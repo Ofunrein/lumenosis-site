@@ -1,6 +1,7 @@
 export type FaqItem = { q: string; a: string };
 
 export const faq: FaqItem[] = [
+  // TODO(martin): real pricing strings replace $X / $Y throughout file when prices locked
   {
     q: "What does this actually cost?",
     a: "Two paths. Build with us starts at $X for a one-time install. Scale with us starts at $Y per month for ongoing coverage. The strategy call walks through which one fits.",

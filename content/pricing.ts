@@ -11,6 +11,7 @@ export const pricingPaths: PricingPath[] = [
   {
     slug: "build",
     label: "Build with us",
+    // TODO(martin): replace $X with real Build install price
     starting: "Starts at $X",
     pitch: "For solo agents and small teams installing their first AI front desk.",
     bullets: [
@@ -23,6 +24,7 @@ export const pricingPaths: PricingPath[] = [
   {
     slug: "scale",
     label: "Scale with us",
+    // TODO(martin): replace $Y with real monthly retainer price
     starting: "Starts at $Y/mo",
     pitch: "For brokerages, property management, and multi-location teams.",
     bullets: [

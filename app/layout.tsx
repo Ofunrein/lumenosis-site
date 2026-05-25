@@ -23,7 +23,10 @@ const jetbrains = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Lumenosis AI — AI agents for real estate",
+  title: {
+    default: "Lumenosis AI — AI agents for real estate",
+    template: "%s — Lumenosis AI",
+  },
   description:
     "AI agents that handle inbound calls, SMS, email, and lead recovery for real estate, brokerages, property management, short-term rentals, and investors.",
   metadataBase: new URL("https://lumenosis.ai"),

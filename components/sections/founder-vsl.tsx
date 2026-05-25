@@ -44,6 +44,7 @@ export function FounderVSL() {
             aria-label="Play overview video"
             className="absolute inset-0 grid place-items-center text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-brand-violet)] focus-visible:ring-offset-2"
           >
+            {/* TODO(martin): wire play handler to launch VSL modal once video uploaded */}
             <span className="grid size-20 place-items-center rounded-full bg-[var(--color-brand-violet)]/90 shadow-[var(--shadow-glow-violet)]">
               <svg viewBox="0 0 24 24" className="size-8" fill="currentColor" aria-hidden>
                 <path d="M8 5v14l11-7z" />

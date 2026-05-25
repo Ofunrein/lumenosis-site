@@ -137,7 +137,7 @@ Eyebrow chips precede section headings. Class recipe:
 **Color rule:**
 - Default: violet `var(--color-brand-violet)` on cream — contrast 5.17:1 (passes 4.5:1)
 - On dark section: gold `var(--color-gold-italic)` — contrast 6.31:1 on dark (passes 4.5:1)
-- Do NOT use gold `#B89154` on cream backgrounds — contrast is only 2.64:1 (fails WCAG, see A11y section)
+- Do NOT use gold `#9a7a3e` on cream backgrounds — contrast is only 2.64:1 (fails WCAG, see A11y section)
 
 No border, no background pill — flat text chip only. A background pill reads as a badge/tag
 and competes with the heading. The visual rhythm comes from the tight tracking + uppercase.
@@ -228,10 +228,13 @@ Mark the `<RotatingText>` with `aria-live="polite"` and `aria-atomic="true"`.
 | `#FFFFFF` on `#7C3AED` | 5.70:1 | Button labels on violet | PASS |
 | `#F5F4EE` on `#0F1612` | 16.66:1 | Body on dark section | PASS |
 | `#B89154` on `#F5F4EE` | 2.64:1 | Gold on cream | **FAIL** |
-| `#B89154` on `#0F1612` | 6.31:1 | Gold eyebrow on dark | PASS |
+| `#9a7a3e` on `#FFFFFF` | 3.65:1 | Gold on white (large text only) | PASS (large text) |
+| `#9a7a3e` on `#F5F4EE` | 4.02:1 | Gold on cream (large text only) | PASS (large text) |
+| `#9a7a3e` on `#0F1612` | 6.31:1 | Gold eyebrow on dark | PASS |
+| `#B89154` on `#0F1612` | 6.31:1 | Gold eyebrow on dark (legacy) | PASS |
 | `#7C3AED` on `#0F1612` | 3.22:1 | Violet on dark (non-text) | PASS (UI component) |
 
-**Gold on cream fails WCAG at all text sizes.** Gold `#B89154` is restricted to:
+**Gold on cream fails WCAG at all text sizes.** Gold `#9a7a3e` is restricted to:
 1. The hero rotating-word italic (decorative; full sentence readable in charcoal; supplement with `aria-live`)
 2. Eyebrow chips on dark-section backgrounds only (`#0F1612`, contrast 6.31:1)
 
