@@ -36,7 +36,7 @@ export function TrustStrip() {
   return (
     <section
       aria-label="Trusted by leading real estate teams"
-      className="border-b border-[var(--color-line)] bg-[#ede8db] py-8 dark:bg-[#06040a]"
+      className="border-b border-[var(--color-line)] bg-[#ede8db] py-8 dark:bg-[#181020]"
     >
       <p className="mb-6 text-center text-[var(--text-eyebrow)] font-semibold uppercase tracking-[0.14em] text-[var(--color-muted)]">
         Trusted by top real estate teams
