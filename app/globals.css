@@ -1,31 +1,48 @@
 @import "tailwindcss";
+@import "tw-animate-css";
 
 @theme {
-  --color-bg-cream: #f5f4ee;
-  --color-ink-charcoal: #1a1a1a;
-  --color-primary-indigo: #1e1b4b;
-  --color-brand-violet: #7c3aed;
-  --color-brand-violet-soft: rgba(124, 58, 237, 0.12);
-  --color-gold-italic: #9a7a3e;
-  --color-dark-section: #0f1612;
-  --color-line: #e2ddd1;
-  --color-muted: #52615b;
+  /* Brand colors */
+  --color-brand-purple: #cb6ce6;
+  --color-brand-purple-soft: rgba(203, 108, 230, 0.15);
+  --color-brand-purple-glow: rgba(203, 108, 230, 0.4);
+  --color-brand-black: #000000;
+  --color-brand-charcoal: #1a1a1a;
+  --color-brand-white: #ffffff;
 
+  /* Legacy tokens still used (now dark mode equivalents) */
+  --color-bg-cream: #000000;
+  --color-ink-charcoal: #ffffff;
+  --color-primary-indigo: #cb6ce6;
+  --color-brand-violet: #cb6ce6;
+  --color-brand-violet-soft: rgba(203, 108, 230, 0.15);
+  --color-gold-italic: #e8c47a;
+  --color-dark-section: #0a0a0a;
+  --color-line: rgba(255, 255, 255, 0.1);
+  --color-muted: rgba(255, 255, 255, 0.6);
+
+  /* Typography */
   --font-display: var(--font-newsreader), "Tiempos Headline", Georgia, serif;
   --font-body: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-jetbrains), ui-monospace, monospace;
 
+  /* Type scale */
   --text-display-hero: clamp(2.5rem, 7vw, 5.5rem);
   --text-display-section: clamp(2rem, 4.5vw, 3.5rem);
   --text-body-lg: 1.1875rem;
   --text-body: 1rem;
   --text-eyebrow: 0.75rem;
 
-  --shadow-soft: 0 18px 45px rgba(17, 21, 19, 0.08);
-  --shadow-glow-violet: 0 0 60px rgba(124, 58, 237, 0.35);
+  /* Shadows */
+  --shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.5);
+  --shadow-glow-violet: 0 0 60px rgba(203, 108, 230, 0.5);
 
+  /* Radius */
   --radius: 0.625rem;
   --radius-pill: 999px;
+
+  /* Star button animation */
+  --animate-star-btn: star-btn calc(var(--duration)*1s) linear infinite;
 }
 
 * { box-sizing: border-box; }
@@ -33,19 +50,22 @@ html { scroll-behavior: smooth; }
 
 body {
   margin: 0;
-  background: var(--color-bg-cream);
-  color: var(--color-ink-charcoal);
+  background: #000000;
+  color: #ffffff;
   font-family: var(--font-body);
   font-size: var(--text-body);
   line-height: 1.55;
   -webkit-font-smoothing: antialiased;
 }
 
+@keyframes star-btn {
+  0% { offset-distance: 0%; }
+  100% { offset-distance: 100%; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  *,
-  *::before,
-  *::after {
+  *, *::before, *::after {
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;
   }

@@ -1,20 +1,24 @@
-import { Button } from "@/components/ui/button";
+"use client";
+import Magnet from '@/components/magnet';
+import { StarButton } from '@/components/star-button';
 
 export function FinalCTA() {
   return (
-    <section className="border-b border-[var(--color-line)] bg-[var(--color-bg-cream)] py-24 text-center md:py-32">
+    <section className="border-b border-[var(--color-line)] bg-black py-24 text-center md:py-32">
       <div className="mx-auto w-[min(900px,calc(100%-32px))]">
-        <h2 className="font-[family-name:var(--font-display)] text-[length:var(--text-display-section)] font-semibold leading-[1.05] text-[var(--color-ink-charcoal)]">
+        <h2 className="font-[family-name:var(--font-display)] text-[length:var(--text-display-section)] font-semibold leading-[1.05] text-white">
           Have a thirty-minute conversation that&rsquo;s{" "}
-          {/* Gold #B89154 on cream #F5F4EE = 2.64:1 — fails WCAG at all sizes.
-              Using primary-indigo (#1E1B4B) = 14.51:1 on cream — passes 4.5:1 decisively. */}
-          <em className="not-italic text-[var(--color-primary-indigo)]">
+          <em className="not-italic text-[var(--color-brand-purple)]">
             actually worth your time.
           </em>
         </h2>
-        <Button asChild size="lg" className="mt-8">
-          <a href="#book">Book a strategy call</a>
-        </Button>
+        <div className="mt-8 flex justify-center">
+          <Magnet padding={80} magnetStrength={5}>
+            <StarButton lightColor="#cb6ce6" className="bg-[var(--color-brand-purple)] text-white px-8 h-14 text-lg">
+              Book a strategy call
+            </StarButton>
+          </Magnet>
+        </div>
       </div>
     </section>
   );

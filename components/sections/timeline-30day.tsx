@@ -4,16 +4,16 @@ export function Timeline30Day() {
   return (
     <section
       id="process"
-      className="border-b border-[var(--color-line)] bg-[var(--color-bg-cream)] py-16 md:py-24"
+      className="border-b border-[var(--color-line)] bg-[var(--color-brand-charcoal)]/40 py-16 md:py-24"
     >
       <div className="mx-auto w-[min(1200px,calc(100%-32px))]">
         {/* Eyebrow */}
-        <p className="mb-3 text-[var(--text-eyebrow)] font-semibold uppercase tracking-[0.14em] text-[var(--color-brand-violet)]">
+        <p className="mb-3 text-[var(--text-eyebrow)] font-semibold uppercase tracking-[0.14em] text-[var(--color-brand-purple)]">
           05 — Process
         </p>
 
         {/* Heading */}
-        <h2 className="max-w-3xl font-[family-name:var(--font-display)] text-[length:var(--text-display-section)] font-semibold leading-[1.05] text-[var(--color-ink-charcoal)]">
+        <h2 className="max-w-3xl font-[family-name:var(--font-display)] text-[length:var(--text-display-section)] font-semibold leading-[1.05] text-white">
           Thirty days to a{" "}
           <em className="not-italic text-[var(--color-gold-italic)]">
             fully running system.
@@ -37,19 +37,19 @@ export function Timeline30Day() {
                   className={`relative z-10 size-3 shrink-0 rounded-full ${
                     i === 1
                       ? "bg-[var(--color-gold-italic)]"
-                      : "border border-[var(--color-line)] bg-white"
+                      : "border border-[var(--color-line)] bg-[var(--color-brand-charcoal)]"
                   }`}
                 />
-                <span className="text-[var(--text-eyebrow)] font-semibold uppercase tracking-[0.14em] text-[var(--color-muted)]">
+                <span className="text-[var(--text-eyebrow)] font-semibold uppercase tracking-[0.14em] text-white/50">
                   {w.week} · {w.kicker}
                 </span>
               </div>
 
               {/* Card content */}
-              <h3 className="font-[family-name:var(--font-display)] text-xl font-semibold text-[var(--color-ink-charcoal)]">
+              <h3 className="font-[family-name:var(--font-display)] text-xl font-semibold text-white">
                 {w.title}
               </h3>
-              <p className="mt-2 text-sm leading-relaxed text-[var(--color-muted)]">
+              <p className="mt-2 text-sm leading-relaxed text-white/60">
                 {w.body}
               </p>
             </li>
