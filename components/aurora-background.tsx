@@ -14,10 +14,10 @@ export function AuroraBackground() {
     <div className="aurora-canvas">
       <Suspense fallback={null}>
         <Aurora
-          colorStops={["#cb6ce6", "#7c3aed", "#cb6ce6"]}
-          blend={0.4}
-          amplitude={1.0}
-          speed={0.35}
+          colorStops={["#6366f1", "#cb6ce6", "#ec4899"]}
+          blend={0.75}
+          amplitude={1.55}
+          speed={0.28}
         />
       </Suspense>
     </div>

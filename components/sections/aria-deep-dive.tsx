@@ -1,136 +1,525 @@
 "use client";
-import { useState, useRef, useEffect } from "react";
+
+import Image from "next/image";
+import { useEffect, useRef, useState } from "react";
+import {
+  Bath,
+  BedDouble,
+  CalendarDays,
+  Clock3,
+  Home,
+  Mail,
+  MapPin,
+  MessageSquare,
+  Phone,
+  Ruler,
+} from "lucide-react";
 import { GlowCard } from "@/components/spotlight-card";
-import { PhoneMockup } from "@/components/phone-mockup";
 
-const emailThread = [
-  { from: "lead" as const, name: "John Carter", time: "9:15 AM", text: "Hi, calling about 412 Oak — is it still available?" },
-  { from: "ai" as const, name: "Iris AI", time: "9:16 AM", text: "It is! 3 bed, 2 bath, 1,840 sqft, listed at $529k. Next viewing is Monday June 17th at 1pm. Are you also looking to sell your current home?", label: "Valuation inquiry detected" },
-  { from: "lead" as const, name: "John Carter", time: "9:18 AM", text: "Actually yes, I need to sell first." },
-  { from: "ai" as const, name: "Iris AI", time: "9:18 AM", text: "I've booked a free home valuation for Tuesday at 4pm. You'll receive a confirmation text shortly.", label: "Valuation booked" },
+type EmailMessage = {
+  id: string;
+  from: "lead" | "iris";
+  name: string;
+  email: string;
+  time: string;
+  body: string;
+  label?: string;
+};
+
+type ConversationLine = {
+  id: string;
+  from: "lead" | "agent";
+  name: string;
+  text: string;
+  detail?: string;
+};
+
+const emailThread: EmailMessage[] = [
+  {
+    id: "email-1",
+    from: "lead",
+    name: "Emily Rivera",
+    email: "emily.rivera@example.com",
+    time: "9:12 AM",
+    body: "Hi, is 1842 Oak Ridge Lane still available? We are moving from Austin and want something close to Barton Creek Elementary. We can tour after 5:30 this week.",
+  },
+  {
+    id: "email-2",
+    from: "iris",
+    name: "Iris",
+    email: "assistant@lumenosis.ai",
+    time: "9:13 AM",
+    label: "Listing details matched",
+    body: "Yes, Oak Ridge Modern is still active. It is a 4 bed, 3 bath remodel at $865,000 with a two-car garage, shaded deck, and new roof. I can hold Wednesday at 5:45 PM or Thursday at 6:10 PM. Are you financing or paying cash?",
+  },
+  {
+    id: "email-3",
+    from: "lead",
+    name: "Emily Rivera",
+    email: "emily.rivera@example.com",
+    time: "9:16 AM",
+    body: "Financing. We are pre-approved up to 900k, but we probably need to sell our Round Rock condo before closing.",
+  },
+  {
+    id: "email-4",
+    from: "iris",
+    name: "Iris",
+    email: "assistant@lumenosis.ai",
+    time: "9:17 AM",
+    label: "Tour booked, seller signal flagged",
+    body: "I placed you on the Wednesday 5:45 PM tour and flagged the sell-before-buy timing for Martin. I can also schedule a 15-minute pricing call for the condo so he walks in with comps ready.",
+  },
 ];
 
-const phoneBubbles = [
-  { from: "agent" as const, text: "Hi, calling about 412 Oak — is it still available?" },
-  { from: "ai" as const, text: "It is. Three bed, two bath, $529k. Are you looking to buy in the next 60 days?" },
-  { from: "agent" as const, text: "Yeah, need to sell first." },
-  { from: "ai" as const, text: "Got it. Tuesday at 4pm works for a free valuation?" },
-  { from: "agent" as const, text: "Perfect." },
-  { from: "ai" as const, text: "Booked. Confirmation text incoming." },
+const ariaTranscript: ConversationLine[] = [
+  {
+    id: "call-1",
+    from: "lead",
+    name: "Caller",
+    detail: "Inbound call",
+    text: "Hi, I am calling about the Oak Ridge house. Is it still available?",
+  },
+  {
+    id: "call-2",
+    from: "agent",
+    name: "Aria",
+    detail: "Property answer",
+    text: "It is available. Four bedrooms, three baths, listed at $865,000. Are you hoping to tour this week?",
+  },
+  {
+    id: "call-3",
+    from: "lead",
+    name: "Caller",
+    detail: "Buyer intent",
+    text: "Yes. We are pre-approved, but I need to sell my current place first.",
+  },
+  {
+    id: "call-4",
+    from: "agent",
+    name: "Aria",
+    detail: "Valuation slot",
+    text: "I can book the showing and hold a valuation call for your current home. Wednesday 5:45 PM is open.",
+  },
+  {
+    id: "call-5",
+    from: "lead",
+    name: "Caller",
+    detail: "Confirmed",
+    text: "That works. Please send the details.",
+  },
+  {
+    id: "call-6",
+    from: "agent",
+    name: "Aria",
+    detail: "Calendar updated",
+    text: "You are booked. I am sending the calendar invite, property packet, and condo pricing call link now.",
+  },
 ];
 
-function EmailCard() {
+const theoThread: ConversationLine[] = [
+  {
+    id: "sms-1",
+    from: "lead",
+    name: "Zillow lead",
+    detail: "9:21 AM",
+    text: "I want more info on the Oak Ridge listing.",
+  },
+  {
+    id: "sms-2",
+    from: "agent",
+    name: "Theo",
+    detail: "9:21 AM",
+    text: "I can help. Are you looking to tour it, ask about price, or compare it with similar homes nearby?",
+  },
+  {
+    id: "sms-3",
+    from: "lead",
+    name: "Zillow lead",
+    detail: "9:22 AM",
+    text: "Tour. We are in town tomorrow afternoon.",
+  },
+  {
+    id: "sms-4",
+    from: "agent",
+    name: "Theo",
+    detail: "9:22 AM",
+    text: "Tomorrow has 2:30 PM and 4:15 PM. I can hold either. Are you already pre-approved?",
+  },
+  {
+    id: "sms-5",
+    from: "lead",
+    name: "Zillow lead",
+    detail: "9:23 AM",
+    text: "Yes. 4:15 is better.",
+  },
+  {
+    id: "sms-6",
+    from: "agent",
+    name: "Theo",
+    detail: "9:23 AM",
+    text: "Held for 4:15 PM. I sent the calendar invite and the agent will text you the entry details.",
+  },
+];
+
+const listingStats = [
+  { label: "Price", value: "$865,000" },
+  { label: "Beds", value: "4" },
+  { label: "Baths", value: "3" },
+  { label: "Sq ft", value: "2,420" },
+];
+
+const microFeatures = [
+  {
+    icon: Clock3,
+    title: "Fast pickup",
+    body: "Aria answers missed calls before the lead opens a second browser tab.",
+  },
+  {
+    icon: CalendarDays,
+    title: "Calendar booking",
+    body: "Tours, valuation calls, and follow-ups land on the right calendar.",
+  },
+  {
+    icon: MessageSquare,
+    title: "Channel memory",
+    body: "Email, voice, and SMS share the same lead context.",
+  },
+  {
+    icon: Home,
+    title: "Listing aware",
+    body: "Every reply uses property facts, showing windows, and seller signals.",
+  },
+];
+
+function useRevealedCount(total: number, delayMs: number) {
+  const [count, setCount] = useState(1);
+
+  useEffect(() => {
+    const id = window.setInterval(() => {
+      setCount((current) => (current >= total ? 1 : current + 1));
+    }, delayMs);
+    return () => window.clearInterval(id);
+  }, [delayMs, total]);
+
+  return count;
+}
+
+function TypewriterText({ text, active }: { text: string; active: boolean }) {
+  const [chars, setChars] = useState(active ? 0 : text.length);
+
+  useEffect(() => {
+    if (!active) {
+      setChars(text.length);
+      return;
+    }
+
+    setChars(0);
+    let next = 0;
+    const step = Math.max(2, Math.ceil(text.length / 72));
+    const id = window.setInterval(() => {
+      next = Math.min(text.length, next + step);
+      setChars(next);
+      if (next >= text.length) {
+        window.clearInterval(id);
+      }
+    }, 24);
+
+    return () => window.clearInterval(id);
+  }, [active, text]);
+
+  return (
+    <>
+      {text.slice(0, chars)}
+      {active && chars < text.length ? <span className="ml-0.5 animate-pulse">|</span> : null}
+    </>
+  );
+}
+
+function SectionBadge({
+  icon: Icon,
+  title,
+  subtitle,
+}: {
+  icon: typeof Mail;
+  title: string;
+  subtitle: string;
+}) {
+  return (
+    <div className="flex items-center gap-3">
+      <span className="grid size-10 shrink-0 place-items-center rounded-2xl border border-white/10 bg-white/8 text-[var(--color-brand-violet)]">
+        <Icon className="size-4" aria-hidden />
+      </span>
+      <div className="min-w-0">
+        <p className="text-sm font-semibold text-white">{title}</p>
+        <p className="text-xs text-white/50">{subtitle}</p>
+      </div>
+    </div>
+  );
+}
+
+function IrisEmailDemo() {
+  const shown = useRevealedCount(emailThread.length, 2600);
   const scrollRef = useRef<HTMLDivElement>(null);
-  const [shown, setShown] = useState(1);
+  const visibleMessages = emailThread.slice(0, shown);
+  const latestMessage = visibleMessages[visibleMessages.length - 1];
 
   useEffect(() => {
-    const t = setInterval(() => {
-      setShown(prev => (prev < emailThread.length ? prev + 1 : 1));
-    }, 2200);
-    return () => clearInterval(t);
-  }, []);
-
-  useEffect(() => {
-    if (scrollRef.current) scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+    if (scrollRef.current) {
+      scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+    }
   }, [shown]);
 
   return (
-    <GlowCard glowColor="purple" customSize className="flex flex-col gap-3 min-h-[320px] dark:[--color-bg-cream:rgb(0_0_0_/_0.4)] dark:backdrop-blur-sm">
-      <div className="flex items-center gap-2 border-b border-[var(--color-line)] pb-3">
-        <span className="text-lg">📧</span>
-        <div>
-          <p className="font-semibold text-[var(--color-ink-charcoal)] text-sm">Iris Handles an Email</p>
-          <p className="text-[var(--color-muted)] text-xs">AI replies in under 60 seconds</p>
-        </div>
-      </div>
-      <div ref={scrollRef} className="flex flex-col gap-2 overflow-hidden flex-1">
-        {emailThread.slice(0, shown).map((msg, i) => (
-          <div key={i} className={`rounded-xl px-3 py-2 text-sm max-w-[85%] ${msg.from === "ai" ? "bg-[var(--color-brand-purple)]/20 border border-[var(--color-brand-purple)]/30 self-end text-[var(--color-ink-charcoal)]" : "bg-[var(--color-brand-violet-soft)] text-[var(--color-ink-charcoal)] self-start"}`}>
-            <p className="font-semibold text-xs text-[var(--color-muted)] mb-1">{msg.name} · {msg.time}</p>
-            <p>{msg.text}</p>
-            {"label" in msg && msg.label && <p className="mt-1 text-[10px] text-[var(--color-brand-purple)] font-semibold uppercase tracking-wider">✓ {msg.label}</p>}
-          </div>
-        ))}
-      </div>
-      <div className="flex gap-2 flex-wrap">
-        {["Valuation Booked", "Viewing Booked", "1 min response"].map(t => (
-          <span key={t} className="text-[10px] text-[var(--color-muted)] border border-[var(--color-line)] px-2 py-0.5 rounded-full">✓ {t}</span>
-        ))}
-      </div>
-    </GlowCard>
-  );
-}
-
-function AudioCallCard() {
-  const [playing, setPlaying] = useState(false);
-  const bars = Array.from({ length: 40 }, (_, i) => Math.round(10 + Math.sin(i * 0.8) * 18 + ((i * 7 + 3) % 13)));
-
-  return (
-    <GlowCard glowColor="purple" customSize className="flex flex-col gap-3 dark:[--color-bg-cream:rgb(0_0_0_/_0.4)] dark:backdrop-blur-sm">
-      <div className="flex items-center gap-2 border-b border-[var(--color-line)] pb-3">
-        <span className="text-lg">📞</span>
-        <div>
-          <p className="font-semibold text-[var(--color-ink-charcoal)] text-sm">Aria Handles a Live Call</p>
-          <p className="text-[var(--color-muted)] text-xs">Answers, qualifies, books appointments</p>
-        </div>
-      </div>
-      <div className="flex items-center gap-1 h-16 justify-center px-2">
-        {bars.map((height, i) => (
-          <div
-            key={i}
-            className={`w-1 rounded-full transition-all duration-150 ${
-              i < (playing ? 18 : 5)
-                ? "bg-[var(--color-brand-purple)]"
-                : "bg-[rgba(128,128,128,0.3)]"
-            }`}
-            style={{ height: `${height}px` }}
-          />
-        ))}
-      </div>
-      <button type="button" onClick={() => setPlaying(!playing)}
-        className="mx-auto grid size-10 place-items-center rounded-full bg-[var(--color-brand-purple)] text-white hover:scale-110 transition-transform">
-        {playing ? "⏸" : "▶"}
-      </button>
-      <p className="text-center text-[var(--color-muted)] text-xs">0:38 / 2:14</p>
-      <div className="grid gap-2">
-        {["Property details provided", "Questions answered", "Viewing booked automatically"].map(f => (
-          <div key={f} className="flex items-center gap-2 text-sm text-[var(--color-muted)]">
-            <span className="size-4 rounded-full bg-[var(--color-brand-purple)]/20 text-[var(--color-brand-purple)] text-xs grid place-items-center">✓</span>
-            {f}
-          </div>
-        ))}
-      </div>
-    </GlowCard>
-  );
-}
-
-function AutomationFlowCard() {
-  const steps = [
-    { icon: "👤", label: "Lead In" },
-    { icon: "📧", label: "Iris\nEmail", sub: true },
-    { icon: "📅", label: "Meeting\nBooked" },
-    { icon: "📞", label: "Aria\nVoice", sub: true },
-    { icon: "🗂", label: "CRM\nUpdated" },
-  ];
-
-  return (
-    <GlowCard glowColor="purple" customSize className="flex flex-col gap-3 dark:[--color-bg-cream:rgb(0_0_0_/_0.4)] dark:backdrop-blur-sm">
-      <div className="flex items-center gap-2 border-b border-[var(--color-line)] pb-3">
-        <span className="text-lg">⚡</span>
-        <div>
-          <p className="font-semibold text-[var(--color-ink-charcoal)] text-sm">Automation Flow</p>
-          <p className="text-[var(--color-muted)] text-xs">Lead to booking — no human input</p>
-        </div>
-      </div>
-      <div className="flex items-center justify-between gap-1 mt-2">
-        {steps.map((step, i) => (
-          <div key={i} className="flex flex-col items-center gap-1 text-center">
-            <div className={`size-8 rounded-full grid place-items-center text-xs ${step.sub ? "bg-[var(--color-brand-purple)]/20 border border-[var(--color-brand-purple)]/40" : "bg-[var(--color-brand-violet-soft)]"}`}>
-              {step.icon}
+    <GlowCard
+      glowColor="purple"
+      customSize
+      className="overflow-hidden p-0 [--backdrop:rgba(5,12,9,0.82)]"
+    >
+      <div className="grid min-h-[610px] lg:grid-cols-[1.05fr_0.95fr]">
+        <div className="flex min-h-0 flex-col border-b border-[var(--color-line)] p-4 sm:p-5 lg:border-b-0 lg:border-r">
+          <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[var(--color-line)] pb-4">
+            <SectionBadge icon={Mail} title="Iris email desk" subtitle="Live buyer inquiry" />
+            <div className="rounded-full border border-emerald-400/25 bg-emerald-400/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-emerald-300">
+              {latestMessage?.from === "iris" ? "Typing reply" : "Reading lead"}
             </div>
-            <p className="text-[9px] text-[var(--color-muted)] whitespace-pre-line leading-tight">{step.label}</p>
           </div>
-        ))}
+
+          <div className="mt-4 rounded-2xl border border-white/10 bg-[#0e1712]/90 p-3 text-sm shadow-[0_18px_44px_rgba(3,7,5,0.28)]">
+            <div className="flex items-start justify-between gap-3 border-b border-[var(--color-line)] pb-3">
+              <div>
+                <p className="text-xs uppercase tracking-[0.18em] text-white/42">Subject</p>
+                <p className="mt-1 font-semibold text-white">
+                  Re: Oak Ridge Modern showing request
+                </p>
+              </div>
+              <span className="rounded-full bg-[var(--color-brand-violet-soft)] px-3 py-1 text-xs font-semibold text-[var(--color-brand-violet)]">
+                CRM synced
+              </span>
+            </div>
+
+            <div ref={scrollRef} className="mt-3 flex max-h-[450px] flex-col gap-3 overflow-hidden">
+              {visibleMessages.map((message) => {
+                const isLatest = latestMessage?.id === message.id;
+                const isIris = message.from === "iris";
+
+                return (
+                  <article
+                    key={message.id}
+                    className={[
+                      "rounded-2xl border p-3 shadow-sm transition-all duration-300",
+                      isIris
+                        ? "border-[var(--color-brand-violet)]/35 bg-[var(--color-brand-violet)]/12"
+                        : "border-white/10 bg-white/[0.07]",
+                    ].join(" ")}
+                  >
+                    <div className="flex items-start gap-3">
+                      <div className="relative size-9 shrink-0 overflow-hidden rounded-full border border-white/10 bg-white/10">
+                        <Image
+                          src={isIris ? "/images/agents/iris.png" : "/images/agents/olivia.png"}
+                          alt={isIris ? "Iris" : "Lead profile"}
+                          fill
+                          sizes="36px"
+                          className="object-cover"
+                        />
+                      </div>
+                      <div className="min-w-0 flex-1">
+                        <div className="flex flex-wrap items-center justify-between gap-2">
+                          <div className="min-w-0">
+                            <p className="truncate text-sm font-semibold text-white">
+                              {message.name}
+                            </p>
+                            <p className="truncate text-xs text-white/45">{message.email}</p>
+                          </div>
+                          <span className="shrink-0 text-xs text-white/45">{message.time}</span>
+                        </div>
+                        <p className="mt-3 text-sm leading-relaxed text-white/82">
+                          <TypewriterText text={message.body} active={isIris && isLatest} />
+                        </p>
+                        {message.label ? (
+                          <p className="mt-3 inline-flex rounded-full bg-emerald-400/10 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-emerald-300">
+                            {message.label}
+                          </p>
+                        ) : null}
+                      </div>
+                    </div>
+                  </article>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+
+        <div className="flex flex-col gap-4 bg-[radial-gradient(circle_at_50%_0%,rgba(203,108,230,0.18),transparent_46%)] p-4 sm:p-5">
+          <div className="relative min-h-[210px] overflow-hidden rounded-[28px] border border-white/12 bg-[#07120d] shadow-[0_24px_70px_rgba(0,0,0,0.28)]">
+            <Image
+              src="/images/listings/oak-ridge-modern.svg"
+              alt="Modern home listing preview"
+              fill
+              sizes="(max-width: 1024px) 100vw, 440px"
+              className="object-cover"
+            />
+            <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent p-4">
+              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-white/60">Matched listing</p>
+              <p className="mt-1 font-[family-name:var(--font-display)] text-2xl font-semibold text-white">
+                Oak Ridge Modern
+              </p>
+            </div>
+          </div>
+
+          <div className="rounded-[24px] border border-white/10 bg-white/[0.07] p-4">
+            <div className="flex items-start gap-3">
+              <MapPin className="mt-1 size-4 shrink-0 text-[var(--color-brand-violet)]" aria-hidden />
+              <div>
+                <p className="font-semibold text-white">1842 Oak Ridge Lane</p>
+                <p className="text-sm text-white/52">Austin, TX 78746</p>
+              </div>
+            </div>
+            <div className="mt-4 grid grid-cols-2 gap-2">
+              {listingStats.map((stat) => (
+                <div key={stat.label} className="rounded-2xl border border-white/10 bg-black/24 p-3">
+                  <p className="text-[10px] uppercase tracking-[0.16em] text-white/40">{stat.label}</p>
+                  <p className="mt-1 text-lg font-semibold text-white">{stat.value}</p>
+                </div>
+              ))}
+            </div>
+            <div className="mt-4 grid gap-2 text-sm text-white/58">
+              <p className="flex items-center gap-2">
+                <BedDouble className="size-4 text-[var(--color-brand-violet)]" aria-hidden />
+                New primary suite and walk-in closet
+              </p>
+              <p className="flex items-center gap-2">
+                <Bath className="size-4 text-[var(--color-brand-violet)]" aria-hidden />
+                Three updated bathrooms
+              </p>
+              <p className="flex items-center gap-2">
+                <Ruler className="size-4 text-[var(--color-brand-violet)]" aria-hidden />
+                Seller prefers closing before July 15
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </GlowCard>
+  );
+}
+
+function AriaPhoneDemo() {
+  const shown = useRevealedCount(ariaTranscript.length, 2300);
+  const visible = ariaTranscript.slice(0, shown);
+  const latest = visible[visible.length - 1];
+
+  return (
+    <div className="mx-auto w-full max-w-[430px] rounded-[44px] border border-white/12 bg-[#08120d] p-3 shadow-[0_30px_110px_rgba(0,0,0,0.42)]">
+      <div className="min-h-[640px] overflow-hidden rounded-[34px] border border-white/8 bg-[linear-gradient(180deg,#10241a_0%,#07120d_100%)] p-5">
+        <div className="mx-auto mb-5 h-7 w-28 rounded-b-3xl bg-black/80" />
+        <div className="text-center">
+          <div className="relative mx-auto size-20 overflow-hidden rounded-full border border-emerald-300/30 bg-emerald-400/10">
+            <Image src="/images/agents/aria.png" alt="Aria" fill sizes="80px" className="object-cover" />
+          </div>
+          <p className="mt-3 font-[family-name:var(--font-display)] text-2xl font-semibold text-white">Aria</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-emerald-300">Voice receptionist</p>
+          <div className="mt-3 inline-flex items-center gap-2 rounded-full border border-emerald-300/20 bg-emerald-300/10 px-3 py-1 text-xs font-semibold text-emerald-200">
+            <span className="size-2 rounded-full bg-emerald-300" />
+            On call 02:14
+          </div>
+        </div>
+
+        <div className="my-5 h-px bg-white/10" />
+
+        <div className="space-y-3">
+          {visible.map((line) => {
+            const isAria = line.from === "agent";
+            const isLatest = latest?.id === line.id;
+
+            return (
+              <div
+                key={line.id}
+                className={[
+                  "max-w-[88%] rounded-3xl px-4 py-3 text-sm leading-relaxed",
+                  isAria
+                    ? "ml-auto bg-emerald-500/18 text-white"
+                    : "mr-auto bg-white/[0.08] text-white/82",
+                ].join(" ")}
+              >
+                <p className="mb-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-white/38">
+                  {line.name} - {line.detail}
+                </p>
+                <TypewriterText text={line.text} active={isAria && isLatest} />
+              </div>
+            );
+          })}
+        </div>
+
+        <div className="mt-5 rounded-3xl border border-white/10 bg-black/22 p-4">
+          <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-white/38">Live actions</p>
+          <div className="mt-3 grid grid-cols-2 gap-2 text-xs text-white/70">
+            {["Showing held", "Valuation flagged", "CRM note added", "SMS sent"].map((item) => (
+              <span key={item} className="rounded-full border border-white/10 bg-white/[0.05] px-3 py-2 text-center">
+                {item}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function TheoSmsDemo() {
+  const shown = useRevealedCount(theoThread.length, 2100);
+  const visible = theoThread.slice(0, shown);
+  const latest = visible[visible.length - 1];
+
+  return (
+    <GlowCard
+      glowColor="purple"
+      customSize
+      className="p-0 [--backdrop:rgba(5,12,9,0.76)]"
+    >
+      <div className="overflow-hidden rounded-2xl">
+        <div className="flex items-center justify-between border-b border-[var(--color-line)] p-4">
+          <SectionBadge icon={MessageSquare} title="Theo SMS desk" subtitle="Portal lead recovery" />
+          <span className="rounded-full bg-cyan-400/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.16em] text-cyan-300">
+            Live thread
+          </span>
+        </div>
+
+        <div className="mx-auto flex min-h-[410px] max-w-[380px] flex-col bg-[#07120d] p-4">
+          <div className="mb-3 flex items-center gap-3 rounded-[24px] bg-white/[0.07] px-3 py-2 shadow-sm">
+            <div className="relative size-10 overflow-hidden rounded-full">
+              <Image src="/images/agents/theo.png" alt="Theo" fill sizes="40px" className="object-cover" />
+            </div>
+            <div>
+              <p className="text-sm font-semibold text-white">Theo</p>
+              <p className="text-xs text-white/50">SMS sales agent</p>
+            </div>
+            <Phone className="ml-auto size-4 text-[var(--color-brand-violet)]" aria-hidden />
+          </div>
+
+          <div className="flex flex-1 flex-col justify-end gap-2">
+            {visible.map((line) => {
+              const isTheo = line.from === "agent";
+              const isLatest = latest?.id === line.id;
+
+              return (
+                <div
+                  key={line.id}
+                  className={[
+                    "max-w-[84%] rounded-[22px] px-3.5 py-2.5 text-sm leading-snug shadow-sm",
+                    isTheo
+                      ? "ml-auto rounded-br-md bg-[var(--color-brand-violet)] text-white"
+                      : "mr-auto rounded-bl-md bg-white/[0.10] text-white/82",
+                  ].join(" ")}
+                >
+                  <p className={isTheo ? "text-white/55 text-[10px]" : "text-white/38 text-[10px]"}>
+                    {line.detail}
+                  </p>
+                  <TypewriterText text={line.text} active={isTheo && isLatest} />
+                </div>
+              );
+            })}
+          </div>
+        </div>
       </div>
     </GlowCard>
   );
@@ -138,29 +527,43 @@ function AutomationFlowCard() {
 
 export function AriaDeepDive() {
   return (
-    <section id="aria" className="bg-[var(--color-bg-cream)] dark:bg-black/60 py-20 md:py-28 border-b border-[var(--color-line)]">
-      <div className="mx-auto w-[min(1200px,calc(100%-32px))]">
-        <div className="max-w-2xl mb-10">
-          <p className="mb-3 text-[var(--text-eyebrow)] font-semibold uppercase tracking-[0.14em] text-[var(--color-gold-italic)]">
-            04 — AI Receptionist
+    <section
+      id="aria"
+      className="relative overflow-hidden border-b border-white/10 bg-[#07120d] py-20 text-white md:py-28"
+    >
+      <div className="absolute left-1/2 top-0 h-[520px] w-[760px] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,rgba(203,108,230,0.22),transparent_62%)] blur-3xl" />
+      <div className="absolute right-[-14rem] top-28 h-[520px] w-[520px] rounded-full bg-[radial-gradient(circle,rgba(34,197,94,0.18),transparent_64%)] blur-3xl" />
+
+      <div className="relative mx-auto grid w-[min(1280px,calc(100%-32px))] gap-12 lg:grid-cols-[0.78fr_1.22fr] lg:items-start">
+        <div className="lg:sticky lg:top-32">
+          <p className="mb-4 text-[var(--text-eyebrow)] font-semibold uppercase tracking-[0.16em] text-emerald-300">
+            04 - Live follow-up desk
           </p>
-          <h2 className="font-[family-name:var(--font-display)] text-[length:var(--text-display-section)] font-semibold leading-[1.05] text-[var(--color-ink-charcoal)]">
-            The front desk that <em className="not-italic text-[var(--color-gold-italic)]">never sleeps</em> and never asks for a raise.
+          <h2 className="font-[family-name:var(--font-display)] text-[clamp(2.6rem,5.6vw,5.35rem)] font-semibold leading-[0.98] text-[#f6f1e7]">
+            The front desk that never sleeps and never asks for a raise.
           </h2>
-          <p className="mt-4 text-[length:var(--text-body-lg)] text-[var(--color-muted)]">
-            Every lead your funnel produces gets answered in under twelve seconds, on voice and SMS. Trained on your market, your CRM, your hours.
+          <p className="mt-6 max-w-xl text-lg leading-8 text-white/62">
+            A buyer asks about a listing. Iris replies with real property details, Aria answers the call, and Theo keeps the text thread moving until a showing or valuation is booked.
           </p>
-        </div>
-        <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-          <div className="lg:col-span-1"><EmailCard /></div>
-          <div className="lg:col-span-1">
-            <GlowCard glowColor="purple" customSize className="min-h-[320px] dark:[--color-bg-cream:rgb(0_0_0_/_0.4)] dark:backdrop-blur-sm">
-              <PhoneMockup name="Aria" role="Lumenosis AI · Voice Receptionist" bubbles={phoneBubbles} />
-            </GlowCard>
+
+          <div className="mt-10 grid gap-4 sm:grid-cols-2">
+            {microFeatures.map(({ icon: Icon, title, body }) => (
+              <div key={title} className="rounded-[24px] border border-white/10 bg-white/[0.04] p-4">
+                <Icon className="size-5 text-emerald-300" aria-hidden />
+                <p className="mt-4 font-[family-name:var(--font-display)] text-xl font-semibold text-[#f6f1e7]">
+                  {title}
+                </p>
+                <p className="mt-2 text-sm leading-6 text-white/52">{body}</p>
+              </div>
+            ))}
           </div>
-          <div className="lg:col-span-1 flex flex-col gap-5">
-            <AudioCallCard />
-            <AutomationFlowCard />
+        </div>
+
+        <div className="grid gap-5">
+          <IrisEmailDemo />
+          <div className="grid items-start gap-5 xl:grid-cols-[0.88fr_1.12fr]">
+            <TheoSmsDemo />
+            <AriaPhoneDemo />
           </div>
         </div>
       </div>

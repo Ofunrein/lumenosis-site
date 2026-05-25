@@ -36,50 +36,48 @@ export function Topbar() {
   return (
     <header
       className={cn(
-        "sticky top-0 z-50 w-full transition-all duration-300 ease-out",
-        !scrolled && "border-b border-[var(--color-line)] bg-[var(--color-bg-cream)]/80 backdrop-blur-sm",
-        scrolled && !open && "flex justify-center border-none bg-transparent py-3",
-        open && "bg-[var(--color-bg-cream)]/95",
+        "sticky top-3 z-50 flex w-full justify-center px-3 transition-all duration-300 ease-out md:top-5",
+        open && "top-0 px-0 md:top-0",
       )}
     >
       <nav
         className={cn(
-          "flex h-16 items-center justify-between px-4 transition-all duration-300 ease-out",
-          !scrolled && "mx-0 w-full max-w-none",
-          scrolled &&
-            !open &&
-            "h-12 w-[min(900px,calc(100%-32px))] rounded-full border border-[var(--color-line)] bg-[var(--color-bg-cream)]/90 px-5 shadow-[var(--shadow-soft)] backdrop-blur-md dark:bg-black/70",
+          "flex items-center justify-between border border-[var(--color-line)] bg-[var(--color-bg-cream)]/90 shadow-[var(--shadow-soft)] backdrop-blur-xl transition-all duration-300 ease-out dark:bg-black/62",
+          open
+            ? "h-16 w-full rounded-none px-4"
+            : "h-14 w-[min(1010px,calc(100%-12px))] rounded-full px-4 md:h-20 md:px-8",
+          scrolled && !open && "md:h-14 md:w-[min(920px,calc(100%-32px))] md:px-5",
         )}
       >
-        <a href="#top" className="inline-flex shrink-0 items-center gap-2">
+        <a href="#top" className="inline-flex shrink-0 items-center gap-2 md:gap-3">
           <Image
             src="/images/lumenosis-logo.png"
             alt="Lumenosis AI"
             width={32}
             height={32}
-            className="rounded-lg"
+            className="rounded-lg md:size-10"
           />
-          <span className="font-semibold text-[var(--color-ink-charcoal)]">
+          <span className="text-base font-semibold text-[var(--color-ink-charcoal)] md:text-xl">
             Lumenosis <span className="text-[var(--color-brand-violet)]">AI</span>
           </span>
         </a>
-        <div className="hidden items-center gap-1 md:flex">
+        <div className="hidden items-center gap-4 md:flex">
           {links.map((link) => (
             <a
               key={link.label}
               href={link.href}
-              className="rounded-md px-3 py-2 text-sm text-[var(--color-muted)] transition-colors hover:bg-[var(--color-brand-violet-soft)] hover:text-[var(--color-ink-charcoal)]"
+              className="rounded-full px-3.5 py-2 text-sm font-medium text-[var(--color-muted)] transition-colors hover:bg-[var(--color-brand-violet-soft)] hover:text-[var(--color-ink-charcoal)]"
             >
               {link.label}
             </a>
           ))}
         </div>
-        <div className="hidden items-center gap-2 md:flex">
+        <div className="hidden items-center gap-3 md:flex">
           {mounted && (
             <button
               type="button"
               onClick={toggleTheme}
-              className="grid size-9 place-items-center rounded-lg border border-[var(--color-line)] text-[var(--color-muted)] transition-colors hover:border-[var(--color-brand-violet)] hover:text-[var(--color-brand-violet)]"
+              className="grid size-11 place-items-center rounded-2xl border border-[var(--color-line)] text-[var(--color-muted)] transition-colors hover:border-[var(--color-brand-violet)] hover:text-[var(--color-brand-violet)]"
               aria-label="Toggle dark/light mode"
             >
               {resolvedTheme === "dark" ? (
@@ -96,7 +94,7 @@ export function Topbar() {
           <StarButton
             lightColor="#cb6ce6"
             backgroundColor="#cb6ce6"
-            className="h-10 bg-[var(--color-brand-violet)] px-5 text-sm text-white [&_span]:text-white"
+            className="h-12 rounded-full bg-[var(--color-brand-violet)] px-7 text-base text-white shadow-[0_0_28px_rgba(203,108,230,0.45)] [&_span]:text-white"
           >
             <a href="#book">Book a Demo</a>
           </StarButton>
