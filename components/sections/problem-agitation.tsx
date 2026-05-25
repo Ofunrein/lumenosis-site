@@ -20,7 +20,10 @@ const leaks = [
 
 export function ProblemAgitation() {
   return (
-    <section id="method" className="border-b border-[var(--color-line)] bg-[var(--color-bg-cream)] dark:bg-transparent py-16 md:py-24">
+    <section
+      id="method"
+      className="border-b border-[var(--color-line)] bg-[#f1eee6] py-16 dark:bg-[#09070d] md:py-24"
+    >
       <div className="mx-auto w-[min(1200px,calc(100%-32px))]">
         <div className="max-w-2xl">
           <p className="mb-3 text-[var(--text-eyebrow)] font-semibold uppercase tracking-[0.14em] text-[var(--color-brand-purple)]">
@@ -31,14 +34,19 @@ export function ProblemAgitation() {
             <em className="text-[var(--color-gold-italic)]">are not ad spend.</em>
           </h2>
           <p className="mt-4 text-[length:var(--text-body-lg)] text-[var(--color-muted)]">
-            You already have leads. You already have a CRM. The leak is the missing operating
-            layer between them. Every minute a lead waits costs five hundred to two thousand
-            dollars in eventual deal value.
+            You already have leads. You already have a CRM. The leak is the missing operating layer
+            between them. Every minute a lead waits costs five hundred to two thousand dollars in
+            eventual deal value.
           </p>
         </div>
         <div className="mt-10 grid gap-4 md:grid-cols-3">
           {leaks.map((leak) => (
-            <GlowCard key={leak.n} glowColor="purple" customSize className="dark:[--color-bg-cream:rgb(0_0_0_/_0.4)] dark:backdrop-blur-sm">
+            <GlowCard
+              key={leak.n}
+              glowColor="purple"
+              customSize
+              className="dark:[--color-bg-cream:#111019]"
+            >
               <div className="mb-3 grid size-9 place-items-center rounded-lg bg-[var(--color-brand-purple-soft)] text-sm font-bold text-[var(--color-brand-purple)]">
                 {leak.n}
               </div>

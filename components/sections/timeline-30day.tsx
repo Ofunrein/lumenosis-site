@@ -4,7 +4,7 @@ export function Timeline30Day() {
   return (
     <section
       id="process"
-      className="border-b border-[var(--color-line)] bg-[var(--color-bg-cream)] py-20 md:py-28 dark:bg-transparent"
+      className="border-b border-[var(--color-line)] bg-[#f5f2e9] py-20 dark:bg-[#100c17] md:py-28"
     >
       <div className="mx-auto w-[min(1500px,calc(100%-40px))]">
         <p className="mb-7 flex items-center gap-3 text-[var(--text-eyebrow)] font-medium uppercase tracking-[0.24em] text-[var(--color-brand-purple)]">
@@ -33,7 +33,7 @@ export function Timeline30Day() {
                       ? "size-5 border-[7px] border-[var(--color-gold-italic)]/25 bg-[var(--color-gold-italic)]"
                       : i === 0
                         ? "size-4 bg-[var(--color-brand-purple)]"
-                        : "size-4 border-2 border-[var(--color-brand-purple)] bg-[var(--color-bg-cream)] dark:bg-transparent"
+                        : "size-4 border-2 border-[var(--color-brand-purple)] bg-[var(--color-bg-cream)] dark:bg-[#100c17]"
                   }`}
                 />
                 <span className="text-[var(--text-eyebrow)] font-medium uppercase tracking-[0.24em] text-[var(--color-brand-purple)]">

@@ -43,12 +43,12 @@ export function Topbar() {
     >
       <nav
         className={cn(
-          "flex items-center justify-between backdrop-blur-xl transition-all duration-300 ease-out",
+          "flex items-center justify-between transition-all duration-300 ease-out",
           open
             ? "h-16 w-full rounded-none px-4"
             : scrolled
-              ? "h-14 w-[min(1010px,calc(100%-12px))] rounded-full border border-[var(--color-line)] bg-[var(--color-bg-cream)]/90 px-4 shadow-[var(--shadow-soft)] md:h-20 md:px-8 dark:bg-black/55"
-              : "h-16 w-full rounded-none border-b border-[var(--color-line)] bg-[var(--color-bg-cream)]/72 px-4 shadow-none md:h-20 md:px-10 dark:bg-transparent",
+              ? "h-14 w-[min(1010px,calc(100%-12px))] rounded-full border border-[var(--color-line)] bg-[var(--color-bg-cream)] px-4 shadow-[var(--shadow-soft)] md:h-20 md:px-8 dark:bg-[#0d0a12]"
+              : "h-16 w-full rounded-none border-b border-[var(--color-line)] bg-[var(--color-bg-cream)] px-4 shadow-none md:h-20 md:px-10 dark:bg-[#0d0a12]",
         )}
       >
         <a href="#top" className="inline-flex shrink-0 items-center gap-2 md:gap-3">
@@ -68,7 +68,7 @@ export function Topbar() {
             <a
               key={link.label}
               href={link.href}
-              className="rounded-full px-3.5 py-2 text-sm font-medium text-[var(--color-muted)] transition-colors hover:bg-[var(--color-brand-violet-soft)] hover:text-[var(--color-ink-charcoal)] dark:text-white/90 dark:hover:text-white"
+              className="rounded-full px-3.5 py-2 text-sm font-medium text-[var(--color-muted)] transition-colors hover:bg-[var(--color-brand-violet-soft)] hover:text-[var(--color-ink-charcoal)] dark:text-white dark:hover:text-white"
             >
               {link.label}
             </a>
@@ -79,7 +79,7 @@ export function Topbar() {
             <button
               type="button"
               onClick={toggleTheme}
-              className="grid size-11 place-items-center rounded-2xl border border-[var(--color-line)] text-[var(--color-muted)] transition-colors hover:border-[var(--color-brand-violet)] hover:text-[var(--color-brand-violet)] dark:text-white/85"
+              className="grid size-11 place-items-center rounded-2xl border border-[var(--color-line)] text-[var(--color-muted)] transition-colors hover:border-[var(--color-brand-violet)] hover:text-[var(--color-brand-violet)] dark:text-white"
               aria-label="Toggle dark/light mode"
             >
               {resolvedTheme === "dark" ? (

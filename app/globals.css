@@ -61,15 +61,14 @@ body {
     color 0.3s ease;
 }
 
-/* ---------- DARK MODE — transparent so Aurora canvas shows ---------- */
 .dark {
-  --color-bg-cream: transparent;
+  --color-bg-cream: #0d0a12;
   --color-ink-charcoal: #ffffff;
   --color-primary-indigo: #cb6ce6;
   --color-brand-violet: #cb6ce6;
   --color-brand-violet-soft: rgba(203, 108, 230, 0.15);
   --color-line: rgba(255, 255, 255, 0.1);
-  --color-muted: rgba(255, 255, 255, 0.78);
+  --color-muted: #ffffff;
   --color-gold-italic: #e8c47a;
   --color-shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.4);
 }
@@ -140,6 +139,16 @@ header {
   }
   100% {
     offset-distance: 100%;
+  }
+}
+
+@keyframes voice-wave {
+  0%,
+  100% {
+    transform: scaleY(0.42);
+  }
+  50% {
+    transform: scaleY(1.08);
   }
 }
 

@@ -5,7 +5,7 @@ export function MeetTheTeam() {
   return (
     <section
       id="agents"
-      className="border-b border-[var(--color-line)] bg-[var(--color-bg-cream)] dark:bg-transparent py-16 md:py-24"
+      className="border-b border-[var(--color-line)] bg-[#f8f6ef] py-16 dark:bg-[#0d0a12] md:py-24"
     >
       <div className="mx-auto w-[min(1200px,calc(100%-32px))]">
         <div className="max-w-2xl">
@@ -13,20 +13,17 @@ export function MeetTheTeam() {
             03 — The team
           </p>
           <h2 className="font-[family-name:var(--font-display)] text-[length:var(--text-display-section)] font-semibold leading-[1.05] text-[var(--color-ink-charcoal)]">
-            Meet your{" "}
-            <em className="not-italic text-[var(--color-gold-italic)]">
-              new team.
-            </em>
+            Meet your <em className="not-italic text-[var(--color-gold-italic)]">new team.</em>
           </h2>
           <p className="mt-4 text-[length:var(--text-body-lg)] text-[var(--color-muted)]">
-            Four named AI agents with one job each. Trained on your market,
-            your inventory, your hours, and your CRM.
+            Four named AI agents with one job each. Trained on your market, your inventory, your
+            hours, and your CRM.
           </p>
         </div>
 
         <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
           {agents.map((a) => (
-            <div key={a.slug} className="h-full dark:[--color-bg-cream:rgb(0_0_0_/_0.4)]">
+            <div key={a.slug} className="h-full dark:[--color-bg-cream:#111019]">
               <AgentPersonaCard agent={a} />
             </div>
           ))}

@@ -50,7 +50,7 @@ const paths = [
 
 export function TwoWaysIn() {
   return (
-    <section className="border-b border-[var(--color-line)] bg-[var(--color-bg-cream)] py-16 dark:bg-transparent md:py-24">
+    <section className="border-b border-[var(--color-line)] bg-[#f8f6ef] py-16 dark:bg-[#0d0a12] md:py-24">
       <div className="mx-auto w-[min(1200px,calc(100%-32px))]">
         <div className="mb-12">
           <p className="mb-3 text-[var(--text-eyebrow)] font-semibold uppercase tracking-[0.14em] text-[var(--color-brand-violet)]">
@@ -102,7 +102,7 @@ export function TwoWaysIn() {
 
               <p
                 className={`mb-5 text-base ${
-                  path.dark ? "text-white/65" : "text-[var(--color-muted)]"
+                  path.dark ? "text-white" : "text-[var(--color-muted)]"
                 }`}
               >
                 {path.description}
@@ -111,14 +111,14 @@ export function TwoWaysIn() {
               <div
                 className={`mb-5 flex items-center gap-2 border-t pt-4 pb-4 text-sm ${
                   path.dark
-                    ? "border-white/10 text-white/45"
+                    ? "border-white/20 text-white"
                     : "border-[var(--color-line)] text-[var(--color-muted)]"
                 }`}
               >
                 <span className="text-[10px] font-semibold tracking-wider uppercase">BEST FOR</span>
                 <span
                   className={`font-medium ${
-                    path.dark ? "text-white/80" : "text-[var(--color-ink-charcoal)]"
+                    path.dark ? "text-white" : "text-[var(--color-ink-charcoal)]"
                   }`}
                 >
                   {path.bestFor}
@@ -137,7 +137,7 @@ export function TwoWaysIn() {
                     />
                     <span
                       className={`text-sm ${
-                        path.dark ? "text-white/75" : "text-[var(--color-ink-charcoal)]"
+                        path.dark ? "text-white" : "text-[var(--color-ink-charcoal)]"
                       }`}
                     >
                       {feature}

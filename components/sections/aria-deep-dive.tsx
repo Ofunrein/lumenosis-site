@@ -9,6 +9,8 @@ import {
   Mail,
   MapPin,
   MessageSquare,
+  Pause,
+  Play,
   Ruler,
 } from "lucide-react";
 import Image from "next/image";
@@ -34,6 +36,8 @@ type ConversationLine = {
   text: string;
   detail?: string;
 };
+
+type ThreadRef = ReturnType<typeof useRef<HTMLDivElement | null>>;
 
 const emailThread: EmailMessage[] = [
   {
@@ -207,6 +211,15 @@ function useRevealedCount(total: number, delayMs: number) {
   return count;
 }
 
+function useAutoScroll(ref: ThreadRef, trigger: unknown) {
+  useEffect(() => {
+    void trigger;
+    const node = ref.current;
+    if (!node) return;
+    node.scrollTo({ top: node.scrollHeight, behavior: "smooth" });
+  }, [ref, trigger]);
+}
+
 function TypewriterText({ text, active }: { text: string; active: boolean }) {
   const [chars, setChars] = useState(active ? 0 : text.length);
 
@@ -249,12 +262,12 @@ function SectionBadge({
 }) {
   return (
     <div className="flex items-center gap-3">
-      <span className="grid size-10 shrink-0 place-items-center rounded-2xl border border-white/10 bg-white/[0.08] text-[var(--color-brand-violet)]">
+      <span className="grid size-10 shrink-0 place-items-center rounded-2xl border border-[#3f3350] bg-[#21192c] text-[var(--color-brand-violet)]">
         <Icon className="size-4" aria-hidden />
       </span>
       <div className="min-w-0">
         <p className="text-sm font-semibold text-white">{title}</p>
-        <p className="text-xs text-white/50">{subtitle}</p>
+        <p className="text-xs text-white">{subtitle}</p>
       </div>
     </div>
   );
@@ -290,9 +303,13 @@ function InlineListingCard() {
   );
 }
 
-function TypingDots() {
+function TypingDots({ align = "left" }: { align?: "left" | "right" }) {
   return (
-    <div className="mr-auto flex w-fit items-center gap-2 rounded-[22px] bg-white/[0.10] px-5 py-4">
+    <div
+      className={`flex w-fit items-center gap-2 rounded-[22px] border border-[#3f3350] bg-[#21192c] px-5 py-4 ${
+        align === "right" ? "ml-auto" : "mr-auto"
+      }`}
+    >
       <span className="size-2 animate-pulse rounded-full bg-[var(--color-brand-violet)]" />
       <span className="size-2 animate-pulse rounded-full bg-[var(--color-brand-violet)] [animation-delay:120ms]" />
       <span className="size-2 animate-pulse rounded-full bg-[var(--color-brand-violet)] [animation-delay:240ms]" />
@@ -300,7 +317,7 @@ function TypingDots() {
   );
 }
 
-function VoiceWave() {
+function VoiceWave({ playing = false, compact = false }: { playing?: boolean; compact?: boolean }) {
   const bars = [
     { id: "wave-01", height: 18 },
     { id: "wave-02", height: 28 },
@@ -318,15 +335,31 @@ function VoiceWave() {
     { id: "wave-14", height: 36 },
     { id: "wave-15", height: 20 },
     { id: "wave-16", height: 44 },
+    { id: "wave-17", height: 26 },
+    { id: "wave-18", height: 32 },
+    { id: "wave-19", height: 22 },
+    { id: "wave-20", height: 40 },
   ];
 
   return (
-    <div className="mx-auto mt-5 flex h-12 w-full max-w-[280px] items-center justify-center gap-1.5 rounded-full border border-white/10 bg-white/[0.04] px-5">
-      {bars.map((bar) => (
+    <div
+      role="img"
+      className={`flex w-full items-center justify-center gap-1.5 rounded-full border border-[#3f3350] bg-[#140f1d] px-5 ${
+        compact ? "h-14" : "h-16"
+      }`}
+      aria-label={playing ? "Call audio playing" : "Call audio paused"}
+    >
+      {bars.map((bar, index) => (
         <span
           key={bar.id}
-          className="w-1.5 rounded-full bg-[var(--color-brand-violet)]/80"
-          style={{ height: bar.height }}
+          className={`w-1.5 rounded-full bg-[var(--color-brand-violet)] ${
+            playing ? "animate-[voice-wave_780ms_ease-in-out_infinite]" : ""
+          }`}
+          style={{
+            height: bar.height,
+            animationDelay: `${index * 52}ms`,
+            opacity: playing ? 1 : 0.72,
+          }}
         />
       ))}
     </div>
@@ -340,7 +373,7 @@ function ValuationLinkCard() {
         Seller signal detected
       </p>
       <p className="mt-2 text-base font-semibold text-white">Book your free property valuation</p>
-      <p className="mt-2 text-sm leading-relaxed text-white/72">
+      <p className="mt-2 text-sm leading-relaxed text-white">
         A 15-minute prep call gives Martin the condo comps, likely range, and timing notes before
         the showing.
       </p>
@@ -354,41 +387,36 @@ function IrisEmailDemo() {
   const visibleMessages = emailThread.slice(0, shown);
   const latestMessage = visibleMessages[visibleMessages.length - 1];
 
-  useEffect(() => {
-    if (shown && scrollRef.current) {
-      scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
-    }
-  }, [shown]);
+  useAutoScroll(scrollRef, shown);
 
   return (
-    <GlowCard
-      glowColor="purple"
-      customSize
-      className="overflow-hidden p-0 [--backdrop:rgba(5,12,9,0.82)]"
-    >
-      <div className="grid min-h-[610px] lg:grid-cols-[1.05fr_0.95fr]">
+    <GlowCard glowColor="purple" customSize className="overflow-hidden p-0 [--backdrop:#130d1b]">
+      <div className="grid min-h-[440px] lg:grid-cols-[1.25fr_0.75fr]">
         <div className="flex min-h-0 flex-col border-b border-[var(--color-line)] p-4 sm:p-5 lg:border-b-0 lg:border-r">
           <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[var(--color-line)] pb-4">
             <SectionBadge icon={Mail} title="Iris email desk" subtitle="Live buyer inquiry" />
-            <div className="rounded-full border border-[var(--color-brand-violet)]/30 bg-[var(--color-brand-violet)]/12 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-[var(--color-brand-violet)]">
+            <div className="rounded-full border border-[var(--color-brand-violet)]/50 bg-[#2a1638] px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-white">
               {latestMessage?.from === "iris" ? "Typing reply" : "Reading lead"}
             </div>
           </div>
 
-          <div className="mt-4 rounded-2xl border border-white/10 bg-black/35 p-3 text-sm shadow-[0_18px_44px_rgba(3,7,5,0.28)]">
+          <div className="mt-4 rounded-2xl border border-[#443650] bg-[#09070d] p-3 text-sm shadow-[0_18px_44px_rgba(3,7,5,0.28)]">
             <div className="flex items-start justify-between gap-3 border-b border-[var(--color-line)] pb-3">
               <div>
-                <p className="text-xs uppercase tracking-[0.18em] text-white/42">Subject</p>
+                <p className="text-xs uppercase tracking-[0.18em] text-white">Subject</p>
                 <p className="mt-1 font-semibold text-white">
                   Re: Oak Ridge Modern showing request
                 </p>
               </div>
-              <span className="rounded-full bg-[var(--color-brand-violet-soft)] px-3 py-1 text-xs font-semibold text-[var(--color-brand-violet)]">
+              <span className="rounded-full bg-[#2d183b] px-3 py-1 text-xs font-semibold text-white">
                 CRM synced
               </span>
             </div>
 
-            <div ref={scrollRef} className="mt-3 flex flex-col gap-3 overflow-visible">
+            <div
+              ref={scrollRef}
+              className="mt-3 flex max-h-[310px] flex-col gap-3 overflow-y-auto pr-2 [scrollbar-color:#cb6ce6_#130d1b] [scrollbar-width:thin]"
+            >
               {visibleMessages.map((message) => {
                 const isLatest = latestMessage?.id === message.id;
                 const isIris = message.from === "iris";
@@ -399,12 +427,12 @@ function IrisEmailDemo() {
                     className={[
                       "rounded-2xl border p-3 shadow-sm transition-all duration-300",
                       isIris
-                        ? "border-[var(--color-brand-violet)]/35 bg-[var(--color-brand-violet)]/12"
-                        : "border-white/10 bg-white/[0.07]",
+                        ? "border-[var(--color-brand-violet)]/45 bg-[#2a1438]"
+                        : "border-[#443650] bg-[#18131f]",
                     ].join(" ")}
                   >
                     <div className="flex items-start gap-3">
-                      <div className="relative size-9 shrink-0 overflow-hidden rounded-full border border-white/10 bg-white/10">
+                      <div className="relative size-9 shrink-0 overflow-hidden rounded-full border border-[#5e4b69] bg-[#21192c]">
                         <Image
                           src={isIris ? "/images/agents/iris.png" : "/images/agents/olivia.png"}
                           alt={isIris ? "Iris" : "Lead profile"}
@@ -419,17 +447,17 @@ function IrisEmailDemo() {
                             <p className="truncate text-sm font-semibold text-white">
                               {message.name}
                             </p>
-                            <p className="truncate text-xs text-white/45">{message.email}</p>
+                            <p className="truncate text-xs text-white">{message.email}</p>
                           </div>
-                          <span className="shrink-0 text-xs text-white/45">{message.time}</span>
+                          <span className="shrink-0 text-xs text-white">{message.time}</span>
                         </div>
-                        <p className="mt-3 text-sm leading-relaxed text-white/82">
+                        <p className="mt-3 text-sm leading-relaxed text-white">
                           <TypewriterText text={message.body} active={isIris && isLatest} />
                         </p>
                         {message.listing ? <InlineListingCard /> : null}
                         {message.valuation ? <ValuationLinkCard /> : null}
                         {message.label ? (
-                          <p className="mt-3 inline-flex rounded-full bg-[var(--color-brand-violet)]/12 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-[var(--color-brand-violet)]">
+                          <p className="mt-3 inline-flex rounded-full bg-[#3a1d4d] px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-white">
                             {message.label}
                           </p>
                         ) : null}
@@ -442,8 +470,8 @@ function IrisEmailDemo() {
           </div>
         </div>
 
-        <div className="flex flex-col gap-4 bg-[radial-gradient(circle_at_50%_0%,rgba(203,108,230,0.18),transparent_46%)] p-4 sm:p-5">
-          <div className="relative min-h-[210px] overflow-hidden rounded-[28px] border border-white/12 bg-black/45 shadow-[0_24px_70px_rgba(0,0,0,0.28)]">
+        <div className="flex flex-col gap-4 bg-[#100b18] p-4 sm:p-5">
+          <div className="relative min-h-[140px] overflow-hidden rounded-[28px] border border-[#443650] bg-[#07060a] shadow-[0_24px_70px_rgba(0,0,0,0.28)]">
             <Image
               src="/images/listings/oak-ridge-modern.svg"
               alt="Modern home listing preview"
@@ -452,7 +480,7 @@ function IrisEmailDemo() {
               className="object-cover"
             />
             <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent p-4">
-              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-white/60">
+              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-white">
                 Matched listing
               </p>
               <p className="mt-1 font-[family-name:var(--font-display)] text-2xl font-semibold text-white">
@@ -461,7 +489,7 @@ function IrisEmailDemo() {
             </div>
           </div>
 
-          <div className="rounded-[24px] border border-white/10 bg-white/[0.07] p-4">
+          <div className="rounded-[24px] border border-[#443650] bg-[#1b1424] p-4">
             <div className="flex items-start gap-3">
               <MapPin
                 className="mt-1 size-4 shrink-0 text-[var(--color-brand-violet)]"
@@ -469,23 +497,21 @@ function IrisEmailDemo() {
               />
               <div>
                 <p className="font-semibold text-white">1842 Oak Ridge Lane</p>
-                <p className="text-sm text-white/52">Austin, TX 78746</p>
+                <p className="text-sm text-white">Austin, TX 78746</p>
               </div>
             </div>
             <div className="mt-4 grid grid-cols-2 gap-2">
               {listingStats.map((stat) => (
                 <div
                   key={stat.label}
-                  className="rounded-2xl border border-white/10 bg-black/24 p-3"
+                  className="rounded-2xl border border-[#443650] bg-[#100b18] p-3"
                 >
-                  <p className="text-[10px] uppercase tracking-[0.16em] text-white/40">
-                    {stat.label}
-                  </p>
+                  <p className="text-[10px] uppercase tracking-[0.16em] text-white">{stat.label}</p>
                   <p className="mt-1 text-lg font-semibold text-white">{stat.value}</p>
                 </div>
               ))}
             </div>
-            <div className="mt-4 grid gap-2 text-sm text-white/58">
+            <div className="mt-4 grid gap-2 text-sm text-white">
               <p className="flex items-center gap-2">
                 <BedDouble className="size-4 text-[var(--color-brand-violet)]" aria-hidden />
                 New primary suite and walk-in closet
@@ -511,6 +537,8 @@ function AriaPhoneDemo() {
   const visible = ariaTranscript.slice(0, shown);
   const latest = visible[visible.length - 1];
   const transcriptRef = useRef<HTMLDivElement>(null);
+  const [playing, setPlaying] = useState(false);
+  const [elapsed, setElapsed] = useState(0);
   const status =
     shown >= ariaTranscript.length
       ? "Showing booked - Wed 5:45 PM"
@@ -520,36 +548,80 @@ function AriaPhoneDemo() {
           ? "Qualifying buyer"
           : "Listening";
 
+  useAutoScroll(transcriptRef, shown);
+
   useEffect(() => {
-    if (shown && transcriptRef.current) {
-      transcriptRef.current.scrollTop = transcriptRef.current.scrollHeight;
-    }
-  }, [shown]);
+    if (!playing) return;
+    const id = window.setInterval(() => {
+      setElapsed((current) => (current >= 134 ? 0 : current + 1));
+    }, 1000);
+    return () => window.clearInterval(id);
+  }, [playing]);
+
+  const minutes = Math.floor(elapsed / 60);
+  const seconds = String(elapsed % 60).padStart(2, "0");
+  const progress = `${Math.min(100, (elapsed / 134) * 100)}%`;
 
   return (
-    <div className="mx-auto w-full max-w-[560px] rounded-[58px] border border-white/12 bg-black/35 p-4 shadow-[0_34px_120px_rgba(0,0,0,0.44)]">
-      <div className="relative h-[860px] overflow-hidden rounded-[44px] border border-white/8 bg-[linear-gradient(180deg,rgba(32,21,45,0.76)_0%,rgba(7,7,10,0.82)_100%)] p-7">
-        <div className="mx-auto mb-8 h-10 w-40 rounded-b-[28px] bg-black/85" />
+    <div className="mx-auto w-full max-w-[360px] rounded-[38px] border border-[#3f3350] bg-[#07060a] p-2.5 shadow-[0_34px_120px_rgba(0,0,0,0.44)]">
+      <div className="relative h-[540px] overflow-hidden rounded-[30px] border border-[#332a3d] bg-[#120d19] p-4">
+        <div className="mx-auto mb-3 h-6 w-24 rounded-b-[20px] bg-black" />
         <div className="text-center">
-          <div className="mx-auto grid size-24 place-items-center rounded-full border border-[var(--color-brand-violet)]/40 bg-[var(--color-brand-violet)]/18 font-[family-name:var(--font-display)] text-5xl text-white">
+          <div className="mx-auto grid size-14 place-items-center rounded-full border border-[var(--color-brand-violet)]/60 bg-[#2a1638] font-[family-name:var(--font-display)] text-2xl text-white">
             A
           </div>
-          <p className="mt-4 font-[family-name:var(--font-display)] text-4xl font-semibold text-white">
+          <p className="mt-2 font-[family-name:var(--font-display)] text-2xl font-semibold text-white">
             Aria
           </p>
-          <p className="mt-2 text-sm font-semibold uppercase tracking-[0.24em] text-[var(--color-brand-violet)]">
-            Lumenosis voice receptionist
+          <p className="mt-1 text-xs font-semibold uppercase tracking-[0.22em] text-[var(--color-brand-violet)]">
+            Call record
           </p>
-          <div className="mt-4 inline-flex items-center gap-2 rounded-full border border-[var(--color-gold-italic)]/35 bg-[var(--color-gold-italic)]/10 px-4 py-2 text-sm font-semibold text-[var(--color-gold-italic)]">
+          <div className="mt-2 inline-flex items-center gap-2 rounded-full border border-[var(--color-gold-italic)]/45 bg-[#241d16] px-4 py-1.5 text-xs font-semibold text-[var(--color-gold-italic)]">
             <span className="size-2 rounded-full bg-[var(--color-gold-italic)]" />
             On call 02:14
           </div>
-          <VoiceWave />
         </div>
 
-        <div className="my-8 h-px bg-white/10" />
+        <div className="mt-3 rounded-[22px] border border-[#3f3350] bg-[#09070d] p-3">
+          <div className="flex items-center gap-4">
+            <button
+              type="button"
+              aria-label={playing ? "Pause Aria call recording" : "Play Aria call recording"}
+              onClick={() => setPlaying((current) => !current)}
+              className="grid size-12 shrink-0 place-items-center rounded-full bg-[var(--color-brand-violet)] text-white shadow-[0_0_32px_rgba(203,108,230,0.38)]"
+            >
+              {playing ? <Pause className="size-5" /> : <Play className="ml-0.5 size-5" />}
+            </button>
+            <div className="min-w-0 flex-1">
+              <p className="text-sm font-semibold text-white">Oak Ridge inbound call</p>
+              <p className="text-xs text-white">
+                Adam handles availability, tour time, and valuation handoff.
+              </p>
+            </div>
+          </div>
+          <div className="mt-4">
+            <VoiceWave playing={playing} compact />
+            <div className="mt-3 h-1.5 overflow-hidden rounded-full bg-[#2b2334]">
+              <div
+                className="h-full rounded-full bg-[var(--color-brand-violet)] transition-[width] duration-500"
+                style={{ width: progress }}
+              />
+            </div>
+            <div className="mt-2 flex justify-between text-xs font-semibold text-white">
+              <span>
+                {minutes}:{seconds}
+              </span>
+              <span>2:14</span>
+            </div>
+          </div>
+        </div>
 
-        <div ref={transcriptRef} className="flex h-[500px] flex-col gap-4 overflow-hidden pr-1">
+        <div className="my-4 h-px bg-[#3f3350]" />
+
+        <div
+          ref={transcriptRef}
+          className="flex h-[190px] flex-col gap-3 overflow-y-auto pr-1 [scrollbar-color:#cb6ce6_#120d19] [scrollbar-width:thin]"
+        >
           {visible.map((line) => {
             const isAria = line.from === "agent";
             const isLatest = latest?.id === line.id;
@@ -558,24 +630,22 @@ function AriaPhoneDemo() {
               <div
                 key={line.id}
                 className={[
-                  "max-w-[88%] rounded-[28px] px-6 py-5 text-[1.05rem] leading-relaxed shadow-[0_12px_36px_rgba(0,0,0,0.18)]",
-                  isAria
-                    ? "ml-auto bg-[var(--color-brand-violet)]/24 text-white"
-                    : "mr-auto bg-white/[0.10] text-white/86",
+                  "max-w-[88%] rounded-[22px] px-4 py-3 text-sm leading-relaxed shadow-[0_12px_36px_rgba(0,0,0,0.18)]",
+                  isAria ? "ml-auto bg-[#35194a] text-white" : "mr-auto bg-[#21192c] text-white",
                 ].join(" ")}
               >
-                <p className="mb-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-white/38">
+                <p className="mb-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-white">
                   {line.name} - {line.detail}
                 </p>
                 <TypewriterText text={line.text} active={isAria && isLatest} />
               </div>
             );
           })}
-          {shown < ariaTranscript.length ? <TypingDots /> : null}
+          {shown < ariaTranscript.length ? <TypingDots align="right" /> : null}
         </div>
 
-        <div className="absolute inset-x-7 bottom-7 rounded-[22px] border border-[var(--color-brand-violet)]/40 bg-black/45 px-5 py-4 backdrop-blur-xl">
-          <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-white/45">
+        <div className="absolute inset-x-4 bottom-4 rounded-[18px] border border-[var(--color-brand-violet)]/50 bg-[#0a0710] px-4 py-3">
+          <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-white">
             Live status
           </p>
           <p className="mt-1 text-lg font-semibold text-white">{status}</p>
@@ -606,28 +676,31 @@ function TheoSmsDemo() {
   }, [shown]);
 
   return (
-    <div className="mx-auto w-full max-w-[560px] rounded-[58px] border border-white/12 bg-black/35 p-4 shadow-[0_34px_120px_rgba(0,0,0,0.44)]">
-      <div className="relative h-[860px] overflow-hidden rounded-[44px] border border-white/8 bg-[linear-gradient(180deg,rgba(32,21,45,0.74)_0%,rgba(7,7,10,0.82)_100%)] p-7">
-        <div className="mx-auto mb-8 h-10 w-40 rounded-b-[28px] bg-black/85" />
+    <div className="mx-auto w-full max-w-[360px] rounded-[38px] border border-[#3f3350] bg-[#07060a] p-2.5 shadow-[0_34px_120px_rgba(0,0,0,0.44)]">
+      <div className="relative h-[540px] overflow-hidden rounded-[30px] border border-[#332a3d] bg-[#120d19] p-4">
+        <div className="mx-auto mb-3 h-6 w-24 rounded-b-[20px] bg-black" />
         <div className="text-center">
-          <div className="mx-auto grid size-24 place-items-center rounded-full border border-[var(--color-brand-violet)]/40 bg-[var(--color-brand-violet)]/18 font-[family-name:var(--font-display)] text-5xl text-white">
+          <div className="mx-auto grid size-14 place-items-center rounded-full border border-[var(--color-brand-violet)]/60 bg-[#2a1638] font-[family-name:var(--font-display)] text-2xl text-white">
             T
           </div>
-          <p className="mt-4 font-[family-name:var(--font-display)] text-4xl font-semibold text-white">
+          <p className="mt-2 font-[family-name:var(--font-display)] text-2xl font-semibold text-white">
             Theo
           </p>
-          <p className="mt-2 text-sm font-semibold uppercase tracking-[0.24em] text-[var(--color-brand-violet)]">
+          <p className="mt-1 text-xs font-semibold uppercase tracking-[0.22em] text-[var(--color-brand-violet)]">
             Lumenosis SMS sales agent
           </p>
-          <div className="mt-4 inline-flex items-center gap-2 rounded-full border border-[var(--color-gold-italic)]/35 bg-[var(--color-gold-italic)]/10 px-4 py-2 text-sm font-semibold text-[var(--color-gold-italic)]">
+          <div className="mt-2 inline-flex items-center gap-2 rounded-full border border-[var(--color-gold-italic)]/45 bg-[#241d16] px-4 py-1.5 text-xs font-semibold text-[var(--color-gold-italic)]">
             <span className="size-2 rounded-full bg-[var(--color-gold-italic)]" />
             Live thread
           </div>
         </div>
 
-        <div className="my-8 h-px bg-white/10" />
+        <div className="my-4 h-px bg-[#3f3350]" />
 
-        <div ref={transcriptRef} className="flex h-[500px] flex-col gap-4 overflow-hidden pr-1">
+        <div
+          ref={transcriptRef}
+          className="flex h-[315px] flex-col gap-3 overflow-y-auto pr-1 [scrollbar-color:#cb6ce6_#120d19] [scrollbar-width:thin]"
+        >
           {visible.map((line) => {
             const isTheo = line.from === "agent";
             const isLatest = latest?.id === line.id;
@@ -636,24 +709,22 @@ function TheoSmsDemo() {
               <div
                 key={line.id}
                 className={[
-                  "max-w-[88%] rounded-[28px] px-6 py-5 text-[1.05rem] leading-relaxed shadow-[0_12px_36px_rgba(0,0,0,0.18)]",
-                  isTheo
-                    ? "ml-auto bg-[var(--color-brand-violet)]/26 text-white"
-                    : "mr-auto bg-white/[0.10] text-white/86",
+                  "max-w-[88%] rounded-[22px] px-4 py-3 text-sm leading-relaxed shadow-[0_12px_36px_rgba(0,0,0,0.18)]",
+                  isTheo ? "ml-auto bg-[#35194a] text-white" : "mr-auto bg-[#21192c] text-white",
                 ].join(" ")}
               >
-                <p className="mb-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-white/38">
+                <p className="mb-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-white">
                   {line.name} - {line.detail}
                 </p>
                 <TypewriterText text={line.text} active={isTheo && isLatest} />
               </div>
             );
           })}
-          {shown < theoThread.length ? <TypingDots /> : null}
+          {shown < theoThread.length ? <TypingDots align="right" /> : null}
         </div>
 
-        <div className="absolute inset-x-7 bottom-7 rounded-[22px] border border-[var(--color-brand-violet)]/40 bg-black/45 px-5 py-4 backdrop-blur-xl">
-          <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-white/45">
+        <div className="absolute inset-x-4 bottom-4 rounded-[18px] border border-[var(--color-brand-violet)]/50 bg-[#0a0710] px-4 py-3">
+          <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-white">
             SMS status
           </p>
           <p className="mt-1 text-lg font-semibold text-white">{status}</p>
@@ -667,17 +738,17 @@ export function AriaDeepDive() {
   return (
     <section
       id="aria"
-      className="relative overflow-hidden border-b border-[var(--color-line)] bg-[var(--color-bg-cream)] py-20 md:py-28 dark:bg-transparent"
+      className="relative overflow-hidden border-b border-[var(--color-line)] bg-[#f1eee6] py-12 dark:bg-[#09070d] md:py-16"
     >
-      <div className="absolute left-1/2 top-0 h-[520px] w-[760px] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,rgba(203,108,230,0.22),transparent_62%)] blur-3xl" />
-      <div className="absolute right-[-14rem] top-28 h-[520px] w-[520px] rounded-full bg-[radial-gradient(circle,rgba(124,58,237,0.15),transparent_64%)] blur-3xl" />
+      <div className="absolute left-1/2 top-0 h-[460px] w-[720px] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,rgba(203,108,230,0.18),rgba(203,108,230,0)_62%)] blur-3xl" />
+      <div className="absolute right-[-14rem] top-24 h-[460px] w-[520px] rounded-full bg-[radial-gradient(circle,rgba(124,58,237,0.14),rgba(124,58,237,0)_64%)] blur-3xl" />
 
-      <div className="relative mx-auto grid w-[min(1280px,calc(100%-32px))] gap-12 lg:grid-cols-[0.78fr_1.22fr] lg:items-start">
+      <div className="relative mx-auto grid w-[min(1480px,calc(100%-32px))] gap-9 lg:grid-cols-[0.58fr_1.42fr] lg:items-start">
         <div className="lg:sticky lg:top-32">
           <p className="mb-4 text-[var(--text-eyebrow)] font-semibold uppercase tracking-[0.16em] text-[var(--color-brand-violet)]">
             04 - Live follow-up desk
           </p>
-          <h2 className="font-[family-name:var(--font-display)] text-[clamp(2.6rem,5.6vw,5.35rem)] font-semibold leading-[0.98] text-[var(--color-ink-charcoal)]">
+          <h2 className="font-[family-name:var(--font-display)] text-[clamp(2.5rem,4.6vw,4.7rem)] font-semibold leading-[0.99] text-[var(--color-ink-charcoal)]">
             The front desk that never sleeps and never asks for a raise.
           </h2>
           <p className="mt-6 max-w-xl text-lg leading-8 text-[var(--color-muted)]">
@@ -689,7 +760,7 @@ export function AriaDeepDive() {
             {microFeatures.map(({ icon: Icon, title, body }) => (
               <div
                 key={title}
-                className="rounded-[24px] border border-white/10 bg-white/[0.04] p-4"
+                className="rounded-[24px] border border-[#ded6c8] bg-[#f8f6ef] p-4 dark:border-[#3f3350] dark:bg-[#120d19]"
               >
                 <Icon className="size-5 text-[var(--color-brand-violet)]" aria-hidden />
                 <p className="mt-4 font-[family-name:var(--font-display)] text-xl font-semibold text-[var(--color-ink-charcoal)]">
@@ -703,7 +774,7 @@ export function AriaDeepDive() {
 
         <div className="grid gap-5">
           <IrisEmailDemo />
-          <div className="grid items-start gap-5 xl:grid-cols-[0.88fr_1.12fr]">
+          <div className="grid items-start gap-5 xl:grid-cols-2">
             <TheoSmsDemo />
             <AriaPhoneDemo />
           </div>

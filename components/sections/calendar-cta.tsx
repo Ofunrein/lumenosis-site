@@ -6,7 +6,10 @@ export function CalendarCTA() {
   const embedUrl = process.env.NEXT_PUBLIC_GHL_CALENDAR_EMBED_URL ?? "";
 
   return (
-    <section id="book" className="border-b border-[var(--color-line)] bg-[var(--color-bg-cream)] dark:bg-transparent py-16 md:py-24">
+    <section
+      id="book"
+      className="border-b border-[var(--color-line)] bg-[#f8f6ef] py-16 dark:bg-[#0d0a12] md:py-24"
+    >
       <div className="mx-auto grid w-[min(1200px,calc(100%-32px))] items-start gap-10 md:grid-cols-[0.85fr_1.15fr]">
         <div>
           <p className="mb-3 text-[var(--text-eyebrow)] font-semibold uppercase tracking-[0.14em] text-[var(--color-brand-purple)]">
@@ -29,15 +32,12 @@ export function CalendarCTA() {
           {formId ? (
             <FilloutEmbed formId={formId} />
           ) : (
-            <div className="rounded-2xl border border-[var(--color-line)] bg-[var(--color-bg-cream)] dark:bg-transparent dark:backdrop-blur-sm p-6 text-[var(--color-muted)]">
+            <div className="rounded-2xl border border-[var(--color-line)] bg-[var(--color-bg-cream)] p-6 text-[var(--color-muted)] dark:bg-[#14101c]">
               Form embed is configured via NEXT_PUBLIC_FILLOUT_FORM_ID env var.
             </div>
           )}
           {embedUrl ? (
-            <GhlCalendar
-              embedUrl={embedUrl}
-              title="Lumenosis AI strategy call calendar"
-            />
+            <GhlCalendar embedUrl={embedUrl} title="Lumenosis AI strategy call calendar" />
           ) : null}
         </div>
       </div>

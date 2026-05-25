@@ -25,7 +25,7 @@ export function Hero() {
   return (
     <section
       id="top"
-      className="relative overflow-hidden border-b border-[var(--color-line)] bg-[var(--color-bg-cream)] pb-16 pt-20 md:pt-28 dark:bg-transparent"
+      className="relative overflow-hidden border-b border-[var(--color-line)] bg-[#f5f4ee] pb-16 pt-20 dark:bg-[#0d0a12] md:pt-28"
     >
       {/* Dark mode: radial overlay for text legibility over Aurora */}
       <div className="absolute inset-0 z-10 hidden dark:block bg-[radial-gradient(ellipse_at_top,transparent_0%,rgba(0,0,0,0.6)_70%)] pointer-events-none" />
@@ -81,7 +81,7 @@ export function Hero() {
               <StarButton
                 lightColor="#cb6ce6"
                 backgroundColor="transparent"
-                className="bg-transparent border border-[var(--color-line)] text-[var(--color-ink-charcoal)] px-6 h-12 text-base hover:bg-[var(--color-brand-violet-soft)] [&_span]:text-[var(--color-ink-charcoal)] dark:[&_span]:text-white"
+                className="h-12 border border-[var(--color-line)] bg-[var(--color-bg-cream)] px-6 text-base text-[var(--color-ink-charcoal)] hover:bg-[var(--color-brand-violet-soft)] dark:bg-[#14101c] [&_span]:text-[var(--color-ink-charcoal)] dark:[&_span]:text-white"
               >
                 <a href="#vsl">Watch 90s overview</a>
               </StarButton>
