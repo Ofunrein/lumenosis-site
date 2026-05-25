@@ -67,8 +67,8 @@ export function TrustStrip() {
             ))}
           </CarouselContent>
         </Carousel>
-        <div className="pointer-events-none absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-[var(--color-bg-cream)] to-transparent dark:hidden" />
-        <div className="pointer-events-none absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-[var(--color-bg-cream)] to-transparent dark:hidden" />
+        <div className="pointer-events-none absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-[#ede8db] to-transparent dark:hidden" />
+        <div className="pointer-events-none absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-[#ede8db] to-transparent dark:hidden" />
       </div>
     </section>
   );
