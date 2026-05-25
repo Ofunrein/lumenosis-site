@@ -10,14 +10,17 @@ import { niches } from "@/content/niches";
 export function Hero() {
   const [titleIndex, setTitleIndex] = useState(0);
   const reduce = useReducedMotion();
+  const longestNiche = niches.reduce((longest, niche) =>
+    niche.length > longest.length ? niche : longest,
+  );
 
   useEffect(() => {
     if (reduce) return;
-    const interval = window.setInterval(() => {
-      setTitleIndex((i) => (i + 1) % niches.length);
+    const timeout = window.setTimeout(() => {
+      setTitleIndex(titleIndex === niches.length - 1 ? 0 : titleIndex + 1);
     }, 2000);
-    return () => window.clearInterval(interval);
-  }, [reduce]);
+    return () => window.clearTimeout(timeout);
+  }, [titleIndex, reduce]);
 
   return (
     <section
@@ -34,17 +37,30 @@ export function Hero() {
           </p>
           <h1 className="font-[family-name:var(--font-display)] text-[length:var(--text-display-hero)] font-semibold leading-[1.04] tracking-tight text-[var(--color-ink-charcoal)]">
             AI agents for your{" "}
-            <motion.span
-              key={niches[titleIndex]}
-              className="inline-block whitespace-nowrap align-bottom text-[0.82em] italic text-[var(--color-gold-italic)] sm:text-[1em]"
+            <span
+              className="relative inline-grid overflow-hidden align-bottom text-[0.82em] italic text-[var(--color-gold-italic)] sm:text-[1em]"
               aria-live="polite"
               aria-atomic="true"
-              initial={reduce ? false : { opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: reduce ? 0 : 0.3 }}
             >
-              {niches[titleIndex]}
-            </motion.span>{" "}
+              <span className="invisible whitespace-nowrap" aria-hidden>
+                {longestNiche}
+              </span>
+              {niches.map((niche, index) => (
+                <motion.span
+                  key={niche}
+                  className="absolute inset-x-0 top-0 whitespace-nowrap"
+                  initial={reduce ? false : { opacity: 0, y: "-115%" }}
+                  transition={reduce ? { duration: 0 } : { type: "spring", stiffness: 50 }}
+                  animate={
+                    titleIndex === index
+                      ? { y: 0, opacity: 1 }
+                      : { y: titleIndex > index ? "-115%" : "115%", opacity: 0 }
+                  }
+                >
+                  {niche}
+                </motion.span>
+              ))}
+            </span>{" "}
             team.
           </h1>
           <p className="mt-5 max-w-xl text-[length:var(--text-body-lg)] leading-snug text-[var(--color-muted)]">
