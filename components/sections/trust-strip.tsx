@@ -17,7 +17,7 @@ const reLogos = [
   {
     id: "exp-realty",
     label: "eXp Realty",
-    src: "/images/trust/exp-realty-logo.svg",
+    src: "/images/trust/exp-realty-logo.png",
   },
   {
     id: "remax",
