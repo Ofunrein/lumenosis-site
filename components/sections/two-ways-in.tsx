@@ -1,6 +1,7 @@
 "use client";
 
 import { Check } from "lucide-react";
+import Magnet from "@/components/magnet";
 import { GlowCard } from "@/components/spotlight-card";
 import { StarButton } from "@/components/ui/star-button";
 
@@ -153,20 +154,28 @@ export function TwoWaysIn() {
                 {path.price}
               </p>
 
-              <StarButton
-                lightColor={path.dark ? "#e8c47a" : "#cb6ce6"}
-                backgroundColor={path.dark ? "#e8c47a" : "#cb6ce6"}
-                className={`h-12 w-full justify-center rounded-xl text-sm ${
-                  path.dark
-                    ? "bg-[var(--color-gold-italic)] text-black [&_span]:text-black"
-                    : "bg-[var(--color-brand-charcoal)] text-white dark:bg-[var(--color-brand-violet)] [&_span]:text-white"
-                }`}
-                onClick={() => {
-                  document.getElementById("book")?.scrollIntoView({ behavior: "smooth" });
-                }}
+              <Magnet
+                padding={60}
+                magnetStrength={5}
+                wrapperClassName="w-full"
+                innerClassName="w-full"
+                style={{ position: "relative", display: "block", width: "100%" }}
               >
-                {path.cta}
-              </StarButton>
+                <StarButton
+                  lightColor={path.dark ? "#e8c47a" : "#cb6ce6"}
+                  backgroundColor={path.dark ? "#e8c47a" : "#cb6ce6"}
+                  className={`h-12 w-full justify-center rounded-xl text-sm ${
+                    path.dark
+                      ? "bg-[var(--color-gold-italic)] text-black [&_span]:text-black"
+                      : "bg-[var(--color-brand-charcoal)] text-white dark:bg-[var(--color-brand-violet)] [&_span]:text-white"
+                  }`}
+                  onClick={() => {
+                    document.getElementById("book")?.scrollIntoView({ behavior: "smooth" });
+                  }}
+                >
+                  {path.cta}
+                </StarButton>
+              </Magnet>
             </GlowCard>
           ))}
         </div>
