@@ -38,6 +38,10 @@ export const faq: FaqItem[] = [
     a: "Yes. Olivia + Aria + Theo + Iris is the standard four. Add a second voice line for after-hours or a Spanish-language agent on request.",
   },
   {
+    q: "What can your AI agents NOT do?",
+    a: "They cannot replace the relationship your agent builds face-to-face, handle legally sensitive advice, negotiate on your behalf, or attend showings. Every conversation that requires professional judgment gets escalated to a human. We will not automate the parts that require your license.",
+  },
+  {
     q: "What if I am not a fit?",
     a: "Then the strategy call ends with us telling you exactly what to do instead. No upsell, no pressure. We turn down more clients than we take.",
   },
