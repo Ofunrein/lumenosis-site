@@ -1,58 +1,83 @@
-"use client";
-import { GlowCard } from "@/components/spotlight-card";
-import Magnet from "@/components/magnet";
-import { StarButton } from "@/components/star-button";
-import { pricingPaths } from "@/content/pricing";
+import { Pencil, Star, Sparkles, Building } from "lucide-react";
+import { CreativePricing, type PricingTier } from "@/components/ui/creative-pricing";
+
+const tiers: PricingTier[] = [
+  {
+    name: "Starter",
+    icon: <Pencil className="w-5 h-5" />,
+    price: "$197",
+    period: "/mo",
+    description: "For solo agents installing their first AI front desk.",
+    color: "violet",
+    features: [
+      "Olivia website chat agent",
+      "Up to 300 leads/mo handled",
+      "CRM auto-sync",
+      "Email support",
+    ],
+  },
+  {
+    name: "Professional",
+    icon: <Star className="w-5 h-5" />,
+    price: "$397",
+    period: "/mo",
+    description: "For busy agents and small teams.",
+    color: "violet",
+    features: [
+      "Everything in Starter",
+      "Aria 24/7 voice receptionist",
+      "Theo SMS sales agent",
+      "Up to 700 leads/mo",
+      "Priority onboarding",
+    ],
+    popular: true,
+  },
+  {
+    name: "Team",
+    icon: <Sparkles className="w-5 h-5" />,
+    price: "$697",
+    period: "/mo",
+    description: "For brokerages and multi-location teams.",
+    color: "violet",
+    features: [
+      "Everything in Professional",
+      "Iris email assistant",
+      "Up to 1,400 leads/mo",
+      "Monthly review with Martin",
+      "Lead recovery sweep",
+    ],
+  },
+  {
+    name: "Enterprise",
+    icon: <Building className="w-5 h-5" />,
+    price: "Custom",
+    description: "For large brokerages and CRE teams.",
+    color: "violet",
+    features: [
+      "Unlimited lead volume",
+      "Custom agent training",
+      "Dedicated build engineer",
+      "Multi-location deployment",
+      "SLA + compliance review",
+    ],
+  },
+];
 
 export function TwoWaysIn() {
   return (
-    <section className="border-b border-[var(--color-line)] bg-[#1a1a1a] py-16 md:py-24">
+    <section className="border-b border-[var(--color-line)] bg-[var(--color-bg-cream)] py-16 md:py-24">
       <div className="mx-auto w-[min(1200px,calc(100%-32px))]">
         <div className="max-w-2xl mb-10">
-          <p className="mb-3 text-[var(--text-eyebrow)] font-semibold uppercase tracking-[0.14em] text-[var(--color-brand-purple)]">
+          <p className="mb-3 text-[var(--text-eyebrow)] font-semibold uppercase tracking-[0.14em] text-[var(--color-brand-violet)]">
             06 — Programs
           </p>
-          <h2 className="font-[family-name:var(--font-display)] text-[length:var(--text-display-section)] font-semibold leading-[1.05] text-white">
-            Simple pricing.{" "}
-            <em className="not-italic text-[var(--color-gold-italic)]">
-              No surprises.
-            </em>
-          </h2>
         </div>
-        <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
-          {pricingPaths.map((p) => (
-            <GlowCard key={p.slug} glowColor="purple" customSize className="flex flex-col relative">
-              {p.popular && (
-                <span className="absolute -top-3 right-4 rounded-full bg-[var(--color-brand-purple)] px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-white">
-                  Popular
-                </span>
-              )}
-              <h3 className="font-semibold text-white text-lg">{p.label}</h3>
-              <div className="mt-1 flex items-baseline gap-1">
-                <span className="text-3xl font-bold text-white">{p.price}</span>
-                {p.subtext && <span className="text-white/50 text-sm">{p.subtext}</span>}
-              </div>
-              <p className="mt-2 text-sm text-white/55 border-b border-white/10 pb-4">{p.pitch}</p>
-              <ul className="mt-4 grid gap-2 text-sm text-white/70 flex-1">
-                {p.bullets.map((b) => (
-                  <li key={b} className="flex gap-2">
-                    <span aria-hidden className="mt-1.5 size-1.5 shrink-0 rounded-full bg-[var(--color-brand-purple)]" />
-                    <span>{b}</span>
-                  </li>
-                ))}
-              </ul>
-              <Magnet padding={60} magnetStrength={5} wrapperClassName="mt-6 w-full">
-                <StarButton
-                  lightColor="#cb6ce6"
-                  className={`w-full justify-center h-10 text-sm ${p.popular ? "bg-[var(--color-brand-purple)] text-white" : "bg-white/10 border border-white/20 text-white hover:bg-white/15"}`}
-                  onClick={() => { window.location.href = '#book'; }}
-                >
-                  {p.cta}
-                </StarButton>
-              </Magnet>
-            </GlowCard>
-          ))}
-        </div>
+        <CreativePricing
+          tag="Simple Pricing"
+          title="Two ways in."
+          description="Both paths lead to the same outcome: qualified appointments on your calendar."
+          tiers={tiers}
+        />
       </div>
     </section>
   );

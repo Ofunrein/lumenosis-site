@@ -18,7 +18,6 @@ const glowColorMap = {
 
 export function GlowCard({ children, className = '', glowColor = 'purple', customSize = true }: GlowCardProps) {
   const cardRef = useRef<HTMLDivElement>(null);
-  // customSize used for potential future sizing — suppress unused warning
   void customSize;
 
   useEffect(() => {
@@ -39,13 +38,13 @@ export function GlowCard({ children, className = '', glowColor = 'purple', custo
 
   const style = {
     '--base': base, '--spread': spread, '--radius': '14', '--border': '1',
-    '--backdrop': 'rgba(26, 26, 26, 0.8)',
-    '--backup-border': 'rgba(203, 108, 230, 0.15)',
+    '--backdrop': 'var(--color-bg-cream)',
+    '--backup-border': 'var(--color-line)',
     '--size': '200', '--outer': '1',
     '--border-size': 'calc(var(--border, 1) * 1px)',
     '--spotlight-size': 'calc(var(--size, 150) * 1px)',
     '--hue': 'calc(var(--base) + (var(--xp, 0) * var(--spread, 0)))',
-    backgroundImage: `radial-gradient(var(--spotlight-size) var(--spotlight-size) at calc(var(--x, 0) * 1px) calc(var(--y, 0) * 1px), hsl(var(--hue, 280) 100% 70% / 0.12), transparent)`,
+    backgroundImage: `radial-gradient(var(--spotlight-size) var(--spotlight-size) at calc(var(--x, 0) * 1px) calc(var(--y, 0) * 1px), hsl(var(--hue, 280) 100% 70% / 0.10), transparent)`,
     backgroundColor: 'var(--backdrop, transparent)',
     backgroundSize: 'calc(100% + (2 * var(--border-size))) calc(100% + (2 * var(--border-size)))',
     backgroundPosition: '50% 50%',
@@ -59,8 +58,19 @@ export function GlowCard({ children, className = '', glowColor = 'purple', custo
   return (
     <>
       <style dangerouslySetInnerHTML={{ __html: beforeAfterCSS }} />
-      <div ref={cardRef} data-glow style={style} className={`rounded-2xl relative p-6 backdrop-blur-sm ${className}`}>
+      <div ref={cardRef} data-glow style={style} className={`group rounded-2xl relative p-6 backdrop-blur-sm ${className}`}>
         <div data-glow style={{ position: 'absolute', inset: 0, opacity: 'var(--outer,1)', borderRadius: 'calc(var(--radius)*1px)', filter: `blur(calc(var(--border-size)*10))`, pointerEvents: 'none', border: 'none', background: 'none' } as React.CSSProperties} />
+        {/* Aceternity-style border glow on hover */}
+        <div
+          className="absolute inset-[-1px] rounded-[14px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+          style={{
+            background: 'radial-gradient(400px circle at var(--x, 50%) var(--y, 50%), rgba(203,108,230,0.35), transparent 40%)',
+            WebkitMask: 'linear-gradient(#fff,#fff) content-box, linear-gradient(#fff,#fff)',
+            WebkitMaskComposite: 'xor',
+            maskComposite: 'exclude',
+            padding: '1px',
+          }}
+        />
         {children}
       </div>
     </>

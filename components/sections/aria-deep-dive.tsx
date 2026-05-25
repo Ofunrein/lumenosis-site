@@ -36,17 +36,17 @@ function EmailCard() {
 
   return (
     <GlowCard glowColor="purple" customSize className="flex flex-col gap-3 min-h-[320px]">
-      <div className="flex items-center gap-2 border-b border-white/10 pb-3">
+      <div className="flex items-center gap-2 border-b border-[var(--color-line)] pb-3">
         <span className="text-lg">📧</span>
         <div>
-          <p className="font-semibold text-white text-sm">Iris Handles an Email</p>
-          <p className="text-white/50 text-xs">AI replies in under 60 seconds</p>
+          <p className="font-semibold text-[var(--color-ink-charcoal)] text-sm">Iris Handles an Email</p>
+          <p className="text-[var(--color-muted)] text-xs">AI replies in under 60 seconds</p>
         </div>
       </div>
       <div ref={scrollRef} className="flex flex-col gap-2 overflow-hidden flex-1">
         {emailThread.slice(0, shown).map((msg, i) => (
-          <div key={i} className={`rounded-xl px-3 py-2 text-sm max-w-[85%] ${msg.from === "ai" ? "bg-[var(--color-brand-purple)]/20 border border-[var(--color-brand-purple)]/30 self-end text-white" : "bg-white/10 text-white/80 self-start"}`}>
-            <p className="font-semibold text-xs text-white/50 mb-1">{msg.name} · {msg.time}</p>
+          <div key={i} className={`rounded-xl px-3 py-2 text-sm max-w-[85%] ${msg.from === "ai" ? "bg-[var(--color-brand-purple)]/20 border border-[var(--color-brand-purple)]/30 self-end text-[var(--color-ink-charcoal)]" : "bg-[var(--color-brand-violet-soft)] text-[var(--color-ink-charcoal)] self-start"}`}>
+            <p className="font-semibold text-xs text-[var(--color-muted)] mb-1">{msg.name} · {msg.time}</p>
             <p>{msg.text}</p>
             {"label" in msg && msg.label && <p className="mt-1 text-[10px] text-[var(--color-brand-purple)] font-semibold uppercase tracking-wider">✓ {msg.label}</p>}
           </div>
@@ -54,7 +54,7 @@ function EmailCard() {
       </div>
       <div className="flex gap-2 flex-wrap">
         {["Valuation Booked", "Viewing Booked", "1 min response"].map(t => (
-          <span key={t} className="text-[10px] text-white/60 border border-white/15 px-2 py-0.5 rounded-full">✓ {t}</span>
+          <span key={t} className="text-[10px] text-[var(--color-muted)] border border-[var(--color-line)] px-2 py-0.5 rounded-full">✓ {t}</span>
         ))}
       </div>
     </GlowCard>
@@ -67,27 +67,27 @@ function AudioCallCard() {
 
   return (
     <GlowCard glowColor="purple" customSize className="flex flex-col gap-3">
-      <div className="flex items-center gap-2 border-b border-white/10 pb-3">
+      <div className="flex items-center gap-2 border-b border-[var(--color-line)] pb-3">
         <span className="text-lg">📞</span>
         <div>
-          <p className="font-semibold text-white text-sm">Aria Handles a Live Call</p>
-          <p className="text-white/50 text-xs">Answers, qualifies, books appointments</p>
+          <p className="font-semibold text-[var(--color-ink-charcoal)] text-sm">Aria Handles a Live Call</p>
+          <p className="text-[var(--color-muted)] text-xs">Answers, qualifies, books appointments</p>
         </div>
       </div>
       <div className="flex items-center gap-1 h-16 justify-center px-2">
         {bars.map((b, i) => (
           <div key={i} className="w-1 rounded-full transition-all duration-150"
-            style={{ height: `${b.h}px`, backgroundColor: i < (playing ? 18 : 5) ? '#cb6ce6' : 'rgba(255,255,255,0.2)' }} />
+            style={{ height: `${b.h}px`, backgroundColor: i < (playing ? 18 : 5) ? '#cb6ce6' : 'rgba(128,128,128,0.3)' }} />
         ))}
       </div>
       <button type="button" onClick={() => setPlaying(!playing)}
         className="mx-auto grid size-10 place-items-center rounded-full bg-[var(--color-brand-purple)] text-white hover:scale-110 transition-transform">
         {playing ? "⏸" : "▶"}
       </button>
-      <p className="text-center text-white/40 text-xs">0:38 / 2:14</p>
+      <p className="text-center text-[var(--color-muted)] text-xs">0:38 / 2:14</p>
       <div className="grid gap-2">
         {["Property details provided", "Questions answered", "Viewing booked automatically"].map(f => (
-          <div key={f} className="flex items-center gap-2 text-sm text-white/70">
+          <div key={f} className="flex items-center gap-2 text-sm text-[var(--color-muted)]">
             <span className="size-4 rounded-full bg-[var(--color-brand-purple)]/20 text-[var(--color-brand-purple)] text-xs grid place-items-center">✓</span>
             {f}
           </div>
@@ -108,20 +108,20 @@ function AutomationFlowCard() {
 
   return (
     <GlowCard glowColor="purple" customSize className="flex flex-col gap-3">
-      <div className="flex items-center gap-2 border-b border-white/10 pb-3">
+      <div className="flex items-center gap-2 border-b border-[var(--color-line)] pb-3">
         <span className="text-lg">⚡</span>
         <div>
-          <p className="font-semibold text-white text-sm">Automation Flow</p>
-          <p className="text-white/50 text-xs">Lead to booking — no human input</p>
+          <p className="font-semibold text-[var(--color-ink-charcoal)] text-sm">Automation Flow</p>
+          <p className="text-[var(--color-muted)] text-xs">Lead to booking — no human input</p>
         </div>
       </div>
       <div className="flex items-center justify-between gap-1 mt-2">
         {steps.map((step, i) => (
           <div key={i} className="flex flex-col items-center gap-1 text-center">
-            <div className={`size-8 rounded-full grid place-items-center text-xs ${step.sub ? "bg-[var(--color-brand-purple)]/20 border border-[var(--color-brand-purple)]/40" : "bg-white/10"}`}>
+            <div className={`size-8 rounded-full grid place-items-center text-xs ${step.sub ? "bg-[var(--color-brand-purple)]/20 border border-[var(--color-brand-purple)]/40" : "bg-[var(--color-brand-violet-soft)]"}`}>
               {step.icon}
             </div>
-            <p className="text-[9px] text-white/50 whitespace-pre-line leading-tight">{step.label}</p>
+            <p className="text-[9px] text-[var(--color-muted)] whitespace-pre-line leading-tight">{step.label}</p>
           </div>
         ))}
       </div>
@@ -131,16 +131,16 @@ function AutomationFlowCard() {
 
 export function AriaDeepDive() {
   return (
-    <section id="aria" className="bg-black py-20 md:py-28 border-b border-[var(--color-line)]">
+    <section id="aria" className="bg-[var(--color-bg-cream)] dark:bg-transparent dark:bg-[rgba(0,0,0,0.3)] py-20 md:py-28 border-b border-[var(--color-line)]">
       <div className="mx-auto w-[min(1200px,calc(100%-32px))]">
         <div className="max-w-2xl mb-10">
           <p className="mb-3 text-[var(--text-eyebrow)] font-semibold uppercase tracking-[0.14em] text-[var(--color-gold-italic)]">
             04 — AI Receptionist
           </p>
-          <h2 className="font-[family-name:var(--font-display)] text-[length:var(--text-display-section)] font-semibold leading-[1.05] text-white">
+          <h2 className="font-[family-name:var(--font-display)] text-[length:var(--text-display-section)] font-semibold leading-[1.05] text-[var(--color-ink-charcoal)]">
             The front desk that <em className="not-italic text-[var(--color-gold-italic)]">never sleeps</em> and never asks for a raise.
           </h2>
-          <p className="mt-4 text-[length:var(--text-body-lg)] text-white/60">
+          <p className="mt-4 text-[length:var(--text-body-lg)] text-[var(--color-muted)]">
             Every lead your funnel produces gets answered in under twelve seconds, on voice and SMS. Trained on your market, your CRM, your hours.
           </p>
         </div>

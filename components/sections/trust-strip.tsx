@@ -7,7 +7,7 @@ const reLogos = [
     id: "compass",
     label: "Compass",
     content: (
-      <svg viewBox="0 0 120 30" className="h-6 w-auto fill-white">
+      <svg viewBox="0 0 120 30" className="h-6 w-auto fill-[var(--color-ink-charcoal)]">
         <text x="0" y="22" fontFamily="Georgia, serif" fontSize="18" fontWeight="700">Compass</text>
       </svg>
     )
@@ -16,7 +16,7 @@ const reLogos = [
     id: "kw",
     label: "Keller Williams",
     content: (
-      <svg viewBox="0 0 160 30" className="h-6 w-auto fill-white">
+      <svg viewBox="0 0 160 30" className="h-6 w-auto fill-[var(--color-ink-charcoal)]">
         <text x="0" y="22" fontFamily="Arial, sans-serif" fontSize="13" fontWeight="700">Keller Williams</text>
       </svg>
     )
@@ -25,7 +25,7 @@ const reLogos = [
     id: "exp",
     label: "eXp Realty",
     content: (
-      <svg viewBox="0 0 100 30" className="h-6 w-auto fill-white">
+      <svg viewBox="0 0 100 30" className="h-6 w-auto fill-[var(--color-ink-charcoal)]">
         <text x="0" y="22" fontFamily="Arial, sans-serif" fontSize="16" fontWeight="700">eXp Realty</text>
       </svg>
     )
@@ -34,7 +34,7 @@ const reLogos = [
     id: "bhhs",
     label: "Berkshire Hathaway HS",
     content: (
-      <svg viewBox="0 0 230 30" className="h-5 w-auto fill-white">
+      <svg viewBox="0 0 230 30" className="h-5 w-auto fill-[var(--color-ink-charcoal)]">
         <text x="0" y="21" fontFamily="Georgia, serif" fontSize="11" fontWeight="600">Berkshire Hathaway HS</text>
       </svg>
     )
@@ -43,7 +43,7 @@ const reLogos = [
     id: "remax",
     label: "RE/MAX",
     content: (
-      <svg viewBox="0 0 90 30" className="h-6 w-auto fill-white">
+      <svg viewBox="0 0 90 30" className="h-6 w-auto fill-[var(--color-ink-charcoal)]">
         <text x="0" y="22" fontFamily="Arial, sans-serif" fontSize="18" fontWeight="900">RE/MAX</text>
       </svg>
     )
@@ -52,8 +52,8 @@ const reLogos = [
 
 export function TrustStrip() {
   return (
-    <section aria-label="Trusted by leading real estate teams" className="border-b border-[var(--color-line)] bg-[#1a1a1a]/60 py-8">
-      <p className="text-center text-[var(--text-eyebrow)] font-semibold uppercase tracking-[0.14em] text-white/40 mb-6">
+    <section aria-label="Trusted by leading real estate teams" className="border-b border-[var(--color-line)] bg-[var(--color-bg-cream)] py-8">
+      <p className="text-center text-[var(--text-eyebrow)] font-semibold uppercase tracking-[0.14em] text-[var(--color-muted)] mb-6">
         Trusted by top real estate teams
       </p>
       <div className="relative mx-auto lg:max-w-5xl overflow-hidden">
@@ -68,8 +68,8 @@ export function TrustStrip() {
             ))}
           </CarouselContent>
         </Carousel>
-        <div className="absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-black to-transparent pointer-events-none" />
-        <div className="absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-black to-transparent pointer-events-none" />
+        <div className="absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-[var(--color-bg-cream)] to-transparent pointer-events-none" />
+        <div className="absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-[var(--color-bg-cream)] to-transparent pointer-events-none" />
       </div>
     </section>
   );

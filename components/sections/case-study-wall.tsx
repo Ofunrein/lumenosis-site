@@ -12,12 +12,12 @@ const labels = {
 
 export function CaseStudyWall() {
   return (
-    <section className="border-b border-[var(--color-line)] bg-black py-16 md:py-24">
+    <section className="border-b border-[var(--color-line)] bg-[var(--color-bg-cream)] py-16 md:py-24">
       <div className="mx-auto w-[min(1200px,calc(100%-32px))]">
         <span className="inline-block mb-3 text-[var(--text-eyebrow)] font-semibold uppercase tracking-[0.14em] text-[var(--color-brand-purple)]">
           07 — Results
         </span>
-        <h2 className="max-w-3xl font-[family-name:var(--font-display)] text-[length:var(--text-display-section)] font-semibold leading-[1.05] text-white">
+        <h2 className="max-w-3xl font-[family-name:var(--font-display)] text-[length:var(--text-display-section)] font-semibold leading-[1.05] text-[var(--color-ink-charcoal)]">
           Don&apos;t just take our word for it.
         </h2>
 
@@ -27,7 +27,7 @@ export function CaseStudyWall() {
               <TabsTrigger
                 key={k}
                 value={k}
-                className="rounded-[var(--radius-pill)] border border-[var(--color-line)] bg-white/5 px-4 py-2 text-sm font-medium text-white/60 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-brand-purple)] focus-visible:ring-offset-2 data-[state=active]:border-[var(--color-brand-purple)] data-[state=active]:bg-[var(--color-brand-purple)] data-[state=active]:text-white data-[state=active]:shadow-none"
+                className="rounded-[var(--radius-pill)] border border-[var(--color-line)] bg-[var(--color-brand-violet-soft)] px-4 py-2 text-sm font-medium text-[var(--color-muted)] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-brand-purple)] focus-visible:ring-offset-2 data-[state=active]:border-[var(--color-brand-purple)] data-[state=active]:bg-[var(--color-brand-purple)] data-[state=active]:text-white data-[state=active]:shadow-none"
               >
                 {v}
               </TabsTrigger>
@@ -47,10 +47,10 @@ export function CaseStudyWall() {
                     <p className="font-[family-name:var(--font-display)] text-lg font-semibold text-[var(--color-brand-purple)]">
                       {c.metric}
                     </p>
-                    <blockquote className="mt-3 text-[var(--text-body-lg)] leading-snug text-white">
+                    <blockquote className="mt-3 text-[var(--text-body-lg)] leading-snug text-[var(--color-ink-charcoal)]">
                       &ldquo;{c.quote}&rdquo;
                     </blockquote>
-                    <p className="mt-3 text-[var(--text-eyebrow)] font-medium uppercase tracking-[0.1em] text-white/50">
+                    <p className="mt-3 text-[var(--text-eyebrow)] font-medium uppercase tracking-[0.1em] text-[var(--color-muted)]">
                       &mdash; {c.attribution}
                     </p>
                   </GlowCard>

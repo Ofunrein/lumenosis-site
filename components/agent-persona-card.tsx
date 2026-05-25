@@ -19,11 +19,11 @@ export function AgentPersonaCard({ agent }: { agent: Agent }) {
       <span className={`mx-auto mb-3 inline-block rounded-full px-3 py-1 text-[10px] font-bold uppercase tracking-[0.12em] whitespace-nowrap overflow-hidden text-ellipsis max-w-full ${accentClass[agent.accent]}`}>
         {agent.role}
       </span>
-      <h3 className="text-center font-[family-name:var(--font-display)] text-xl font-semibold text-white">
+      <h3 className="text-center font-[family-name:var(--font-display)] text-xl font-semibold text-[var(--color-ink-charcoal)]">
         {agent.name}
       </h3>
-      <p className="mt-2 text-center text-sm text-white/60 line-clamp-2">{agent.tagline}</p>
-      <ul className="mt-4 grid gap-2 text-sm text-white/70">
+      <p className="mt-2 text-center text-sm text-[var(--color-muted)] line-clamp-2">{agent.tagline}</p>
+      <ul className="mt-4 grid gap-2 text-sm text-[var(--color-muted)]">
         {agent.bullets.map((b) => (
           <li key={b} className="flex gap-2">
             <span aria-hidden className="mt-1.5 size-1.5 shrink-0 rounded-full bg-[var(--color-brand-purple)]" />
