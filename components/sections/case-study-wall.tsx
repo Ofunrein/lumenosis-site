@@ -1,6 +1,7 @@
 "use client";
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { GlowCard } from "@/components/spotlight-card";
 import { caseStudies } from "@/content/case-studies";
 
 const labels = {
@@ -42,10 +43,7 @@ export function CaseStudyWall() {
               {caseStudies
                 .filter((c) => c.category === cat)
                 .map((c) => (
-                  <article
-                    key={c.quote}
-                    className="rounded-2xl border border-[var(--color-line)] bg-[var(--color-brand-charcoal)]/80 p-6 shadow-[var(--shadow-soft)]"
-                  >
+                  <GlowCard key={c.quote} glowColor="purple" customSize className="">
                     <p className="font-[family-name:var(--font-display)] text-lg font-semibold text-[var(--color-brand-purple)]">
                       {c.metric}
                     </p>
@@ -55,7 +53,7 @@ export function CaseStudyWall() {
                     <p className="mt-3 text-[var(--text-eyebrow)] font-medium uppercase tracking-[0.1em] text-white/50">
                       &mdash; {c.attribution}
                     </p>
-                  </article>
+                  </GlowCard>
                 ))}
             </TabsContent>
           ))}

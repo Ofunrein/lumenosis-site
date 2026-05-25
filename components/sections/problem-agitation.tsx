@@ -1,3 +1,5 @@
+import { GlowCard } from "@/components/spotlight-card";
+
 const leaks = [
   {
     n: "01",
@@ -36,10 +38,7 @@ export function ProblemAgitation() {
         </div>
         <div className="mt-10 grid gap-4 md:grid-cols-3">
           {leaks.map((leak) => (
-            <article
-              key={leak.n}
-              className="rounded-2xl border border-[var(--color-line)] bg-[var(--color-brand-charcoal)]/80 p-6 shadow-[0_4px_24px_rgba(0,0,0,0.5)]"
-            >
+            <GlowCard key={leak.n} glowColor="purple" customSize className="">
               <div className="mb-3 grid size-9 place-items-center rounded-lg bg-[var(--color-brand-purple-soft)] text-sm font-bold text-[var(--color-brand-purple)]">
                 {leak.n}
               </div>
@@ -47,7 +46,7 @@ export function ProblemAgitation() {
                 {leak.title}
               </h3>
               <p className="mt-2 text-white/60">{leak.body}</p>
-            </article>
+            </GlowCard>
           ))}
         </div>
       </div>

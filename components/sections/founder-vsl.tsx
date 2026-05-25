@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { GlowCard } from "@/components/spotlight-card";
 
 export function FounderVSL() {
   return (
@@ -31,27 +32,29 @@ export function FounderVSL() {
             </li>
           </ul>
         </div>
-        <div className="relative aspect-video w-full overflow-hidden rounded-2xl bg-[var(--color-dark-section)] shadow-[var(--shadow-glow-violet)]">
-          <Image
-            src="/images/martin-headshot.jpg"
-            alt="Martin Ofunrein on Lumenosis AI strategy for real estate"
-            fill
-            sizes="(max-width: 768px) 100vw, 700px"
-            className="object-cover"
-          />
-          <button
-            type="button"
-            aria-label="Play overview video"
-            className="absolute inset-0 grid place-items-center text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-brand-purple)] focus-visible:ring-offset-2"
-          >
-            {/* TODO(martin): wire play handler to launch VSL modal once video uploaded */}
-            <span className="grid size-20 place-items-center rounded-full bg-[var(--color-brand-purple)]/90 shadow-[var(--shadow-glow-violet)]">
-              <svg viewBox="0 0 24 24" className="size-8" fill="currentColor" aria-hidden>
-                <path d="M8 5v14l11-7z" />
-              </svg>
-            </span>
-          </button>
-        </div>
+        <GlowCard glowColor="purple" customSize className="p-0 overflow-hidden">
+          <div className="relative aspect-video w-full overflow-hidden rounded-2xl bg-[var(--color-dark-section)] shadow-[var(--shadow-glow-violet)]">
+            <Image
+              src="/images/martin-headshot.jpg"
+              alt="Martin Ofunrein on Lumenosis AI strategy for real estate"
+              fill
+              sizes="(max-width: 768px) 100vw, 700px"
+              className="object-cover"
+            />
+            <button
+              type="button"
+              aria-label="Play overview video"
+              className="absolute inset-0 grid place-items-center text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-brand-purple)] focus-visible:ring-offset-2"
+            >
+              {/* TODO(martin): wire play handler to launch VSL modal once video uploaded */}
+              <span className="grid size-20 place-items-center rounded-full bg-[var(--color-brand-purple)]/90 shadow-[var(--shadow-glow-violet)]">
+                <svg viewBox="0 0 24 24" className="size-8" fill="currentColor" aria-hidden>
+                  <path d="M8 5v14l11-7z" />
+                </svg>
+              </span>
+            </button>
+          </div>
+        </GlowCard>
       </div>
     </section>
   );

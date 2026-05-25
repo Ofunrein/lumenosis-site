@@ -46,12 +46,14 @@ export function Timeline30Day() {
               </div>
 
               {/* Card content */}
-              <h3 className="font-[family-name:var(--font-display)] text-xl font-semibold text-white">
-                {w.title}
-              </h3>
-              <p className="mt-2 text-sm leading-relaxed text-white/60">
-                {w.body}
-              </p>
+              <div className="border border-[var(--color-line)] rounded-xl p-4 hover:border-[var(--color-brand-purple)]/40 transition-colors">
+                <h3 className="font-[family-name:var(--font-display)] text-xl font-semibold text-white">
+                  {w.title}
+                </h3>
+                <p className="mt-2 text-sm leading-relaxed text-white/60">
+                  {w.body}
+                </p>
+              </div>
             </li>
           ))}
         </ol>
