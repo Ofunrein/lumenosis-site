@@ -78,51 +78,6 @@ const emailThread: EmailMessage[] = [
   },
 ];
 
-const ariaTranscript: ConversationLine[] = [
-  {
-    id: "call-1",
-    from: "lead",
-    name: "Caller",
-    detail: "Inbound call",
-    text: "Hi, I am calling about the Oak Ridge house. Is it still available?",
-  },
-  {
-    id: "call-2",
-    from: "agent",
-    name: "Aria",
-    detail: "Property answer",
-    text: "It is available. Four bedrooms, three baths, listed at $865,000. Are you hoping to tour this week?",
-  },
-  {
-    id: "call-3",
-    from: "lead",
-    name: "Caller",
-    detail: "Buyer intent",
-    text: "Yes. We are pre-approved, but I need to sell my current place first.",
-  },
-  {
-    id: "call-4",
-    from: "agent",
-    name: "Aria",
-    detail: "Valuation slot",
-    text: "I can book the showing and hold a valuation call for your current home. Wednesday 5:45 PM is open.",
-  },
-  {
-    id: "call-5",
-    from: "lead",
-    name: "Caller",
-    detail: "Confirmed",
-    text: "That works. Please send the details.",
-  },
-  {
-    id: "call-6",
-    from: "agent",
-    name: "Aria",
-    detail: "Calendar updated",
-    text: "You are booked. I am sending the calendar invite, property packet, and condo pricing call link now.",
-  },
-];
-
 const theoThread: ConversationLine[] = [
   {
     id: "sms-1",
@@ -535,22 +490,8 @@ function IrisEmailDemo() {
 }
 
 function AriaPhoneDemo() {
-  const shown = useRevealedCount(ariaTranscript.length, 10000);
-  const visible = ariaTranscript.slice(0, shown);
-  const latest = visible[visible.length - 1];
-  const transcriptRef = useRef<HTMLDivElement>(null);
   const [playing, setPlaying] = useState(false);
   const [elapsed, setElapsed] = useState(0);
-  const status =
-    shown >= ariaTranscript.length
-      ? "Showing booked - Wed 5:45 PM"
-      : shown >= 4
-        ? "Checking calendar"
-        : shown >= 2
-          ? "Qualifying buyer"
-          : "Listening";
-
-  useAutoScroll(transcriptRef, shown);
 
   useEffect(() => {
     if (!playing) return;
@@ -565,82 +506,49 @@ function AriaPhoneDemo() {
   const progress = `${Math.min(100, (elapsed / 134) * 100)}%`;
 
   return (
-    <div className="mx-auto w-full max-w-[360px] rounded-[38px] border border-[#3f3350] bg-[#07060a] p-2.5 shadow-[0_34px_120px_rgba(0,0,0,0.44)]">
-      <div className="flex h-[540px] flex-col overflow-hidden rounded-[30px] border border-[#332a3d] bg-[#120d19] p-4">
-        <div className="mx-auto mb-3 h-6 w-24 rounded-b-[20px] bg-black" />
-        <div className="text-center">
-          <div className="mx-auto grid size-14 place-items-center rounded-full border border-[var(--color-brand-violet)]/60 bg-[#2a1638] font-[family-name:var(--font-display)] text-2xl text-white">
-            A
-          </div>
-          <p className="mt-2 font-[family-name:var(--font-display)] text-2xl font-semibold text-white">
-            Aria
-          </p>
-          <div className="mt-2 inline-flex items-center gap-2 rounded-full border border-[var(--color-gold-italic)]/45 bg-[#241d16] px-4 py-1.5 text-xs font-semibold text-white">
-            <span className="size-2 rounded-full bg-[var(--color-gold-italic)]" />
-            {status}
+    <div className="mx-auto w-full max-w-[440px] rounded-[28px] border border-[#3f3350] bg-[#120d19] p-5 shadow-[0_34px_120px_rgba(0,0,0,0.38)]">
+      <div className="text-center">
+        <div className="mx-auto grid size-14 place-items-center rounded-full border border-[var(--color-brand-violet)]/60 bg-[#2a1638] font-[family-name:var(--font-display)] text-2xl text-white">
+          A
+        </div>
+        <p className="mt-2 font-[family-name:var(--font-display)] text-2xl font-semibold text-white">
+          Aria
+        </p>
+        <div className="mt-2 inline-flex items-center gap-2 rounded-full border border-[var(--color-gold-italic)]/45 bg-[#241d16] px-4 py-1.5 text-xs font-semibold text-white">
+          <span className="size-2 rounded-full bg-[var(--color-gold-italic)]" />
+          Recording call
+        </div>
+      </div>
+
+      <div className="mt-5 rounded-[24px] border border-[#3f3350] bg-[#09070d] p-4">
+        <div className="flex items-center gap-4">
+          <button
+            type="button"
+            aria-label={playing ? "Pause Aria call recording" : "Play Aria call recording"}
+            onClick={() => setPlaying((current) => !current)}
+            className="grid size-12 shrink-0 place-items-center rounded-full bg-[var(--color-brand-violet)] text-white shadow-[0_0_32px_rgba(203,108,230,0.38)]"
+          >
+            {playing ? <Pause className="size-5" /> : <Play className="ml-0.5 size-5" />}
+          </button>
+          <div className="min-w-0 flex-1">
+            <p className="text-sm font-semibold text-white">Oak Ridge inbound call</p>
+            <p className="text-xs text-white/78">Availability, tour time, valuation handoff.</p>
           </div>
         </div>
-
-        <div className="mt-3 rounded-[22px] border border-[#3f3350] bg-[#09070d] p-3">
-          <div className="flex items-center gap-4">
-            <button
-              type="button"
-              aria-label={playing ? "Pause Aria call recording" : "Play Aria call recording"}
-              onClick={() => setPlaying((current) => !current)}
-              className="grid size-12 shrink-0 place-items-center rounded-full bg-[var(--color-brand-violet)] text-white shadow-[0_0_32px_rgba(203,108,230,0.38)]"
-            >
-              {playing ? <Pause className="size-5" /> : <Play className="ml-0.5 size-5" />}
-            </button>
-            <div className="min-w-0 flex-1">
-              <p className="text-sm font-semibold text-white">Oak Ridge inbound call</p>
-              <p className="text-xs text-white">
-                Adam handles availability, tour time, and valuation handoff.
-              </p>
-            </div>
+        <div className="mt-5">
+          <VoiceWave playing={playing} />
+          <div className="mt-4 h-1.5 overflow-hidden rounded-full bg-[#2b2334]">
+            <div
+              className="h-full rounded-full bg-[var(--color-brand-violet)] transition-[width] duration-500"
+              style={{ width: progress }}
+            />
           </div>
-          <div className="mt-4">
-            <VoiceWave playing={playing} compact />
-            <div className="mt-3 h-1.5 overflow-hidden rounded-full bg-[#2b2334]">
-              <div
-                className="h-full rounded-full bg-[var(--color-brand-violet)] transition-[width] duration-500"
-                style={{ width: progress }}
-              />
-            </div>
-            <div className="mt-2 flex justify-between text-xs font-semibold text-white">
-              <span>
-                {minutes}:{seconds}
-              </span>
-              <span>2:14</span>
-            </div>
+          <div className="mt-2 flex justify-between text-xs font-semibold text-white">
+            <span>
+              {minutes}:{seconds}
+            </span>
+            <span>2:14</span>
           </div>
-        </div>
-
-        <div className="my-4 h-px bg-[#3f3350]" />
-
-        <div
-          ref={transcriptRef}
-          className="flex min-h-0 flex-1 flex-col gap-3 overflow-y-auto pr-1 [scrollbar-color:#cb6ce6_#120d19] [scrollbar-width:thin]"
-        >
-          {visible.map((line) => {
-            const isAria = line.from === "agent";
-            const isLatest = latest?.id === line.id;
-
-            return (
-              <div
-                key={line.id}
-                className={[
-                  "max-w-[88%] rounded-[22px] px-4 py-3 text-sm leading-relaxed shadow-[0_12px_36px_rgba(0,0,0,0.18)]",
-                  isAria ? "ml-auto bg-[#35194a] text-white" : "mr-auto bg-[#21192c] text-white",
-                ].join(" ")}
-              >
-                <p className="mb-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-white">
-                  {line.name} - {line.detail}
-                </p>
-                <TypewriterText text={line.text} active={isAria && isLatest} />
-              </div>
-            );
-          })}
-          {shown < ariaTranscript.length ? <TypingDots align="right" /> : null}
         </div>
       </div>
     </div>
@@ -670,7 +578,7 @@ function TheoSmsDemo() {
   return (
     <div className="mx-auto w-full max-w-[360px] rounded-[38px] border border-[#3f3350] bg-[#07060a] p-2.5 shadow-[0_34px_120px_rgba(0,0,0,0.44)]">
       <div className="flex h-[540px] flex-col overflow-hidden rounded-[30px] border border-[#332a3d] bg-[#120d19] p-4">
-        <div className="mx-auto mb-3 h-6 w-24 rounded-b-[20px] bg-black" />
+        <div className="mx-auto mb-4 mt-1 h-5 w-20 rounded-full bg-black" />
         <div className="text-center">
           <div className="mx-auto grid size-14 place-items-center rounded-full border border-[var(--color-brand-violet)]/60 bg-[#2a1638] font-[family-name:var(--font-display)] text-2xl text-white">
             T
