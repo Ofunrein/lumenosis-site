@@ -53,20 +53,20 @@ export function Topbar() {
       >
         <a
           href="#top"
-          className="inline-flex shrink-0 items-center gap-2 justify-self-start md:gap-3"
+          className="inline-flex h-full shrink-0 items-center gap-2 justify-self-start md:gap-3"
         >
           <Image
             src="/images/lumenosis-logo.png"
             alt="Lumenosis AI"
             width={32}
             height={32}
-            className="rounded-lg md:size-10"
+            className="block rounded-lg object-contain md:size-10"
           />
-          <span className="text-base font-semibold text-[var(--color-ink-charcoal)] md:text-xl">
+          <span className="leading-none text-base font-semibold text-[var(--color-ink-charcoal)] md:text-xl">
             Lumenosis <span className="text-[var(--color-brand-violet)]">AI</span>
           </span>
         </a>
-        <div className="hidden items-center gap-4 justify-self-center md:flex">
+        <div className="hidden h-full items-center gap-4 justify-self-center md:flex">
           {links.map((link) => (
             <a
               key={link.label}
@@ -77,12 +77,12 @@ export function Topbar() {
             </a>
           ))}
         </div>
-        <div className="hidden items-center gap-3 justify-self-end md:flex">
+        <div className="hidden h-full items-center gap-3 justify-self-end md:flex">
           {mounted && (
             <button
               type="button"
               onClick={toggleTheme}
-              className="grid size-11 place-items-center rounded-2xl border border-[var(--color-line)] text-[var(--color-muted)] transition-colors hover:border-[var(--color-brand-violet)] hover:text-[var(--color-brand-violet)] dark:text-white"
+              className="grid size-11 place-items-center self-center rounded-2xl border border-[var(--color-line)] text-[var(--color-muted)] transition-colors hover:border-[var(--color-brand-violet)] hover:text-[var(--color-brand-violet)] dark:text-white"
               aria-label="Toggle dark/light mode"
             >
               {resolvedTheme === "dark" ? (
@@ -101,7 +101,7 @@ export function Topbar() {
           <StarButton
             lightColor="#cb6ce6"
             backgroundColor="#cb6ce6"
-            className="h-12 rounded-full bg-[var(--color-brand-violet)] px-7 text-base text-white shadow-[0_0_28px_rgba(203,108,230,0.45)] [&_span]:text-white"
+            className="h-12 self-center rounded-full bg-[var(--color-brand-violet)] px-7 text-base text-white shadow-[0_0_28px_rgba(203,108,230,0.45)] [&_a]:flex [&_a]:items-center [&_a]:leading-none [&_span]:flex [&_span]:items-center [&_span]:leading-none [&_span]:text-white"
           >
             <a href="#book">Book a Demo</a>
           </StarButton>
