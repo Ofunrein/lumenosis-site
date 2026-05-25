@@ -2,7 +2,7 @@
 @import "tw-animate-css";
 
 @theme {
-  /* ---- LIGHT MODE TOKENS (default) ---- */
+  /* LIGHT MODE (default) */
   --color-bg-cream: #f5f4ee;
   --color-ink-charcoal: #1a1a1a;
   --color-primary-indigo: #1e1b4b;
@@ -15,8 +15,6 @@
   --color-line: #e2ddd1;
   --color-muted: #52615b;
   --color-brand-charcoal: #1a1a1a;
-  --color-brand-black: #000000;
-  --color-brand-white: #ffffff;
 
   /* Typography */
   --font-display: var(--font-newsreader), "Tiempos Headline", Georgia, serif;
@@ -57,14 +55,9 @@ body {
   transition: background 0.3s ease, color 0.3s ease;
 }
 
-/* ---------- DARK MODE ---------- */
-.dark body {
-  background: #1a1a1a;
-  color: #ffffff;
-}
-
+/* ---------- DARK MODE — transparent so Aurora canvas shows ---------- */
 .dark {
-  --color-bg-cream: #000000;
+  --color-bg-cream: transparent;
   --color-ink-charcoal: #ffffff;
   --color-primary-indigo: #cb6ce6;
   --color-brand-violet: #cb6ce6;
@@ -72,27 +65,45 @@ body {
   --color-line: rgba(255, 255, 255, 0.1);
   --color-muted: rgba(255, 255, 255, 0.55);
   --color-gold-italic: #e8c47a;
-  --color-dark-section: #0a0a0a;
+  --color-shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.4);
 }
 
-/* ---------- AURORA CANVAS FULL SITE DARK MODE ---------- */
-.dark .aurora-canvas {
+.dark body {
+  background: #1a1a1a;
+  color: #ffffff;
+}
+
+/* Aurora canvas — fixed full-screen, dark mode only */
+.aurora-canvas {
+  display: none;
   position: fixed;
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  opacity: 0.45;
+  opacity: 0.5;
 }
 
-.aurora-canvas { display: none; }
-.dark .aurora-canvas { display: block; }
+.dark .aurora-canvas {
+  display: block;
+}
 
-/* ---------- ANIMATIONS ---------- */
+/* All main content sits above the aurora canvas */
+main, footer {
+  position: relative;
+  z-index: 1;
+}
+
+header {
+  z-index: 50;
+}
+
+/* ---------- STAR BUTTON ANIMATION ---------- */
 @keyframes star-btn {
   0% { offset-distance: 0%; }
   100% { offset-distance: 100%; }
 }
 
+/* ---------- REDUCED MOTION ---------- */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after {

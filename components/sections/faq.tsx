@@ -12,7 +12,7 @@ export function Faq() {
   return (
     <section
       id="faq"
-      className="border-b border-[var(--color-line)] bg-[var(--color-bg-cream)] py-16 md:py-24"
+      className="border-b border-[var(--color-line)] bg-[var(--color-bg-cream)] dark:bg-black/25 py-16 md:py-24"
     >
       <div className="mx-auto grid w-[min(1200px,calc(100%-32px))] gap-10 md:grid-cols-[0.6fr_1fr]">
         <div>

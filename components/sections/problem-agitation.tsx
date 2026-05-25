@@ -20,7 +20,7 @@ const leaks = [
 
 export function ProblemAgitation() {
   return (
-    <section id="method" className="border-b border-[var(--color-line)] bg-[var(--color-bg-cream)] py-16 md:py-24">
+    <section id="method" className="border-b border-[var(--color-line)] bg-[var(--color-bg-cream)] dark:bg-black/25 py-16 md:py-24">
       <div className="mx-auto w-[min(1200px,calc(100%-32px))]">
         <div className="max-w-2xl">
           <p className="mb-3 text-[var(--text-eyebrow)] font-semibold uppercase tracking-[0.14em] text-[var(--color-brand-purple)]">
@@ -38,7 +38,7 @@ export function ProblemAgitation() {
         </div>
         <div className="mt-10 grid gap-4 md:grid-cols-3">
           {leaks.map((leak) => (
-            <GlowCard key={leak.n} glowColor="purple" customSize className="">
+            <GlowCard key={leak.n} glowColor="purple" customSize className="dark:[--color-bg-cream:rgb(0_0_0_/_0.4)] dark:backdrop-blur-sm">
               <div className="mb-3 grid size-9 place-items-center rounded-lg bg-[var(--color-brand-purple-soft)] text-sm font-bold text-[var(--color-brand-purple)]">
                 {leak.n}
               </div>

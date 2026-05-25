@@ -35,7 +35,7 @@ function EmailCard() {
   }, [shown]);
 
   return (
-    <GlowCard glowColor="purple" customSize className="flex flex-col gap-3 min-h-[320px]">
+    <GlowCard glowColor="purple" customSize className="flex flex-col gap-3 min-h-[320px] dark:[--color-bg-cream:rgb(0_0_0_/_0.4)] dark:backdrop-blur-sm">
       <div className="flex items-center gap-2 border-b border-[var(--color-line)] pb-3">
         <span className="text-lg">📧</span>
         <div>
@@ -63,10 +63,10 @@ function EmailCard() {
 
 function AudioCallCard() {
   const [playing, setPlaying] = useState(false);
-  const bars = Array.from({ length: 40 }, (_, i) => ({ h: 10 + Math.sin(i * 0.8) * 18 + ((i * 7 + 3) % 13), active: i < (playing ? 18 : 0) }));
+  const bars = Array.from({ length: 40 }, (_, i) => Math.round(10 + Math.sin(i * 0.8) * 18 + ((i * 7 + 3) % 13)));
 
   return (
-    <GlowCard glowColor="purple" customSize className="flex flex-col gap-3">
+    <GlowCard glowColor="purple" customSize className="flex flex-col gap-3 dark:[--color-bg-cream:rgb(0_0_0_/_0.4)] dark:backdrop-blur-sm">
       <div className="flex items-center gap-2 border-b border-[var(--color-line)] pb-3">
         <span className="text-lg">📞</span>
         <div>
@@ -75,9 +75,16 @@ function AudioCallCard() {
         </div>
       </div>
       <div className="flex items-center gap-1 h-16 justify-center px-2">
-        {bars.map((b, i) => (
-          <div key={i} className="w-1 rounded-full transition-all duration-150"
-            style={{ height: `${b.h}px`, backgroundColor: i < (playing ? 18 : 5) ? '#cb6ce6' : 'rgba(128,128,128,0.3)' }} />
+        {bars.map((height, i) => (
+          <div
+            key={i}
+            className={`w-1 rounded-full transition-all duration-150 ${
+              i < (playing ? 18 : 5)
+                ? "bg-[var(--color-brand-purple)]"
+                : "bg-[rgba(128,128,128,0.3)]"
+            }`}
+            style={{ height: `${height}px` }}
+          />
         ))}
       </div>
       <button type="button" onClick={() => setPlaying(!playing)}
@@ -107,7 +114,7 @@ function AutomationFlowCard() {
   ];
 
   return (
-    <GlowCard glowColor="purple" customSize className="flex flex-col gap-3">
+    <GlowCard glowColor="purple" customSize className="flex flex-col gap-3 dark:[--color-bg-cream:rgb(0_0_0_/_0.4)] dark:backdrop-blur-sm">
       <div className="flex items-center gap-2 border-b border-[var(--color-line)] pb-3">
         <span className="text-lg">⚡</span>
         <div>
@@ -131,7 +138,7 @@ function AutomationFlowCard() {
 
 export function AriaDeepDive() {
   return (
-    <section id="aria" className="bg-[var(--color-bg-cream)] dark:bg-transparent dark:bg-[rgba(0,0,0,0.3)] py-20 md:py-28 border-b border-[var(--color-line)]">
+    <section id="aria" className="bg-[var(--color-bg-cream)] dark:bg-black/60 py-20 md:py-28 border-b border-[var(--color-line)]">
       <div className="mx-auto w-[min(1200px,calc(100%-32px))]">
         <div className="max-w-2xl mb-10">
           <p className="mb-3 text-[var(--text-eyebrow)] font-semibold uppercase tracking-[0.14em] text-[var(--color-gold-italic)]">
@@ -147,7 +154,7 @@ export function AriaDeepDive() {
         <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
           <div className="lg:col-span-1"><EmailCard /></div>
           <div className="lg:col-span-1">
-            <GlowCard glowColor="purple" customSize className="min-h-[320px]">
+            <GlowCard glowColor="purple" customSize className="min-h-[320px] dark:[--color-bg-cream:rgb(0_0_0_/_0.4)] dark:backdrop-blur-sm">
               <PhoneMockup name="Aria" role="Lumenosis AI · Voice Receptionist" bubbles={phoneBubbles} />
             </GlowCard>
           </div>

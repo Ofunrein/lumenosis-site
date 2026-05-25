@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { StarButton } from "@/components/star-button";
+import { StarButton } from "@/components/ui/star-button";
 
 export function StickyCtaBar() {
   const [show, setShow] = useState(false);
@@ -16,7 +16,7 @@ export function StickyCtaBar() {
   return (
     <div
       role="complementary"
-      aria-label="Book a strategy call"
+      aria-label="Book a Demo"
       aria-hidden={!show}
       className={`fixed inset-x-3 bottom-3 z-40 mx-auto flex max-w-3xl items-center justify-between gap-3 rounded-2xl border border-[var(--color-line)] bg-[var(--color-bg-cream)]/90 px-4 py-3 shadow-[var(--shadow-glow-violet)] backdrop-blur-md transition-all md:inset-x-0 md:bottom-5 ${
         show
@@ -25,16 +25,18 @@ export function StickyCtaBar() {
       }`}
     >
       <span className="text-sm font-medium text-[var(--color-ink-charcoal)]">
-        Ready to scale? Book your strategy call.
+        Ready to scale? Book a demo.
       </span>
-      <StarButton
-        lightColor="#cb6ce6"
-        className="bg-[var(--color-brand-purple)] text-white h-9 px-4 text-sm"
-        tabIndex={show ? 0 : -1}
-        onClick={() => { window.location.href = '#book'; }}
-      >
-        Book &rarr;
-      </StarButton>
+      {show && (
+        <StarButton
+          lightColor="#cb6ce6"
+          backgroundColor="#cb6ce6"
+          className="bg-[var(--color-brand-purple)] text-white h-9 px-4 text-sm [&_span]:text-white"
+          onClick={() => { window.location.href = '#book'; }}
+        >
+          Book Demo
+        </StarButton>
+      )}
     </div>
   );
 }

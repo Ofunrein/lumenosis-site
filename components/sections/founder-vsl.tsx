@@ -3,7 +3,7 @@ import { GlowCard } from "@/components/spotlight-card";
 
 export function FounderVSL() {
   return (
-    <section id="vsl" className="border-b border-[var(--color-line)] bg-[var(--color-bg-cream)] py-16 md:py-24">
+    <section id="vsl" className="border-b border-[var(--color-line)] bg-[var(--color-bg-cream)] dark:bg-black/25 py-16 md:py-24">
       <div className="mx-auto grid w-[min(1200px,calc(100%-32px))] items-center gap-10 md:grid-cols-[0.85fr_1.15fr]">
         <div>
           <p className="mb-3 text-[var(--text-eyebrow)] font-semibold uppercase tracking-[0.14em] text-[var(--color-brand-purple)]">
@@ -32,7 +32,7 @@ export function FounderVSL() {
             </li>
           </ul>
         </div>
-        <GlowCard glowColor="purple" customSize className="p-0 overflow-hidden">
+        <GlowCard glowColor="purple" customSize className="p-0 overflow-hidden dark:[--color-bg-cream:rgb(0_0_0_/_0.4)] dark:backdrop-blur-sm">
           <div className="relative aspect-video w-full overflow-hidden rounded-2xl bg-[var(--color-dark-section)] shadow-[var(--shadow-glow-violet)]">
             <Image
               src="/images/martin-headshot.jpg"

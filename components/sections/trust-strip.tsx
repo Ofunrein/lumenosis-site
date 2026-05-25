@@ -52,7 +52,7 @@ const reLogos = [
 
 export function TrustStrip() {
   return (
-    <section aria-label="Trusted by leading real estate teams" className="border-b border-[var(--color-line)] bg-[var(--color-bg-cream)] py-8">
+    <section aria-label="Trusted by leading real estate teams" className="border-b border-[var(--color-line)] bg-[var(--color-bg-cream)]/60 dark:bg-black/30 py-8">
       <p className="text-center text-[var(--text-eyebrow)] font-semibold uppercase tracking-[0.14em] text-[var(--color-muted)] mb-6">
         Trusted by top real estate teams
       </p>

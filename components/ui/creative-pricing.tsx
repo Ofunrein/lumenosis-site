@@ -1,4 +1,4 @@
-import { StarButton } from "@/components/star-button";
+import { StarButton } from "@/components/ui/star-button";
 import { Check } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { ReactNode } from "react";

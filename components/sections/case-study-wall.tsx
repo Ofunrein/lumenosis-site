@@ -12,7 +12,7 @@ const labels = {
 
 export function CaseStudyWall() {
   return (
-    <section className="border-b border-[var(--color-line)] bg-[var(--color-bg-cream)] py-16 md:py-24">
+    <section className="border-b border-[var(--color-line)] bg-[var(--color-bg-cream)] dark:bg-black/25 py-16 md:py-24">
       <div className="mx-auto w-[min(1200px,calc(100%-32px))]">
         <span className="inline-block mb-3 text-[var(--text-eyebrow)] font-semibold uppercase tracking-[0.14em] text-[var(--color-brand-purple)]">
           07 — Results
@@ -43,7 +43,7 @@ export function CaseStudyWall() {
               {caseStudies
                 .filter((c) => c.category === cat)
                 .map((c) => (
-                  <GlowCard key={c.quote} glowColor="purple" customSize className="">
+                  <GlowCard key={c.quote} glowColor="purple" customSize className="dark:[--color-bg-cream:rgb(0_0_0_/_0.4)] dark:backdrop-blur-sm">
                     <p className="font-[family-name:var(--font-display)] text-lg font-semibold text-[var(--color-brand-purple)]">
                       {c.metric}
                     </p>

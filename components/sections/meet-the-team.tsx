@@ -5,7 +5,7 @@ export function MeetTheTeam() {
   return (
     <section
       id="agents"
-      className="border-b border-[var(--color-line)] bg-[var(--color-bg-cream)] py-16 md:py-24"
+      className="border-b border-[var(--color-line)] bg-[var(--color-bg-cream)] dark:bg-black/25 py-16 md:py-24"
     >
       <div className="mx-auto w-[min(1200px,calc(100%-32px))]">
         <div className="max-w-2xl">
@@ -26,7 +26,9 @@ export function MeetTheTeam() {
 
         <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
           {agents.map((a) => (
-            <AgentPersonaCard key={a.slug} agent={a} />
+            <div key={a.slug} className="h-full dark:[--color-bg-cream:rgb(0_0_0_/_0.4)]">
+              <AgentPersonaCard agent={a} />
+            </div>
           ))}
         </div>
       </div>

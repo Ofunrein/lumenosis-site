@@ -1,12 +1,24 @@
 "use client";
+import { motion, useReducedMotion } from "framer-motion";
+import { useEffect, useState } from "react";
 import Magnet from '@/components/magnet';
-import { StarButton } from '@/components/star-button';
+import { StarButton } from "@/components/ui/star-button";
 import { GlassStatCallout } from '@/components/glass-stat-callout';
-import { RotatingText } from '@/components/rotating-text';
 import { niches } from '@/content/niches';
 import Image from 'next/image';
 
 export function Hero() {
+  const [titleIndex, setTitleIndex] = useState(0);
+  const reduce = useReducedMotion();
+
+  useEffect(() => {
+    if (reduce) return;
+    const t = setTimeout(() => {
+      setTitleIndex((i) => (i + 1) % niches.length);
+    }, 2000);
+    return () => clearTimeout(t);
+  }, [titleIndex, reduce]);
+
   return (
     <section
       id="top"
@@ -22,7 +34,30 @@ export function Hero() {
           </p>
           <h1 className="font-[family-name:var(--font-display)] text-[length:var(--text-display-hero)] font-semibold leading-[1.04] tracking-tight text-[var(--color-ink-charcoal)]">
             AI agents for your{" "}
-            <RotatingText words={niches} className="italic text-[var(--color-gold-italic)]" />{" "}
+            <span
+              className="relative inline-flex h-[1.1em] overflow-hidden align-bottom text-[0.82em] sm:text-[1em]"
+              aria-live="polite"
+              aria-atomic="true"
+            >
+              {niches.map((niche, index) => (
+                <motion.span
+                  key={niche}
+                  className="absolute whitespace-nowrap italic text-[var(--color-gold-italic)]"
+                  initial={reduce ? false : { opacity: 0, y: 150 }}
+                  transition={reduce ? { duration: 0 } : { type: "spring", stiffness: 50 }}
+                  animate={
+                    titleIndex === index
+                      ? { y: 0, opacity: 1 }
+                      : { y: titleIndex > index ? -150 : 150, opacity: 0 }
+                  }
+                >
+                  {niche}
+                </motion.span>
+              ))}
+              <span className="invisible whitespace-nowrap" aria-hidden>
+                {niches.reduce((a, b) => (a.length >= b.length ? a : b))}
+              </span>
+            </span>{" "}
             team.
           </h1>
           <p className="mt-5 max-w-xl text-[length:var(--text-body-lg)] leading-snug text-[var(--color-muted)]">
@@ -31,13 +66,13 @@ export function Hero() {
           </p>
           <div className="mt-7 flex flex-wrap gap-3">
             <Magnet padding={60} magnetStrength={5}>
-              <StarButton lightColor="#cb6ce6" className="bg-[var(--color-brand-purple)] text-white px-6 h-12 text-base">
-                Book a strategy call
+              <StarButton lightColor="#cb6ce6" backgroundColor="#cb6ce6" className="bg-[var(--color-brand-purple)] text-white px-6 h-12 text-base [&_span]:text-white">
+                <a href="#book">Book a Demo</a>
               </StarButton>
             </Magnet>
             <Magnet padding={60} magnetStrength={5}>
-              <StarButton lightColor="#cb6ce6" className="bg-transparent border border-[var(--color-line)] text-[var(--color-ink-charcoal)] px-6 h-12 text-base hover:bg-[var(--color-brand-violet-soft)]">
-                Watch 90s overview
+              <StarButton lightColor="#cb6ce6" backgroundColor="transparent" className="bg-transparent border border-[var(--color-line)] text-[var(--color-ink-charcoal)] px-6 h-12 text-base hover:bg-[var(--color-brand-violet-soft)] [&_span]:text-[var(--color-ink-charcoal)] dark:[&_span]:text-white">
+                <a href="#vsl">Watch 90s overview</a>
               </StarButton>
             </Magnet>
           </div>
@@ -52,9 +87,9 @@ export function Hero() {
               className="object-cover opacity-80"
             />
           </div>
-          <GlassStatCallout label="Avg response" value="60 seconds" className="absolute -left-3 top-8 md:-left-6 bg-[var(--color-bg-cream)]/90 dark:bg-black/80 border-[var(--color-line)] text-[var(--color-ink-charcoal)]" />
-          <GlassStatCallout label="More bookings" value="+300%" className="absolute -right-3 top-1/2 hidden md:-right-8 md:block bg-[var(--color-bg-cream)]/90 dark:bg-black/80 border-[var(--color-line)] text-[var(--color-ink-charcoal)]" />
-          <GlassStatCallout label="Coverage" value="24 / 7" className="absolute -bottom-4 left-12 md:-bottom-6 bg-[var(--color-bg-cream)]/90 dark:bg-black/80 border-[var(--color-line)] text-[var(--color-ink-charcoal)]" />
+          <GlassStatCallout label="Avg response" value="60 seconds" className="absolute -left-3 top-8 md:-left-6" />
+          <GlassStatCallout label="More bookings" value="+300%" className="absolute -right-3 top-1/2 hidden md:-right-8 md:block" />
+          <GlassStatCallout label="Coverage" value="24 / 7" className="absolute -bottom-4 left-12 md:-bottom-6" />
         </div>
       </div>
     </section>
