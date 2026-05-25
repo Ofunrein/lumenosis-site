@@ -306,13 +306,15 @@ function InlineListingCard() {
 function TypingDots({ align = "left" }: { align?: "left" | "right" }) {
   return (
     <div
-      className={`flex w-fit items-center gap-2 rounded-[22px] border border-[#3f3350] bg-[#21192c] px-5 py-4 ${
+      className={`flex w-fit items-center gap-1.5 rounded-[18px] border border-[#3f3350] bg-[#21192c] px-4 py-2.5 ${
         align === "right" ? "ml-auto" : "mr-auto"
       }`}
+      role="status"
+      aria-label="Typing"
     >
-      <span className="size-2 animate-pulse rounded-full bg-[var(--color-brand-violet)]" />
-      <span className="size-2 animate-pulse rounded-full bg-[var(--color-brand-violet)] [animation-delay:120ms]" />
-      <span className="size-2 animate-pulse rounded-full bg-[var(--color-brand-violet)] [animation-delay:240ms]" />
+      <span className="size-1.5 animate-[typing-dot_1.35s_ease-in-out_infinite] rounded-full bg-white/72" />
+      <span className="size-1.5 animate-[typing-dot_1.35s_ease-in-out_infinite] rounded-full bg-white/72 [animation-delay:160ms]" />
+      <span className="size-1.5 animate-[typing-dot_1.35s_ease-in-out_infinite] rounded-full bg-white/72 [animation-delay:320ms]" />
     </div>
   );
 }
