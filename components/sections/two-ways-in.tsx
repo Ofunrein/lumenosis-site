@@ -1,7 +1,8 @@
 "use client";
 
-import { StarButton } from "@/components/ui/star-button";
 import { Check } from "lucide-react";
+import { GlowCard } from "@/components/spotlight-card";
+import { StarButton } from "@/components/ui/star-button";
 
 const paths = [
   {
@@ -48,28 +49,27 @@ const paths = [
 
 export function TwoWaysIn() {
   return (
-    <section className="border-b border-[var(--color-line)] bg-[var(--color-bg-cream)] py-16 dark:bg-black/25 md:py-24">
+    <section className="border-b border-[var(--color-line)] bg-[var(--color-bg-cream)] py-16 dark:bg-transparent md:py-24">
       <div className="mx-auto w-[min(1200px,calc(100%-32px))]">
         <div className="mb-12">
           <p className="mb-3 text-[var(--text-eyebrow)] font-semibold uppercase tracking-[0.14em] text-[var(--color-brand-violet)]">
             06 — Programs
           </p>
           <h2 className="font-[family-name:var(--font-display)] text-[length:var(--text-display-section)] font-semibold leading-[1.05] text-[var(--color-ink-charcoal)]">
-            Two ways in.{" "}
-            <em className="text-[var(--color-gold-italic)]">
-              One destination.
-            </em>
+            Two ways in. <em className="text-[var(--color-gold-italic)]">One destination.</em>
           </h2>
         </div>
 
         <div className="grid gap-5 md:grid-cols-2">
           {paths.map((path) => (
-            <article
+            <GlowCard
               key={path.path}
-              className={`relative flex flex-col rounded-2xl border p-8 ${
+              glowColor="purple"
+              customSize
+              className={`flex h-full flex-col p-8 ${
                 path.dark
-                  ? "border-[var(--color-brand-violet)]/20 bg-[var(--color-brand-charcoal)] text-white"
-                  : "border-[var(--color-line)] bg-[var(--color-bg-cream)] text-[var(--color-ink-charcoal)] dark:bg-black/40"
+                  ? "[--backup-border:rgb(203_108_230_/_0.2)] [--backdrop:var(--color-brand-charcoal)] text-white"
+                  : "[--backup-border:var(--color-line)] [--backdrop:var(--color-bg-cream)] text-[var(--color-ink-charcoal)] dark:[--backdrop:rgb(0_0_0_/_0.4)]"
               }`}
             >
               {path.popular && (
@@ -80,9 +80,7 @@ export function TwoWaysIn() {
 
               <p
                 className={`mb-4 text-[var(--text-eyebrow)] font-semibold uppercase tracking-[0.14em] ${
-                  path.dark
-                    ? "text-[var(--color-gold-italic)]"
-                    : "text-[var(--color-brand-violet)]"
+                  path.dark ? "text-[var(--color-gold-italic)]" : "text-[var(--color-brand-violet)]"
                 }`}
               >
                 {path.path}
@@ -116,14 +114,10 @@ export function TwoWaysIn() {
                     : "border-[var(--color-line)] text-[var(--color-muted)]"
                 }`}
               >
-                <span className="text-[10px] font-semibold tracking-wider uppercase">
-                  BEST FOR
-                </span>
+                <span className="text-[10px] font-semibold tracking-wider uppercase">BEST FOR</span>
                 <span
                   className={`font-medium ${
-                    path.dark
-                      ? "text-white/80"
-                      : "text-[var(--color-ink-charcoal)]"
+                    path.dark ? "text-white/80" : "text-[var(--color-ink-charcoal)]"
                   }`}
                 >
                   {path.bestFor}
@@ -142,9 +136,7 @@ export function TwoWaysIn() {
                     />
                     <span
                       className={`text-sm ${
-                        path.dark
-                          ? "text-white/75"
-                          : "text-[var(--color-ink-charcoal)]"
+                        path.dark ? "text-white/75" : "text-[var(--color-ink-charcoal)]"
                       }`}
                     >
                       {feature}
@@ -155,9 +147,7 @@ export function TwoWaysIn() {
 
               <p
                 className={`mb-3 text-xs font-semibold tracking-widest uppercase ${
-                  path.dark
-                    ? "text-[var(--color-gold-italic)]"
-                    : "text-[var(--color-brand-violet)]"
+                  path.dark ? "text-[var(--color-gold-italic)]" : "text-[var(--color-brand-violet)]"
                 }`}
               >
                 {path.price}
@@ -172,14 +162,12 @@ export function TwoWaysIn() {
                     : "bg-[var(--color-brand-charcoal)] text-white dark:bg-[var(--color-brand-violet)] [&_span]:text-white"
                 }`}
                 onClick={() => {
-                  document
-                    .getElementById("book")
-                    ?.scrollIntoView({ behavior: "smooth" });
+                  document.getElementById("book")?.scrollIntoView({ behavior: "smooth" });
                 }}
               >
                 {path.cta}
               </StarButton>
-            </article>
+            </GlowCard>
           ))}
         </div>
       </div>

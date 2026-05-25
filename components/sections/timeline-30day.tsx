@@ -4,47 +4,48 @@ export function Timeline30Day() {
   return (
     <section
       id="process"
-      className="border-b border-[var(--color-line)] bg-[var(--color-bg-cream)] dark:bg-black/25 py-16 md:py-24"
+      className="border-b border-[var(--color-line)] bg-[var(--color-bg-cream)] py-20 md:py-28 dark:bg-transparent"
     >
-      <div className="mx-auto w-[min(1200px,calc(100%-32px))]">
-        <p className="mb-3 text-[var(--text-eyebrow)] font-semibold uppercase tracking-[0.14em] text-[var(--color-brand-purple)]">
-          05 — Process
+      <div className="mx-auto w-[min(1500px,calc(100%-40px))]">
+        <p className="mb-7 flex items-center gap-3 text-[var(--text-eyebrow)] font-medium uppercase tracking-[0.24em] text-[var(--color-brand-purple)]">
+          <span className="h-px w-8 bg-[var(--color-gold-italic)]" aria-hidden />
+          05 - Process
         </p>
 
-        <h2 className="max-w-3xl font-[family-name:var(--font-display)] text-[length:var(--text-display-section)] font-semibold leading-[1.05] text-[var(--color-ink-charcoal)]">
+        <h2 className="max-w-[760px] font-[family-name:var(--font-display)] text-[clamp(3.1rem,5.1vw,5.6rem)] font-medium leading-[0.98] tracking-normal text-[var(--color-ink-charcoal)]">
           Thirty days to a{" "}
-          <em className="not-italic text-[var(--color-gold-italic)]">
-            fully running system.
-          </em>
+          <em className="font-normal text-[var(--color-gold-italic)]">fully running system.</em>
         </h2>
 
-        <ol className="relative mt-12 grid gap-6 md:grid-cols-4">
+        <ol className="relative mt-20 grid gap-12 md:mt-28 md:grid-cols-4 md:gap-10">
           <li
             aria-hidden
-            className="pointer-events-none absolute inset-x-0 top-[5px] hidden h-px bg-[var(--color-line)] md:block"
+            className="pointer-events-none absolute inset-x-0 top-[10px] hidden h-px bg-[var(--color-line)] md:block"
           />
 
           {timeline.map((w, i) => (
-            <li key={w.week} className="relative">
-              <div className="mb-4 flex items-center gap-3">
+            <li key={w.week} className="relative md:pt-28">
+              <div className="mb-8 flex items-center gap-3 md:absolute md:left-0 md:top-0 md:w-full md:flex-col md:items-start md:gap-10">
                 <span
                   aria-hidden
-                  className={`relative z-10 size-3 shrink-0 rounded-full ${
-                    i === 1
-                      ? "bg-[var(--color-gold-italic)]"
-                      : "border border-[var(--color-line)] bg-[var(--color-bg-cream)]"
+                  className={`relative z-10 shrink-0 rounded-full ${
+                    i === 2
+                      ? "size-5 border-[7px] border-[var(--color-gold-italic)]/25 bg-[var(--color-gold-italic)]"
+                      : i === 0
+                        ? "size-4 bg-[var(--color-brand-purple)]"
+                        : "size-4 border-2 border-[var(--color-brand-purple)] bg-[var(--color-bg-cream)] dark:bg-transparent"
                   }`}
                 />
-                <span className="text-[var(--text-eyebrow)] font-semibold uppercase tracking-[0.14em] text-[var(--color-muted)]">
+                <span className="text-[var(--text-eyebrow)] font-medium uppercase tracking-[0.24em] text-[var(--color-brand-purple)]">
                   {w.week} · {w.kicker}
                 </span>
               </div>
 
-              <div className="border border-[var(--color-line)] rounded-xl p-4 hover:border-[var(--color-brand-purple)]/40 transition-colors bg-[var(--color-bg-cream)] dark:bg-black/40 dark:backdrop-blur-sm">
-                <h3 className="font-[family-name:var(--font-display)] text-xl font-semibold text-[var(--color-ink-charcoal)]">
+              <div>
+                <h3 className="font-[family-name:var(--font-display)] text-[clamp(1.55rem,2vw,2rem)] font-medium leading-tight text-[var(--color-ink-charcoal)]">
                   {w.title}
                 </h3>
-                <p className="mt-2 text-sm leading-relaxed text-[var(--color-muted)]">
+                <p className="mt-5 max-w-[330px] text-[1.05rem] leading-8 text-[var(--color-muted)]">
                   {w.body}
                 </p>
               </div>

@@ -6,7 +6,8 @@ export async function POST(req: NextRequest) {
 
   // TODO: HMAC verify against FILLOUT_WEBHOOK_SECRET when Fillout webhook is configured
 
-  const signature = req.headers.get("x-fillout-signature") ?? req.headers.get("x-webhook-signature");
+  const signature =
+    req.headers.get("x-fillout-signature") ?? req.headers.get("x-webhook-signature");
   if (process.env.NODE_ENV === "production" && !signature) {
     return NextResponse.json({ error: "missing signature" }, { status: 401 });
   }

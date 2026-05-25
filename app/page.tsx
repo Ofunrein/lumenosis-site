@@ -1,3 +1,4 @@
+import { AuroraBackground } from "@/components/aurora-background";
 import { AriaDeepDive } from "@/components/sections/aria-deep-dive";
 import { CalendarCTA } from "@/components/sections/calendar-cta";
 import { CaseStudyWall } from "@/components/sections/case-study-wall";
@@ -14,7 +15,6 @@ import { Timeline30Day } from "@/components/sections/timeline-30day";
 import { Topbar } from "@/components/sections/topbar";
 import { TrustStrip } from "@/components/sections/trust-strip";
 import { TwoWaysIn } from "@/components/sections/two-ways-in";
-import { AuroraBackground } from "@/components/aurora-background";
 
 export default function Page() {
   return (

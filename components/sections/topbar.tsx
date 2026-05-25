@@ -1,16 +1,16 @@
 "use client";
 
-import React from "react";
 import Image from "next/image";
 import { useTheme } from "next-themes";
-import { cn } from "@/lib/utils";
+import React from "react";
 import { MenuToggleIcon } from "@/components/ui/menu-toggle-icon";
-import { useScroll } from "@/components/ui/use-scroll";
 import { StarButton } from "@/components/ui/star-button";
+import { useScroll } from "@/components/ui/use-scroll";
+import { cn } from "@/lib/utils";
 
 export function Topbar() {
   const [open, setOpen] = React.useState(false);
-  const scrolled = useScroll(10);
+  const scrolled = useScroll(140);
   const { resolvedTheme, setTheme } = useTheme();
   const [mounted, setMounted] = React.useState(false);
   React.useEffect(() => {
@@ -36,17 +36,19 @@ export function Topbar() {
   return (
     <header
       className={cn(
-        "sticky top-3 z-50 flex w-full justify-center px-3 transition-all duration-300 ease-out md:top-5",
-        open && "top-0 px-0 md:top-0",
+        "sticky top-0 z-50 w-full transition-all duration-300 ease-out",
+        scrolled && !open && "flex justify-center px-3 py-3 md:py-5",
+        open && "px-0 py-0",
       )}
     >
       <nav
         className={cn(
-          "flex items-center justify-between border border-[var(--color-line)] bg-[var(--color-bg-cream)]/90 shadow-[var(--shadow-soft)] backdrop-blur-xl transition-all duration-300 ease-out dark:bg-black/62",
+          "flex items-center justify-between backdrop-blur-xl transition-all duration-300 ease-out",
           open
             ? "h-16 w-full rounded-none px-4"
-            : "h-14 w-[min(1010px,calc(100%-12px))] rounded-full px-4 md:h-20 md:px-8",
-          scrolled && !open && "md:h-14 md:w-[min(920px,calc(100%-32px))] md:px-5",
+            : scrolled
+              ? "h-14 w-[min(1010px,calc(100%-12px))] rounded-full border border-[var(--color-line)] bg-[var(--color-bg-cream)]/90 px-4 shadow-[var(--shadow-soft)] md:h-20 md:px-8 dark:bg-black/55"
+              : "h-16 w-full rounded-none border-b border-[var(--color-line)] bg-[var(--color-bg-cream)]/72 px-4 shadow-none md:h-20 md:px-10 dark:bg-transparent",
         )}
       >
         <a href="#top" className="inline-flex shrink-0 items-center gap-2 md:gap-3">
@@ -66,7 +68,7 @@ export function Topbar() {
             <a
               key={link.label}
               href={link.href}
-              className="rounded-full px-3.5 py-2 text-sm font-medium text-[var(--color-muted)] transition-colors hover:bg-[var(--color-brand-violet-soft)] hover:text-[var(--color-ink-charcoal)]"
+              className="rounded-full px-3.5 py-2 text-sm font-medium text-[var(--color-muted)] transition-colors hover:bg-[var(--color-brand-violet-soft)] hover:text-[var(--color-ink-charcoal)] dark:text-white/90 dark:hover:text-white"
             >
               {link.label}
             </a>
@@ -77,15 +79,17 @@ export function Topbar() {
             <button
               type="button"
               onClick={toggleTheme}
-              className="grid size-11 place-items-center rounded-2xl border border-[var(--color-line)] text-[var(--color-muted)] transition-colors hover:border-[var(--color-brand-violet)] hover:text-[var(--color-brand-violet)]"
+              className="grid size-11 place-items-center rounded-2xl border border-[var(--color-line)] text-[var(--color-muted)] transition-colors hover:border-[var(--color-brand-violet)] hover:text-[var(--color-brand-violet)] dark:text-white/85"
               aria-label="Toggle dark/light mode"
             >
               {resolvedTheme === "dark" ? (
                 <svg viewBox="0 0 24 24" className="size-4 fill-current" aria-hidden>
+                  <title>Dark mode icon</title>
                   <path d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.389 5.389 0 0 1-4.4 2.26 5.403 5.403 0 0 1-3.14-9.8c-.44-.06-.9-.1-1.36-.1z" />
                 </svg>
               ) : (
                 <svg viewBox="0 0 24 24" className="size-4 fill-current" aria-hidden>
+                  <title>Light mode icon</title>
                   <path d="M12 7a5 5 0 1 0 0 10A5 5 0 0 0 12 7zm0-5a1 1 0 0 1 1 1v1a1 1 0 0 1-2 0V3a1 1 0 0 1 1-1zm0 18a1 1 0 0 1 1 1v1a1 1 0 0 1-2 0v-1a1 1 0 0 1 1-1zm9-9h-1a1 1 0 0 1 0-2h1a1 1 0 0 1 0 2zM3 12H2a1 1 0 0 1 0-2h1a1 1 0 0 1 0 2zm15.66-6.24-.7-.7a1 1 0 0 0-1.42 1.42l.7.7a1 1 0 0 0 1.42-1.42zm-12.02 12.02-.7-.7a1 1 0 0 0-1.42 1.42l.7.7a1 1 0 0 0 1.42-1.42zm12.02 0a1 1 0 0 0-1.42 0l-.7.7a1 1 0 0 0 1.42 1.42l.7-.7a1 1 0 0 0 0-1.42zm-12.02-12.02a1 1 0 0 0 0 1.42l-.7.7a1 1 0 1 0 1.42-1.42l-.7-.7a1 1 0 0 0-1.42 0z" />
                 </svg>
               )}
@@ -130,6 +134,7 @@ export function Topbar() {
               {resolvedTheme === "dark" ? (
                 <>
                   <svg viewBox="0 0 24 24" className="size-5 fill-current" aria-hidden>
+                    <title>Dark mode icon</title>
                     <path d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.389 5.389 0 0 1-4.4 2.26 5.403 5.403 0 0 1-3.14-9.8c-.44-.06-.9-.1-1.36-.1z" />
                   </svg>
                   Switch to light mode
@@ -137,6 +142,7 @@ export function Topbar() {
               ) : (
                 <>
                   <svg viewBox="0 0 24 24" className="size-5 fill-current" aria-hidden>
+                    <title>Light mode icon</title>
                     <path d="M12 7a5 5 0 1 0 0 10A5 5 0 0 0 12 7zm0-5a1 1 0 0 1 1 1v1a1 1 0 0 1-2 0V3a1 1 0 0 1 1-1zm0 18a1 1 0 0 1 1 1v1a1 1 0 0 1-2 0v-1a1 1 0 0 1 1-1zm9-9h-1a1 1 0 0 1 0-2h1a1 1 0 0 1 0 2zM3 12H2a1 1 0 0 1 0-2h1a1 1 0 0 1 0 2zm15.66-6.24-.7-.7a1 1 0 0 0-1.42 1.42l.7.7a1 1 0 0 0 1.42-1.42zm-12.02 12.02-.7-.7a1 1 0 0 0-1.42 1.42l.7.7a1 1 0 0 0 1.42-1.42zm12.02 0a1 1 0 0 0-1.42 0l-.7.7a1 1 0 0 0 1.42 1.42l.7-.7a1 1 0 0 0 0-1.42zm-12.02-12.02a1 1 0 0 0 0 1.42l-.7.7a1 1 0 1 0 1.42-1.42l-.7-.7a1 1 0 0 0-1.42 0z" />
                   </svg>
                   Switch to dark mode

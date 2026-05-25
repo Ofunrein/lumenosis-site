@@ -20,7 +20,7 @@ const leaks = [
 
 export function ProblemAgitation() {
   return (
-    <section id="method" className="border-b border-[var(--color-line)] bg-[var(--color-bg-cream)] dark:bg-black/25 py-16 md:py-24">
+    <section id="method" className="border-b border-[var(--color-line)] bg-[var(--color-bg-cream)] dark:bg-transparent py-16 md:py-24">
       <div className="mx-auto w-[min(1200px,calc(100%-32px))]">
         <div className="max-w-2xl">
           <p className="mb-3 text-[var(--text-eyebrow)] font-semibold uppercase tracking-[0.14em] text-[var(--color-brand-purple)]">

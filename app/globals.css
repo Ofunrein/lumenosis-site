@@ -37,12 +37,16 @@
   --radius-pill: 999px;
 
   /* Star button */
-  --animate-star-btn: star-btn calc(var(--duration)*1s) linear infinite;
+  --animate-star-btn: star-btn calc(var(--duration) * 1s) linear infinite;
 }
 
 /* ---------- BASE ---------- */
-* { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+* {
+  box-sizing: border-box;
+}
+html {
+  scroll-behavior: smooth;
+}
 
 body {
   margin: 0;
@@ -52,7 +56,9 @@ body {
   font-size: var(--text-body);
   line-height: 1.55;
   -webkit-font-smoothing: antialiased;
-  transition: background 0.3s ease, color 0.3s ease;
+  transition:
+    background 0.3s ease,
+    color 0.3s ease;
 }
 
 /* ---------- DARK MODE — transparent so Aurora canvas shows ---------- */
@@ -63,7 +69,7 @@ body {
   --color-brand-violet: #cb6ce6;
   --color-brand-violet-soft: rgba(203, 108, 230, 0.15);
   --color-line: rgba(255, 255, 255, 0.1);
-  --color-muted: rgba(255, 255, 255, 0.55);
+  --color-muted: rgba(255, 255, 255, 0.78);
   --color-gold-italic: #e8c47a;
   --color-shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.4);
 }
@@ -117,7 +123,8 @@ body {
 }
 
 /* All main content sits above the aurora canvas */
-main, footer {
+main,
+footer {
   position: relative;
   z-index: 1;
 }
@@ -128,14 +135,22 @@ header {
 
 /* ---------- STAR BUTTON ANIMATION ---------- */
 @keyframes star-btn {
-  0% { offset-distance: 0%; }
-  100% { offset-distance: 100%; }
+  0% {
+    offset-distance: 0%;
+  }
+  100% {
+    offset-distance: 100%;
+  }
 }
 
 /* ---------- REDUCED MOTION ---------- */
 @media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
-  *, *::before, *::after {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;
   }

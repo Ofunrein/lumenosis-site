@@ -12,7 +12,7 @@ export function Faq() {
   return (
     <section
       id="faq"
-      className="border-b border-[var(--color-line)] bg-[var(--color-bg-cream)] dark:bg-black/25 py-16 md:py-24"
+      className="border-b border-[var(--color-line)] bg-[var(--color-bg-cream)] dark:bg-transparent py-16 md:py-24"
     >
       <div className="mx-auto grid w-[min(1200px,calc(100%-32px))] gap-10 md:grid-cols-[0.6fr_1fr]">
         <div>
@@ -37,7 +37,7 @@ export function Faq() {
               <AccordionTrigger className="text-left font-[family-name:var(--font-display)] text-lg font-semibold text-[var(--color-ink-charcoal)] hover:no-underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-brand-purple)] focus-visible:ring-offset-2">
                 {item.q}
               </AccordionTrigger>
-              <AccordionContent className="text-[var(--color-muted)]">
+              <AccordionContent className="text-[var(--color-muted)] dark:text-white/86">
                 {item.a}
               </AccordionContent>
             </AccordionItem>
