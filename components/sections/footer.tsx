@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 export function Footer() {
@@ -5,9 +6,13 @@ export function Footer() {
     <footer className="border-t border-[var(--color-line)] bg-[#f1eee6] py-12 text-sm text-[var(--color-muted)] dark:bg-[#09070d] md:py-16">
       <div className="mx-auto flex w-[min(1200px,calc(100%-32px))] flex-col gap-4 md:flex-row md:items-center md:justify-between">
         <div className="flex items-center gap-3">
-          <span className="grid size-8 place-items-center rounded-lg bg-[var(--color-brand-purple)] text-white font-semibold select-none">
-            L
-          </span>
+          <Image
+            src="/images/lumenosis-logo.png"
+            alt="Lumenosis AI"
+            width={32}
+            height={32}
+            className="rounded-lg"
+          />
           <span>&copy; {new Date().getFullYear()} Lumenosis AI</span>
         </div>
         <nav aria-label="Footer" className="flex flex-wrap gap-5">
