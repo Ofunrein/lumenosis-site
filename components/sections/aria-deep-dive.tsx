@@ -720,7 +720,7 @@ export function AriaDeepDive() {
   return (
     <section
       id="aria"
-      className="relative overflow-hidden border-b border-[var(--color-line)] bg-[#f1eee6] py-12 dark:bg-[rgb(5_4_8_/_0.88)] md:py-16"
+      className="relative overflow-hidden border-b border-[var(--color-line)] bg-[#050408] py-12 text-white dark:bg-[rgb(5_4_8_/_0.88)] md:py-16"
     >
       <div className="absolute left-1/2 top-0 h-[460px] w-[720px] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,rgba(203,108,230,0.18),rgba(203,108,230,0)_62%)] blur-3xl" />
       <div className="absolute right-[-14rem] top-24 h-[460px] w-[520px] rounded-full bg-[radial-gradient(circle,rgba(124,58,237,0.14),rgba(124,58,237,0)_64%)] blur-3xl" />
@@ -730,25 +730,22 @@ export function AriaDeepDive() {
           <p className="mb-4 text-[var(--text-eyebrow)] font-semibold uppercase tracking-[0.16em] text-[var(--color-brand-violet)]">
             04 - Live follow-up desk
           </p>
-          <h2 className="font-[family-name:var(--font-display)] text-[clamp(2.5rem,4.6vw,4.7rem)] font-semibold leading-[0.99] text-[var(--color-ink-charcoal)]">
+          <h2 className="font-[family-name:var(--font-display)] text-[clamp(2.5rem,4.6vw,4.7rem)] font-semibold leading-[0.99] text-white">
             The front desk that never sleeps and never asks for a raise.
           </h2>
-          <p className="mt-6 max-w-xl text-lg leading-8 text-[var(--color-muted)]">
+          <p className="mt-6 max-w-xl text-lg leading-8 text-white/82">
             A buyer asks about a listing. Iris replies with real property details, Aria answers the
             call, and Theo keeps the text thread moving until a showing or valuation is booked.
           </p>
 
           <div className="mt-10 grid gap-4 sm:grid-cols-2">
             {microFeatures.map(({ icon: Icon, title, body }) => (
-              <div
-                key={title}
-                className="rounded-[24px] border border-[#ded6c8] bg-[#f8f6ef] p-4 dark:border-[#3f3350] dark:bg-[#120d19]"
-              >
+              <div key={title} className="rounded-[24px] border border-[#3f3350] bg-[#120d19] p-4">
                 <Icon className="size-5 text-[var(--color-brand-violet)]" aria-hidden />
-                <p className="mt-4 font-[family-name:var(--font-display)] text-xl font-semibold text-[var(--color-ink-charcoal)]">
+                <p className="mt-4 font-[family-name:var(--font-display)] text-xl font-semibold text-white">
                   {title}
                 </p>
-                <p className="mt-2 text-sm leading-6 text-[var(--color-muted)]">{body}</p>
+                <p className="mt-2 text-sm leading-6 text-white/75">{body}</p>
               </div>
             ))}
           </div>
