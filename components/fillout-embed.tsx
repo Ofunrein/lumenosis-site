@@ -1,7 +1,6 @@
 "use client";
 
 import { FilloutStandardEmbed } from "@fillout/react";
-import "@fillout/react/style.css";
 
 export function FilloutEmbed({ formId }: { formId: string }) {
   return (
