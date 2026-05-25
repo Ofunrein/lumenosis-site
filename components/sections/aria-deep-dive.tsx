@@ -720,7 +720,7 @@ export function AriaDeepDive() {
   return (
     <section
       id="aria"
-      className="relative overflow-hidden border-b border-[var(--color-line)] bg-[#f1eee6] py-12 dark:bg-[#050408] md:py-16"
+      className="relative overflow-hidden border-b border-[var(--color-line)] bg-[#f1eee6] py-12 dark:bg-[rgb(5_4_8_/_0.88)] md:py-16"
     >
       <div className="absolute left-1/2 top-0 h-[460px] w-[720px] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,rgba(203,108,230,0.18),rgba(203,108,230,0)_62%)] blur-3xl" />
       <div className="absolute right-[-14rem] top-24 h-[460px] w-[520px] rounded-full bg-[radial-gradient(circle,rgba(124,58,237,0.14),rgba(124,58,237,0)_64%)] blur-3xl" />

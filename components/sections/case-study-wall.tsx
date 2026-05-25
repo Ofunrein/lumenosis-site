@@ -34,7 +34,7 @@ export function CaseStudyWall() {
   return (
     <section
       id="results"
-      className="border-b border-[var(--color-line)] bg-[#f1eee6] py-16 dark:bg-[#09070d] md:py-24"
+      className="border-b border-[var(--color-line)] bg-[#f1eee6] py-16 dark:bg-[rgb(9_7_13_/_0.76)] md:py-24"
     >
       <div className="mx-auto w-[min(1200px,calc(100%-32px))]">
         <div className="grid gap-8 lg:grid-cols-[minmax(0,1.14fr)_minmax(0,0.86fr)] lg:items-end">

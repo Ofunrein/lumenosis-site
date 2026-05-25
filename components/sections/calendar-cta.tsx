@@ -8,7 +8,7 @@ export function CalendarCTA() {
   return (
     <section
       id="book"
-      className="border-b border-[var(--color-line)] bg-[#f8f6ef] py-16 dark:bg-[#0d0a12] md:py-24"
+      className="border-b border-[var(--color-line)] bg-[#f8f6ef] py-16 dark:bg-[rgb(13_10_18_/_0.72)] md:py-24"
     >
       <div className="mx-auto grid w-[min(1200px,calc(100%-32px))] items-start gap-10 md:grid-cols-[0.85fr_1.15fr]">
         <div>
