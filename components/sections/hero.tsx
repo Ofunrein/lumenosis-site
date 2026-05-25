@@ -25,12 +25,9 @@ export function Hero() {
   return (
     <section
       id="top"
-      className="relative overflow-hidden border-b border-[var(--color-line)] bg-[#f5f4ee] pb-16 pt-20 dark:bg-[#0d0a12] md:pt-28"
+      className="relative overflow-hidden border-b border-[var(--color-line)] bg-[#f5f4ee] pb-16 pt-20 dark:bg-transparent md:pt-28"
     >
-      {/* Dark mode: radial overlay for text legibility over Aurora */}
-      <div className="absolute inset-0 z-10 hidden dark:block bg-[radial-gradient(ellipse_at_top,transparent_0%,rgba(0,0,0,0.6)_70%)] pointer-events-none" />
-
-      <div className="relative z-20 mx-auto grid w-[min(1200px,calc(100%-32px))] items-start gap-10 md:grid-cols-[1.05fr_0.95fr] md:gap-12">
+      <div className="relative z-10 mx-auto grid w-[min(1200px,calc(100%-32px))] items-start gap-10 md:grid-cols-[1.05fr_0.95fr] md:gap-12">
         <div>
           <p className="mb-3 text-[var(--text-eyebrow)] font-semibold uppercase tracking-[0.14em] text-[var(--color-brand-purple)]">
             5.0 from 50+ verified real estate professionals
@@ -67,7 +64,7 @@ export function Hero() {
             Olivia answers your website. Aria answers the phone. Theo texts every lead in under
             sixty seconds. Iris turns inbound emails into booked valuations.
           </p>
-          <div className="mt-7 flex flex-wrap gap-3">
+          <div className="mt-7 flex flex-col items-start gap-3">
             <Magnet padding={60} magnetStrength={5}>
               <StarButton
                 lightColor="#cb6ce6"
@@ -79,11 +76,11 @@ export function Hero() {
             </Magnet>
             <Magnet padding={60} magnetStrength={5}>
               <StarButton
-                lightColor="#cb6ce6"
+                lightColor="#e8c47a"
                 backgroundColor="transparent"
-                className="h-12 border border-[var(--color-line)] bg-[var(--color-bg-cream)] px-6 text-base text-[var(--color-ink-charcoal)] hover:bg-[var(--color-brand-violet-soft)] dark:bg-[#14101c] [&_span]:text-[var(--color-ink-charcoal)] dark:[&_span]:text-white"
+                className="h-11 border border-[var(--color-line)] bg-[#fbf8ef] px-5 text-sm text-[var(--color-ink-charcoal)] hover:bg-[var(--color-brand-violet-soft)] dark:bg-[#14101c] [&_span]:text-[var(--color-ink-charcoal)] dark:[&_span]:text-white"
               >
-                <a href="#vsl">Watch 90s overview</a>
+                <a href="#book">Book a discovery call</a>
               </StarButton>
             </Magnet>
           </div>

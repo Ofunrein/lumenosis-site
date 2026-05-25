@@ -69,8 +69,8 @@ export function TwoWaysIn() {
               customSize
               className={`flex h-full flex-col p-8 ${
                 path.dark
-                  ? "[--backup-border:rgb(203_108_230_/_0.2)] [--backdrop:var(--color-brand-charcoal)] text-white"
-                  : "[--backup-border:var(--color-line)] [--backdrop:var(--color-bg-cream)] text-[var(--color-ink-charcoal)] dark:[--backdrop:rgb(0_0_0_/_0.4)]"
+                  ? "[--backup-border:rgb(203_108_230_/_0.26)] [--backdrop:#0a0710] text-white"
+                  : "[--backup-border:var(--color-line)] [--backdrop:#f8f4e9] text-[var(--color-ink-charcoal)] dark:[--backup-border:rgb(255_255_255_/_0.1)] dark:[--backdrop:#17111f]"
               }`}
             >
               {path.popular && (

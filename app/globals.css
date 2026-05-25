@@ -1,6 +1,8 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
   /* LIGHT MODE (default) */
   --color-bg-cream: #f5f4ee;

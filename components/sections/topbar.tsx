@@ -43,7 +43,7 @@ export function Topbar() {
     >
       <nav
         className={cn(
-          "flex items-center justify-between transition-all duration-300 ease-out",
+          "grid grid-cols-[1fr_auto_1fr] items-center transition-all duration-300 ease-out",
           open
             ? "h-16 w-full rounded-none px-4"
             : scrolled
@@ -51,7 +51,10 @@ export function Topbar() {
               : "h-16 w-full rounded-none border-b border-[var(--color-line)] bg-[var(--color-bg-cream)] px-4 shadow-none md:h-20 md:px-10 dark:bg-[#0d0a12]",
         )}
       >
-        <a href="#top" className="inline-flex shrink-0 items-center gap-2 md:gap-3">
+        <a
+          href="#top"
+          className="inline-flex shrink-0 items-center gap-2 justify-self-start md:gap-3"
+        >
           <Image
             src="/images/lumenosis-logo.png"
             alt="Lumenosis AI"
@@ -63,7 +66,7 @@ export function Topbar() {
             Lumenosis <span className="text-[var(--color-brand-violet)]">AI</span>
           </span>
         </a>
-        <div className="hidden items-center gap-4 md:flex">
+        <div className="hidden items-center gap-4 justify-self-center md:flex">
           {links.map((link) => (
             <a
               key={link.label}
@@ -74,7 +77,7 @@ export function Topbar() {
             </a>
           ))}
         </div>
-        <div className="hidden items-center gap-3 md:flex">
+        <div className="hidden items-center gap-3 justify-self-end md:flex">
           {mounted && (
             <button
               type="button"
@@ -106,7 +109,7 @@ export function Topbar() {
         <button
           type="button"
           onClick={() => setOpen(!open)}
-          className="grid size-9 place-items-center rounded-md border border-[var(--color-line)] text-[var(--color-ink-charcoal)] md:hidden"
+          className="col-start-3 grid size-9 place-items-center justify-self-end rounded-md border border-[var(--color-line)] text-[var(--color-ink-charcoal)] md:hidden"
           aria-label="Toggle menu"
         >
           <MenuToggleIcon open={open} className="size-5" duration={300} />

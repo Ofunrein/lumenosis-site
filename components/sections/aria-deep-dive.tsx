@@ -231,14 +231,14 @@ function TypewriterText({ text, active }: { text: string; active: boolean }) {
 
     setChars(0);
     let next = 0;
-    const step = Math.max(2, Math.ceil(text.length / 72));
+    const step = Math.max(1, Math.ceil(text.length / 96));
     const id = window.setInterval(() => {
       next = Math.min(text.length, next + step);
       setChars(next);
       if (next >= text.length) {
         window.clearInterval(id);
       }
-    }, 24);
+    }, 58);
 
     return () => window.clearInterval(id);
   }, [active, text]);
@@ -382,7 +382,7 @@ function ValuationLinkCard() {
 }
 
 function IrisEmailDemo() {
-  const shown = useRevealedCount(emailThread.length, 3000);
+  const shown = useRevealedCount(emailThread.length, 11500);
   const scrollRef = useRef<HTMLDivElement>(null);
   const visibleMessages = emailThread.slice(0, shown);
   const latestMessage = visibleMessages[visibleMessages.length - 1];
@@ -391,7 +391,7 @@ function IrisEmailDemo() {
 
   return (
     <GlowCard glowColor="purple" customSize className="overflow-hidden p-0 [--backdrop:#130d1b]">
-      <div className="grid min-h-[440px] lg:grid-cols-[1.25fr_0.75fr]">
+      <div className="grid h-[680px] min-h-0 lg:h-[620px] lg:grid-cols-[1.25fr_0.75fr]">
         <div className="flex min-h-0 flex-col border-b border-[var(--color-line)] p-4 sm:p-5 lg:border-b-0 lg:border-r">
           <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[var(--color-line)] pb-4">
             <SectionBadge icon={Mail} title="Iris email desk" subtitle="Live buyer inquiry" />
@@ -400,7 +400,7 @@ function IrisEmailDemo() {
             </div>
           </div>
 
-          <div className="mt-4 rounded-2xl border border-[#443650] bg-[#09070d] p-3 text-sm shadow-[0_18px_44px_rgba(3,7,5,0.28)]">
+          <div className="mt-4 flex min-h-0 flex-1 flex-col rounded-2xl border border-[#443650] bg-[#09070d] p-3 text-sm shadow-[0_18px_44px_rgba(3,7,5,0.28)]">
             <div className="flex items-start justify-between gap-3 border-b border-[var(--color-line)] pb-3">
               <div>
                 <p className="text-xs uppercase tracking-[0.18em] text-white">Subject</p>
@@ -415,7 +415,7 @@ function IrisEmailDemo() {
 
             <div
               ref={scrollRef}
-              className="mt-3 flex max-h-[310px] flex-col gap-3 overflow-y-auto pr-2 [scrollbar-color:#cb6ce6_#130d1b] [scrollbar-width:thin]"
+              className="mt-3 flex min-h-0 flex-1 flex-col gap-3 overflow-y-auto pr-2 [scrollbar-color:#cb6ce6_#130d1b] [scrollbar-width:thin]"
             >
               {visibleMessages.map((message) => {
                 const isLatest = latestMessage?.id === message.id;
@@ -533,7 +533,7 @@ function IrisEmailDemo() {
 }
 
 function AriaPhoneDemo() {
-  const shown = useRevealedCount(ariaTranscript.length, 2300);
+  const shown = useRevealedCount(ariaTranscript.length, 10000);
   const visible = ariaTranscript.slice(0, shown);
   const latest = visible[visible.length - 1];
   const transcriptRef = useRef<HTMLDivElement>(null);
@@ -564,7 +564,7 @@ function AriaPhoneDemo() {
 
   return (
     <div className="mx-auto w-full max-w-[360px] rounded-[38px] border border-[#3f3350] bg-[#07060a] p-2.5 shadow-[0_34px_120px_rgba(0,0,0,0.44)]">
-      <div className="relative h-[540px] overflow-hidden rounded-[30px] border border-[#332a3d] bg-[#120d19] p-4">
+      <div className="flex h-[540px] flex-col overflow-hidden rounded-[30px] border border-[#332a3d] bg-[#120d19] p-4">
         <div className="mx-auto mb-3 h-6 w-24 rounded-b-[20px] bg-black" />
         <div className="text-center">
           <div className="mx-auto grid size-14 place-items-center rounded-full border border-[var(--color-brand-violet)]/60 bg-[#2a1638] font-[family-name:var(--font-display)] text-2xl text-white">
@@ -573,12 +573,9 @@ function AriaPhoneDemo() {
           <p className="mt-2 font-[family-name:var(--font-display)] text-2xl font-semibold text-white">
             Aria
           </p>
-          <p className="mt-1 text-xs font-semibold uppercase tracking-[0.22em] text-[var(--color-brand-violet)]">
-            Call record
-          </p>
-          <div className="mt-2 inline-flex items-center gap-2 rounded-full border border-[var(--color-gold-italic)]/45 bg-[#241d16] px-4 py-1.5 text-xs font-semibold text-[var(--color-gold-italic)]">
+          <div className="mt-2 inline-flex items-center gap-2 rounded-full border border-[var(--color-gold-italic)]/45 bg-[#241d16] px-4 py-1.5 text-xs font-semibold text-white">
             <span className="size-2 rounded-full bg-[var(--color-gold-italic)]" />
-            On call 02:14
+            {status}
           </div>
         </div>
 
@@ -620,7 +617,7 @@ function AriaPhoneDemo() {
 
         <div
           ref={transcriptRef}
-          className="flex h-[190px] flex-col gap-3 overflow-y-auto pr-1 [scrollbar-color:#cb6ce6_#120d19] [scrollbar-width:thin]"
+          className="flex min-h-0 flex-1 flex-col gap-3 overflow-y-auto pr-1 [scrollbar-color:#cb6ce6_#120d19] [scrollbar-width:thin]"
         >
           {visible.map((line) => {
             const isAria = line.from === "agent";
@@ -643,20 +640,13 @@ function AriaPhoneDemo() {
           })}
           {shown < ariaTranscript.length ? <TypingDots align="right" /> : null}
         </div>
-
-        <div className="absolute inset-x-4 bottom-4 rounded-[18px] border border-[var(--color-brand-violet)]/50 bg-[#0a0710] px-4 py-3">
-          <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-white">
-            Live status
-          </p>
-          <p className="mt-1 text-lg font-semibold text-white">{status}</p>
-        </div>
       </div>
     </div>
   );
 }
 
 function TheoSmsDemo() {
-  const shown = useRevealedCount(theoThread.length, 2100);
+  const shown = useRevealedCount(theoThread.length, 10000);
   const visible = theoThread.slice(0, shown);
   const latest = visible[visible.length - 1];
   const transcriptRef = useRef<HTMLDivElement>(null);
@@ -677,7 +667,7 @@ function TheoSmsDemo() {
 
   return (
     <div className="mx-auto w-full max-w-[360px] rounded-[38px] border border-[#3f3350] bg-[#07060a] p-2.5 shadow-[0_34px_120px_rgba(0,0,0,0.44)]">
-      <div className="relative h-[540px] overflow-hidden rounded-[30px] border border-[#332a3d] bg-[#120d19] p-4">
+      <div className="flex h-[540px] flex-col overflow-hidden rounded-[30px] border border-[#332a3d] bg-[#120d19] p-4">
         <div className="mx-auto mb-3 h-6 w-24 rounded-b-[20px] bg-black" />
         <div className="text-center">
           <div className="mx-auto grid size-14 place-items-center rounded-full border border-[var(--color-brand-violet)]/60 bg-[#2a1638] font-[family-name:var(--font-display)] text-2xl text-white">
@@ -686,12 +676,9 @@ function TheoSmsDemo() {
           <p className="mt-2 font-[family-name:var(--font-display)] text-2xl font-semibold text-white">
             Theo
           </p>
-          <p className="mt-1 text-xs font-semibold uppercase tracking-[0.22em] text-[var(--color-brand-violet)]">
-            Lumenosis SMS sales agent
-          </p>
-          <div className="mt-2 inline-flex items-center gap-2 rounded-full border border-[var(--color-gold-italic)]/45 bg-[#241d16] px-4 py-1.5 text-xs font-semibold text-[var(--color-gold-italic)]">
+          <div className="mt-2 inline-flex items-center gap-2 rounded-full border border-[var(--color-gold-italic)]/45 bg-[#241d16] px-4 py-1.5 text-xs font-semibold text-white">
             <span className="size-2 rounded-full bg-[var(--color-gold-italic)]" />
-            Live thread
+            {status}
           </div>
         </div>
 
@@ -699,7 +686,7 @@ function TheoSmsDemo() {
 
         <div
           ref={transcriptRef}
-          className="flex h-[315px] flex-col gap-3 overflow-y-auto pr-1 [scrollbar-color:#cb6ce6_#120d19] [scrollbar-width:thin]"
+          className="flex min-h-0 flex-1 flex-col gap-3 overflow-y-auto pr-1 [scrollbar-color:#cb6ce6_#120d19] [scrollbar-width:thin]"
         >
           {visible.map((line) => {
             const isTheo = line.from === "agent";
@@ -722,13 +709,6 @@ function TheoSmsDemo() {
           })}
           {shown < theoThread.length ? <TypingDots align="right" /> : null}
         </div>
-
-        <div className="absolute inset-x-4 bottom-4 rounded-[18px] border border-[var(--color-brand-violet)]/50 bg-[#0a0710] px-4 py-3">
-          <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-white">
-            SMS status
-          </p>
-          <p className="mt-1 text-lg font-semibold text-white">{status}</p>
-        </div>
       </div>
     </div>
   );
@@ -738,7 +718,7 @@ export function AriaDeepDive() {
   return (
     <section
       id="aria"
-      className="relative overflow-hidden border-b border-[var(--color-line)] bg-[#f1eee6] py-12 dark:bg-[#09070d] md:py-16"
+      className="relative overflow-hidden border-b border-[var(--color-line)] bg-[#f1eee6] py-12 dark:bg-[#050408] md:py-16"
     >
       <div className="absolute left-1/2 top-0 h-[460px] w-[720px] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,rgba(203,108,230,0.18),rgba(203,108,230,0)_62%)] blur-3xl" />
       <div className="absolute right-[-14rem] top-24 h-[460px] w-[520px] rounded-full bg-[radial-gradient(circle,rgba(124,58,237,0.14),rgba(124,58,237,0)_64%)] blur-3xl" />

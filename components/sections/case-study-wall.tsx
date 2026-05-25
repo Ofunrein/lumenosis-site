@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { GlowCard } from "@/components/spotlight-card";
 import { caseStudies } from "@/content/case-studies";
 
 type CaseStudyCard = (typeof caseStudies)[number] & {
@@ -31,14 +32,17 @@ export function CaseStudyWall() {
       : caseStudies.filter((study) => study.category === activeCategory);
 
   return (
-    <section className="border-b border-[var(--color-line)] bg-[#f1eee6] py-16 dark:bg-[#09070d] md:py-24">
+    <section
+      id="results"
+      className="border-b border-[var(--color-line)] bg-[#f1eee6] py-16 dark:bg-[#09070d] md:py-24"
+    >
       <div className="mx-auto w-[min(1200px,calc(100%-32px))]">
-        <div className="grid gap-8 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:items-end">
+        <div className="grid gap-8 lg:grid-cols-[minmax(0,1.14fr)_minmax(0,0.86fr)] lg:items-end">
           <div>
             <span className="mb-3 inline-block text-[var(--text-eyebrow)] font-semibold uppercase tracking-[0.14em] text-[var(--color-brand-purple)]">
               07 - Wall of Results
             </span>
-            <h2 className="max-w-4xl font-[family-name:var(--font-display)] text-[clamp(3rem,7vw,6.4rem)] font-semibold leading-[0.94] tracking-normal text-[var(--color-ink-charcoal)]">
+            <h2 className="max-w-[980px] font-[family-name:var(--font-display)] text-[clamp(2.65rem,4.85vw,5.05rem)] font-semibold leading-[0.96] tracking-normal text-[var(--color-ink-charcoal)]">
               What real estate teams actually say.
             </h2>
           </div>
@@ -86,12 +90,14 @@ export function CaseStudyWall() {
               card.attribution ?? [card.name, card.role, card.location].filter(Boolean).join(", ");
 
             return (
-              <article
+              <GlowCard
                 key={`${card.name}-${card.quote}`}
-                className="mb-4 break-inside-avoid rounded-[var(--radius)] border border-[var(--color-line)] bg-white p-5 shadow-[var(--shadow-soft)] transition-transform hover:-translate-y-1 dark:bg-[#14101c]"
+                glowColor="purple"
+                customSize
+                className="mb-4 break-inside-avoid rounded-[var(--radius)] p-5 shadow-[var(--shadow-soft)] transition-transform hover:-translate-y-1 [--backdrop:#ffffff] [--backup-border:var(--color-line)] dark:[--backdrop:#14101c]"
               >
                 <div className="flex items-start justify-between gap-4">
-                  <p className="font-[family-name:var(--font-display)] text-[clamp(1.8rem,3vw,2.55rem)] font-semibold leading-none text-[var(--color-brand-purple)]">
+                  <p className="font-[family-name:var(--font-display)] text-[clamp(1.8rem,3vw,2.55rem)] font-semibold leading-none text-[var(--color-brand-purple)] dark:text-white">
                     {result}
                   </p>
                   <span className="shrink-0 rounded-[var(--radius-pill)] bg-[var(--color-brand-purple-soft)] px-3 py-1 text-xs font-semibold uppercase tracking-[0.1em] text-[var(--color-brand-purple)]">
@@ -106,7 +112,7 @@ export function CaseStudyWall() {
                 <p className="mt-5 text-sm font-semibold text-[var(--color-ink-charcoal)]">
                   {attribution}
                 </p>
-              </article>
+              </GlowCard>
             );
           })}
         </div>
