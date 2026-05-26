@@ -59,9 +59,9 @@ export function TwoWaysIn() {
 
         <div className="grid items-stretch gap-6 md:grid-cols-2 lg:gap-8">
           {paths.map((path) => (
-            <div key={path.path} className={`relative ${path.popular ? "pt-5 md:pt-0" : ""}`}>
+            <div key={path.path} className={`relative ${path.popular ? "pt-5" : ""}`}>
               {path.popular && (
-                <span className="absolute top-0 right-6 -translate-y-1/2 z-20 rounded-full bg-[var(--color-gold-italic)] px-3 py-1.5 text-[10px] font-bold uppercase tracking-widest whitespace-nowrap shadow-sm text-black">
+                <span className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 rounded-full bg-[var(--color-gold-italic)] px-4 py-1.5 text-[10px] font-bold uppercase tracking-widest whitespace-nowrap shadow-sm text-black">
                   MOST POPULAR
                 </span>
               )}
@@ -71,7 +71,7 @@ export function TwoWaysIn() {
                 radius={16}
                 className={`min-h-[560px] h-full flex flex-col !p-0 ${
                   path.dark
-                    ? "md:-mt-4 [--backup-border:rgb(232,196,122,0.4)] [--backdrop:#0b0711] shadow-[0_34px_90px_rgb(10_7_17_/_0.32)] dark:shadow-[0_34px_90px_rgb(203_108_230_/_0.16)] text-white"
+                    ? "[--backup-border:rgb(232,196,122,0.4)] [--backdrop:#0b0711] shadow-[0_34px_90px_rgb(10_7_17_/_0.32)] dark:shadow-[0_34px_90px_rgb(203_108_230_/_0.16)] text-white"
                     : "[--backup-border:rgb(33,30,25,0.15)] [--backdrop:#fffdf7] dark:[--backup-border:rgb(255,255,255,0.12)] dark:[--backdrop:#17111f] shadow-[0_18px_50px_rgb(33_30_25_/_0.08)] dark:shadow-none text-[var(--color-ink-charcoal)] dark:text-white"
                 }`}
               >
