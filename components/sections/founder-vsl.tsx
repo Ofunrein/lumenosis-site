@@ -89,13 +89,13 @@ export function FounderVSL() {
                 <button
                   type="button"
                   aria-label="Play overview video"
-                  className="absolute inset-0 grid place-items-center text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-brand-purple)]"
+                  className="group absolute inset-0 grid place-items-center text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-brand-purple)]"
                 >
                   <span
-                    className={`grid place-items-center rounded-full border border-white/35 bg-[var(--color-brand-purple)] shadow-[0_12px_36px_rgb(203_108_230_/_0.45)] transition-transform hover:scale-105 size-14 sm:size-16 ${visible ? "scale-100 opacity-100" : "scale-90 opacity-0"}`}
-                    style={{ transition: "opacity 0.4s, transform 0.4s" }}
+                    className={`grid place-items-center rounded-full border border-white/35 bg-[var(--color-brand-purple)] shadow-[0_12px_36px_rgb(203_108_230_/_0.45)] size-14 sm:size-16 group-hover:scale-110 group-hover:shadow-[0_16px_60px_rgb(203_108_230_/_0.75)] group-hover:border-white/60 group-hover:bg-[var(--color-brand-violet)] ${visible ? "scale-100 opacity-100" : "scale-90 opacity-0"}`}
+                    style={{ transition: "opacity 0.4s, transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease, background-color 0.35s ease" }}
                   >
-                    <svg viewBox="0 0 24 24" className="ml-0.5 size-5" fill="currentColor" aria-hidden>
+                    <svg viewBox="0 0 24 24" className="ml-0.5 size-5 group-hover:scale-110 transition-transform duration-300" fill="currentColor" aria-hidden>
                       <title>Play overview</title>
                       <path d="M8 5v14l11-7z" />
                     </svg>
