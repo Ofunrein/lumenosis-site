@@ -7,6 +7,7 @@ interface GlowCardProps {
   className?: string;
   glowColor?: "purple" | "blue" | "green" | "red" | "orange";
   customSize?: boolean;
+  radius?: number;
 }
 
 const glowColorMap = {
@@ -22,6 +23,7 @@ export function GlowCard({
   className = "",
   glowColor = "purple",
   customSize = true,
+  radius,
 }: GlowCardProps) {
   const cardRef = useRef<HTMLDivElement>(null);
   void customSize;
@@ -45,7 +47,7 @@ export function GlowCard({
   const style = {
     "--base": base,
     "--spread": spread,
-    "--default-radius": "16",
+    "--default-radius": String(radius ?? 16),
     "--default-border": "1",
     "--default-backdrop": "var(--color-bg-cream)",
     "--default-backup-border": "var(--color-line)",
@@ -72,8 +74,8 @@ export function GlowCard({
       <div
         ref={cardRef}
         data-glow
-        style={style}
-        className={`group rounded-2xl relative p-6 ${className}`}
+        style={{ ...style, borderRadius: `${radius ?? 16}px` }}
+        className={`group relative p-6 ${className}`}
       >
         <div
           data-glow
