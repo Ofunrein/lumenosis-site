@@ -48,7 +48,7 @@ export function GlowCard({
     "--base": base,
     "--spread": spread,
     "--default-radius": String(radius ?? 16),
-    "--default-border": "2",
+    "--default-border": "3",
     "--default-backdrop": "var(--color-bg-cream)",
     "--default-backup-border": "var(--color-line)",
     "--default-size": "200",
