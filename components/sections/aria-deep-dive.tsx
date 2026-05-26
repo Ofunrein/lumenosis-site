@@ -468,7 +468,7 @@ function AriaPhoneDemo() {
   const [playing, setPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
-  const [bars, setBars] = useState<number[]>(Array.from({ length: 40 }, (_, i) => 10 + Math.abs(Math.sin(i * 0.7) * 30)));
+  const [bars, setBars] = useState<number[]>(Array.from({ length: 40 }, (_, i) => 8 + Math.abs(Math.sin(i * 0.4) * 25 + Math.sin(i * 0.8) * 15)));
 
   // Connect Web Audio API when first play
   const setupAudio = () => {
@@ -494,14 +494,23 @@ function AriaPhoneDemo() {
     const dataArray = new Uint8Array(analyser.frequencyBinCount); // 64 bins
     analyser.getByteFrequencyData(dataArray);
 
-    // Map 64 frequency bins to 40 bars
     const newBars = Array.from({ length: 40 }, (_, i) => {
-      const binIndex = Math.floor((i / 40) * 64);
-      const value = dataArray[binIndex];
-      return Math.max(6, (value / 255) * 100); // 6% to 100% height
-    });
-    setBars(newBars);
+      // Logarithmic bin mapping — spread bars across full spectrum
+      const normalized = i / 39; // 0 to 1
+      const logBin = Math.round(Math.pow(normalized, 0.6) * 60); // skewed to cover 0-60 bins
+      const binIndex = Math.max(0, Math.min(63, logBin));
 
+      // Average with neighbors for smoother look
+      const v0 = dataArray[Math.max(0, binIndex - 1)] ?? 0;
+      const v1 = dataArray[binIndex] ?? 0;
+      const v2 = dataArray[Math.min(63, binIndex + 1)] ?? 0;
+      const avg = (v0 + v1 * 2 + v2) / 4;
+
+      const scaled = (avg / 255) * 100 * 1.8; // boost amplitude
+      return Math.max(8, Math.min(100, scaled)); // min 8% height when playing
+    });
+
+    setBars(newBars);
     rafRef.current = requestAnimationFrame(animateBars);
   };
 
@@ -536,8 +545,8 @@ function AriaPhoneDemo() {
     const onEnded = () => {
       setPlaying(false);
       cancelAnimationFrame(rafRef.current);
-      // Reset bars to static
-      setBars(Array.from({ length: 40 }, (_, i) => 10 + Math.abs(Math.sin(i * 0.7) * 30)));
+      // Reset bars to static idle waveform
+      setBars(Array.from({ length: 40 }, (_, i) => 8 + Math.abs(Math.sin(i * 0.4) * 25 + Math.sin(i * 0.8) * 15)));
     };
     audio.addEventListener("timeupdate", onTime);
     audio.addEventListener("loadedmetadata", onLoad);
