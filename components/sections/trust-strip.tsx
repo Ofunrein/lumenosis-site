@@ -67,8 +67,17 @@ export function TrustStrip() {
             ))}
           </CarouselContent>
         </Carousel>
-        <div className="pointer-events-none absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-[var(--color-bg-cream)] to-transparent dark:hidden" />
-        <div className="pointer-events-none absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-[var(--color-bg-cream)] to-transparent dark:hidden" />
+        {/* Left progressive blur */}
+        <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-28">
+          <div className="absolute inset-0 bg-gradient-to-r from-[var(--color-bg-cream)] via-[var(--color-bg-cream)]/60 to-transparent dark:from-black/80 dark:via-black/40 dark:to-transparent" />
+          <div className="absolute inset-0 backdrop-blur-[2px] [mask-image:linear-gradient(to_right,black_0%,black_40%,transparent_100%)]" />
+        </div>
+
+        {/* Right progressive blur */}
+        <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-28">
+          <div className="absolute inset-0 bg-gradient-to-l from-[var(--color-bg-cream)] via-[var(--color-bg-cream)]/60 to-transparent dark:from-black/80 dark:via-black/40 dark:to-transparent" />
+          <div className="absolute inset-0 backdrop-blur-[2px] [mask-image:linear-gradient(to_left,black_0%,black_40%,transparent_100%)]" />
+        </div>
       </div>
     </section>
   );
