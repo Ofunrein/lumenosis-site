@@ -491,23 +491,28 @@ function AriaPhoneDemo() {
     const analyser = analyserRef.current;
     if (!analyser) return;
 
-    const dataArray = new Uint8Array(analyser.frequencyBinCount); // 64 bins
+    const dataArray = new Uint8Array(analyser.frequencyBinCount);
     analyser.getByteFrequencyData(dataArray);
 
+    // Get overall energy level from low-mid frequencies (where voice lives)
+    const energy = dataArray.slice(0, 20).reduce((sum, v) => sum + v, 0) / (20 * 255);
+
+    // Generate bars that span full width using energy + procedural pattern
     const newBars = Array.from({ length: 40 }, (_, i) => {
-      // Logarithmic bin mapping — spread bars across full spectrum
-      const normalized = i / 39; // 0 to 1
-      const logBin = Math.round(Math.pow(normalized, 0.6) * 60); // skewed to cover 0-60 bins
-      const binIndex = Math.max(0, Math.min(63, logBin));
+      // Phase-based procedural heights driven by real audio energy
+      const phase1 = Math.sin(i * 0.35 + Date.now() * 0.003) * 0.5 + 0.5;
+      const phase2 = Math.sin(i * 0.7 + Date.now() * 0.005) * 0.3 + 0.3;
+      const phase3 = Math.sin(i * 1.1 + Date.now() * 0.002) * 0.2 + 0.2;
 
-      // Average with neighbors for smoother look
-      const v0 = dataArray[Math.max(0, binIndex - 1)] ?? 0;
-      const v1 = dataArray[binIndex] ?? 0;
-      const v2 = dataArray[Math.min(63, binIndex + 1)] ?? 0;
-      const avg = (v0 + v1 * 2 + v2) / 4;
+      // Combine phases weighted by energy level
+      const combined = (phase1 * 0.5 + phase2 * 0.3 + phase3 * 0.2) * energy * 2.2;
 
-      const scaled = (avg / 255) * 100 * 1.8; // boost amplitude
-      return Math.max(8, Math.min(100, scaled)); // min 8% height when playing
+      // Add actual frequency data contribution (logarithmic)
+      const binIndex = Math.min(63, Math.floor(Math.pow(i / 39, 0.5) * 50));
+      const freqVal = (dataArray[binIndex] ?? 0) / 255;
+
+      const height = Math.max(8, Math.min(95, (combined * 60) + (freqVal * 30)));
+      return height;
     });
 
     setBars(newBars);
@@ -617,50 +622,51 @@ function AriaPhoneDemo() {
           ))}
         </div>
 
-        {/* Progress scrubber — taller hit target */}
-        <div className="space-y-1">
-          <div
-            className="group relative h-5 flex items-center cursor-pointer"
-            onClick={(e) => {
-              const audio = audioRef.current;
-              if (!audio || !duration) return;
-              const rect = e.currentTarget.getBoundingClientRect();
-              const pct = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+        {/* Progress bar — clickable and draggable */}
+        <div
+          className="group relative h-6 flex items-center cursor-pointer"
+          onClick={(e) => {
+            const audio = audioRef.current;
+            if (!audio || !duration) return;
+            const rect = e.currentTarget.getBoundingClientRect();
+            audio.currentTime = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width)) * duration;
+          }}
+          onMouseDown={(e) => {
+            const audio = audioRef.current;
+            if (!audio || !duration) return;
+            const container = e.currentTarget as HTMLDivElement;
+            const rect = container.getBoundingClientRect(); // Capture rect at mousedown time
+
+            const setTime = (clientX: number) => {
+              const pct = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
               audio.currentTime = pct * duration;
-            }}
-            onMouseDown={(e) => {
-              const container = e.currentTarget;
-              const handleMove = (moveEvent: MouseEvent) => {
-                const audio = audioRef.current;
-                if (!audio || !duration) return;
-                const rect = container.getBoundingClientRect();
-                const pct = Math.max(0, Math.min(1, (moveEvent.clientX - rect.left) / rect.width));
-                audio.currentTime = pct * duration;
-              };
-              const handleUp = () => {
-                window.removeEventListener("mousemove", handleMove);
-                window.removeEventListener("mouseup", handleUp);
-              };
-              window.addEventListener("mousemove", handleMove);
-              window.addEventListener("mouseup", handleUp);
-            }}
-          >
-            <div className="relative w-full h-1 rounded-full bg-white/10">
-              <div
-                className="absolute inset-y-0 left-0 rounded-full bg-[var(--color-brand-violet)] transition-none"
-                style={{ width: `${progress * 100}%` }}
-              />
-              {/* Thumb */}
-              <div
-                className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 size-3 rounded-full bg-[var(--color-brand-violet)] opacity-0 group-hover:opacity-100 transition-opacity"
-                style={{ left: `${progress * 100}%` }}
-              />
-            </div>
+            };
+
+            setTime(e.clientX);
+
+            const onMove = (me: MouseEvent) => setTime(me.clientX);
+            const onUp = () => {
+              window.removeEventListener("mousemove", onMove);
+              window.removeEventListener("mouseup", onUp);
+            };
+            window.addEventListener("mousemove", onMove);
+            window.addEventListener("mouseup", onUp);
+          }}
+        >
+          <div className="relative w-full h-1 rounded-full bg-white/15">
+            <div
+              className="absolute inset-y-0 left-0 rounded-full bg-[var(--color-brand-violet)]"
+              style={{ width: `${progress * 100}%` }}
+            />
+            <div
+              className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 size-3.5 rounded-full bg-[var(--color-brand-violet)] opacity-0 group-hover:opacity-100 transition-opacity shadow-sm"
+              style={{ left: `${progress * 100}%` }}
+            />
           </div>
-          <div className="flex justify-between text-xs text-white/50">
-            <span>{fmt(currentTime)}</span>
-            <span>{duration > 0 ? fmt(duration) : "4:41"}</span>
-          </div>
+        </div>
+        <div className="flex justify-between text-xs text-white/50 mt-1">
+          <span>{fmt(currentTime)}</span>
+          <span>{duration > 0 ? fmt(duration) : "4:41"}</span>
         </div>
       </div>
 
@@ -813,7 +819,7 @@ export function AriaDeepDive() {
   return (
     <section
       id="aria"
-      className="relative overflow-hidden border-b border-[var(--color-line)] bg-[var(--color-bg-cream)] dark:bg-black/25 py-12 text-white md:py-16"
+      className="bg-[#0a0e0c] py-20 md:py-28 border-b border-white/5 relative overflow-hidden"
     >
       <div className="absolute left-1/2 top-0 h-[460px] w-[720px] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,rgba(203,108,230,0.18),rgba(203,108,230,0)_62%)] blur-3xl" />
       <div className="absolute right-[-14rem] top-24 h-[460px] w-[520px] rounded-full bg-[radial-gradient(circle,rgba(124,58,237,0.14),rgba(124,58,237,0)_64%)] blur-3xl" />
@@ -823,22 +829,22 @@ export function AriaDeepDive() {
           <p className="mb-4 text-[var(--text-eyebrow)] font-semibold uppercase tracking-[0.16em] text-[var(--color-brand-violet)]">
             04 - Live follow-up desk
           </p>
-          <h2 className="font-[family-name:var(--font-display)] text-[clamp(2.5rem,4.6vw,4.7rem)] font-semibold leading-[0.99] text-[var(--color-ink-charcoal)]">
+          <h2 className="font-[family-name:var(--font-display)] text-[clamp(2.5rem,4.6vw,4.7rem)] font-semibold leading-[0.99] text-white">
             The front desk that never sleeps and never asks for a raise.
           </h2>
-          <p className="mt-6 max-w-xl text-lg leading-8 text-[var(--color-muted)]">
+          <p className="mt-6 max-w-xl text-lg leading-8 text-white/75">
             A buyer asks about a listing. Iris replies with real property details, Aria answers the
             call, and Theo keeps the text thread moving until a showing or valuation is booked.
           </p>
 
           <div className="mt-10 grid gap-4 sm:grid-cols-2">
             {microFeatures.map(({ icon: Icon, title, body }) => (
-              <div key={title} className="rounded-[24px] border border-[#3f3350] bg-[#120d19] p-4">
+              <div key={title} className="rounded-[24px] border border-white/10 bg-white/5 p-4">
                 <Icon className="size-5 text-[var(--color-brand-violet)]" aria-hidden />
-                <p className="mt-4 font-[family-name:var(--font-display)] text-xl font-semibold text-[var(--color-ink-charcoal)]">
+                <p className="mt-4 font-[family-name:var(--font-display)] text-xl font-semibold text-white">
                   {title}
                 </p>
-                <p className="mt-2 text-sm leading-6 text-[var(--color-muted)]">{body}</p>
+                <p className="mt-2 text-sm leading-6 text-white/65">{body}</p>
               </div>
             ))}
           </div>
