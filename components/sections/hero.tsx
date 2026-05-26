@@ -29,7 +29,7 @@ export function Hero() {
       id="top"
       className="relative overflow-hidden border-b border-[var(--color-line)] bg-[var(--color-bg-cream)] dark:bg-transparent pb-16 pt-20 md:pt-28"
     >
-      <div className="relative z-10 mx-auto grid w-[min(1200px,calc(100%-48px))] sm:w-[min(1200px,calc(100%-32px))] items-center gap-10 md:grid-cols-[0.9fr_1.1fr] lg:grid-cols-[0.8fr_1.2fr] xl:grid-cols-[0.75fr_1.25fr] md:gap-12">
+      <div className="relative z-10 mx-auto grid w-[min(1200px,calc(100%-48px))] sm:w-[min(1200px,calc(100%-32px))] items-start gap-8 md:grid-cols-[0.65fr_1.35fr] lg:grid-cols-[0.6fr_1.4fr] xl:grid-cols-[0.55fr_1.45fr] md:gap-10">
         <div>
           <h1 className="font-[family-name:var(--font-display)] text-[length:var(--text-display-hero)] font-semibold leading-[1.04] tracking-tight text-[var(--color-ink-charcoal)]">
             AI agents for your{" "}
@@ -85,7 +85,7 @@ export function Hero() {
               alt="Lumenosis AI dashboard with CRM, iMessage thread, and booked appointment"
               fill
               priority
-              sizes="(max-width: 768px) 100vw, (max-width: 1024px) 54vw, 60vw"
+              sizes="(max-width: 768px) 100vw, (max-width: 1024px) 67vw, 72vw"
               className="object-cover opacity-80"
             />
           </div>
