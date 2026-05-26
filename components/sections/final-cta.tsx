@@ -1,6 +1,7 @@
 "use client";
 import Magnet from "@/components/magnet";
 import { StarButton } from "@/components/ui/star-button";
+import { SpotlightButtonWrapper } from "@/components/spotlight-button";
 
 export function FinalCTA() {
   return (
@@ -12,13 +13,15 @@ export function FinalCTA() {
         </h2>
         <div className="mt-8 flex justify-center">
           <Magnet padding={80} magnetStrength={5}>
-            <StarButton
-              lightColor="#cb6ce6"
-              backgroundColor="#cb6ce6"
-              className="bg-[var(--color-brand-purple)] text-white px-8 h-14 text-lg [&_span]:text-white"
-            >
-              Book a Demo
-            </StarButton>
+            <SpotlightButtonWrapper>
+              <StarButton
+                lightColor="#cb6ce6"
+                backgroundColor="#cb6ce6"
+                className="bg-[var(--color-brand-purple)] text-white px-8 h-14 text-lg [&_span]:text-white"
+              >
+                Book a Demo
+              </StarButton>
+            </SpotlightButtonWrapper>
           </Magnet>
         </div>
       </div>

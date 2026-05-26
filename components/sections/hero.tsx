@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { GlassStatCallout } from "@/components/glass-stat-callout";
 import Magnet from "@/components/magnet";
 import { StarButton } from "@/components/ui/star-button";
+import { SpotlightButtonWrapper } from "@/components/spotlight-button";
 import { niches } from "@/content/niches";
 
 export function Hero() {
@@ -63,13 +64,15 @@ export function Hero() {
           </p>
           <div className="mt-7 flex flex-col items-start gap-3">
             <Magnet padding={60} magnetStrength={5}>
-              <StarButton
-                lightColor="#cb6ce6"
-                backgroundColor="#cb6ce6"
-                className="bg-[var(--color-brand-purple)] text-white px-6 h-12 text-base [&_span]:text-white"
-              >
-                <a href="#book">Book a Demo</a>
-              </StarButton>
+              <SpotlightButtonWrapper>
+                <StarButton
+                  lightColor="#cb6ce6"
+                  backgroundColor="#cb6ce6"
+                  className="bg-[var(--color-brand-purple)] text-white px-6 h-12 text-base [&_span]:text-white"
+                >
+                  <a href="#book">Book a Demo</a>
+                </StarButton>
+              </SpotlightButtonWrapper>
             </Magnet>
           </div>
         </div>

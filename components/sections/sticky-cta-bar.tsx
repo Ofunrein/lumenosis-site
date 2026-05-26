@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { StarButton } from "@/components/ui/star-button";
+import { SpotlightButtonWrapper } from "@/components/spotlight-button";
 
 export function StickyCtaBar() {
   const [show, setShow] = useState(false);
@@ -31,16 +32,18 @@ export function StickyCtaBar() {
         Ready to scale? Book a demo.
       </span>
       {show && (
-        <StarButton
-          lightColor="#cb6ce6"
-          backgroundColor="#cb6ce6"
-          className="h-9 bg-[var(--color-brand-purple)] px-4 text-sm text-white [&_span]:text-white"
-          onClick={() => {
-            window.location.href = "#book";
-          }}
-        >
-          Book Demo
-        </StarButton>
+        <SpotlightButtonWrapper>
+          <StarButton
+            lightColor="#cb6ce6"
+            backgroundColor="#cb6ce6"
+            className="h-9 bg-[var(--color-brand-purple)] px-4 text-sm text-white [&_span]:text-white"
+            onClick={() => {
+              window.location.href = "#book";
+            }}
+          >
+            Book Demo
+          </StarButton>
+        </SpotlightButtonWrapper>
       )}
     </aside>
   );

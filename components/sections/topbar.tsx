@@ -6,6 +6,7 @@ import React from "react";
 import { MenuToggleIcon } from "@/components/ui/menu-toggle-icon";
 import { StarButton } from "@/components/ui/star-button";
 import { useScroll } from "@/components/ui/use-scroll";
+import { SpotlightButtonWrapper } from "@/components/spotlight-button";
 import { cn } from "@/lib/utils";
 
 export function Topbar() {
@@ -90,12 +91,14 @@ export function Topbar() {
               )}
             </button>
           )}
-          <StarButton
-            lightColor="#cb6ce6"
-            className="bg-[var(--color-brand-violet)] text-white px-4 h-9 text-sm !text-white"
-          >
-            <a href="#book">Book a Demo</a>
-          </StarButton>
+          <SpotlightButtonWrapper>
+            <StarButton
+              lightColor="#cb6ce6"
+              className="bg-[var(--color-brand-violet)] text-white px-4 h-9 text-sm !text-white"
+            >
+              <a href="#book">Book a Demo</a>
+            </StarButton>
+          </SpotlightButtonWrapper>
         </div>
 
         <button
@@ -121,12 +124,14 @@ export function Topbar() {
             </a>
           ))}
           <div className="mt-auto">
-            <StarButton
-              lightColor="#cb6ce6"
-              className="w-full bg-[var(--color-brand-violet)] text-white h-12 text-base justify-center"
-            >
-              <a href="#book">Book a Demo</a>
-            </StarButton>
+            <SpotlightButtonWrapper className="w-full">
+              <StarButton
+                lightColor="#cb6ce6"
+                className="w-full bg-[var(--color-brand-violet)] text-white h-12 text-base justify-center"
+              >
+                <a href="#book">Book a Demo</a>
+              </StarButton>
+            </SpotlightButtonWrapper>
           </div>
         </div>
       )}
