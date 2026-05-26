@@ -846,7 +846,7 @@ export function AriaDeepDive() {
 
       <div className="relative mx-auto grid w-[min(1480px,calc(100%-32px))] gap-9 lg:grid-cols-[0.58fr_1.42fr] lg:items-start">
         <div className="lg:sticky lg:top-32">
-          <p className="mb-4 text-[var(--text-eyebrow)] font-semibold uppercase tracking-[0.16em] [color:#cb6ce6]">
+          <p className="mb-4 text-[var(--text-eyebrow)] font-semibold uppercase tracking-[0.16em]" style={{ color: '#ffffff' }}>
             04 - Live follow-up desk
           </p>
           <h2 className="font-[family-name:var(--font-display)] text-[clamp(2.5rem,4.6vw,4.7rem)] font-semibold leading-[0.99] text-white">
