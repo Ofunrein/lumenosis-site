@@ -26,11 +26,10 @@ export function Topbar() {
   ];
 
   React.useEffect(() => {
-    document.body.style.overflow = open ? "hidden" : "";
     return () => {
       document.body.style.overflow = "";
     };
-  }, [open]);
+  }, []);
 
   const toggleTheme = () => setTheme(resolvedTheme === "dark" ? "light" : "dark");
 
@@ -126,29 +125,51 @@ export function Topbar() {
       </nav>
 
       {open && (
-        <div className="fixed inset-0 top-16 bg-[var(--color-bg-cream)] z-40 flex flex-col p-6 gap-3 md:hidden pointer-events-auto">
-          {links.map((link) => (
-            <a
-              key={link.label}
-              href={link.href}
-              onClick={() => setOpen(false)}
-              className="px-4 py-3 text-lg text-[var(--color-ink-charcoal)] rounded-xl hover:bg-[var(--color-brand-violet-soft)] transition-colors"
-            >
-              {link.label}
-            </a>
-          ))}
-          <div className="mt-auto">
-            <SpotlightButtonWrapper className="w-full">
+          <div className="absolute top-full left-0 right-0 mt-3 rounded-2xl overflow-hidden border border-[var(--color-line)] dark:border-white/10 bg-[var(--color-bg-cream)]/95 dark:bg-[#161616]/95 backdrop-blur-xl shadow-xl z-50 p-3 flex flex-col gap-1 md:hidden pointer-events-auto">
+            {links.map((link) => (
+              <a
+                key={link.label}
+                href={link.href}
+                onClick={() => setOpen(false)}
+                className="px-4 py-3 text-base text-[var(--color-ink-charcoal)] dark:text-white rounded-xl hover:bg-[var(--color-brand-violet-soft)] transition-colors"
+              >
+                {link.label}
+              </a>
+            ))}
+            <div className="h-px bg-[var(--color-line)] dark:bg-white/10 my-1" />
+            <div className="flex items-center justify-between px-4 py-2">
+              <span className="text-sm text-[var(--color-muted)] dark:text-white/60">Appearance</span>
+              {mounted && (
+                <button
+                  type="button"
+                  onClick={toggleTheme}
+                  className="grid size-8 place-items-center rounded-full border border-[var(--color-line)] dark:border-white/10 text-[var(--color-muted)] dark:text-white/70 hover:text-[var(--color-brand-violet)] transition-colors"
+                  aria-label="Toggle dark/light mode"
+                >
+                  {resolvedTheme === "dark" ? (
+                    <svg viewBox="0 0 24 24" className="size-3.5 fill-current" aria-hidden>
+                      <title>Dark mode icon</title>
+                      <path d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.389 5.389 0 0 1-4.4 2.26 5.403 5.403 0 0 1-3.14-9.8c-.44-.06-.9-.1-1.36-.1z" />
+                    </svg>
+                  ) : (
+                    <svg viewBox="0 0 24 24" className="size-3.5 fill-current" aria-hidden>
+                      <title>Light mode icon</title>
+                      <path d="M12 7a5 5 0 1 0 0 10A5 5 0 0 0 12 7zm0-5a1 1 0 0 1 1 1v1a1 1 0 0 1-2 0V3a1 1 0 0 1 1-1zm0 18a1 1 0 0 1 1 1v1a1 1 0 0 1-2 0v-1a1 1 0 0 1 1-1zm9-9h-1a1 1 0 0 1 0-2h1a1 1 0 0 1 0 2zM3 12H2a1 1 0 0 1 0-2h1a1 1 0 0 1 0 2zm15.66-6.24-.7-.7a1 1 0 0 0-1.42 1.42l.7.7a1 1 0 0 0 1.42-1.42zm-12.02 12.02-.7-.7a1 1 0 0 0-1.42 1.42l.7.7a1 1 0 0 0 1.42-1.42zm12.02 0a1 1 0 0 0-1.42 0l-.7.7a1 1 0 0 0 1.42 1.42l.7-.7a1 1 0 0 0 0-1.42zm-12.02-12.02a1 1 0 0 0 0 1.42l-.7.7a1 1 0 1 0 1.42-1.42l-.7-.7a1 1 0 0 0-1.42 0z" />
+                    </svg>
+                  )}
+                </button>
+              )}
+            </div>
+            <SpotlightButtonWrapper>
               <StarButton
                 lightColor="#cb6ce6"
-                className="w-full bg-[var(--color-brand-violet)] text-white h-12 text-base justify-center"
+                className="w-full bg-[var(--color-brand-violet)] text-white h-11 text-sm justify-center !text-white"
               >
-                <a href="#book">Book a Demo</a>
+                <a href="#book" onClick={() => setOpen(false)}>Book a Demo</a>
               </StarButton>
             </SpotlightButtonWrapper>
           </div>
-        </div>
-      )}
+        )}
     </header>
   );
 }

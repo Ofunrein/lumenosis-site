@@ -60,7 +60,7 @@ export function TwoWaysIn() {
 
         <div className="grid items-stretch gap-6 md:grid-cols-2 lg:gap-8">
           {paths.map((path) => (
-            <div key={path.path} className="relative">
+            <div key={path.path} className={`relative ${path.popular ? "pt-5 md:pt-0" : ""}`}>
               {path.popular && (
                 <span className="absolute top-0 right-6 -translate-y-1/2 z-20 rounded-full bg-[var(--color-gold-italic)] px-3 py-1.5 text-[10px] font-bold uppercase tracking-widest whitespace-nowrap shadow-sm text-black">
                   MOST POPULAR
