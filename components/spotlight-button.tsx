@@ -51,7 +51,7 @@ export function SpotlightButtonWrapper({
   position: absolute;
   inset: -1px;
   border: 1px solid transparent;
-  border-radius: inherit;
+  border-radius: 9999px;
   background-attachment: fixed;
   background-size: calc(100% + 2px) calc(100% + 2px);
   background-repeat: no-repeat;
