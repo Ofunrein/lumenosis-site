@@ -469,7 +469,7 @@ function AriaPhoneDemo() {
   const [callComplete, setCallComplete] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
-  const [bars, setBars] = useState<number[]>(Array.from({ length: 40 }, (_, i) => 8 + Math.abs(Math.sin(i * 0.4) * 25 + Math.sin(i * 0.8) * 15)));
+  const [bars, setBars] = useState<number[]>(Array.from({ length: 40 }, (_, i) => 14 + Math.abs(Math.sin(i * 0.38) * 22 + Math.sin(i * 0.85) * 14)));
 
   // Connect Web Audio API when first play
   const setupAudio = () => {
@@ -489,31 +489,24 @@ function AriaPhoneDemo() {
   };
 
   const animateBars = () => {
-    const analyser = analyserRef.current;
-    if (!analyser) return;
+    const t = Date.now();
 
-    const dataArray = new Uint8Array(analyser.frequencyBinCount);
-    analyser.getByteFrequencyData(dataArray);
+    // Get real audio energy if available, but floor it so bars always move when playing
+    let energy = 0.45;
+    if (analyserRef.current) {
+      const dataArray = new Uint8Array(analyserRef.current.frequencyBinCount);
+      analyserRef.current.getByteFrequencyData(dataArray);
+      const raw = Array.from(dataArray.slice(0, 32)).reduce((s, v) => s + v, 0) / (32 * 255);
+      energy = Math.max(0.35, raw * 2.5); // ensure minimum visible movement
+    }
 
-    // Get overall energy level from low-mid frequencies (where voice lives)
-    const energy = dataArray.slice(0, 20).reduce((sum, v) => sum + v, 0) / (20 * 255);
-
-    // Generate bars that span full width using energy + procedural pattern
     const newBars = Array.from({ length: 40 }, (_, i) => {
-      // Phase-based procedural heights driven by real audio energy
-      const phase1 = Math.sin(i * 0.35 + Date.now() * 0.003) * 0.5 + 0.5;
-      const phase2 = Math.sin(i * 0.7 + Date.now() * 0.005) * 0.3 + 0.3;
-      const phase3 = Math.sin(i * 1.1 + Date.now() * 0.002) * 0.2 + 0.2;
-
-      // Combine phases weighted by energy level
-      const combined = (phase1 * 0.5 + phase2 * 0.3 + phase3 * 0.2) * energy * 2.2;
-
-      // Add actual frequency data contribution (logarithmic)
-      const binIndex = Math.min(63, Math.floor(Math.pow(i / 39, 0.5) * 50));
-      const freqVal = (dataArray[binIndex] ?? 0) / 255;
-
-      const height = Math.max(8, Math.min(95, (combined * 60) + (freqVal * 30)));
-      return height;
+      // Multiple phase oscillators for organic movement across full width
+      const p1 = Math.sin(t * 0.002 + i * 0.28) * 0.5 + 0.5;
+      const p2 = Math.sin(t * 0.0035 + i * 0.55) * 0.5 + 0.5;
+      const p3 = Math.sin(t * 0.0015 + i * 0.18) * 0.5 + 0.5;
+      const combined = p1 * 0.5 + p2 * 0.3 + p3 * 0.2;
+      return Math.max(8, Math.min(95, combined * energy * 90 + 6));
     });
 
     setBars(newBars);
@@ -535,6 +528,7 @@ function AriaPhoneDemo() {
     if (playing) {
       audio.pause();
       cancelAnimationFrame(rafRef.current);
+      setBars(Array.from({ length: 40 }, (_, i) => 14 + Math.abs(Math.sin(i * 0.38) * 22 + Math.sin(i * 0.85) * 14)));
       setPlaying(false);
     } else {
       await audio.play();
@@ -553,7 +547,7 @@ function AriaPhoneDemo() {
       setCallComplete(true);
       cancelAnimationFrame(rafRef.current);
       // Reset bars to static idle waveform
-      setBars(Array.from({ length: 40 }, (_, i) => 8 + Math.abs(Math.sin(i * 0.4) * 25 + Math.sin(i * 0.8) * 15)));
+      setBars(Array.from({ length: 40 }, (_, i) => 14 + Math.abs(Math.sin(i * 0.38) * 22 + Math.sin(i * 0.85) * 14)));
     };
     audio.addEventListener("timeupdate", onTime);
     audio.addEventListener("loadedmetadata", onLoad);
