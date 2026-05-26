@@ -946,7 +946,7 @@ export function AriaDeepDive() {
               <GlowCard
                 glowColor="purple"
                 customSize
-                className="flex min-h-[608px] items-center justify-center border border-white/10 [--backdrop:#130d1b]"
+                className="flex min-h-[620px] items-center justify-center border border-white/10 [--backdrop:#130d1b]"
               >
                 <AriaPhoneDemo />
               </GlowCard>
