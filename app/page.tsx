@@ -21,7 +21,7 @@ export default function Page() {
     <>
       <AuroraBackground />
       <Topbar />
-      <main>
+      <main className="pt-20">
         <Hero />
         <TrustStrip />
         <FounderVSL />
