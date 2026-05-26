@@ -47,8 +47,8 @@ export function Topbar() {
           open
             ? "h-16 w-full rounded-none px-4"
             : scrolled
-              ? "h-14 w-[min(1010px,calc(100%-12px))] rounded-full border border-[var(--color-line)] bg-[var(--color-bg-cream)]/88 px-4 shadow-[var(--shadow-soft)] backdrop-blur-xl md:h-20 md:px-8 dark:bg-black/70"
-              : "h-16 w-full rounded-none border-b border-[var(--color-line)] bg-[var(--color-bg-cream)]/86 px-4 shadow-none backdrop-blur-xl md:h-20 md:px-10 dark:bg-black/70",
+              ? "h-14 w-[min(800px,calc(100%-12px))] rounded-full border border-[var(--color-line)] bg-[var(--color-bg-cream)]/60 px-4 shadow-[var(--shadow-soft)] backdrop-blur-lg md:h-20 md:px-8 dark:bg-black/60"
+              : "h-16 w-[min(1100px,calc(100%-32px))] mx-auto rounded-none border-b border-[var(--color-line)] bg-[var(--color-bg-cream)]/86 px-4 shadow-none backdrop-blur-xl md:h-20 md:px-10 dark:bg-black/70",
         )}
       >
         <a

@@ -56,7 +56,7 @@ export function TrustStrip() {
                   <span
                     aria-label={logo.label}
                     role="img"
-                    className="block h-8 w-36 bg-[var(--color-ink-charcoal)]"
+                    className="block h-8 w-36 bg-[var(--color-ink-charcoal)] dark:bg-white"
                     style={{
                       WebkitMask: `url(${logo.src}) center / contain no-repeat`,
                       mask: `url(${logo.src}) center / contain no-repeat`,

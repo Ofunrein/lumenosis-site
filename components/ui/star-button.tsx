@@ -100,9 +100,7 @@ export function StarButton({
         className="absolute inset-0 z-[4] overflow-hidden rounded-[inherit] border-black/10 dark:border-white/15"
         style={{ borderWidth: "var(--border-width)" }}
         aria-hidden="true"
-      >
-        <StarBackground color={backgroundColor} />
-      </div>
+      />
       <span className="z-10 relative dark:text-white text-[var(--color-ink-charcoal)]">
         {children}
       </span>

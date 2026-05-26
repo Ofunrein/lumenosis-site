@@ -555,25 +555,64 @@ function AriaPhoneDemo() {
   );
 }
 
+type ChatStep =
+  | { type: "message"; index: number }
+  | { type: "typing" };
+
+// Timeline: each entry has the step to show and when (ms from start)
+const theoTimeline: Array<{ step: ChatStep; showAt: number }> = [
+  { step: { type: "message", index: 0 }, showAt: 0 },      // lead msg
+  { step: { type: "typing" }, showAt: 1200 },               // Theo typing
+  { step: { type: "message", index: 1 }, showAt: 2600 },    // Theo reply (hides typing)
+  { step: { type: "message", index: 2 }, showAt: 4400 },    // lead msg
+  { step: { type: "typing" }, showAt: 5200 },               // Theo typing
+  { step: { type: "message", index: 3 }, showAt: 6400 },    // Theo reply
+  { step: { type: "message", index: 4 }, showAt: 8200 },    // lead msg
+  { step: { type: "typing" }, showAt: 8900 },               // Theo typing
+  { step: { type: "message", index: 5 }, showAt: 10000 },   // Theo reply
+];
+const LOOP_DURATION = 13000;
+
 function TheoSmsDemo() {
-  const shown = useRevealedCount(theoThread.length, 10000);
-  const visible = theoThread.slice(0, shown);
-  const latest = visible[visible.length - 1];
+  const [elapsed, setElapsed] = useState(0);
   const transcriptRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const start = Date.now();
+    const id = window.setInterval(() => {
+      setElapsed((Date.now() - start) % LOOP_DURATION);
+    }, 80);
+    return () => window.clearInterval(id);
+  }, []);
+
+  // Determine which steps are currently visible
+  const activeSteps = theoTimeline.filter((entry) => entry.showAt <= elapsed);
+  const lastActive = activeSteps[activeSteps.length - 1];
+  const showTyping = lastActive?.step.type === "typing";
+
+  // Collect message indices to show
+  const visibleIndices = activeSteps
+    .filter((e) => e.step.type === "message")
+    .map((e) => (e.step as { type: "message"; index: number }).index);
+
+  const visibleLines = visibleIndices.map((i) => theoThread[i]).filter(Boolean);
+  const latestMsgIndex = visibleIndices[visibleIndices.length - 1];
+  const latest = latestMsgIndex !== undefined ? theoThread[latestMsgIndex] : undefined;
+
   const status =
-    shown >= theoThread.length
+    visibleIndices.includes(5)
       ? "Tour held - Thu 4:15 PM"
-      : shown >= 4
+      : visibleIndices.includes(3)
         ? "Confirming time"
-        : shown >= 2
+        : visibleIndices.includes(1)
           ? "Texting lead"
           : "New portal lead";
 
   useEffect(() => {
-    if (shown && transcriptRef.current) {
+    if (transcriptRef.current) {
       transcriptRef.current.scrollTop = transcriptRef.current.scrollHeight;
     }
-  }, [shown]);
+  }, [elapsed]);
 
   return (
     <div className="mx-auto w-full max-w-[360px] rounded-[38px] border border-[#3f3350] bg-[#07060a] p-2.5 shadow-[0_34px_120px_rgba(0,0,0,0.44)]">
@@ -598,7 +637,7 @@ function TheoSmsDemo() {
           ref={transcriptRef}
           className="flex min-h-0 flex-1 flex-col gap-3 overflow-y-auto pr-1 [scrollbar-color:#cb6ce6_#120d19] [scrollbar-width:thin]"
         >
-          {visible.map((line) => {
+          {visibleLines.map((line) => {
             const isTheo = line.from === "agent";
             const isLatest = latest?.id === line.id;
 
@@ -617,7 +656,7 @@ function TheoSmsDemo() {
               </div>
             );
           })}
-          {shown < theoThread.length ? <TypingDots align="right" /> : null}
+          {showTyping ? <TypingDots align="right" /> : null}
         </div>
       </div>
     </div>

@@ -29,9 +29,6 @@ export function Hero() {
     >
       <div className="relative z-10 mx-auto grid w-[min(1200px,calc(100%-32px))] items-start gap-10 md:grid-cols-[1.05fr_0.95fr] md:gap-12">
         <div>
-          <p className="mb-3 text-[var(--text-eyebrow)] font-semibold uppercase tracking-[0.14em] text-[var(--color-brand-purple)]">
-            5.0 from 50+ verified real estate professionals
-          </p>
           <h1 className="font-[family-name:var(--font-display)] text-[length:var(--text-display-hero)] font-semibold leading-[1.04] tracking-tight text-[var(--color-ink-charcoal)]">
             AI agents for your{" "}
             <span
@@ -72,15 +69,6 @@ export function Hero() {
                 className="bg-[var(--color-brand-purple)] text-white px-6 h-12 text-base [&_span]:text-white"
               >
                 <a href="#book">Book a Demo</a>
-              </StarButton>
-            </Magnet>
-            <Magnet padding={60} magnetStrength={5}>
-              <StarButton
-                lightColor="#e8c47a"
-                backgroundColor="transparent"
-                className="h-11 border border-[var(--color-line)] bg-[#fbf8ef] px-5 text-sm text-[var(--color-ink-charcoal)] hover:bg-[var(--color-brand-violet-soft)] dark:bg-[#14101c] [&_span]:text-[var(--color-ink-charcoal)] dark:[&_span]:text-white"
-              >
-                <a href="#vsl">Watch 90s overview</a>
               </StarButton>
             </Magnet>
           </div>
