@@ -7,7 +7,13 @@ export function StickyCtaBar() {
   const [show, setShow] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setShow(window.scrollY > window.innerHeight * 0.9);
+    const onScroll = () => {
+      const scrollY = window.scrollY;
+      const totalHeight = document.body.scrollHeight - window.innerHeight;
+      const pastHero = scrollY > window.innerHeight * 0.9;
+      const nearBottom = scrollY > totalHeight - 900;
+      setShow(pastHero && !nearBottom);
+    };
     window.addEventListener("scroll", onScroll, { passive: true });
     onScroll();
     return () => window.removeEventListener("scroll", onScroll);
