@@ -30,7 +30,7 @@ export function Hero() {
       className="relative border-b border-[var(--color-line)] bg-[var(--color-bg-cream)] dark:bg-transparent pt-20 md:pt-0"
     >
       {/* Two-column: text left, image right — image fills full column height */}
-      <div className="mx-auto grid w-[min(1400px,100%)] md:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] md:min-h-[520px] lg:min-h-[600px] md:items-stretch">
+      <div className="mx-auto grid w-[min(1400px,100%)] md:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] md:min-h-[580px] lg:min-h-[660px] md:items-stretch">
 
         {/* Text column */}
         <div className="flex flex-col justify-center px-6 py-16 sm:px-10 md:pl-[max(32px,calc((100vw-1400px)/2+40px))] md:pr-14 lg:pl-[max(48px,calc((100vw-1400px)/2+60px))] text-center md:text-left">
@@ -81,9 +81,9 @@ export function Hero() {
           </div>
         </div>
 
-        {/* Image column — full height, no aspect ratio cap */}
-        <div className="relative aspect-[4/5] md:aspect-auto md:h-auto md:min-h-full">
-          <div className="absolute inset-0 overflow-hidden md:rounded-none rounded-2xl bg-[var(--color-brand-charcoal)]">
+        {/* Image column */}
+        <div className="relative aspect-[4/5] md:aspect-auto md:h-auto md:min-h-full md:py-8 md:pr-8">
+          <div className="absolute inset-0 md:inset-y-8 md:inset-x-0 md:right-8 overflow-hidden rounded-2xl md:rounded-3xl bg-[var(--color-brand-charcoal)]">
             <Image
               src="/images/product-card-mockup.png"
               alt="Lumenosis AI — AI agents for real estate teams"
@@ -101,13 +101,13 @@ export function Hero() {
             label="Avg lead response"
             value="60 seconds"
             icon={<Clock className="size-4" />}
-            className="absolute left-6 top-10 md:-left-4 md:top-16 z-10"
+            className="absolute left-6 top-10 md:-left-5 md:top-20 z-10"
           />
           <GlassStatCallout
             label="Always-on coverage"
             value="24 / 7"
             icon={<ShieldCheck className="size-4" />}
-            className="absolute left-6 bottom-10 md:-left-4 md:bottom-16 z-10"
+            className="absolute left-6 bottom-10 md:-left-5 md:bottom-20 z-10"
           />
         </div>
       </div>
