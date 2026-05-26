@@ -50,7 +50,7 @@ const emailThread: EmailMessage[] = [
     id: "email-2",
     from: "iris",
     name: "Iris",
-    email: "assistant@lumenosis.ai",
+    email: "assistant@lumenosis.com",
     time: "9:13 AM",
     label: "Listing details matched",
     listing: true,
@@ -68,7 +68,7 @@ const emailThread: EmailMessage[] = [
     id: "email-4",
     from: "iris",
     name: "Iris",
-    email: "assistant@lumenosis.ai",
+    email: "assistant@lumenosis.com",
     time: "9:17 AM",
     label: "Tour booked, valuation opened",
     valuation: true,
@@ -290,10 +290,29 @@ function ValuationLinkCard() {
 function IrisEmailDemo() {
   const shown = useRevealedCount(emailThread.length, 11500);
   const scrollRef = useRef<HTMLDivElement>(null);
+  const userScrolledRef = useRef(false);
+  const scrollTimeoutRef = useRef<ReturnType<typeof setTimeout>>(undefined);
   const visibleMessages = emailThread.slice(0, shown);
   const latestMessage = visibleMessages[visibleMessages.length - 1];
 
-  useAutoScroll(scrollRef, shown);
+  const handleScroll = () => {
+    const el = scrollRef.current;
+    if (!el) return;
+    const isAtBottom = el.scrollTop + el.clientHeight >= el.scrollHeight - 10;
+    if (!isAtBottom) {
+      userScrolledRef.current = true;
+      clearTimeout(scrollTimeoutRef.current);
+      scrollTimeoutRef.current = setTimeout(() => {
+        userScrolledRef.current = false;
+      }, 3000);
+    }
+  };
+
+  useEffect(() => {
+    if (!userScrolledRef.current && scrollRef.current) {
+      scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+    }
+  }, [shown]);
 
   return (
     <GlowCard glowColor="purple" customSize className="overflow-hidden p-0 [--backdrop:#130d1b]">
@@ -321,7 +340,9 @@ function IrisEmailDemo() {
 
             <div
               ref={scrollRef}
-              className="mt-3 flex min-h-0 flex-1 flex-col gap-3 overflow-y-auto pr-2 [scrollbar-color:#cb6ce6_#130d1b] [scrollbar-width:thin]"
+              onScroll={handleScroll}
+              className="mt-3 flex h-[320px] flex-col gap-3 overflow-y-auto pr-2"
+              style={{ scrollbarWidth: "none" }}
             >
               {visibleMessages.map((message) => {
                 const isLatest = latestMessage?.id === message.id;
@@ -645,6 +666,15 @@ const theoTimeline: Array<{ step: ChatStep; showAt: number }> = [
 ];
 const LOOP_DURATION = 19500;
 
+const getTheoStatus = (lastVisibleIndex: number | undefined) => {
+  if (lastVisibleIndex === undefined || lastVisibleIndex === 0)
+    return { dot: "amber", text: "Qualifying lead" };
+  if (lastVisibleIndex <= 2) return { dot: "amber", text: "Checking availability" };
+  if (lastVisibleIndex <= 4) return { dot: "amber", text: "Scheduling showing" };
+  // index 5 = final Theo reply "Done! Booked..."
+  return { dot: "green", text: "Appointment booked", check: true };
+};
+
 function TheoSmsDemo() {
   const [elapsed, setElapsed] = useState(0);
   const transcriptRef = useRef<HTMLDivElement>(null);
@@ -671,14 +701,7 @@ function TheoSmsDemo() {
   const latestMsgIndex = visibleIndices[visibleIndices.length - 1];
   const latest = latestMsgIndex !== undefined ? theoThread[latestMsgIndex] : undefined;
 
-  const status =
-    visibleIndices.includes(5)
-      ? "Tour held - Thu 4:15 PM"
-      : visibleIndices.includes(3)
-        ? "Confirming time"
-        : visibleIndices.includes(1)
-          ? "Texting lead"
-          : "New portal lead";
+  const status = getTheoStatus(latestMsgIndex);
 
   useEffect(() => {
     if (transcriptRef.current) {
@@ -697,9 +720,17 @@ function TheoSmsDemo() {
           <p className="mt-2 font-[family-name:var(--font-display)] text-2xl font-semibold text-white">
             Theo AI
           </p>
-          <div className="mt-2 inline-flex items-center gap-2 rounded-full border border-[var(--color-gold-italic)]/45 bg-[#241d16] px-4 py-1.5 text-xs font-semibold text-white">
-            <span className="size-2 rounded-full bg-[var(--color-gold-italic)]" />
-            Lumenosis SMS Agent
+          <div className={`mt-2 inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-xs font-semibold transition-all duration-500 ${
+            status.dot === "green"
+              ? "border-emerald-500/30 bg-emerald-500/10 text-emerald-400"
+              : "border-[var(--color-gold-italic)]/45 bg-[#241d16] text-white"
+          }`}>
+            {status.check ? (
+              <svg viewBox="0 0 16 16" className="size-3 fill-current text-emerald-400"><path d="M13.5 3.5L6 11 2.5 7.5 1 9l5 5 9-9z"/></svg>
+            ) : (
+              <span className="size-2 rounded-full bg-amber-400 animate-pulse" />
+            )}
+            {status.text}
           </div>
         </div>
 

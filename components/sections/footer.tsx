@@ -35,7 +35,7 @@ export function Footer() {
             Book a call
           </a>
           <a
-            href="mailto:hello@lumenosis.ai"
+            href="mailto:hello@lumenosis.com"
             className="transition-colors hover:text-[var(--color-ink-charcoal)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-brand-purple)] focus-visible:ring-offset-2"
           >
             Email
