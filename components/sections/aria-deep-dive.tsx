@@ -710,19 +710,19 @@ export function AriaDeepDive() {
         </div>
 
         {/* Bento grid: TOP=email full-width, BOTTOM=phone left + call right */}
-        <div className="flex flex-col gap-5">
+        <div className="flex flex-col gap-6">
 
           {/* TOP: Email card — full width */}
-          <div className="w-full">
+          <div className="w-full min-h-[420px]">
             <IrisEmailDemo />
           </div>
 
           {/* BOTTOM: Phone left + Call right — equal halves */}
-          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
-            <GlowCard glowColor="purple" customSize className="min-h-[480px] flex items-center justify-center">
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+            <GlowCard glowColor="purple" customSize className="min-h-[560px] flex items-center justify-center">
               <TheoSmsDemo />
             </GlowCard>
-            <GlowCard glowColor="purple" customSize className="min-h-[480px] flex items-center justify-center">
+            <GlowCard glowColor="purple" customSize className="min-h-[560px] flex items-center justify-center">
               <AriaPhoneDemo />
             </GlowCard>
           </div>
