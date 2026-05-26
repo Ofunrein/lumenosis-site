@@ -709,27 +709,22 @@ export function AriaDeepDive() {
           </div>
         </div>
 
-        {/* Bento grid: LEFT=phone, RIGHT=email+call stacked */}
-        <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
+        {/* Bento grid: TOP=email full-width, BOTTOM=phone left + call right */}
+        <div className="flex flex-col gap-5">
 
-          {/* LEFT: Theo SMS Phone — big, spans full height */}
-          <div className="flex h-full min-h-[600px] items-center justify-center">
-            <TheoSmsDemo />
+          {/* TOP: Email card — full width */}
+          <div className="w-full">
+            <IrisEmailDemo />
           </div>
 
-          {/* RIGHT: Email + Call Recording stacked */}
-          <div className="flex flex-col gap-5">
-
-            {/* Email card — shorter, internal scroll */}
-            <div className="max-h-[360px] overflow-hidden">
-              <IrisEmailDemo />
+          {/* BOTTOM: Phone left + Call right — equal halves */}
+          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+            <div className="flex min-h-[360px] items-center justify-center">
+              <TheoSmsDemo />
             </div>
-
-            {/* Call recording card */}
-            <div className="flex-1">
+            <div className="flex min-h-[360px] items-center justify-center">
               <AriaPhoneDemo />
             </div>
-
           </div>
 
         </div>
