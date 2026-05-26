@@ -516,7 +516,7 @@ function AriaPhoneDemo() {
           </button>
           <div>
             <p className="text-sm font-semibold text-white">Oak Ridge inbound call</p>
-            <p className="text-xs text-white/50">Availability, tour time, valuation handoff.</p>
+            <p className="text-xs text-white/90">Availability, tour time, valuation handoff.</p>
           </div>
         </div>
 
@@ -567,7 +567,7 @@ function AriaPhoneDemo() {
       {/* Feature bullets */}
       <div className="grid gap-2">
         {["Property details provided", "Questions answered", "Viewing booked automatically"].map((f) => (
-          <div key={f} className="flex items-center gap-2 text-sm text-white/60">
+          <div key={f} className="flex items-center gap-2 text-sm text-white/90">
             <span className="size-4 grid place-items-center rounded-full bg-[var(--color-brand-violet)]/15 text-[var(--color-brand-violet)] text-xs">✓</span>
             {f}
           </div>
