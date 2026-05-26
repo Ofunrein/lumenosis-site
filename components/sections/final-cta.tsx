@@ -5,7 +5,7 @@ import { SpotlightButtonWrapper } from "@/components/spotlight-button";
 
 export function FinalCTA() {
   return (
-    <section className="border-b border-[var(--color-line)] bg-[#f5f2e9] py-24 text-center dark:bg-[rgb(16_12_23_/_0.72)] md:py-32">
+    <section className="border-b border-[var(--color-line)] bg-[#f5f2e9] py-24 text-center dark:bg-transparent md:py-32">
       <div className="mx-auto w-[min(900px,calc(100%-32px))]">
         <h2 className="font-[family-name:var(--font-display)] text-[length:var(--text-display-section)] font-semibold leading-[1.05] text-[var(--color-ink-charcoal)]">
           Have a thirty-minute conversation that&rsquo;s{" "}

@@ -46,7 +46,7 @@ const paths = [
 
 export function TwoWaysIn() {
   return (
-    <section className="border-b border-[var(--color-line)] bg-[#f8f6ef] py-16 dark:bg-[rgb(13_10_18_/_0.72)] md:py-24">
+    <section className="border-b border-[var(--color-line)] bg-[#f8f6ef] py-16 dark:bg-transparent md:py-24">
       <div className="mx-auto w-[min(1200px,calc(100%-32px))]">
         <div className="mb-12 md:mb-16">
           <p className="mb-3 text-[var(--text-eyebrow)] font-semibold uppercase tracking-[0.16em] text-[var(--color-brand-violet)] dark:text-white">
