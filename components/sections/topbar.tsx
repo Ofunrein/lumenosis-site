@@ -62,9 +62,9 @@ export function Topbar() {
             alt="Lumenosis AI"
             width={34}
             height={34}
-            className="rounded-lg"
+            className="rounded-lg md:w-[34px] md:h-[34px] w-[40px] h-[40px]"
           />
-          <span className="font-semibold text-[17px] text-[var(--color-ink-charcoal)]">
+          <span className="font-semibold text-[19px] md:text-[17px] text-[var(--color-ink-charcoal)]">
             Lumenosis <span className="text-[var(--color-brand-violet)]">AI</span>
           </span>
         </a>

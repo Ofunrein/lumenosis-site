@@ -1,19 +1,30 @@
+import type { ReactNode } from "react";
+
 export function GlassStatCallout({
   label,
   value,
+  icon,
   className,
 }: {
   label: string;
   value: string;
+  icon?: ReactNode;
   className?: string;
 }) {
   return (
     <div
-      className={`pointer-events-none rounded-xl border border-[var(--color-line)] bg-[var(--color-bg-cream)]/90 px-4 py-3 text-[var(--color-ink-charcoal)] shadow-[var(--shadow-soft)] backdrop-blur-md dark:bg-black/70 ${className ?? ""}`}
+      className={`pointer-events-none flex items-center gap-3 rounded-xl border border-[var(--color-line)] bg-[var(--color-bg-cream)]/92 px-4 py-3 text-[var(--color-ink-charcoal)] shadow-[var(--shadow-soft)] backdrop-blur-md dark:bg-black/75 dark:border-white/10 ${className ?? ""}`}
     >
-      <div className="text-[15px] font-semibold leading-tight">{value}</div>
-      <div className="mt-1 text-[11px] uppercase tracking-wider text-[var(--color-muted)]">
-        {label}
+      {icon && (
+        <div className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-[var(--color-brand-violet-soft)] text-[var(--color-brand-violet)] dark:bg-white/10 dark:text-white/80">
+          {icon}
+        </div>
+      )}
+      <div>
+        <div className="text-[15px] font-semibold leading-tight">{value}</div>
+        <div className="mt-0.5 text-[10px] uppercase tracking-widest text-[var(--color-muted)] dark:text-white/50">
+          {label}
+        </div>
       </div>
     </div>
   );

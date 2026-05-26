@@ -2,6 +2,7 @@
 import { motion, useReducedMotion } from "framer-motion";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import { Clock, TrendingUp, ShieldCheck } from "lucide-react";
 import { GlassStatCallout } from "@/components/glass-stat-callout";
 import Magnet from "@/components/magnet";
 import { StarButton } from "@/components/ui/star-button";
@@ -28,7 +29,7 @@ export function Hero() {
       id="top"
       className="relative overflow-hidden border-b border-[var(--color-line)] bg-[var(--color-bg-cream)] dark:bg-transparent pb-16 pt-20 md:pt-28"
     >
-      <div className="relative z-10 mx-auto grid w-[min(1200px,calc(100%-32px))] items-start gap-10 md:grid-cols-[1fr_1.05fr] lg:grid-cols-[0.85fr_1.15fr] md:gap-12">
+      <div className="relative z-10 mx-auto grid w-[min(1200px,calc(100%-32px))] items-start gap-10 md:grid-cols-[1fr_1.05fr] lg:grid-cols-[0.85fr_1.15fr] xl:grid-cols-[0.78fr_1.22fr] md:gap-12">
         <div>
           <h1 className="font-[family-name:var(--font-display)] text-[length:var(--text-display-hero)] font-semibold leading-[1.04] tracking-tight text-[var(--color-ink-charcoal)]">
             AI agents for your{" "}
@@ -77,30 +78,33 @@ export function Hero() {
           </div>
         </div>
 
-        <div className="relative aspect-[4/5] w-full max-w-[460px] justify-self-center md:max-w-none lg:aspect-[3/4]">
+        <div className="relative aspect-[4/5] w-full max-w-[460px] justify-self-center md:max-w-none lg:aspect-[4/5] xl:aspect-[3/4]">
           <div className="relative h-full w-full overflow-hidden rounded-2xl bg-[var(--color-brand-charcoal)] border border-[var(--color-line)]">
             <Image
               src="/images/product-card-mockup.png"
               alt="Lumenosis AI dashboard with CRM, iMessage thread, and booked appointment"
               fill
               priority
-              sizes="(max-width: 768px) 100vw, (max-width: 1024px) 52vw, 58vw"
+              sizes="(max-width: 768px) 100vw, (max-width: 1024px) 52vw, 62vw"
               className="object-cover opacity-80"
             />
           </div>
           <GlassStatCallout
-            label="Avg response"
+            label="Avg lead response"
             value="60 seconds"
+            icon={<Clock className="size-4" />}
             className="absolute -left-3 top-8 md:-left-6"
           />
           <GlassStatCallout
-            label="More bookings"
+            label="More booked showings"
             value="+300%"
+            icon={<TrendingUp className="size-4" />}
             className="absolute -right-3 top-1/2 hidden md:-right-8 md:block"
           />
           <GlassStatCallout
-            label="Coverage"
+            label="Always-on coverage"
             value="24 / 7"
+            icon={<ShieldCheck className="size-4" />}
             className="absolute -bottom-4 left-12 md:-bottom-6"
           />
         </div>
