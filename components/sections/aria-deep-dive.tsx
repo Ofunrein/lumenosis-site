@@ -348,7 +348,7 @@ function IrisEmailDemo() {
 
   return (
     <GlowCard glowColor="purple" customSize className="overflow-hidden p-0 [--backdrop:#130d1b]">
-      <div className="grid h-[680px] min-h-0 lg:h-[620px] lg:grid-cols-[1.25fr_0.75fr]">
+      <div className="grid h-[340px] min-h-0 lg:h-[320px] lg:grid-cols-[1.25fr_0.75fr]">
         <div className="flex min-h-0 flex-col border-b border-[var(--color-line)] p-4 sm:p-5 lg:border-b-0 lg:border-r">
           <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[var(--color-line)] pb-4">
             <SectionBadge icon={Mail} title="Iris email desk" subtitle="Live buyer inquiry" />
@@ -709,12 +709,29 @@ export function AriaDeepDive() {
           </div>
         </div>
 
-        <div className="grid gap-5">
-          <IrisEmailDemo />
-          <div className="grid items-start gap-5 xl:grid-cols-2">
+        {/* Bento grid: LEFT=phone, RIGHT=email+call stacked */}
+        <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
+
+          {/* LEFT: Theo SMS Phone — big, spans full height */}
+          <div className="flex h-full min-h-[600px] items-center justify-center">
             <TheoSmsDemo />
-            <AriaPhoneDemo />
           </div>
+
+          {/* RIGHT: Email + Call Recording stacked */}
+          <div className="flex flex-col gap-5">
+
+            {/* Email card — shorter, internal scroll */}
+            <div className="max-h-[360px] overflow-hidden">
+              <IrisEmailDemo />
+            </div>
+
+            {/* Call recording card */}
+            <div className="flex-1">
+              <AriaPhoneDemo />
+            </div>
+
+          </div>
+
         </div>
       </div>
     </section>
