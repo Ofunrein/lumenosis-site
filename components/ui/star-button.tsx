@@ -101,7 +101,7 @@ export function StarButton({
         style={{ borderWidth: "var(--border-width)" }}
         aria-hidden="true"
       />
-      <span className="z-10 relative dark:text-white text-[var(--color-ink-charcoal)]">
+      <span className="z-10 relative text-white">
         {children}
       </span>
     </button>

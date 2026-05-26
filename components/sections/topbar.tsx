@@ -92,7 +92,7 @@ export function Topbar() {
           )}
           <StarButton
             lightColor="#cb6ce6"
-            className="bg-[var(--color-brand-violet)] text-white px-4 h-9 text-sm"
+            className="bg-[var(--color-brand-violet)] text-white px-4 h-9 text-sm !text-white"
           >
             <a href="#book">Book a Demo</a>
           </StarButton>
