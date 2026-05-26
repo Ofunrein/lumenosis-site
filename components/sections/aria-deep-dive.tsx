@@ -587,16 +587,16 @@ type ChatStep =
 // Timeline: each entry has the step to show and when (ms from start)
 const theoTimeline: Array<{ step: ChatStep; showAt: number }> = [
   { step: { type: "message", index: 0 }, showAt: 0 },      // lead msg
-  { step: { type: "typing" }, showAt: 1200 },               // Theo typing
-  { step: { type: "message", index: 1 }, showAt: 2600 },    // Theo reply (hides typing)
-  { step: { type: "message", index: 2 }, showAt: 4400 },    // lead msg
-  { step: { type: "typing" }, showAt: 5200 },               // Theo typing
-  { step: { type: "message", index: 3 }, showAt: 6400 },    // Theo reply
-  { step: { type: "message", index: 4 }, showAt: 8200 },    // lead msg
-  { step: { type: "typing" }, showAt: 8900 },               // Theo typing
-  { step: { type: "message", index: 5 }, showAt: 10000 },   // Theo reply
+  { step: { type: "typing" }, showAt: 1800 },               // Theo typing
+  { step: { type: "message", index: 1 }, showAt: 3900 },    // Theo reply (hides typing)
+  { step: { type: "message", index: 2 }, showAt: 6600 },    // lead msg
+  { step: { type: "typing" }, showAt: 7800 },               // Theo typing
+  { step: { type: "message", index: 3 }, showAt: 9600 },    // Theo reply
+  { step: { type: "message", index: 4 }, showAt: 12300 },   // lead msg
+  { step: { type: "typing" }, showAt: 13350 },              // Theo typing
+  { step: { type: "message", index: 5 }, showAt: 15000 },   // Theo reply
 ];
-const LOOP_DURATION = 13000;
+const LOOP_DURATION = 19500;
 
 function TheoSmsDemo() {
   const [elapsed, setElapsed] = useState(0);
@@ -687,7 +687,7 @@ function TheoSmsDemo() {
                     isTheo ? "self-end bg-[#35194a] text-white" : "self-start bg-[#21192c] text-white",
                   ].join(" ")}
                 >
-                  <TypewriterText text={line.text} active={isTheo && isLatest} />
+                  {line.text}
                 </div>
               </div>
             );
@@ -703,7 +703,7 @@ export function AriaDeepDive() {
   return (
     <section
       id="aria"
-      className="relative overflow-hidden border-b border-[var(--color-line)] bg-[#050408] py-12 text-white dark:bg-[rgb(5_4_8_/_0.88)] md:py-16"
+      className="relative overflow-hidden border-b border-[var(--color-line)] bg-[#050408] py-12 text-white dark:bg-black/25 md:py-16"
     >
       <div className="absolute left-1/2 top-0 h-[460px] w-[720px] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,rgba(203,108,230,0.18),rgba(203,108,230,0)_62%)] blur-3xl" />
       <div className="absolute right-[-14rem] top-24 h-[460px] w-[520px] rounded-full bg-[radial-gradient(circle,rgba(124,58,237,0.14),rgba(124,58,237,0)_64%)] blur-3xl" />
