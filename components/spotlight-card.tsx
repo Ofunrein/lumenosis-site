@@ -45,7 +45,7 @@ export function GlowCard({
   const style = {
     "--base": base,
     "--spread": spread,
-    "--default-radius": "14",
+    "--default-radius": "16",
     "--default-border": "1",
     "--default-backdrop": "var(--color-bg-cream)",
     "--default-backup-border": "var(--color-line)",
@@ -92,7 +92,7 @@ export function GlowCard({
         />
         {/* Aceternity-style border glow on hover */}
         <div
-          className="absolute inset-[-1px] rounded-[14px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+          className="absolute inset-[-1px] rounded-[16px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
           style={{
             borderRadius: "calc(var(--radius,var(--default-radius))*1px)",
             background:

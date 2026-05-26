@@ -348,7 +348,7 @@ function IrisEmailDemo() {
 
   return (
     <GlowCard glowColor="purple" customSize className="overflow-hidden p-0 [--backdrop:#130d1b]">
-      <div className="grid h-[340px] min-h-0 lg:h-[320px] lg:grid-cols-[1.25fr_0.75fr]">
+      <div className="grid min-h-0 lg:grid-cols-[1.25fr_0.75fr]">
         <div className="flex min-h-0 flex-col border-b border-[var(--color-line)] p-4 sm:p-5 lg:border-b-0 lg:border-r">
           <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[var(--color-line)] pb-4">
             <SectionBadge icon={Mail} title="Iris email desk" subtitle="Live buyer inquiry" />
@@ -719,12 +719,12 @@ export function AriaDeepDive() {
 
           {/* BOTTOM: Phone left + Call right — equal halves */}
           <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
-            <div className="flex min-h-[360px] items-center justify-center">
+            <GlowCard glowColor="purple" customSize className="min-h-[480px] flex items-center justify-center">
               <TheoSmsDemo />
-            </div>
-            <div className="flex min-h-[360px] items-center justify-center">
+            </GlowCard>
+            <GlowCard glowColor="purple" customSize className="min-h-[480px] flex items-center justify-center">
               <AriaPhoneDemo />
-            </div>
+            </GlowCard>
           </div>
 
         </div>
