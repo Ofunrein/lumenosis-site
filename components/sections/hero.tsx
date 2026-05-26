@@ -1,13 +1,13 @@
 "use client";
 import { motion, useReducedMotion } from "framer-motion";
+import { Clock, ShieldCheck } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { Clock, ShieldCheck } from "lucide-react";
 import { GlassStatCallout } from "@/components/glass-stat-callout";
-import { GlowCard } from "@/components/spotlight-card";
 import Magnet from "@/components/magnet";
-import { StarButton } from "@/components/ui/star-button";
 import { SpotlightButtonWrapper } from "@/components/spotlight-button";
+import { GlowCard } from "@/components/spotlight-card";
+import { StarButton } from "@/components/ui/star-button";
 import { niches } from "@/content/niches";
 
 export function Hero() {
@@ -32,9 +32,8 @@ export function Hero() {
     >
       {/* Two-column: text left, image right — image fills full column height */}
       <div className="mx-auto grid w-full gap-8 px-5 sm:px-6 md:w-[min(1400px,100%)] md:gap-0 md:px-0 md:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] md:min-h-[580px] lg:min-h-[660px] md:items-stretch">
-
         {/* Text column */}
-        <div className="flex flex-col justify-center px-1 py-12 sm:px-4 sm:py-16 md:pl-[max(32px,calc((100vw-1400px)/2+40px))] md:pr-14 lg:pl-[max(48px,calc((100vw-1400px)/2+60px))] text-center md:text-left">
+        <div className="flex flex-col items-center justify-center px-1 py-12 text-center sm:px-4 sm:py-16 md:pl-[max(32px,calc((100vw-1400px)/2+40px))] md:pr-14 lg:pl-[max(48px,calc((100vw-1400px)/2+60px))]">
           <h1 className="font-[family-name:var(--font-display)] text-[clamp(2.4rem,4.8vw,5rem)] font-semibold leading-[1.04] tracking-tight text-[var(--color-ink-charcoal)]">
             AI agents for your{" "}
             <span
@@ -63,11 +62,11 @@ export function Hero() {
             </span>{" "}
             team.
           </h1>
-          <p className="mt-5 max-w-lg text-[length:var(--text-body-lg)] leading-snug text-[var(--color-muted)]">
+          <p className="mt-5 max-w-lg text-center text-[length:var(--text-body-lg)] leading-snug text-[var(--color-muted)]">
             Olivia answers your website. Aria answers the phone. Theo texts every lead in under
             sixty seconds. Iris turns inbound emails into booked valuations.
           </p>
-          <div className="mt-8 flex justify-center md:justify-start">
+          <div className="mt-8 flex justify-center">
             <Magnet padding={60} magnetStrength={5}>
               <SpotlightButtonWrapper>
                 <StarButton
