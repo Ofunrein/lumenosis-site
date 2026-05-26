@@ -2,7 +2,7 @@
 import { motion, useReducedMotion } from "framer-motion";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { Clock, TrendingUp, ShieldCheck } from "lucide-react";
+import { Clock, ShieldCheck } from "lucide-react";
 import { GlassStatCallout } from "@/components/glass-stat-callout";
 import Magnet from "@/components/magnet";
 import { StarButton } from "@/components/ui/star-button";
@@ -29,7 +29,7 @@ export function Hero() {
       id="top"
       className="relative overflow-hidden border-b border-[var(--color-line)] bg-[var(--color-bg-cream)] dark:bg-transparent pb-16 pt-20 md:pt-28"
     >
-      <div className="relative z-10 mx-auto grid w-[min(1200px,calc(100%-32px))] items-start gap-10 md:grid-cols-[1fr_1.05fr] lg:grid-cols-[0.85fr_1.15fr] xl:grid-cols-[0.78fr_1.22fr] md:gap-12">
+      <div className="relative z-10 mx-auto grid w-[min(1200px,calc(100%-48px))] sm:w-[min(1200px,calc(100%-32px))] items-start gap-10 md:grid-cols-[1fr_1.05fr] lg:grid-cols-[0.85fr_1.15fr] xl:grid-cols-[0.78fr_1.22fr] md:gap-12">
         <div>
           <h1 className="font-[family-name:var(--font-display)] text-[length:var(--text-display-hero)] font-semibold leading-[1.04] tracking-tight text-[var(--color-ink-charcoal)]">
             AI agents for your{" "}
@@ -93,13 +93,7 @@ export function Hero() {
             label="Avg lead response"
             value="60 seconds"
             icon={<Clock className="size-4" />}
-            className="absolute -left-3 top-8 md:-left-6"
-          />
-          <GlassStatCallout
-            label="More booked showings"
-            value="+300%"
-            icon={<TrendingUp className="size-4" />}
-            className="absolute -right-3 top-1/2 hidden md:-right-8 md:block"
+            className="absolute -left-3 top-4 md:-left-6"
           />
           <GlassStatCallout
             label="Always-on coverage"
