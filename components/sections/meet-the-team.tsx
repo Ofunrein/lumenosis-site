@@ -1,4 +1,5 @@
 import { AgentPersonaCard } from "@/components/agent-persona-card";
+import { Reveal } from "@/components/reveal";
 import { agents } from "@/content/agents";
 
 export function MeetTheTeam() {
@@ -7,8 +8,8 @@ export function MeetTheTeam() {
       id="agents"
       className="border-b border-[var(--color-line)] bg-[#f8f6ef] py-16 dark:bg-[rgb(13_10_18_/_0.72)] md:py-24"
     >
-      <div className="mx-auto w-[min(1200px,calc(100%-32px))]">
-        <div className="max-w-2xl">
+      <div className="mx-auto w-[min(1200px,calc(100%-40px))] sm:w-[min(1200px,calc(100%-32px))]">
+        <Reveal variant="up" className="max-w-2xl">
           <p className="mb-3 text-[var(--text-eyebrow)] font-semibold uppercase tracking-[0.14em] text-[var(--color-brand-purple)]">
             03 — The team
           </p>
@@ -19,13 +20,20 @@ export function MeetTheTeam() {
             Four named AI agents with one job each. Trained on your market, your inventory, your
             hours, and your CRM.
           </p>
-        </div>
+        </Reveal>
 
         <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
-          {agents.map((a) => (
-            <div key={a.slug} className="h-full dark:[--color-bg-cream:#111019]">
-              <AgentPersonaCard agent={a} />
-            </div>
+          {agents.map((a, index) => (
+            <Reveal
+              key={a.slug}
+              variant={index % 2 === 0 ? "left" : "right"}
+              delay={index * 0.06}
+              className="h-full"
+            >
+              <div className="h-full dark:[--color-bg-cream:#111019]">
+                <AgentPersonaCard agent={a} />
+              </div>
+            </Reveal>
           ))}
         </div>
       </div>

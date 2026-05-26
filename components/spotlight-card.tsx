@@ -48,9 +48,9 @@ export function GlowCard({
     "--base": base,
     "--spread": spread,
     "--default-radius": String(radius ?? 16),
-    "--default-border": "3",
+    "--default-border": "4",
     "--default-backdrop": "var(--color-bg-cream)",
-    "--default-backup-border": "var(--color-line)",
+    "--default-backup-border": "color-mix(in srgb, var(--color-line) 70%, rgb(16 14 24))",
     "--default-size": "200",
     "--default-outer": "1",
     "--border-size": "calc(var(--border, var(--default-border)) * 1px)",
@@ -98,11 +98,11 @@ export function GlowCard({
           style={{
             borderRadius: "calc(var(--radius,var(--default-radius))*1px)",
             background:
-              "radial-gradient(400px circle at var(--x, 50%) var(--y, 50%), rgba(203,108,230,0.35), transparent 40%)",
+              "radial-gradient(400px circle at var(--x, 50%) var(--y, 50%), rgba(203,108,230,0.45), transparent 38%)",
             WebkitMask: "linear-gradient(#fff,#fff) content-box, linear-gradient(#fff,#fff)",
             WebkitMaskComposite: "xor",
             maskComposite: "exclude",
-            padding: "1px",
+            padding: "2px",
           }}
         />
         {children}

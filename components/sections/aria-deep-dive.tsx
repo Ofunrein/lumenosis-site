@@ -14,6 +14,7 @@ import {
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { GlowCard } from "@/components/spotlight-card";
+import { Reveal } from "@/components/reveal";
 
 type EmailMessage = {
   id: string;
@@ -469,14 +470,22 @@ function AriaPhoneDemo() {
   const [callComplete, setCallComplete] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
-  const [bars, setBars] = useState<number[]>(Array.from({ length: 40 }, (_, i) => 14 + Math.abs(Math.sin(i * 0.38) * 22 + Math.sin(i * 0.85) * 14)));
+  const [bars, setBars] = useState<number[]>(
+    Array.from(
+      { length: 40 },
+      (_, i) => 14 + Math.abs(Math.sin(i * 0.38) * 22 + Math.sin(i * 0.85) * 14),
+    ),
+  );
 
   // Connect Web Audio API when first play
   const setupAudio = () => {
     const audio = audioRef.current;
     if (!audio || audioCtxRef.current) return;
 
-    const audioCtx = new (window.AudioContext || (window as typeof window & { webkitAudioContext?: typeof AudioContext }).webkitAudioContext)();
+    const audioCtx = new (
+      window.AudioContext ||
+      (window as typeof window & { webkitAudioContext?: typeof AudioContext }).webkitAudioContext
+    )();
     const analyser = audioCtx.createAnalyser();
     analyser.fftSize = 128; // 64 frequency bins
     const source = audioCtx.createMediaElementSource(audio);
@@ -528,7 +537,12 @@ function AriaPhoneDemo() {
     if (playing) {
       audio.pause();
       cancelAnimationFrame(rafRef.current);
-      setBars(Array.from({ length: 40 }, (_, i) => 14 + Math.abs(Math.sin(i * 0.38) * 22 + Math.sin(i * 0.85) * 14)));
+      setBars(
+        Array.from(
+          { length: 40 },
+          (_, i) => 14 + Math.abs(Math.sin(i * 0.38) * 22 + Math.sin(i * 0.85) * 14),
+        ),
+      );
       setPlaying(false);
     } else {
       await audio.play();
@@ -547,7 +561,12 @@ function AriaPhoneDemo() {
       setCallComplete(true);
       cancelAnimationFrame(rafRef.current);
       // Reset bars to static idle waveform
-      setBars(Array.from({ length: 40 }, (_, i) => 14 + Math.abs(Math.sin(i * 0.38) * 22 + Math.sin(i * 0.85) * 14)));
+      setBars(
+        Array.from(
+          { length: 40 },
+          (_, i) => 14 + Math.abs(Math.sin(i * 0.38) * 22 + Math.sin(i * 0.85) * 14),
+        ),
+      );
     };
     audio.addEventListener("timeupdate", onTime);
     audio.addEventListener("loadedmetadata", onLoad);
@@ -575,14 +594,20 @@ function AriaPhoneDemo() {
         <div className="relative size-14 overflow-hidden rounded-full mx-auto mb-3">
           <Image src="/images/agents/aria.png" alt="Aria AI" fill className="object-cover" />
         </div>
-        <p className="font-[family-name:var(--font-display)] text-lg font-semibold text-white">Aria AI</p>
-        <div className={`mt-1.5 inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs transition-all duration-500 ${
-          callComplete
-            ? "border-emerald-500/30 bg-emerald-500/10 text-emerald-400"
-            : "border-white/15 bg-white/5 text-white/60"
-        }`}>
+        <p className="font-[family-name:var(--font-display)] text-lg font-semibold text-white">
+          Aria AI
+        </p>
+        <div
+          className={`mt-1.5 inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs transition-all duration-500 ${
+            callComplete
+              ? "border-emerald-500/30 bg-emerald-500/10 text-emerald-400"
+              : "border-white/15 bg-white/5 text-white/60"
+          }`}
+        >
           {callComplete ? (
-            <svg viewBox="0 0 16 16" className="size-3 fill-current"><path d="M13.5 3.5L6 11 2.5 7.5 1 9l5 5 9-9z"/></svg>
+            <svg viewBox="0 0 16 16" className="size-3 fill-current">
+              <path d="M13.5 3.5L6 11 2.5 7.5 1 9l5 5 9-9z" />
+            </svg>
           ) : (
             <span className="size-1.5 rounded-full bg-amber-400 animate-pulse" />
           )}
@@ -600,9 +625,14 @@ function AriaPhoneDemo() {
             aria-label={playing ? "Pause" : "Play"}
           >
             {playing ? (
-              <svg viewBox="0 0 24 24" className="size-4 fill-current"><rect x="6" y="5" width="4" height="14"/><rect x="14" y="5" width="4" height="14"/></svg>
+              <svg viewBox="0 0 24 24" className="size-4 fill-current">
+                <rect x="6" y="5" width="4" height="14" />
+                <rect x="14" y="5" width="4" height="14" />
+              </svg>
             ) : (
-              <svg viewBox="0 0 24 24" className="size-4 fill-current"><path d="M8 5v14l11-7z"/></svg>
+              <svg viewBox="0 0 24 24" className="size-4 fill-current">
+                <path d="M8 5v14l11-7z" />
+              </svg>
             )}
           </button>
           <div>
@@ -633,7 +663,8 @@ function AriaPhoneDemo() {
             const audio = audioRef.current;
             if (!audio || !duration) return;
             const rect = e.currentTarget.getBoundingClientRect();
-            audio.currentTime = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width)) * duration;
+            audio.currentTime =
+              Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width)) * duration;
           }}
           onMouseDown={(e) => {
             const audio = audioRef.current;
@@ -676,35 +707,42 @@ function AriaPhoneDemo() {
 
       {/* Feature bullets */}
       <div className="grid gap-2">
-        {["Property details provided", "Questions answered", "Viewing booked automatically"].map((f) => (
-          <div key={f} className="flex items-center gap-2 text-sm text-white/80">
-            <span className="size-4 grid place-items-center rounded-full bg-[var(--color-brand-violet)]/20 text-[var(--color-brand-violet)] text-xs">✓</span>
-            {f}
-          </div>
-        ))}
+        {["Property details provided", "Questions answered", "Viewing booked automatically"].map(
+          (f) => (
+            <div key={f} className="flex items-center gap-2 text-sm text-white/80">
+              <span className="size-4 grid place-items-center rounded-full bg-[var(--color-brand-violet)]/20 text-[var(--color-brand-violet)] text-xs">
+                ✓
+              </span>
+              {f}
+            </div>
+          ),
+        )}
       </div>
 
       {/* Hidden audio */}
-      <audio ref={audioRef} src="/aria-oak-ridge-call.mp3" preload="metadata" crossOrigin="anonymous" />
+      <audio
+        ref={audioRef}
+        src="/aria-oak-ridge-call.mp3"
+        preload="metadata"
+        crossOrigin="anonymous"
+      />
     </div>
   );
 }
 
-type ChatStep =
-  | { type: "message"; index: number }
-  | { type: "typing" };
+type ChatStep = { type: "message"; index: number } | { type: "typing" };
 
 // Timeline: each entry has the step to show and when (ms from start)
 const theoTimeline: Array<{ step: ChatStep; showAt: number }> = [
-  { step: { type: "message", index: 0 }, showAt: 0 },      // lead msg
-  { step: { type: "typing" }, showAt: 1800 },               // Theo typing
-  { step: { type: "message", index: 1 }, showAt: 3900 },    // Theo reply (hides typing)
-  { step: { type: "message", index: 2 }, showAt: 6600 },    // lead msg
-  { step: { type: "typing" }, showAt: 7800 },               // Theo typing
-  { step: { type: "message", index: 3 }, showAt: 9600 },    // Theo reply
-  { step: { type: "message", index: 4 }, showAt: 12300 },   // lead msg
-  { step: { type: "typing" }, showAt: 13350 },              // Theo typing
-  { step: { type: "message", index: 5 }, showAt: 15000 },   // Theo reply
+  { step: { type: "message", index: 0 }, showAt: 0 }, // lead msg
+  { step: { type: "typing" }, showAt: 1800 }, // Theo typing
+  { step: { type: "message", index: 1 }, showAt: 3900 }, // Theo reply (hides typing)
+  { step: { type: "message", index: 2 }, showAt: 6600 }, // lead msg
+  { step: { type: "typing" }, showAt: 7800 }, // Theo typing
+  { step: { type: "message", index: 3 }, showAt: 9600 }, // Theo reply
+  { step: { type: "message", index: 4 }, showAt: 12300 }, // lead msg
+  { step: { type: "typing" }, showAt: 13350 }, // Theo typing
+  { step: { type: "message", index: 5 }, showAt: 15000 }, // Theo reply
 ];
 const LOOP_DURATION = 19500;
 
@@ -777,13 +815,17 @@ function TheoSmsDemo() {
           <p className="mt-2 font-[family-name:var(--font-display)] text-2xl font-semibold text-white">
             Theo AI
           </p>
-          <div className={`mt-2 inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-xs font-semibold transition-all duration-500 ${
-            status.dot === "green"
-              ? "border-emerald-500/30 bg-emerald-500/10 text-emerald-400"
-              : "border-[var(--color-gold-italic)]/45 bg-[#241d16] text-white"
-          }`}>
+          <div
+            className={`mt-2 inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-xs font-semibold transition-all duration-500 ${
+              status.dot === "green"
+                ? "border-emerald-500/30 bg-emerald-500/10 text-emerald-400"
+                : "border-[var(--color-gold-italic)]/45 bg-[#241d16] text-white"
+            }`}
+          >
             {status.check ? (
-              <svg viewBox="0 0 16 16" className="size-3 fill-current text-emerald-400"><path d="M13.5 3.5L6 11 2.5 7.5 1 9l5 5 9-9z"/></svg>
+              <svg viewBox="0 0 16 16" className="size-3 fill-current text-emerald-400">
+                <path d="M13.5 3.5L6 11 2.5 7.5 1 9l5 5 9-9z" />
+              </svg>
             ) : (
               <span className="size-2 rounded-full bg-amber-400 animate-pulse" />
             )}
@@ -803,10 +845,7 @@ function TheoSmsDemo() {
             const isLatest = latest?.id === line.id;
 
             return (
-              <div
-                key={line.id}
-                className="flex flex-col"
-              >
+              <div key={line.id} className="flex flex-col">
                 {isTheo && (
                   <p className="mb-1 self-end text-[10px] font-semibold uppercase tracking-[0.14em] text-white/50">
                     THEO · AI
@@ -820,7 +859,9 @@ function TheoSmsDemo() {
                 <div
                   className={[
                     "max-w-[88%] rounded-[22px] px-4 py-3 text-sm leading-relaxed shadow-[0_12px_36px_rgba(0,0,0,0.18)]",
-                    isTheo ? "self-end bg-[#35194a] text-white" : "self-start bg-[#21192c] text-white",
+                    isTheo
+                      ? "self-end bg-[#35194a] text-white"
+                      : "self-start bg-[#21192c] text-white",
                   ].join(" ")}
                 >
                   {line.text}
@@ -844,50 +885,73 @@ export function AriaDeepDive() {
       <div className="absolute left-1/2 top-0 h-[460px] w-[720px] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,rgba(203,108,230,0.18),rgba(203,108,230,0)_62%)] blur-3xl" />
       <div className="absolute right-[-14rem] top-24 h-[460px] w-[520px] rounded-full bg-[radial-gradient(circle,rgba(124,58,237,0.14),rgba(124,58,237,0)_64%)] blur-3xl" />
 
-      <div className="relative mx-auto grid w-[min(1480px,calc(100%-32px))] gap-9 lg:grid-cols-[0.58fr_1.42fr] lg:items-start">
-        <div className="lg:sticky lg:top-32">
-          <p className="mb-4 text-[var(--text-eyebrow)] font-semibold uppercase tracking-[0.16em]" style={{ color: '#ffffff' }}>
-            04 - Live follow-up desk
-          </p>
-          <h2 className="font-[family-name:var(--font-display)] text-[clamp(2.5rem,4.6vw,4.7rem)] font-semibold leading-[0.99] text-white">
-            The front desk that never sleeps and never asks for a raise.
-          </h2>
-          <p className="mt-6 max-w-xl text-lg leading-8 text-white/75">
-            A buyer asks about a listing. Iris replies with real property details, Aria answers the
-            call, and Theo keeps the text thread moving until a showing or valuation is booked.
-          </p>
+      <div className="relative mx-auto grid w-[min(1480px,calc(100%-40px))] sm:w-[min(1480px,calc(100%-32px))] gap-9 lg:grid-cols-[0.58fr_1.42fr] lg:items-start">
+        <Reveal variant="left" className="lg:sticky lg:top-32">
+          <div>
+            <p
+              className="mb-4 text-[var(--text-eyebrow)] font-semibold uppercase tracking-[0.16em]"
+              style={{ color: "#ffffff" }}
+            >
+              04 - Live follow-up desk
+            </p>
+            <h2 className="font-[family-name:var(--font-display)] text-[clamp(2.5rem,4.6vw,4.7rem)] font-semibold leading-[0.99] text-white">
+              The front desk that never sleeps and never asks for a raise.
+            </h2>
+            <p className="mt-6 max-w-xl text-lg leading-8 text-white/75">
+              A buyer asks about a listing. Iris replies with real property details, Aria answers
+              the call, and Theo keeps the text thread moving until a showing or valuation is
+              booked.
+            </p>
+          </div>
 
           <div className="mt-10 grid gap-4 sm:grid-cols-2">
-            {microFeatures.map(({ icon: Icon, title, body }) => (
-              <GlowCard key={title} glowColor="purple" customSize radius={12} className="p-4 flex flex-col gap-0 [--backdrop:rgba(18,12,28,0.85)] [--backup-border:rgba(203,108,230,0.15)]">
-                <Icon className="size-5 text-[var(--color-brand-violet)]" aria-hidden />
-                <p className="mt-4 font-[family-name:var(--font-display)] text-xl font-semibold text-white">
-                  {title}
-                </p>
-                <p className="mt-2 text-sm leading-6 text-white/65">{body}</p>
-              </GlowCard>
+            {microFeatures.map(({ icon: Icon, title, body }, index) => (
+              <Reveal key={title} variant="scale" delay={index * 0.06}>
+                <GlowCard
+                  glowColor="purple"
+                  customSize
+                  radius={12}
+                  className="flex flex-col gap-0 p-4 [--backdrop:rgba(18,12,28,0.85)] [--backup-border:rgba(203,108,230,0.15)]"
+                >
+                  <Icon className="size-5 text-[var(--color-brand-violet)]" aria-hidden />
+                  <p className="mt-4 font-[family-name:var(--font-display)] text-xl font-semibold text-white">
+                    {title}
+                  </p>
+                  <p className="mt-2 text-sm leading-6 text-white/65">{body}</p>
+                </GlowCard>
+              </Reveal>
             ))}
           </div>
-        </div>
+        </Reveal>
 
         {/* Bento grid: TOP=email full-width, BOTTOM=phone left + call right */}
         <div className="flex flex-col gap-6">
-
           {/* TOP: Email card — full width */}
-          <div className="w-full min-h-[420px]">
+          <Reveal variant="right" className="min-h-[420px] w-full">
             <IrisEmailDemo />
-          </div>
+          </Reveal>
 
           {/* BOTTOM: Phone left + Call right — equal halves */}
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
-            <GlowCard glowColor="purple" customSize className="min-h-[560px] flex items-center justify-center [--backdrop:#130d1b] border border-white/10">
-              <TheoSmsDemo />
-            </GlowCard>
-            <GlowCard glowColor="purple" customSize className="min-h-[560px] flex items-center justify-center [--backdrop:#130d1b] border border-white/10">
-              <AriaPhoneDemo />
-            </GlowCard>
+            <Reveal variant="left" delay={0.06} className="h-full">
+              <GlowCard
+                glowColor="purple"
+                customSize
+                className="flex min-h-[560px] items-center justify-center border border-white/10 [--backdrop:#130d1b]"
+              >
+                <TheoSmsDemo />
+              </GlowCard>
+            </Reveal>
+            <Reveal variant="scale" delay={0.12} className="h-full">
+              <GlowCard
+                glowColor="purple"
+                customSize
+                className="flex min-h-[560px] items-center justify-center border border-white/10 [--backdrop:#130d1b]"
+              >
+                <AriaPhoneDemo />
+              </GlowCard>
+            </Reveal>
           </div>
-
         </div>
       </div>
     </section>

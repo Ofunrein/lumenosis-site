@@ -9,6 +9,45 @@ import { useScroll } from "@/components/ui/use-scroll";
 import { SpotlightButtonWrapper } from "@/components/spotlight-button";
 import { cn } from "@/lib/utils";
 
+function ThemeToggleIcon({ dark }: { dark: boolean }) {
+  if (dark) {
+    return (
+      <svg viewBox="0 0 24 24" className="size-[18px]" aria-hidden>
+        <title>Dark mode icon</title>
+        <path
+          d="M15.2 3.4a8.8 8.8 0 1 0 5.4 14.8 8.3 8.3 0 0 1-3 .6 8.8 8.8 0 0 1-8.8-8.8c0-2.8 1.3-5.4 3.5-7.1a8.8 8.8 0 0 1 2.9-.5z"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.9"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </svg>
+    );
+  }
+
+  return (
+    <svg viewBox="0 0 24 24" className="size-[18px]" aria-hidden>
+      <title>Light mode icon</title>
+      <circle
+        cx="12"
+        cy="12"
+        r="4.1"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.9"
+      />
+      <path
+        d="M12 2.75v2.1M12 19.15v2.1M21.25 12h-2.1M4.85 12h-2.1M18.55 5.45l-1.48 1.48M6.93 17.07l-1.48 1.48M18.55 18.55l-1.48-1.48M6.93 6.93 5.45 5.45"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.9"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+}
+
 export function Topbar() {
   const [open, setOpen] = React.useState(false);
   const scrolled = useScroll(140);
@@ -88,20 +127,10 @@ export function Topbar() {
               <button
                 type="button"
                 onClick={toggleTheme}
-                className="grid size-8 place-items-center rounded-full border border-[var(--color-line)] text-[var(--color-muted)] hover:text-[var(--color-brand-violet)] transition-colors"
+                className="grid size-10 place-items-center rounded-full border border-[rgba(47,40,78,0.18)] bg-[rgba(255,255,255,0.68)] text-[rgba(47,40,78,0.88)] shadow-[inset_0_1px_0_rgba(255,255,255,0.55),0_0_0_1px_rgba(47,40,78,0.03)] transition-all duration-200 hover:border-[rgba(47,40,78,0.3)] hover:text-[rgba(47,40,78,1)] dark:border-[rgba(255,255,255,0.16)] dark:bg-[rgba(14,13,26,0.82)] dark:text-[rgba(243,242,251,0.9)] dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.08),0_0_0_1px_rgba(255,255,255,0.04)] dark:hover:border-[rgba(255,255,255,0.28)] dark:hover:text-white"
                 aria-label="Toggle dark/light mode"
               >
-                {resolvedTheme === "dark" ? (
-                  <svg viewBox="0 0 24 24" className="size-3.5 fill-current" aria-hidden>
-                    <title>Dark mode icon</title>
-                    <path d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.389 5.389 0 0 1-4.4 2.26 5.403 5.403 0 0 1-3.14-9.8c-.44-.06-.9-.1-1.36-.1z" />
-                  </svg>
-                ) : (
-                  <svg viewBox="0 0 24 24" className="size-3.5 fill-current" aria-hidden>
-                    <title>Light mode icon</title>
-                    <path d="M12 7a5 5 0 1 0 0 10A5 5 0 0 0 12 7zm0-5a1 1 0 0 1 1 1v1a1 1 0 0 1-2 0V3a1 1 0 0 1 1-1zm0 18a1 1 0 0 1 1 1v1a1 1 0 0 1-2 0v-1a1 1 0 0 1 1-1zm9-9h-1a1 1 0 0 1 0-2h1a1 1 0 0 1 0 2zM3 12H2a1 1 0 0 1 0-2h1a1 1 0 0 1 0 2zm15.66-6.24-.7-.7a1 1 0 0 0-1.42 1.42l.7.7a1 1 0 0 0 1.42-1.42zm-12.02 12.02-.7-.7a1 1 0 0 0-1.42 1.42l.7.7a1 1 0 0 0 1.42-1.42zm12.02 0a1 1 0 0 0-1.42 0l-.7.7a1 1 0 0 0 1.42 1.42l.7-.7a1 1 0 0 0 0-1.42zm-12.02-12.02a1 1 0 0 0 0 1.42l-.7.7a1 1 0 1 0 1.42-1.42l-.7-.7a1 1 0 0 0-1.42 0z" />
-                  </svg>
-                )}
+                <ThemeToggleIcon dark={resolvedTheme === "dark"} />
               </button>
             )}
             <SpotlightButtonWrapper>
@@ -144,20 +173,10 @@ export function Topbar() {
                 <button
                   type="button"
                   onClick={toggleTheme}
-                  className="grid size-8 place-items-center rounded-full border border-[var(--color-line)] dark:border-white/10 text-[var(--color-muted)] dark:text-white/70 hover:text-[var(--color-brand-violet)] transition-colors"
+                  className="grid size-10 place-items-center rounded-full border border-[rgba(47,40,78,0.18)] bg-[rgba(255,255,255,0.68)] text-[rgba(47,40,78,0.88)] shadow-[inset_0_1px_0_rgba(255,255,255,0.55),0_0_0_1px_rgba(47,40,78,0.03)] transition-all duration-200 hover:border-[rgba(47,40,78,0.3)] hover:text-[rgba(47,40,78,1)] dark:border-[rgba(255,255,255,0.18)] dark:bg-[rgba(14,13,26,0.88)] dark:text-[rgba(243,242,251,0.9)] dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.08),0_0_0_1px_rgba(255,255,255,0.04)] dark:hover:border-[rgba(255,255,255,0.28)] dark:hover:text-white"
                   aria-label="Toggle dark/light mode"
                 >
-                  {resolvedTheme === "dark" ? (
-                    <svg viewBox="0 0 24 24" className="size-3.5 fill-current" aria-hidden>
-                      <title>Dark mode icon</title>
-                      <path d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.389 5.389 0 0 1-4.4 2.26 5.403 5.403 0 0 1-3.14-9.8c-.44-.06-.9-.1-1.36-.1z" />
-                    </svg>
-                  ) : (
-                    <svg viewBox="0 0 24 24" className="size-3.5 fill-current" aria-hidden>
-                      <title>Light mode icon</title>
-                      <path d="M12 7a5 5 0 1 0 0 10A5 5 0 0 0 12 7zm0-5a1 1 0 0 1 1 1v1a1 1 0 0 1-2 0V3a1 1 0 0 1 1-1zm0 18a1 1 0 0 1 1 1v1a1 1 0 0 1-2 0v-1a1 1 0 0 1 1-1zm9-9h-1a1 1 0 0 1 0-2h1a1 1 0 0 1 0 2zM3 12H2a1 1 0 0 1 0-2h1a1 1 0 0 1 0 2zm15.66-6.24-.7-.7a1 1 0 0 0-1.42 1.42l.7.7a1 1 0 0 0 1.42-1.42zm-12.02 12.02-.7-.7a1 1 0 0 0-1.42 1.42l.7.7a1 1 0 0 0 1.42-1.42zm12.02 0a1 1 0 0 0-1.42 0l-.7.7a1 1 0 0 0 1.42 1.42l.7-.7a1 1 0 0 0 0-1.42zm-12.02-12.02a1 1 0 0 0 0 1.42l-.7.7a1 1 0 1 0 1.42-1.42l-.7-.7a1 1 0 0 0-1.42 0z" />
-                    </svg>
-                  )}
+                  <ThemeToggleIcon dark={resolvedTheme === "dark"} />
                 </button>
               )}
             </div>
