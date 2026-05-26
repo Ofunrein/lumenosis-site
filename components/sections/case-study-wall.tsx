@@ -97,7 +97,7 @@ export function CaseStudyWall() {
                 className="mb-4 break-inside-avoid overflow-hidden rounded-2xl p-5 shadow-[var(--shadow-soft)] transition-transform hover:-translate-y-1 [--backdrop:#ffffff] [--backup-border:var(--color-line)] [--outer:0] [--radius:16] [--size:115] dark:[--backdrop:#14101c]"
               >
                 <div className="flex items-start justify-between gap-4">
-                  <p className="font-[family-name:var(--font-display)] text-[clamp(1.8rem,3vw,2.55rem)] font-semibold leading-none text-[var(--color-ink-charcoal)] dark:text-[var(--color-brand-violet)]">
+                  <p className="font-[family-name:var(--font-display)] text-[clamp(1.8rem,3vw,2.55rem)] font-semibold leading-none text-[var(--color-ink-charcoal)] dark:text-white">
                     {result}
                   </p>
                   <span className="shrink-0 rounded-[var(--radius-pill)] bg-[var(--color-brand-purple-soft)] px-3 py-1 text-xs font-semibold uppercase tracking-[0.1em] text-[var(--color-brand-purple)]">

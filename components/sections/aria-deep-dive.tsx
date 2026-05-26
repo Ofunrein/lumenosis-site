@@ -466,6 +466,7 @@ function AriaPhoneDemo() {
   const sourceRef = useRef<MediaElementAudioSourceNode | null>(null);
   const rafRef = useRef<number>(0);
   const [playing, setPlaying] = useState(false);
+  const [callComplete, setCallComplete] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const [bars, setBars] = useState<number[]>(Array.from({ length: 40 }, (_, i) => 8 + Math.abs(Math.sin(i * 0.4) * 25 + Math.sin(i * 0.8) * 15)));
@@ -549,6 +550,7 @@ function AriaPhoneDemo() {
     const onLoad = () => setDuration(audio.duration);
     const onEnded = () => {
       setPlaying(false);
+      setCallComplete(true);
       cancelAnimationFrame(rafRef.current);
       // Reset bars to static idle waveform
       setBars(Array.from({ length: 40 }, (_, i) => 8 + Math.abs(Math.sin(i * 0.4) * 25 + Math.sin(i * 0.8) * 15)));
@@ -576,13 +578,21 @@ function AriaPhoneDemo() {
     <div className="flex flex-col gap-5 w-full p-6">
       {/* Header */}
       <div className="text-center">
-        <div className="grid size-14 place-items-center rounded-full bg-[var(--color-brand-violet)]/20 text-[var(--color-brand-violet)] mx-auto mb-3 font-[family-name:var(--font-display)] font-semibold text-xl">
-          A
+        <div className="relative size-14 overflow-hidden rounded-full mx-auto mb-3">
+          <Image src="/images/agents/aria.png" alt="Aria AI" fill className="object-cover" />
         </div>
-        <p className="font-[family-name:var(--font-display)] text-lg font-semibold text-white">Aria</p>
-        <div className="mt-1.5 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1 text-xs text-white/60">
-          <span className="size-1.5 rounded-full bg-amber-400 animate-pulse" />
-          Recording call
+        <p className="font-[family-name:var(--font-display)] text-lg font-semibold text-white">Aria AI</p>
+        <div className={`mt-1.5 inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs transition-all duration-500 ${
+          callComplete
+            ? "border-emerald-500/30 bg-emerald-500/10 text-emerald-400"
+            : "border-white/15 bg-white/5 text-white/60"
+        }`}>
+          {callComplete ? (
+            <svg viewBox="0 0 16 16" className="size-3 fill-current"><path d="M13.5 3.5L6 11 2.5 7.5 1 9l5 5 9-9z"/></svg>
+          ) : (
+            <span className="size-1.5 rounded-full bg-amber-400 animate-pulse" />
+          )}
+          {callComplete ? "Appointment booked" : "Recording call"}
         </div>
       </div>
 
@@ -716,6 +726,8 @@ const getTheoStatus = (lastVisibleIndex: number | undefined) => {
 function TheoSmsDemo() {
   const [elapsed, setElapsed] = useState(0);
   const transcriptRef = useRef<HTMLDivElement>(null);
+  const userScrolledRef = useRef(false);
+  const scrollTimeoutRef = useRef<ReturnType<typeof setTimeout>>(undefined);
 
   useEffect(() => {
     const start = Date.now();
@@ -741,8 +753,21 @@ function TheoSmsDemo() {
 
   const status = getTheoStatus(latestMsgIndex);
 
+  const handleTheoScroll = () => {
+    const el = transcriptRef.current;
+    if (!el) return;
+    const isAtBottom = el.scrollTop + el.clientHeight >= el.scrollHeight - 10;
+    if (!isAtBottom) {
+      userScrolledRef.current = true;
+      clearTimeout(scrollTimeoutRef.current);
+      scrollTimeoutRef.current = setTimeout(() => {
+        userScrolledRef.current = false;
+      }, 3000);
+    }
+  };
+
   useEffect(() => {
-    if (transcriptRef.current) {
+    if (!userScrolledRef.current && transcriptRef.current) {
       transcriptRef.current.scrollTop = transcriptRef.current.scrollHeight;
     }
   }, [elapsed]);
@@ -752,8 +777,8 @@ function TheoSmsDemo() {
       <div className="flex h-[540px] flex-col overflow-hidden rounded-[30px] border border-[#332a3d] bg-[#120d19] p-4">
         <div className="mx-auto mb-4 mt-1 h-5 w-20 rounded-full bg-black" />
         <div className="text-center">
-          <div className="mx-auto grid size-14 place-items-center rounded-full border border-[var(--color-brand-violet)]/60 bg-[#2a1638] font-[family-name:var(--font-display)] text-2xl text-white">
-            T
+          <div className="relative mx-auto size-14 overflow-hidden rounded-full border border-[var(--color-brand-violet)]/60 mb-2">
+            <Image src="/images/agents/theo.png" alt="Theo" fill className="object-cover" />
           </div>
           <p className="mt-2 font-[family-name:var(--font-display)] text-2xl font-semibold text-white">
             Theo AI
@@ -776,7 +801,8 @@ function TheoSmsDemo() {
 
         <div
           ref={transcriptRef}
-          className="flex min-h-0 flex-1 flex-col gap-3 overflow-y-auto pr-1 [scrollbar-color:#cb6ce6_#120d19] [scrollbar-width:thin]"
+          onScroll={handleTheoScroll}
+          className="flex min-h-0 flex-1 flex-col gap-3 overflow-y-auto pr-1 scrollbar-thin scrollbar-thumb-[var(--color-brand-violet)]/40 scrollbar-track-transparent [scrollbar-color:#cb6ce6_#120d19] [scrollbar-width:thin]"
         >
           {visibleLines.map((line) => {
             const isTheo = line.from === "ai";
@@ -839,7 +865,7 @@ export function AriaDeepDive() {
 
           <div className="mt-10 grid gap-4 sm:grid-cols-2">
             {microFeatures.map(({ icon: Icon, title, body }) => (
-              <GlowCard key={title} glowColor="purple" customSize radius={12} className="p-4 flex flex-col gap-0">
+              <GlowCard key={title} glowColor="purple" customSize radius={12} className="p-4 flex flex-col gap-0 [--default-backdrop:rgba(18,12,28,0.9)]">
                 <Icon className="size-5 text-[var(--color-brand-violet)]" aria-hidden />
                 <p className="mt-4 font-[family-name:var(--font-display)] text-xl font-semibold text-white">
                   {title}

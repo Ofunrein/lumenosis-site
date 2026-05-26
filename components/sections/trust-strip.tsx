@@ -41,7 +41,13 @@ export function TrustStrip() {
       <p className="mb-6 text-center text-[var(--text-eyebrow)] font-semibold uppercase tracking-[0.14em] text-[var(--color-muted)]">
         Trusted by top real estate teams
       </p>
-      <div className="relative mx-auto overflow-hidden lg:max-w-5xl">
+      <div
+        className="relative mx-auto lg:max-w-5xl"
+        style={{
+          maskImage: 'linear-gradient(to right, transparent 0%, black 18%, black 82%, transparent 100%)',
+          WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 18%, black 82%, transparent 100%)',
+        }}
+      >
         <Carousel
           opts={{ loop: true }}
           plugins={[AutoScroll({ playOnInit: true, speed: 1, stopOnInteraction: false })]}
@@ -67,17 +73,6 @@ export function TrustStrip() {
             ))}
           </CarouselContent>
         </Carousel>
-        {/* Left progressive blur */}
-        <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-28">
-          <div className="absolute inset-0 bg-gradient-to-r from-[var(--color-bg-cream)] via-[var(--color-bg-cream)]/60 to-transparent dark:from-black/80 dark:via-black/40 dark:to-transparent" />
-          <div className="absolute inset-0 backdrop-blur-[2px] [mask-image:linear-gradient(to_right,black_0%,black_40%,transparent_100%)]" />
-        </div>
-
-        {/* Right progressive blur */}
-        <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-28">
-          <div className="absolute inset-0 bg-gradient-to-l from-[var(--color-bg-cream)] via-[var(--color-bg-cream)]/60 to-transparent dark:from-black/80 dark:via-black/40 dark:to-transparent" />
-          <div className="absolute inset-0 backdrop-blur-[2px] [mask-image:linear-gradient(to_left,black_0%,black_40%,transparent_100%)]" />
-        </div>
       </div>
     </section>
   );

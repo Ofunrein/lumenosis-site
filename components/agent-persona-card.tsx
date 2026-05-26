@@ -3,7 +3,7 @@ import type { Agent } from "@/content/agents";
 import { GlowCard } from "@/components/spotlight-card";
 
 const accentClass: Record<Agent["accent"], string> = {
-  violet: "bg-[var(--color-brand-violet)] text-white",
+  violet: "bg-[var(--color-brand-violet)]/15 text-[var(--color-brand-violet)]",
   indigo: "bg-[var(--color-brand-purple)]/15 text-[var(--color-brand-purple)]",
   gold: "bg-[var(--color-gold-italic)]/15 text-[var(--color-gold-italic)]",
   cyan: "bg-cyan-500/15 text-cyan-400",

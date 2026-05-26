@@ -1,8 +1,6 @@
 "use client";
 
-import { useRef, useState, useEffect, type ReactNode } from "react";
 import { Check } from "lucide-react";
-import Magnet from "@/components/magnet";
 import { StarButton } from "@/components/ui/star-button";
 import { SpotlightButtonWrapper } from "@/components/spotlight-button";
 
@@ -25,7 +23,6 @@ const paths = [
     popular: false,
     dark: false,
     cta: "Book a Demo →",
-    price: "Starts at $197/mo",
   },
   {
     path: "PATH 02 · SCALE",
@@ -45,73 +42,8 @@ const paths = [
     popular: true,
     dark: true,
     cta: "Book a Demo →",
-    price: "Starts at $397/mo",
   },
 ] as const;
-
-function MagneticCard({ children, className }: { children: ReactNode; className?: string }) {
-  const wrapRef = useRef<HTMLDivElement>(null);
-  const [pos, setPos] = useState({ x: 0, y: 0 });
-  const [isActive, setIsActive] = useState(false);
-  const [glowPos, setGlowPos] = useState({ x: 50, y: 50 });
-  const [glowVisible, setGlowVisible] = useState(false);
-
-  useEffect(() => {
-    const el = wrapRef.current;
-    if (!el) return;
-    const PAD = 70;
-    const STRENGTH = 5;
-
-    const onMove = (e: MouseEvent) => {
-      const rect = el.getBoundingClientRect();
-      const cx = rect.left + rect.width / 2;
-      const cy = rect.top + rect.height / 2;
-      const dx = e.clientX - cx;
-      const dy = e.clientY - cy;
-      const inRange =
-        Math.abs(e.clientX - rect.left) < rect.width / 2 + PAD &&
-        Math.abs(e.clientY - rect.top) < rect.height / 2 + PAD;
-      if (inRange) {
-        setIsActive(true);
-        setPos({ x: dx / STRENGTH, y: dy / STRENGTH });
-        setGlowPos({
-          x: ((e.clientX - rect.left) / rect.width) * 100,
-          y: ((e.clientY - rect.top) / rect.height) * 100,
-        });
-        setGlowVisible(true);
-      } else {
-        setIsActive(false);
-        setPos({ x: 0, y: 0 });
-        setGlowVisible(false);
-      }
-    };
-    window.addEventListener("mousemove", onMove);
-    return () => window.removeEventListener("mousemove", onMove);
-  }, []);
-
-  return (
-    <div ref={wrapRef} className="relative" style={{ display: "block" }}>
-      <div
-        style={{
-          transform: `translate3d(${pos.x}px, ${pos.y}px, 0)`,
-          transition: isActive ? "transform 0.25s ease-out" : "transform 0.45s ease-in-out",
-          willChange: "transform",
-        }}
-        className={className}
-      >
-        {/* Spotlight glow */}
-        <div
-          className="pointer-events-none absolute inset-0 rounded-[inherit] transition-opacity duration-300"
-          style={{
-            background: `radial-gradient(400px circle at ${glowPos.x}% ${glowPos.y}%, rgba(203,108,230,0.15), transparent 60%)`,
-            opacity: glowVisible ? 1 : 0,
-          }}
-        />
-        {children}
-      </div>
-    </div>
-  );
-}
 
 export function TwoWaysIn() {
   return (
@@ -130,11 +62,11 @@ export function TwoWaysIn() {
           {paths.map((path) => (
             <div key={path.path} className="relative">
               {path.popular && (
-                <span className="absolute top-0 right-6 -translate-y-1/2 z-20 rounded-full bg-[var(--color-gold-italic)] text-white px-3 py-1.5 text-[10px] font-bold uppercase tracking-widest whitespace-nowrap shadow-sm">
+                <span className="absolute top-0 right-6 -translate-y-1/2 z-20 rounded-full bg-[var(--color-gold-italic)] px-3 py-1.5 text-[10px] font-bold uppercase tracking-widest whitespace-nowrap shadow-sm text-black">
                   MOST POPULAR
                 </span>
               )}
-              <MagneticCard
+              <div
                 className={`isolate relative flex min-h-[560px] h-full flex-col overflow-hidden rounded-2xl border p-8 md:p-10 ${
                   path.dark
                     ? "md:-mt-4 border-[rgb(232_196_122_/_0.28)] bg-[#0b0711] text-white shadow-[0_34px_90px_rgb(10_7_17_/_0.32)] dark:shadow-[0_34px_90px_rgb(203_108_230_/_0.16)]"
@@ -220,39 +152,23 @@ export function TwoWaysIn() {
                   ))}
                 </ul>
 
-                <p
-                  className={`mb-4 text-xs font-semibold tracking-widest uppercase ${
-                    path.dark ? "text-[var(--color-gold-italic)]" : "text-[var(--color-brand-violet)]"
-                  }`}
-                >
-                  {path.price}
-                </p>
-
-                <Magnet
-                  padding={60}
-                  magnetStrength={5}
-                  wrapperClassName="w-full"
-                  innerClassName="w-full"
-                  style={{ position: "relative", display: "block", width: "100%" }}
-                >
-                  <SpotlightButtonWrapper className="w-full">
-                    <StarButton
-                      lightColor={path.dark ? "#e8c47a" : "#cb6ce6"}
-                      backgroundColor={path.dark ? "#e8c47a" : "#cb6ce6"}
-                      className={`h-12 w-full justify-center rounded-xl text-sm shadow-none ${
-                        path.dark
-                          ? "bg-[var(--color-gold-italic)] text-black [&_span]:!text-black"
-                          : "bg-[var(--color-brand-charcoal)] text-white dark:bg-[var(--color-brand-violet)] [&_span]:!text-white"
-                      }`}
-                      onClick={() => {
-                        document.getElementById("book")?.scrollIntoView({ behavior: "smooth" });
-                      }}
-                    >
-                      {path.cta}
-                    </StarButton>
-                  </SpotlightButtonWrapper>
-                </Magnet>
-              </MagneticCard>
+                <SpotlightButtonWrapper className="w-full">
+                  <StarButton
+                    lightColor={path.dark ? "#e8c47a" : "#cb6ce6"}
+                    backgroundColor={path.dark ? "#e8c47a" : "#cb6ce6"}
+                    className={`h-12 w-full justify-center rounded-xl text-sm shadow-none ${
+                      path.dark
+                        ? "bg-[var(--color-gold-italic)] text-black [&_span]:!text-black"
+                        : "bg-[var(--color-brand-charcoal)] text-white dark:bg-[var(--color-brand-violet)] [&_span]:!text-white"
+                    }`}
+                    onClick={() => {
+                      document.getElementById("book")?.scrollIntoView({ behavior: "smooth" });
+                    }}
+                  >
+                    {path.cta}
+                  </StarButton>
+                </SpotlightButtonWrapper>
+              </div>
             </div>
           ))}
         </div>
