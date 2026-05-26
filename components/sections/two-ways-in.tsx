@@ -66,7 +66,7 @@ export function TwoWaysIn() {
           {paths.map((path) => (
             <div key={path.path} className="relative">
               {path.popular && (
-                <span className="absolute -top-3 right-6 z-10 rounded-full bg-[var(--color-gold-italic)] text-black px-3 py-1 text-[10px] font-bold uppercase tracking-widest">
+                <span className="absolute top-0 right-6 -translate-y-1/2 z-20 rounded-full bg-[var(--color-gold-italic)] text-white px-3 py-1.5 text-[10px] font-bold uppercase tracking-widest whitespace-nowrap shadow-sm">
                   MOST POPULAR
                 </span>
               )}

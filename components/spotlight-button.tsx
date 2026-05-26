@@ -60,16 +60,16 @@ export function SpotlightButtonWrapper({
   mask-clip: padding-box, border-box;
   mask-composite: intersect;
 }
-.btn-spotlight::before {
+.dark .btn-spotlight::before {
   background-image: radial-gradient(
     var(--btn-size) var(--btn-size) at
     calc(var(--bx, 0) * 1px)
     calc(var(--by, 0) * 1px),
-    hsl(var(--hue, 280) 100% 60% / 0.7), transparent 100%
+    hsl(var(--hue, 280) 100% 70% / 1), transparent 100%
   );
   filter: brightness(1.5);
 }
-.dark .btn-spotlight::before {
+.dark .btn-spotlight::after {
   background-image: radial-gradient(
     var(--btn-size) var(--btn-size) at
     calc(var(--bx, 0) * 1px)
