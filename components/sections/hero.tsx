@@ -89,7 +89,7 @@ export function Hero() {
               glowColor="purple"
               customSize
               radius={24}
-              className="h-full w-full !p-0 overflow-hidden [--backdrop:transparent] [--backup-border:rgba(203,108,230,0.55)] dark:[--backup-border:rgba(203,108,230,0.65)]"
+              className="h-full w-full !p-0 overflow-hidden [--backdrop:transparent] [--backup-border:rgba(255,255,255,0.08)]"
             >
               <Image
                 src="/images/product-card-mockup.png"
