@@ -64,13 +64,13 @@ body {
 }
 
 .dark {
-  --color-bg-cream: #0d0a12;
+  --color-bg-cream: transparent;
   --color-ink-charcoal: #ffffff;
   --color-primary-indigo: #cb6ce6;
   --color-brand-violet: #cb6ce6;
   --color-brand-violet-soft: rgba(203, 108, 230, 0.15);
   --color-line: rgba(255, 255, 255, 0.1);
-  --color-muted: #ffffff;
+  --color-muted: rgba(255, 255, 255, 0.55);
   --color-gold-italic: #e8c47a;
   --color-shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.4);
 }

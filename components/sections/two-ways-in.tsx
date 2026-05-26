@@ -63,8 +63,13 @@ export function TwoWaysIn() {
 
         <div className="grid items-stretch gap-6 md:grid-cols-2 lg:gap-8">
           {paths.map((path) => (
+            <div key={path.path} className="relative">
+              {path.popular && (
+                <span className="absolute -top-3 right-6 z-10 rounded-full bg-[var(--color-gold-italic)] text-black px-3 py-1 text-[10px] font-bold uppercase tracking-widest">
+                  MOST POPULAR
+                </span>
+              )}
             <GlowCard
-              key={path.path}
               glowColor="purple"
               customSize
               className={`isolate flex min-h-[560px] h-full flex-col overflow-hidden rounded-2xl p-8 md:p-10 [--radius:18] [--size:180] ${
@@ -80,12 +85,6 @@ export function TwoWaysIn() {
                     : "bg-[radial-gradient(circle_at_8%_0%,rgb(203_108_230_/_0.08),transparent_28%),linear-gradient(180deg,rgb(255_253_247_/_0.96),rgb(248_244_233_/_0.86))] dark:bg-[radial-gradient(circle_at_8%_0%,rgb(203_108_230_/_0.12),transparent_28%),linear-gradient(180deg,rgb(23_17_31_/_0.96),rgb(12_9_17_/_0.94))]"
                 }`}
               />
-
-              {path.popular && (
-                <span className="absolute -top-4 right-8 rounded-full bg-[var(--color-gold-italic)] px-4 py-2 text-[10px] font-bold uppercase tracking-widest text-black shadow-[0_12px_30px_rgb(232_196_122_/_0.28)]">
-                  MOST POPULAR
-                </span>
-              )}
 
               <p
                 className={`mb-5 text-[var(--text-eyebrow)] font-semibold uppercase tracking-[0.18em] ${
@@ -189,6 +188,7 @@ export function TwoWaysIn() {
                 </StarButton>
               </Magnet>
             </GlowCard>
+            </div>
           ))}
         </div>
       </div>

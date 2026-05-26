@@ -36,7 +36,7 @@ export function TrustStrip() {
   return (
     <section
       aria-label="Trusted by leading real estate teams"
-      className="border-b border-[var(--color-line)] bg-[#ede8db] py-8 dark:bg-[#181020]"
+      className="border-b border-[var(--color-line)] bg-[#ede8db] py-8 dark:bg-black/30"
     >
       <p className="mb-6 text-center text-[var(--text-eyebrow)] font-semibold uppercase tracking-[0.14em] text-[var(--color-muted)]">
         Trusted by top real estate teams
@@ -67,8 +67,8 @@ export function TrustStrip() {
             ))}
           </CarouselContent>
         </Carousel>
-        <div className="pointer-events-none absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-[#ede8db] to-transparent dark:hidden" />
-        <div className="pointer-events-none absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-[#ede8db] to-transparent dark:hidden" />
+        <div className="pointer-events-none absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-[var(--color-bg-cream)] to-transparent dark:hidden" />
+        <div className="pointer-events-none absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-[var(--color-bg-cream)] to-transparent dark:hidden" />
       </div>
     </section>
   );

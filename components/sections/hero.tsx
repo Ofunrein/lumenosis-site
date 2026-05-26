@@ -25,7 +25,7 @@ export function Hero() {
   return (
     <section
       id="top"
-      className="relative overflow-hidden border-b border-[var(--color-line)] bg-[#f5f4ee] pb-16 pt-20 dark:bg-transparent md:pt-28"
+      className="relative overflow-hidden border-b border-[var(--color-line)] bg-[var(--color-bg-cream)] dark:bg-transparent pb-16 pt-20 md:pt-28"
     >
       <div className="relative z-10 mx-auto grid w-[min(1200px,calc(100%-32px))] items-start gap-10 md:grid-cols-[1.05fr_0.95fr] md:gap-12">
         <div>
@@ -80,7 +80,7 @@ export function Hero() {
                 backgroundColor="transparent"
                 className="h-11 border border-[var(--color-line)] bg-[#fbf8ef] px-5 text-sm text-[var(--color-ink-charcoal)] hover:bg-[var(--color-brand-violet-soft)] dark:bg-[#14101c] [&_span]:text-[var(--color-ink-charcoal)] dark:[&_span]:text-white"
               >
-                <a href="#book">Book a discovery call</a>
+                <a href="#vsl">Watch 90s overview</a>
               </StarButton>
             </Magnet>
           </div>
