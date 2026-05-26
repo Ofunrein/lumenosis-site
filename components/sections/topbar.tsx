@@ -38,11 +38,12 @@ export function Topbar() {
     <header className="fixed top-0 left-0 right-0 z-50 flex justify-center pt-3 md:pt-4 pointer-events-none">
       <nav
         className={cn(
-          "pointer-events-auto flex items-center justify-between gap-4 rounded-full border border-[var(--color-line)] px-4 py-4 transition-all duration-300 ease-out",
-          "bg-[var(--color-bg-cream)]/80 dark:bg-black/75 backdrop-blur-md",
+          "pointer-events-auto flex items-center justify-between gap-4 rounded-full border border-[var(--color-line)] dark:border-white/[0.08] px-4 py-4 transition-all duration-300 ease-out",
+          "bg-[var(--color-bg-cream)]/70 dark:bg-black/40 backdrop-blur-xl",
+          "dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.08),0_0_0_1px_rgba(255,255,255,0.04)]",
           scrolled
-            ? "w-[min(860px,calc(100%-32px))] shadow-md"
-            : "w-[min(1000px,calc(100%-32px))] shadow-sm",
+            ? "w-[min(860px,calc(100%-32px))] shadow-md dark:shadow-[0_0_30px_rgba(203,108,230,0.1)]"
+            : "w-[min(1000px,calc(100%-32px))] shadow-sm dark:shadow-[0_0_30px_rgba(203,108,230,0.1)]",
         )}
       >
         <a href="#top" className="inline-flex items-center gap-2 shrink-0 ml-1">
