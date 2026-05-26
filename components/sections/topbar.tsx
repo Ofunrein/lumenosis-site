@@ -37,7 +37,7 @@ export function Topbar() {
     <header className="fixed top-0 left-0 right-0 z-50 flex justify-center pt-3 md:pt-4 pointer-events-none">
       <nav
         className={cn(
-          "pointer-events-auto flex items-center justify-between gap-4 rounded-full border border-[var(--color-line)] px-4 py-2 transition-all duration-300 ease-out",
+          "pointer-events-auto flex items-center justify-between gap-4 rounded-full border border-[var(--color-line)] px-4 py-3 transition-all duration-300 ease-out",
           "bg-[var(--color-bg-cream)]/80 dark:bg-black/75 backdrop-blur-md",
           scrolled
             ? "w-[min(860px,calc(100%-32px))] shadow-md"
@@ -52,7 +52,7 @@ export function Topbar() {
             height={28}
             className="rounded-lg"
           />
-          <span className="font-semibold text-sm text-[var(--color-ink-charcoal)]">
+          <span className="font-semibold text-base text-[var(--color-ink-charcoal)]">
             Lumenosis <span className="text-[var(--color-brand-violet)]">AI</span>
           </span>
         </a>
@@ -62,7 +62,7 @@ export function Topbar() {
             <a
               key={link.label}
               href={link.href}
-              className="px-3 py-1.5 text-sm text-[var(--color-muted)] hover:text-[var(--color-ink-charcoal)] transition-colors rounded-full hover:bg-[var(--color-brand-violet-soft)]"
+              className="px-3 py-1.5 text-base text-[var(--color-muted)] hover:text-[var(--color-ink-charcoal)] transition-colors rounded-full hover:bg-[var(--color-brand-violet-soft)]"
             >
               {link.label}
             </a>
