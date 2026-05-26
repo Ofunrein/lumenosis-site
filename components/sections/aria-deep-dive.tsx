@@ -440,19 +440,71 @@ function IrisEmailDemo() {
 
 function AriaPhoneDemo() {
   const audioRef = useRef<HTMLAudioElement>(null);
+  const audioCtxRef = useRef<AudioContext | null>(null);
+  const analyserRef = useRef<AnalyserNode | null>(null);
+  const sourceRef = useRef<MediaElementAudioSourceNode | null>(null);
+  const rafRef = useRef<number>(0);
   const [playing, setPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
+  const [bars, setBars] = useState<number[]>(Array.from({ length: 40 }, (_, i) => 10 + Math.abs(Math.sin(i * 0.7) * 30)));
 
-  const togglePlay = () => {
+  // Connect Web Audio API when first play
+  const setupAudio = () => {
+    const audio = audioRef.current;
+    if (!audio || audioCtxRef.current) return;
+
+    const audioCtx = new (window.AudioContext || (window as typeof window & { webkitAudioContext?: typeof AudioContext }).webkitAudioContext)();
+    const analyser = audioCtx.createAnalyser();
+    analyser.fftSize = 128; // 64 frequency bins
+    const source = audioCtx.createMediaElementSource(audio);
+    source.connect(analyser);
+    analyser.connect(audioCtx.destination);
+
+    audioCtxRef.current = audioCtx;
+    analyserRef.current = analyser;
+    sourceRef.current = source;
+  };
+
+  const animateBars = () => {
+    const analyser = analyserRef.current;
+    if (!analyser) return;
+
+    const dataArray = new Uint8Array(analyser.frequencyBinCount); // 64 bins
+    analyser.getByteFrequencyData(dataArray);
+
+    // Map 64 frequency bins to 40 bars
+    const newBars = Array.from({ length: 40 }, (_, i) => {
+      const binIndex = Math.floor((i / 40) * 64);
+      const value = dataArray[binIndex];
+      return Math.max(6, (value / 255) * 100); // 6% to 100% height
+    });
+    setBars(newBars);
+
+    rafRef.current = requestAnimationFrame(animateBars);
+  };
+
+  const togglePlay = async () => {
     const audio = audioRef.current;
     if (!audio) return;
+
+    if (!audioCtxRef.current) {
+      setupAudio();
+    }
+
+    if (audioCtxRef.current?.state === "suspended") {
+      await audioCtxRef.current.resume();
+    }
+
     if (playing) {
       audio.pause();
+      cancelAnimationFrame(rafRef.current);
+      setPlaying(false);
     } else {
-      audio.play();
+      await audio.play();
+      setPlaying(true);
+      animateBars();
     }
-    setPlaying(!playing);
   };
 
   useEffect(() => {
@@ -460,7 +512,12 @@ function AriaPhoneDemo() {
     if (!audio) return;
     const onTime = () => setCurrentTime(audio.currentTime);
     const onLoad = () => setDuration(audio.duration);
-    const onEnded = () => setPlaying(false);
+    const onEnded = () => {
+      setPlaying(false);
+      cancelAnimationFrame(rafRef.current);
+      // Reset bars to static
+      setBars(Array.from({ length: 40 }, (_, i) => 10 + Math.abs(Math.sin(i * 0.7) * 30)));
+    };
     audio.addEventListener("timeupdate", onTime);
     audio.addEventListener("loadedmetadata", onLoad);
     audio.addEventListener("ended", onEnded);
@@ -468,6 +525,7 @@ function AriaPhoneDemo() {
       audio.removeEventListener("timeupdate", onTime);
       audio.removeEventListener("loadedmetadata", onLoad);
       audio.removeEventListener("ended", onEnded);
+      cancelAnimationFrame(rafRef.current);
     };
   }, []);
 
@@ -478,12 +536,6 @@ function AriaPhoneDemo() {
   };
 
   const progress = duration > 0 ? currentTime / duration : 0;
-
-  // 40 bars — heights vary, active ones pulse during playback
-  const bars = Array.from({ length: 40 }, (_, i) => ({
-    h: 10 + Math.abs(Math.sin(i * 0.7) * 28 + Math.sin(i * 1.3) * 14),
-    active: i / 40 < progress,
-  }));
 
   return (
     <div className="flex flex-col gap-5 w-full p-6">
@@ -499,7 +551,7 @@ function AriaPhoneDemo() {
         </div>
       </div>
 
-      {/* Audio player card */}
+      {/* Audio player */}
       <div className="rounded-xl bg-white/5 border border-white/10 p-4 space-y-4">
         <div className="flex items-center gap-3">
           <button
@@ -516,31 +568,26 @@ function AriaPhoneDemo() {
           </button>
           <div>
             <p className="text-sm font-semibold text-white">Oak Ridge inbound call</p>
-            <p className="text-xs text-white/90">Availability, tour time, valuation handoff.</p>
+            <p className="text-xs text-white/70">Availability, tour time, valuation handoff.</p>
           </div>
         </div>
 
-        {/* Waveform */}
-        <div className="flex items-center gap-0.5 h-12 w-full">
-          {bars.map((b, i) => (
+        {/* Real-time waveform */}
+        <div className="flex items-center gap-[2px] h-14 w-full">
+          {bars.map((h, i) => (
             <div
               key={i}
-              className={`flex-1 rounded-full transition-colors duration-100 ${
-                b.active
+              className={`flex-1 rounded-full transition-all duration-75 ${
+                i / 40 < progress
                   ? "bg-[var(--color-brand-violet)]"
-                  : playing
-                  ? "bg-[var(--color-brand-violet)]/25"
-                  : "bg-white/20"
+                  : "bg-[var(--color-brand-violet)]/30"
               }`}
-              style={{
-                height: `${b.h}%`,
-                animationDelay: `${i * 0.05}s`,
-              }}
+              style={{ height: `${h}%` }}
             />
           ))}
         </div>
 
-        {/* Progress bar */}
+        {/* Clickable progress bar */}
         <div className="space-y-1">
           <div
             className="h-0.5 w-full cursor-pointer rounded-full bg-white/10 relative"
@@ -557,9 +604,9 @@ function AriaPhoneDemo() {
               style={{ width: `${progress * 100}%` }}
             />
           </div>
-          <div className="flex justify-between text-xs text-white/40">
+          <div className="flex justify-between text-xs text-white/50">
             <span>{fmt(currentTime)}</span>
-            <span>{duration > 0 ? fmt(duration) : "2:14"}</span>
+            <span>{duration > 0 ? fmt(duration) : "4:41"}</span>
           </div>
         </div>
       </div>
@@ -567,15 +614,15 @@ function AriaPhoneDemo() {
       {/* Feature bullets */}
       <div className="grid gap-2">
         {["Property details provided", "Questions answered", "Viewing booked automatically"].map((f) => (
-          <div key={f} className="flex items-center gap-2 text-sm text-white/90">
-            <span className="size-4 grid place-items-center rounded-full bg-[var(--color-brand-violet)]/15 text-[var(--color-brand-violet)] text-xs">✓</span>
+          <div key={f} className="flex items-center gap-2 text-sm text-white/80">
+            <span className="size-4 grid place-items-center rounded-full bg-[var(--color-brand-violet)]/20 text-[var(--color-brand-violet)] text-xs">✓</span>
             {f}
           </div>
         ))}
       </div>
 
-      {/* Hidden audio element */}
-      <audio ref={audioRef} src="/aria-oak-ridge-call.mp3" preload="metadata" />
+      {/* Hidden audio */}
+      <audio ref={audioRef} src="/aria-oak-ridge-call.mp3" preload="metadata" crossOrigin="anonymous" />
     </div>
   );
 }
@@ -744,10 +791,10 @@ export function AriaDeepDive() {
 
           {/* BOTTOM: Phone left + Call right — equal halves */}
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
-            <GlowCard glowColor="purple" customSize className="min-h-[560px] flex items-center justify-center">
+            <GlowCard glowColor="purple" customSize className="min-h-[560px] flex items-center justify-center dark:bg-black/60 dark:backdrop-blur-sm border dark:border-white/10">
               <TheoSmsDemo />
             </GlowCard>
-            <GlowCard glowColor="purple" customSize className="min-h-[560px] flex items-center justify-center">
+            <GlowCard glowColor="purple" customSize className="min-h-[560px] flex items-center justify-center dark:bg-black/60 dark:backdrop-blur-sm border dark:border-white/10">
               <AriaPhoneDemo />
             </GlowCard>
           </div>
