@@ -28,13 +28,13 @@ export function Hero() {
   return (
     <section
       id="top"
-      className="relative border-b border-[var(--color-line)] bg-[var(--color-bg-cream)] dark:bg-transparent pt-20 md:pt-0"
+      className="relative border-b border-[var(--color-line)] bg-[var(--color-bg-cream)] pt-20 pb-10 dark:bg-transparent md:pb-0 md:pt-0"
     >
       {/* Two-column: text left, image right — image fills full column height */}
-      <div className="mx-auto grid w-full px-5 sm:px-6 md:w-[min(1400px,100%)] md:px-0 md:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] md:min-h-[580px] lg:min-h-[660px] md:items-stretch">
+      <div className="mx-auto grid w-full gap-8 px-5 sm:px-6 md:w-[min(1400px,100%)] md:gap-0 md:px-0 md:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] md:min-h-[580px] lg:min-h-[660px] md:items-stretch">
 
         {/* Text column */}
-        <div className="flex flex-col justify-center px-1 py-14 sm:px-4 sm:py-16 md:pl-[max(32px,calc((100vw-1400px)/2+40px))] md:pr-14 lg:pl-[max(48px,calc((100vw-1400px)/2+60px))] text-center md:text-left">
+        <div className="flex flex-col justify-center px-1 py-12 sm:px-4 sm:py-16 md:pl-[max(32px,calc((100vw-1400px)/2+40px))] md:pr-14 lg:pl-[max(48px,calc((100vw-1400px)/2+60px))] text-center md:text-left">
           <h1 className="font-[family-name:var(--font-display)] text-[clamp(2.4rem,4.8vw,5rem)] font-semibold leading-[1.04] tracking-tight text-[var(--color-ink-charcoal)]">
             AI agents for your{" "}
             <span
@@ -83,7 +83,7 @@ export function Hero() {
         </div>
 
         {/* Image column */}
-        <div className="relative mx-auto mt-2 w-full max-w-[420px] aspect-[11/13] md:mt-0 md:max-w-none md:aspect-auto md:h-auto md:min-h-full md:py-8 md:pr-8">
+        <div className="relative mx-auto mt-4 w-full max-w-[350px] px-2 aspect-[11/13] md:mt-0 md:max-w-none md:px-0 md:aspect-auto md:h-auto md:min-h-full md:py-8 md:pr-8">
           <div className="absolute inset-0 md:inset-y-8 md:right-8">
             <GlowCard
               glowColor="purple"
@@ -108,13 +108,13 @@ export function Hero() {
             label="Avg lead response"
             value="60 seconds"
             icon={<Clock className="size-4" />}
-            className="absolute left-3 top-6 md:-left-5 md:top-20 z-10"
+            className="absolute left-5 top-6 md:-left-5 md:top-20 z-10"
           />
           <GlassStatCallout
             label="Always-on coverage"
             value="24 / 7"
             icon={<ShieldCheck className="size-4" />}
-            className="absolute left-3 bottom-6 md:-left-5 md:bottom-20 z-10"
+            className="absolute left-5 bottom-6 md:-left-5 md:bottom-20 z-10"
           />
         </div>
       </div>

@@ -127,7 +127,7 @@ export function Topbar() {
               <button
                 type="button"
                 onClick={toggleTheme}
-                className="grid size-10 place-items-center rounded-full border border-[rgba(47,40,78,0.18)] bg-[rgba(255,255,255,0.68)] text-[rgba(47,40,78,0.88)] shadow-[inset_0_1px_0_rgba(255,255,255,0.55),0_0_0_1px_rgba(47,40,78,0.03)] transition-all duration-200 hover:border-[rgba(47,40,78,0.3)] hover:text-[rgba(47,40,78,1)] dark:border-[rgba(255,255,255,0.16)] dark:bg-[rgba(14,13,26,0.82)] dark:text-[rgba(243,242,251,0.9)] dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.08),0_0_0_1px_rgba(255,255,255,0.04)] dark:hover:border-[rgba(255,255,255,0.28)] dark:hover:text-white"
+                className="grid size-10 place-items-center text-[rgba(47,40,78,0.88)] transition-colors duration-200 hover:text-[rgba(47,40,78,1)] dark:text-[rgba(243,242,251,0.9)] dark:hover:text-white"
                 aria-label="Toggle dark/light mode"
               >
                 <ThemeToggleIcon dark={resolvedTheme === "dark"} />
@@ -173,7 +173,7 @@ export function Topbar() {
                 <button
                   type="button"
                   onClick={toggleTheme}
-                  className="grid size-10 place-items-center rounded-full border border-[rgba(47,40,78,0.18)] bg-[rgba(255,255,255,0.68)] text-[rgba(47,40,78,0.88)] shadow-[inset_0_1px_0_rgba(255,255,255,0.55),0_0_0_1px_rgba(47,40,78,0.03)] transition-all duration-200 hover:border-[rgba(47,40,78,0.3)] hover:text-[rgba(47,40,78,1)] dark:border-[rgba(255,255,255,0.18)] dark:bg-[rgba(14,13,26,0.88)] dark:text-[rgba(243,242,251,0.9)] dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.08),0_0_0_1px_rgba(255,255,255,0.04)] dark:hover:border-[rgba(255,255,255,0.28)] dark:hover:text-white"
+                  className="grid size-10 place-items-center text-[rgba(47,40,78,0.88)] transition-colors duration-200 hover:text-[rgba(47,40,78,1)] dark:text-[rgba(243,242,251,0.9)] dark:hover:text-white"
                   aria-label="Toggle dark/light mode"
                 >
                   <ThemeToggleIcon dark={resolvedTheme === "dark"} />
