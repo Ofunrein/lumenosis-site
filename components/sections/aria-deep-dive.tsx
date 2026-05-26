@@ -9,8 +9,6 @@ import {
   Mail,
   MapPin,
   MessageSquare,
-  Pause,
-  Play,
   Ruler,
 } from "lucide-react";
 import Image from "next/image";
@@ -274,55 +272,6 @@ function TypingDots({ align = "left" }: { align?: "left" | "right" }) {
   );
 }
 
-function VoiceWave({ playing = false, compact = false }: { playing?: boolean; compact?: boolean }) {
-  const bars = [
-    { id: "wave-01", height: 18 },
-    { id: "wave-02", height: 28 },
-    { id: "wave-03", height: 14 },
-    { id: "wave-04", height: 38 },
-    { id: "wave-05", height: 22 },
-    { id: "wave-06", height: 46 },
-    { id: "wave-07", height: 20 },
-    { id: "wave-08", height: 34 },
-    { id: "wave-09", height: 16 },
-    { id: "wave-10", height: 42 },
-    { id: "wave-11", height: 24 },
-    { id: "wave-12", height: 30 },
-    { id: "wave-13", height: 18 },
-    { id: "wave-14", height: 36 },
-    { id: "wave-15", height: 20 },
-    { id: "wave-16", height: 44 },
-    { id: "wave-17", height: 26 },
-    { id: "wave-18", height: 32 },
-    { id: "wave-19", height: 22 },
-    { id: "wave-20", height: 40 },
-  ];
-
-  return (
-    <div
-      role="img"
-      className={`flex w-full items-center justify-center gap-1.5 rounded-full border border-[#3f3350] bg-[#140f1d] px-5 ${
-        compact ? "h-14" : "h-16"
-      }`}
-      aria-label={playing ? "Call audio playing" : "Call audio paused"}
-    >
-      {bars.map((bar, index) => (
-        <span
-          key={bar.id}
-          className={`w-1.5 rounded-full bg-[var(--color-brand-violet)] ${
-            playing ? "animate-[voice-wave_780ms_ease-in-out_infinite]" : ""
-          }`}
-          style={{
-            height: bar.height,
-            animationDelay: `${index * 52}ms`,
-            opacity: playing ? 1 : 0.72,
-          }}
-        />
-      ))}
-    </div>
-  );
-}
-
 function ValuationLinkCard() {
   return (
     <div className="mt-4 rounded-2xl border border-[var(--color-brand-violet)]/40 bg-[var(--color-brand-violet)]/15 p-4">
@@ -490,67 +439,143 @@ function IrisEmailDemo() {
 }
 
 function AriaPhoneDemo() {
+  const audioRef = useRef<HTMLAudioElement>(null);
   const [playing, setPlaying] = useState(false);
-  const [elapsed, setElapsed] = useState(0);
+  const [currentTime, setCurrentTime] = useState(0);
+  const [duration, setDuration] = useState(0);
+
+  const togglePlay = () => {
+    const audio = audioRef.current;
+    if (!audio) return;
+    if (playing) {
+      audio.pause();
+    } else {
+      audio.play();
+    }
+    setPlaying(!playing);
+  };
 
   useEffect(() => {
-    if (!playing) return;
-    const id = window.setInterval(() => {
-      setElapsed((current) => (current >= 134 ? 0 : current + 1));
-    }, 1000);
-    return () => window.clearInterval(id);
-  }, [playing]);
+    const audio = audioRef.current;
+    if (!audio) return;
+    const onTime = () => setCurrentTime(audio.currentTime);
+    const onLoad = () => setDuration(audio.duration);
+    const onEnded = () => setPlaying(false);
+    audio.addEventListener("timeupdate", onTime);
+    audio.addEventListener("loadedmetadata", onLoad);
+    audio.addEventListener("ended", onEnded);
+    return () => {
+      audio.removeEventListener("timeupdate", onTime);
+      audio.removeEventListener("loadedmetadata", onLoad);
+      audio.removeEventListener("ended", onEnded);
+    };
+  }, []);
 
-  const minutes = Math.floor(elapsed / 60);
-  const seconds = String(elapsed % 60).padStart(2, "0");
-  const progress = `${Math.min(100, (elapsed / 134) * 100)}%`;
+  const fmt = (s: number) => {
+    const m = Math.floor(s / 60);
+    const sec = Math.floor(s % 60);
+    return `${m}:${sec.toString().padStart(2, "0")}`;
+  };
+
+  const progress = duration > 0 ? currentTime / duration : 0;
+
+  // 40 bars — heights vary, active ones pulse during playback
+  const bars = Array.from({ length: 40 }, (_, i) => ({
+    h: 10 + Math.abs(Math.sin(i * 0.7) * 28 + Math.sin(i * 1.3) * 14),
+    active: i / 40 < progress,
+  }));
 
   return (
-    <div className="mx-auto w-full max-w-[440px] rounded-[28px] border border-[#3f3350] bg-[#120d19] p-5 shadow-[0_34px_120px_rgba(0,0,0,0.38)]">
+    <div className="flex flex-col gap-5 w-full p-6">
+      {/* Header */}
       <div className="text-center">
-        <div className="mx-auto grid size-14 place-items-center rounded-full border border-[var(--color-brand-violet)]/60 bg-[#2a1638] font-[family-name:var(--font-display)] text-2xl text-white">
+        <div className="grid size-14 place-items-center rounded-full bg-[var(--color-brand-violet)]/20 text-[var(--color-brand-violet)] mx-auto mb-3 font-[family-name:var(--font-display)] font-semibold text-xl">
           A
         </div>
-        <p className="mt-2 font-[family-name:var(--font-display)] text-2xl font-semibold text-white">
-          Aria
-        </p>
-        <div className="mt-2 inline-flex items-center gap-2 rounded-full border border-[var(--color-gold-italic)]/45 bg-[#241d16] px-4 py-1.5 text-xs font-semibold text-white">
-          <span className="size-2 rounded-full bg-[var(--color-gold-italic)]" />
+        <p className="font-[family-name:var(--font-display)] text-lg font-semibold text-white">Aria</p>
+        <div className="mt-1.5 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1 text-xs text-white/60">
+          <span className="size-1.5 rounded-full bg-amber-400 animate-pulse" />
           Recording call
         </div>
       </div>
 
-      <div className="mt-5 rounded-[24px] border border-[#3f3350] bg-[#09070d] p-4">
-        <div className="flex items-center gap-4">
+      {/* Audio player card */}
+      <div className="rounded-xl bg-white/5 border border-white/10 p-4 space-y-4">
+        <div className="flex items-center gap-3">
           <button
             type="button"
-            aria-label={playing ? "Pause Aria call recording" : "Play Aria call recording"}
-            onClick={() => setPlaying((current) => !current)}
-            className="grid size-12 shrink-0 place-items-center rounded-full bg-[var(--color-brand-violet)] text-white shadow-[0_0_32px_rgba(203,108,230,0.38)]"
+            onClick={togglePlay}
+            className="grid size-10 shrink-0 place-items-center rounded-full bg-[var(--color-brand-violet)] text-white hover:scale-105 transition-transform"
+            aria-label={playing ? "Pause" : "Play"}
           >
-            {playing ? <Pause className="size-5" /> : <Play className="ml-0.5 size-5" />}
+            {playing ? (
+              <svg viewBox="0 0 24 24" className="size-4 fill-current"><rect x="6" y="5" width="4" height="14"/><rect x="14" y="5" width="4" height="14"/></svg>
+            ) : (
+              <svg viewBox="0 0 24 24" className="size-4 fill-current"><path d="M8 5v14l11-7z"/></svg>
+            )}
           </button>
-          <div className="min-w-0 flex-1">
+          <div>
             <p className="text-sm font-semibold text-white">Oak Ridge inbound call</p>
-            <p className="text-xs text-white/78">Availability, tour time, valuation handoff.</p>
+            <p className="text-xs text-white/50">Availability, tour time, valuation handoff.</p>
           </div>
         </div>
-        <div className="mt-5">
-          <VoiceWave playing={playing} />
-          <div className="mt-4 h-1.5 overflow-hidden rounded-full bg-[#2b2334]">
+
+        {/* Waveform */}
+        <div className="flex items-center gap-0.5 h-12 w-full">
+          {bars.map((b, i) => (
             <div
-              className="h-full rounded-full bg-[var(--color-brand-violet)] transition-[width] duration-500"
-              style={{ width: progress }}
+              key={i}
+              className={`flex-1 rounded-full transition-colors duration-100 ${
+                b.active
+                  ? "bg-[var(--color-brand-violet)]"
+                  : playing
+                  ? "bg-[var(--color-brand-violet)]/25"
+                  : "bg-white/20"
+              }`}
+              style={{
+                height: `${b.h}%`,
+                animationDelay: `${i * 0.05}s`,
+              }}
+            />
+          ))}
+        </div>
+
+        {/* Progress bar */}
+        <div className="space-y-1">
+          <div
+            className="h-0.5 w-full cursor-pointer rounded-full bg-white/10 relative"
+            onClick={(e) => {
+              const audio = audioRef.current;
+              if (!audio || !duration) return;
+              const rect = e.currentTarget.getBoundingClientRect();
+              const pct = (e.clientX - rect.left) / rect.width;
+              audio.currentTime = pct * duration;
+            }}
+          >
+            <div
+              className="absolute inset-y-0 left-0 rounded-full bg-[var(--color-brand-violet)]"
+              style={{ width: `${progress * 100}%` }}
             />
           </div>
-          <div className="mt-2 flex justify-between text-xs font-semibold text-white">
-            <span>
-              {minutes}:{seconds}
-            </span>
-            <span>2:14</span>
+          <div className="flex justify-between text-xs text-white/40">
+            <span>{fmt(currentTime)}</span>
+            <span>{duration > 0 ? fmt(duration) : "2:14"}</span>
           </div>
         </div>
       </div>
+
+      {/* Feature bullets */}
+      <div className="grid gap-2">
+        {["Property details provided", "Questions answered", "Viewing booked automatically"].map((f) => (
+          <div key={f} className="flex items-center gap-2 text-sm text-white/60">
+            <span className="size-4 grid place-items-center rounded-full bg-[var(--color-brand-violet)]/15 text-[var(--color-brand-violet)] text-xs">✓</span>
+            {f}
+          </div>
+        ))}
+      </div>
+
+      {/* Hidden audio element */}
+      <audio ref={audioRef} src="/aria-oak-ridge-call.mp3" preload="metadata" />
     </div>
   );
 }
