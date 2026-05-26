@@ -1,16 +1,31 @@
+"use client";
+
 import Image from "next/image";
+import { useEffect, useRef, useState } from "react";
 import { GlowCard } from "@/components/spotlight-card";
 
 export function FounderVSL() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) setVisible(true); }, { threshold: 0.15 });
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+
   return (
     <section
+      ref={sectionRef}
       id="vsl"
       className="border-b border-[var(--color-line)] bg-[#f8f6ef] py-16 dark:bg-transparent md:py-24"
     >
       <div className="mx-auto grid w-[min(1200px,calc(100%-32px))] items-center gap-10 md:grid-cols-[0.85fr_1.15fr]">
         <div>
           <p className="mb-3 text-[var(--text-eyebrow)] font-semibold uppercase tracking-[0.14em] text-[var(--color-brand-purple)]">
-            01 — Why this matters
+            01 — Watch First
           </p>
           <h2 className="font-[family-name:var(--font-display)] text-[length:var(--text-display-section)] font-semibold leading-[1.05] text-[var(--color-ink-charcoal)]">
             Why most agents are losing to faster competitors in 2026 —{" "}
@@ -18,31 +33,19 @@ export function FounderVSL() {
           </h2>
           <ul className="mt-6 grid gap-3 text-[var(--color-muted)]">
             <li className="flex gap-3">
-              <span
-                aria-hidden
-                className="mt-2 size-1.5 shrink-0 rounded-full bg-[var(--color-brand-purple)]"
-              />
+              <span aria-hidden className="mt-2 size-1.5 shrink-0 rounded-full bg-[var(--color-brand-purple)]" />
               <span>Speed-to-lead beats lead volume every time.</span>
             </li>
             <li className="flex gap-3">
-              <span
-                aria-hidden
-                className="mt-2 size-1.5 shrink-0 rounded-full bg-[var(--color-brand-purple)]"
-              />
+              <span aria-hidden className="mt-2 size-1.5 shrink-0 rounded-full bg-[var(--color-brand-purple)]" />
               <span>Most teams already have leads. They lose them to slow follow-up.</span>
             </li>
             <li className="flex gap-3">
-              <span
-                aria-hidden
-                className="mt-2 size-1.5 shrink-0 rounded-full bg-[var(--color-brand-purple)]"
-              />
+              <span aria-hidden className="mt-2 size-1.5 shrink-0 rounded-full bg-[var(--color-brand-purple)]" />
               <span>AI agents are not a chatbot. They are a front desk.</span>
             </li>
             <li className="flex gap-3">
-              <span
-                aria-hidden
-                className="mt-2 size-1.5 shrink-0 rounded-full bg-[var(--color-brand-purple)]"
-              />
+              <span aria-hidden className="mt-2 size-1.5 shrink-0 rounded-full bg-[var(--color-brand-purple)]" />
               <span>Done right, the first booked appointment lands inside week three.</span>
             </li>
           </ul>
@@ -86,15 +89,13 @@ export function FounderVSL() {
                 <button
                   type="button"
                   aria-label="Play overview video"
-                  className="absolute inset-0 grid place-items-center text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-brand-purple)] focus-visible:ring-offset-2 focus-visible:ring-offset-[#fffaf0] dark:focus-visible:ring-offset-[#14111d]"
+                  className="absolute inset-0 grid place-items-center text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-brand-purple)]"
                 >
-                  <span className="grid size-20 place-items-center rounded-full border border-white/35 bg-[var(--color-brand-purple)] shadow-[0_18px_54px_rgb(203_108_230_/_0.45)] transition group-hover:scale-105 sm:size-24">
-                    <svg
-                      viewBox="0 0 24 24"
-                      className="ml-1 size-8"
-                      fill="currentColor"
-                      aria-hidden
-                    >
+                  <span
+                    className={`grid place-items-center rounded-full border border-white/35 bg-[var(--color-brand-purple)] shadow-[0_12px_36px_rgb(203_108_230_/_0.45)] transition-transform hover:scale-105 size-14 sm:size-16 ${visible ? "scale-100 opacity-100" : "scale-90 opacity-0"}`}
+                    style={{ transition: "opacity 0.4s, transform 0.4s" }}
+                  >
+                    <svg viewBox="0 0 24 24" className="ml-0.5 size-5" fill="currentColor" aria-hidden>
                       <title>Play overview</title>
                       <path d="M8 5v14l11-7z" />
                     </svg>
@@ -102,11 +103,11 @@ export function FounderVSL() {
                 </button>
               </div>
 
-              <div className="grid gap-3 bg-[#fff7e8] p-4 text-sm text-[var(--color-muted)] dark:bg-[#1b1626] dark:text-white/72 sm:grid-cols-[1fr_auto] sm:items-center sm:px-5">
-                <p>Watch Martin explain why response speed now decides who gets the appointment.</p>
-                <span className="font-semibold text-[var(--color-brand-violet)] dark:text-[var(--color-gold-italic)]">
-                  7:12 overview
-                </span>
+              <div className="flex items-center justify-between gap-3 bg-[#fff7e8] px-4 py-3 dark:bg-[#1b1626]">
+                <div className="flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.14em] text-[var(--color-muted)] dark:text-white/50">
+                  <span className="rounded-full bg-[var(--color-brand-violet-soft)] px-2.5 py-1 text-[9px] font-bold text-[var(--color-brand-violet)]">FEATURED</span>
+                  FROM THE FOUNDER · WHY SPEED-TO-LEAD WINS IN 2026
+                </div>
               </div>
             </div>
           </div>

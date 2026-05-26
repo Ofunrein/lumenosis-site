@@ -1,3 +1,6 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
 import { GlowCard } from "@/components/spotlight-card";
 
 const leaks = [
@@ -18,7 +21,51 @@ const leaks = [
   },
 ];
 
+const stats = [
+  { prefix: "", suffix: "%", target: 87, label: "of leads go cold in under 5 min" },
+  { prefix: "$", suffix: "k", target: 24, label: "avg deal value lost per slow reply" },
+  { prefix: "", suffix: "x", target: 3, label: "booking lift with AI follow-up" },
+];
+
+function useCountUp(target: number, active: boolean, duration = 1200) {
+  const [val, setVal] = useState(0);
+  useEffect(() => {
+    if (!active) return;
+    const start = performance.now();
+    const raf = (now: number) => {
+      const p = Math.min((now - start) / duration, 1);
+      setVal(Math.round(p * target));
+      if (p < 1) requestAnimationFrame(raf);
+    };
+    requestAnimationFrame(raf);
+  }, [active, target, duration]);
+  return val;
+}
+
+function StatItem({ prefix, suffix, target, label, active }: typeof stats[0] & { active: boolean }) {
+  const val = useCountUp(target, active);
+  return (
+    <div className="flex flex-col items-center gap-1.5 text-center">
+      <span className="font-[family-name:var(--font-display)] text-[clamp(2.2rem,4vw,3.5rem)] font-semibold leading-none text-[var(--color-ink-charcoal)] dark:text-white">
+        {prefix}{val}{suffix}
+      </span>
+      <span className="text-xs uppercase tracking-[0.12em] text-[var(--color-muted)]">{label}</span>
+    </div>
+  );
+}
+
 export function ProblemAgitation() {
+  const statsRef = useRef<HTMLDivElement>(null);
+  const [active, setActive] = useState(false);
+
+  useEffect(() => {
+    const el = statsRef.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) setActive(true); }, { threshold: 0.3 });
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+
   return (
     <section
       id="method"
@@ -39,7 +86,16 @@ export function ProblemAgitation() {
             eventual deal value.
           </p>
         </div>
-        <div className="mt-10 grid gap-4 md:grid-cols-3">
+
+        <div ref={statsRef} className="mt-10 grid grid-cols-3 divide-x divide-[var(--color-line)] dark:divide-white/10 border border-[var(--color-line)] dark:border-white/10 rounded-2xl overflow-hidden bg-white/60 dark:bg-white/[0.03] mb-10">
+          {stats.map((s) => (
+            <div key={s.label} className="py-8 px-4">
+              <StatItem {...s} active={active} />
+            </div>
+          ))}
+        </div>
+
+        <div className="grid gap-4 md:grid-cols-3">
           {leaks.map((leak) => (
             <GlowCard
               key={leak.n}
