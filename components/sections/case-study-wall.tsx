@@ -94,7 +94,7 @@ export function CaseStudyWall() {
                 key={`${card.name}-${card.quote}`}
                 glowColor="purple"
                 customSize
-                className="mb-4 break-inside-avoid overflow-hidden rounded-2xl p-5 shadow-[var(--shadow-soft)] transition-transform hover:-translate-y-1 [--backdrop:#ffffff] [--backup-border:var(--color-line)] [--outer:0] [--radius:16] [--size:115] dark:[--backdrop:#14101c]"
+                className="mb-4 break-inside-avoid overflow-hidden rounded-2xl p-5 [--backdrop:#ffffff] [--backup-border:var(--color-line)] [--outer:0] [--radius:16] [--size:115] dark:[--backdrop:#14101c]"
               >
                 <div className="flex items-start justify-between gap-4">
                   <p className="font-[family-name:var(--font-display)] text-[clamp(1.8rem,3vw,2.55rem)] font-semibold leading-none text-[var(--color-ink-charcoal)] dark:text-white">
