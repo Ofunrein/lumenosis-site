@@ -29,7 +29,7 @@ export function Hero() {
       id="top"
       className="relative overflow-hidden border-b border-[var(--color-line)] bg-[var(--color-bg-cream)] dark:bg-transparent pb-16 pt-20 md:pt-28"
     >
-      <div className="relative z-10 mx-auto grid w-[min(1200px,calc(100%-48px))] sm:w-[min(1200px,calc(100%-32px))] items-start gap-10 md:grid-cols-[1fr_1.05fr] lg:grid-cols-[0.85fr_1.15fr] xl:grid-cols-[0.78fr_1.22fr] md:gap-12">
+      <div className="relative z-10 mx-auto grid w-[min(1200px,calc(100%-48px))] sm:w-[min(1200px,calc(100%-32px))] items-center gap-10 md:grid-cols-[1fr_0.88fr] lg:grid-cols-[1fr_0.82fr] xl:grid-cols-[1fr_0.78fr] md:gap-16">
         <div>
           <h1 className="font-[family-name:var(--font-display)] text-[length:var(--text-display-hero)] font-semibold leading-[1.04] tracking-tight text-[var(--color-ink-charcoal)]">
             AI agents for your{" "}
@@ -78,7 +78,7 @@ export function Hero() {
           </div>
         </div>
 
-        <div className="relative aspect-[4/5] w-full max-w-[460px] justify-self-center md:max-w-none lg:aspect-[4/5] xl:aspect-[3/4]">
+        <div className="relative aspect-[4/5] w-full max-w-[460px] justify-self-center md:max-w-none">
           <div className="relative h-full w-full overflow-hidden rounded-2xl bg-[var(--color-brand-charcoal)] border border-[var(--color-line)]">
             <Image
               src="/images/product-card-mockup.png"
