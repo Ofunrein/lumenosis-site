@@ -31,10 +31,10 @@ export function Hero() {
       className="relative border-b border-[var(--color-line)] bg-[var(--color-bg-cream)] pt-20 pb-10 dark:bg-transparent md:pb-0 md:pt-0"
     >
       {/* Two-column: text left, image right — image fills full column height */}
-      <div className="mx-auto grid w-full gap-8 px-5 sm:px-6 md:w-[min(1400px,100%)] md:gap-0 md:px-0 md:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] md:min-h-[580px] lg:min-h-[660px] md:items-stretch">
+      <div className="mx-auto grid w-full gap-8 px-5 sm:px-6 md:w-[min(1400px,100%)] md:gap-10 md:px-0 md:grid-cols-[minmax(0,0.92fr)_minmax(0,0.88fr)] md:min-h-[580px] lg:min-h-[660px] md:items-stretch lg:gap-16">
         {/* Text column */}
-        <div className="flex flex-col items-center justify-center px-1 py-12 text-center sm:px-4 sm:py-16 md:items-start md:pl-[max(24px,calc((100vw-1400px)/2+16px))] md:pr-6 lg:pl-[max(32px,calc((100vw-1400px)/2+24px))]">
-          <h1 className="font-[family-name:var(--font-display)] text-[clamp(2.4rem,4.8vw,5rem)] font-semibold leading-[1.04] tracking-tight text-[var(--color-ink-charcoal)]">
+        <div className="flex flex-col items-center justify-center px-1 py-12 text-center sm:px-4 sm:py-16 md:items-start md:pl-[max(24px,calc((100vw-1400px)/2+24px))] md:pr-0 lg:pl-[max(32px,calc((100vw-1400px)/2+32px))]">
+          <h1 className="w-full max-w-[650px] text-center font-[family-name:var(--font-display)] text-[clamp(2.4rem,4.45vw,4.75rem)] font-semibold leading-[1.04] tracking-tight text-[var(--color-ink-charcoal)]">
             AI agents for your{" "}
             <span
               className="relative inline-grid overflow-hidden align-bottom text-[0.82em] italic text-[var(--color-gold-italic)] sm:text-[1em]"
@@ -62,11 +62,11 @@ export function Hero() {
             </span>{" "}
             team.
           </h1>
-          <p className="mt-5 max-w-2xl text-center text-[length:var(--text-body-lg)] leading-snug text-[var(--color-muted)]">
+          <p className="mt-5 w-full max-w-[590px] text-center text-[length:var(--text-body-lg)] leading-snug text-[var(--color-muted)]">
             Olivia answers your website. Aria answers the phone. Theo texts every lead in under
             sixty seconds. Iris turns inbound emails into booked valuations.
           </p>
-          <div className="mt-8 flex justify-center">
+          <div className="mt-8 flex w-full max-w-[590px] justify-center">
             <Magnet padding={60} magnetStrength={5}>
               <SpotlightButtonWrapper>
                 <StarButton
