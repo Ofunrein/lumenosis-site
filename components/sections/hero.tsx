@@ -30,10 +30,10 @@ export function Hero() {
       className="relative border-b border-[var(--color-line)] bg-[var(--color-bg-cream)] dark:bg-transparent pt-20 md:pt-0"
     >
       {/* Two-column: text left, image right — image fills full column height */}
-      <div className="mx-auto grid w-[min(1400px,100%)] md:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] md:min-h-[calc(100svh-72px)] md:items-stretch">
+      <div className="mx-auto grid w-[min(1400px,100%)] md:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] md:min-h-[520px] lg:min-h-[600px] md:items-stretch">
 
         {/* Text column */}
-        <div className="flex flex-col justify-center px-6 py-16 sm:px-10 md:pl-[max(32px,calc((100vw-1400px)/2+40px))] md:pr-14 lg:pl-[max(48px,calc((100vw-1400px)/2+60px))]">
+        <div className="flex flex-col justify-center px-6 py-16 sm:px-10 md:pl-[max(32px,calc((100vw-1400px)/2+40px))] md:pr-14 lg:pl-[max(48px,calc((100vw-1400px)/2+60px))] text-center md:text-left">
           <h1 className="font-[family-name:var(--font-display)] text-[clamp(2.4rem,4.8vw,5rem)] font-semibold leading-[1.04] tracking-tight text-[var(--color-ink-charcoal)]">
             AI agents for your{" "}
             <span
@@ -66,7 +66,7 @@ export function Hero() {
             Olivia answers your website. Aria answers the phone. Theo texts every lead in under
             sixty seconds. Iris turns inbound emails into booked valuations.
           </p>
-          <div className="mt-8">
+          <div className="mt-8 flex justify-center md:justify-start">
             <Magnet padding={60} magnetStrength={5}>
               <SpotlightButtonWrapper>
                 <StarButton
