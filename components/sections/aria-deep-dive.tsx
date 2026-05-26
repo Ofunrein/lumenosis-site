@@ -31,7 +31,7 @@ type EmailMessage = {
 
 type ConversationLine = {
   id: string;
-  from: "lead" | "agent";
+  from: "lead" | "ai";
   name: string;
   text: string;
   detail?: string;
@@ -84,42 +84,42 @@ const theoThread: ConversationLine[] = [
     from: "lead",
     name: "Zillow lead",
     detail: "9:21 AM",
-    text: "I want more info on the Oak Ridge listing.",
+    text: "Hi, saw the listing at 412 Oak Ridge. Still available?",
   },
   {
     id: "sms-2",
-    from: "agent",
+    from: "ai",
     name: "Theo",
     detail: "9:21 AM",
-    text: "I can help. Are you looking to tour it, ask about price, or compare it with similar homes nearby?",
+    text: "Hey! Yes it is — 3 bed, 2 bath, $529k. Are you pre-approved or working with an agent?",
   },
   {
     id: "sms-3",
     from: "lead",
     name: "Zillow lead",
     detail: "9:22 AM",
-    text: "Tour. We are in town tomorrow afternoon.",
+    text: "Pre-approved, looking to move in 60 days.",
   },
   {
     id: "sms-4",
-    from: "agent",
+    from: "ai",
     name: "Theo",
     detail: "9:22 AM",
-    text: "Tomorrow has 2:30 PM and 4:15 PM. I can hold either. Are you already pre-approved?",
+    text: "Perfect timing. I have Tuesday 4pm or Thursday 10am for a showing. Which works?",
   },
   {
     id: "sms-5",
     from: "lead",
     name: "Zillow lead",
     detail: "9:23 AM",
-    text: "Yes. 4:15 is better.",
+    text: "Tuesday at 4.",
   },
   {
     id: "sms-6",
-    from: "agent",
+    from: "ai",
     name: "Theo",
     detail: "9:23 AM",
-    text: "Held for 4:15 PM. I sent the calendar invite and the agent will text you the entry details.",
+    text: "Done! Booked Tuesday 4pm. You'll get a confirmation text. See you there!",
   },
 ];
 
@@ -234,7 +234,7 @@ function InlineListingCard() {
       <div className="grid gap-0 sm:grid-cols-[0.92fr_1.08fr]">
         <div className="relative min-h-[172px] sm:min-h-full">
           <Image
-            src="/images/listings/oak-ridge-modern.svg"
+            src="https://ap.rdcpix.com/574f42a37829888fdbdf1cf4d48faa27l-m3739095458rd-w960_h720.webp"
             alt="Oak Ridge Modern property preview"
             fill
             sizes="(max-width: 768px) 100vw, 260px"
@@ -430,7 +430,7 @@ function IrisEmailDemo() {
         <div className="flex flex-col gap-4 bg-[#100b18] p-4 sm:p-5">
           <div className="relative min-h-[140px] overflow-hidden rounded-[28px] border border-[#443650] bg-[#07060a] shadow-[0_24px_70px_rgba(0,0,0,0.28)]">
             <Image
-              src="/images/listings/oak-ridge-modern.svg"
+              src="https://ap.rdcpix.com/574f42a37829888fdbdf1cf4d48faa27l-m3739095458rd-w960_h720.webp"
               alt="Modern home listing preview"
               fill
               sizes="(max-width: 1024px) 100vw, 440px"
@@ -623,11 +623,11 @@ function TheoSmsDemo() {
             T
           </div>
           <p className="mt-2 font-[family-name:var(--font-display)] text-2xl font-semibold text-white">
-            Theo
+            Theo AI
           </p>
           <div className="mt-2 inline-flex items-center gap-2 rounded-full border border-[var(--color-gold-italic)]/45 bg-[#241d16] px-4 py-1.5 text-xs font-semibold text-white">
             <span className="size-2 rounded-full bg-[var(--color-gold-italic)]" />
-            {status}
+            Lumenosis SMS Agent
           </div>
         </div>
 
@@ -638,21 +638,32 @@ function TheoSmsDemo() {
           className="flex min-h-0 flex-1 flex-col gap-3 overflow-y-auto pr-1 [scrollbar-color:#cb6ce6_#120d19] [scrollbar-width:thin]"
         >
           {visibleLines.map((line) => {
-            const isTheo = line.from === "agent";
+            const isTheo = line.from === "ai";
             const isLatest = latest?.id === line.id;
 
             return (
               <div
                 key={line.id}
-                className={[
-                  "max-w-[88%] rounded-[22px] px-4 py-3 text-sm leading-relaxed shadow-[0_12px_36px_rgba(0,0,0,0.18)]",
-                  isTheo ? "ml-auto bg-[#35194a] text-white" : "mr-auto bg-[#21192c] text-white",
-                ].join(" ")}
+                className="flex flex-col"
               >
-                <p className="mb-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-white">
-                  {line.name} - {line.detail}
-                </p>
-                <TypewriterText text={line.text} active={isTheo && isLatest} />
+                {isTheo && (
+                  <p className="mb-1 self-end text-[10px] font-semibold uppercase tracking-[0.14em] text-white/50">
+                    THEO · AI
+                  </p>
+                )}
+                {!isTheo && (
+                  <p className="mb-1 self-start text-[10px] font-semibold uppercase tracking-[0.14em] text-white/50">
+                    ZILLOW LEAD
+                  </p>
+                )}
+                <div
+                  className={[
+                    "max-w-[88%] rounded-[22px] px-4 py-3 text-sm leading-relaxed shadow-[0_12px_36px_rgba(0,0,0,0.18)]",
+                    isTheo ? "self-end bg-[#35194a] text-white" : "self-start bg-[#21192c] text-white",
+                  ].join(" ")}
+                >
+                  <TypewriterText text={line.text} active={isTheo && isLatest} />
+                </div>
               </div>
             );
           })}

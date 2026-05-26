@@ -66,9 +66,6 @@ export function FounderVSL() {
                   <span className="size-3 rounded-full bg-[#e8c47a]" />
                   <span className="size-3 rounded-full bg-[#62c184]" />
                 </div>
-                <p className="hidden rounded-full bg-white px-4 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-[var(--color-muted)] shadow-sm dark:bg-[#100d18] dark:text-white/70 sm:block">
-                  Founder briefing
-                </p>
                 <span className="h-2 w-12 rounded-full bg-[var(--color-brand-purple)]/25 dark:bg-[var(--color-gold-italic)]/35" />
               </div>
 
