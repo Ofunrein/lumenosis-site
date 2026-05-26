@@ -84,23 +84,24 @@ export function Hero() {
 
         {/* Image column */}
         <div className="relative aspect-[4/5] md:aspect-auto md:h-auto md:min-h-full md:py-8 md:pr-8">
-          <GlowCard
-            glowColor="purple"
-            customSize
-            radius={24}
-            className="absolute inset-0 md:inset-y-8 md:right-8 !p-0 overflow-hidden [--backdrop:transparent] [--backup-border:rgba(203,108,230,0.55)] dark:[--backup-border:rgba(203,108,230,0.65)]"
-          >
-            <Image
-              src="/images/product-card-mockup.png"
-              alt="Lumenosis AI — AI agents for real estate teams"
-              fill
-              priority
-              sizes="(max-width: 768px) 100vw, 50vw"
-              className="object-cover"
-            />
-            {/* left-edge gradient so text column bleeds naturally */}
-            <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(245,244,238,0.12),transparent_25%)] dark:bg-[linear-gradient(to_right,rgba(10,7,15,0.15),transparent_25%)]" />
-          </GlowCard>
+          <div className="absolute inset-0 md:inset-y-8 md:right-8">
+            <GlowCard
+              glowColor="purple"
+              customSize
+              radius={24}
+              className="h-full w-full !p-0 overflow-hidden [--backdrop:transparent] [--backup-border:rgba(203,108,230,0.55)] dark:[--backup-border:rgba(203,108,230,0.65)]"
+            >
+              <Image
+                src="/images/product-card-mockup.png"
+                alt="Lumenosis AI — AI agents for real estate teams"
+                fill
+                priority
+                sizes="(max-width: 768px) 100vw, 50vw"
+                className="object-cover"
+              />
+              <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(245,244,238,0.1),transparent_25%)] dark:bg-[linear-gradient(to_right,rgba(10,7,15,0.1),transparent_25%)]" />
+            </GlowCard>
+          </div>
 
           {/* Stat callouts */}
           <GlassStatCallout
