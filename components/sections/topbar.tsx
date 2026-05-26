@@ -51,6 +51,7 @@ export function Topbar() {
         {/* Logo — absolutely centered on mobile, normal flow on desktop */}
         <a
           href="#top"
+          onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: "smooth" }); }}
           className="
             absolute left-1/2 -translate-x-1/2
             md:relative md:left-auto md:translate-x-0 md:flex-none
