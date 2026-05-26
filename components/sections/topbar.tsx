@@ -3,10 +3,10 @@
 import Image from "next/image";
 import { useTheme } from "next-themes";
 import React from "react";
+import { SpotlightButtonWrapper } from "@/components/spotlight-button";
 import { MenuToggleIcon } from "@/components/ui/menu-toggle-icon";
 import { StarButton } from "@/components/ui/star-button";
 import { useScroll } from "@/components/ui/use-scroll";
-import { SpotlightButtonWrapper } from "@/components/spotlight-button";
 import { cn } from "@/lib/utils";
 
 function ThemeToggleIcon({ dark }: { dark: boolean }) {
@@ -15,12 +15,8 @@ function ThemeToggleIcon({ dark }: { dark: boolean }) {
       <svg viewBox="0 0 24 24" className="size-[18px]" aria-hidden>
         <title>Dark mode icon</title>
         <path
-          d="M15.2 3.4a8.8 8.8 0 1 0 5.4 14.8 8.3 8.3 0 0 1-3 .6 8.8 8.8 0 0 1-8.8-8.8c0-2.8 1.3-5.4 3.5-7.1a8.8 8.8 0 0 1 2.9-.5z"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="1.9"
-          strokeLinecap="round"
-          strokeLinejoin="round"
+          d="M19.55 15.82A7.55 7.55 0 0 1 8.18 6.45a.72.72 0 0 0-.82-1.04 8.5 8.5 0 1 0 11.23 11.23.72.72 0 0 0-.94-.94 7.3 7.3 0 0 1-1.9.25 7.55 7.55 0 0 1-7.55-7.55c0-.65.08-1.28.24-1.89a6.15 6.15 0 1 0 11.11 9.31z"
+          fill="currentColor"
         />
       </svg>
     );
@@ -29,14 +25,7 @@ function ThemeToggleIcon({ dark }: { dark: boolean }) {
   return (
     <svg viewBox="0 0 24 24" className="size-[18px]" aria-hidden>
       <title>Light mode icon</title>
-      <circle
-        cx="12"
-        cy="12"
-        r="4.1"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.9"
-      />
+      <circle cx="12" cy="12" r="4.1" fill="none" stroke="currentColor" strokeWidth="1.9" />
       <path
         d="M12 2.75v2.1M12 19.15v2.1M21.25 12h-2.1M4.85 12h-2.1M18.55 5.45l-1.48 1.48M6.93 17.07l-1.48 1.48M18.55 18.55l-1.48-1.48M6.93 6.93 5.45 5.45"
         fill="none"
@@ -90,7 +79,10 @@ export function Topbar() {
         {/* Logo — absolutely centered on mobile, normal flow on desktop */}
         <a
           href="#top"
-          onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: "smooth" }); }}
+          onClick={(e) => {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: "smooth" });
+          }}
           className="
             absolute left-1/2 -translate-x-1/2
             md:relative md:left-auto md:translate-x-0 md:flex-none
@@ -155,41 +147,43 @@ export function Topbar() {
       </nav>
 
       {open && (
-          <div className="absolute top-full left-0 right-0 mt-3 rounded-2xl overflow-hidden border border-[var(--color-line)] dark:border-white/10 bg-[var(--color-bg-cream)]/95 dark:bg-[#161616]/95 backdrop-blur-xl shadow-xl z-50 p-3 flex flex-col gap-1 md:hidden pointer-events-auto">
-            {links.map((link) => (
-              <a
-                key={link.label}
-                href={link.href}
-                onClick={() => setOpen(false)}
-                className="px-4 py-3 text-base text-[var(--color-ink-charcoal)] dark:text-white rounded-xl hover:bg-[var(--color-brand-violet-soft)] transition-colors"
+        <div className="absolute top-full left-0 right-0 mt-3 rounded-2xl overflow-hidden border border-[var(--color-line)] dark:border-white/10 bg-[var(--color-bg-cream)]/95 dark:bg-[#161616]/95 backdrop-blur-xl shadow-xl z-50 p-3 flex flex-col gap-1 md:hidden pointer-events-auto">
+          {links.map((link) => (
+            <a
+              key={link.label}
+              href={link.href}
+              onClick={() => setOpen(false)}
+              className="px-4 py-3 text-base text-[var(--color-ink-charcoal)] dark:text-white rounded-xl hover:bg-[var(--color-brand-violet-soft)] transition-colors"
+            >
+              {link.label}
+            </a>
+          ))}
+          <div className="h-px bg-[var(--color-line)] dark:bg-white/10 my-1" />
+          <div className="flex items-center justify-between px-4 py-2">
+            <span className="text-sm text-[var(--color-muted)] dark:text-white/60">Appearance</span>
+            {mounted && (
+              <button
+                type="button"
+                onClick={toggleTheme}
+                className="grid size-10 place-items-center text-[rgba(47,40,78,0.88)] transition-colors duration-200 hover:text-[rgba(47,40,78,1)] dark:text-[rgba(243,242,251,0.9)] dark:hover:text-white"
+                aria-label="Toggle dark/light mode"
               >
-                {link.label}
-              </a>
-            ))}
-            <div className="h-px bg-[var(--color-line)] dark:bg-white/10 my-1" />
-            <div className="flex items-center justify-between px-4 py-2">
-              <span className="text-sm text-[var(--color-muted)] dark:text-white/60">Appearance</span>
-              {mounted && (
-                <button
-                  type="button"
-                  onClick={toggleTheme}
-                  className="grid size-10 place-items-center text-[rgba(47,40,78,0.88)] transition-colors duration-200 hover:text-[rgba(47,40,78,1)] dark:text-[rgba(243,242,251,0.9)] dark:hover:text-white"
-                  aria-label="Toggle dark/light mode"
-                >
-                  <ThemeToggleIcon dark={resolvedTheme === "dark"} />
-                </button>
-              )}
-            </div>
-            <SpotlightButtonWrapper>
-              <StarButton
-                lightColor="#cb6ce6"
-                className="w-full bg-[var(--color-brand-violet)] text-white h-11 text-sm justify-center !text-white"
-              >
-                <a href="#book" onClick={() => setOpen(false)}>Book a Demo</a>
-              </StarButton>
-            </SpotlightButtonWrapper>
+                <ThemeToggleIcon dark={resolvedTheme === "dark"} />
+              </button>
+            )}
           </div>
-        )}
+          <SpotlightButtonWrapper>
+            <StarButton
+              lightColor="#cb6ce6"
+              className="w-full bg-[var(--color-brand-violet)] text-white h-11 text-sm justify-center !text-white"
+            >
+              <a href="#book" onClick={() => setOpen(false)}>
+                Book a Demo
+              </a>
+            </StarButton>
+          </SpotlightButtonWrapper>
+        </div>
+      )}
     </header>
   );
 }
