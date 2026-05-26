@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { Clock, ShieldCheck } from "lucide-react";
 import { GlassStatCallout } from "@/components/glass-stat-callout";
+import { GlowCard } from "@/components/spotlight-card";
 import Magnet from "@/components/magnet";
 import { StarButton } from "@/components/ui/star-button";
 import { SpotlightButtonWrapper } from "@/components/spotlight-button";
@@ -83,18 +84,23 @@ export function Hero() {
 
         {/* Image column */}
         <div className="relative aspect-[4/5] md:aspect-auto md:h-auto md:min-h-full md:py-8 md:pr-8">
-          <div className="absolute inset-0 md:inset-y-8 md:inset-x-0 md:right-8 overflow-hidden rounded-2xl md:rounded-3xl bg-[var(--color-brand-charcoal)]">
+          <GlowCard
+            glowColor="purple"
+            customSize
+            radius={24}
+            className="absolute inset-0 md:inset-y-8 md:right-8 !p-0 overflow-hidden [--backdrop:transparent] [--backup-border:rgba(203,108,230,0.55)] dark:[--backup-border:rgba(203,108,230,0.65)]"
+          >
             <Image
               src="/images/product-card-mockup.png"
               alt="Lumenosis AI — AI agents for real estate teams"
               fill
               priority
-              sizes="(max-width: 768px) 100vw, 58vw"
-              className="object-cover opacity-85"
+              sizes="(max-width: 768px) 100vw, 50vw"
+              className="object-cover"
             />
-            {/* subtle gradient overlay */}
-            <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(245,244,238,0.18),transparent_30%)] dark:bg-[linear-gradient(to_right,rgba(10,7,15,0.22),transparent_30%)]" />
-          </div>
+            {/* left-edge gradient so text column bleeds naturally */}
+            <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(245,244,238,0.12),transparent_25%)] dark:bg-[linear-gradient(to_right,rgba(10,7,15,0.15),transparent_25%)]" />
+          </GlowCard>
 
           {/* Stat callouts */}
           <GlassStatCallout
