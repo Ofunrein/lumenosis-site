@@ -865,7 +865,7 @@ export function AriaDeepDive() {
 
           <div className="mt-10 grid gap-4 sm:grid-cols-2">
             {microFeatures.map(({ icon: Icon, title, body }) => (
-              <GlowCard key={title} glowColor="purple" customSize radius={12} className="p-4 flex flex-col gap-0 [--default-backdrop:rgba(18,12,28,0.9)]">
+              <GlowCard key={title} glowColor="purple" customSize radius={12} className="p-4 flex flex-col gap-0 [--backdrop:rgba(18,12,28,0.85)] [--backup-border:rgba(203,108,230,0.15)]">
                 <Icon className="size-5 text-[var(--color-brand-violet)]" aria-hidden />
                 <p className="mt-4 font-[family-name:var(--font-display)] text-xl font-semibold text-white">
                   {title}

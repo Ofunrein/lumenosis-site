@@ -42,10 +42,10 @@ export function TrustStrip() {
         Trusted by top real estate teams
       </p>
       <div
-        className="relative mx-auto lg:max-w-5xl"
+        className="relative w-full"
         style={{
-          maskImage: 'linear-gradient(to right, transparent 0%, black 18%, black 82%, transparent 100%)',
-          WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 18%, black 82%, transparent 100%)',
+          maskImage: 'linear-gradient(to right, transparent 0%, black 12%, black 88%, transparent 100%)',
+          WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 12%, black 88%, transparent 100%)',
         }}
       >
         <Carousel
