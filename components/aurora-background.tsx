@@ -17,7 +17,7 @@ export function AuroraBackground() {
           colorStops={["#6366f1", "#cb6ce6", "#ec4899"]}
           blend={0.75}
           amplitude={1.55}
-          speed={0.28}
+          speed={0.9}
         />
       </Suspense>
     </div>

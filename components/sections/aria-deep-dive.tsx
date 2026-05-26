@@ -341,7 +341,7 @@ function IrisEmailDemo() {
             <div
               ref={scrollRef}
               onScroll={handleScroll}
-              className="mt-3 flex h-[320px] flex-col gap-3 overflow-y-auto pr-2"
+              className="mt-3 flex h-[420px] flex-col gap-3 overflow-y-auto pr-2"
               style={{ scrollbarWidth: "none" }}
             >
               {visibleMessages.map((message) => {
@@ -839,13 +839,13 @@ export function AriaDeepDive() {
 
           <div className="mt-10 grid gap-4 sm:grid-cols-2">
             {microFeatures.map(({ icon: Icon, title, body }) => (
-              <div key={title} className="rounded-[24px] border border-white/10 bg-white/5 p-4">
+              <GlowCard key={title} glowColor="purple" customSize className="p-4 flex flex-col gap-0">
                 <Icon className="size-5 text-[var(--color-brand-violet)]" aria-hidden />
                 <p className="mt-4 font-[family-name:var(--font-display)] text-xl font-semibold text-white">
                   {title}
                 </p>
                 <p className="mt-2 text-sm leading-6 text-white/65">{body}</p>
-              </div>
+              </GlowCard>
             ))}
           </div>
         </div>
@@ -860,10 +860,10 @@ export function AriaDeepDive() {
 
           {/* BOTTOM: Phone left + Call right — equal halves */}
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
-            <GlowCard glowColor="purple" customSize className="min-h-[560px] flex items-center justify-center dark:bg-black/60 dark:backdrop-blur-sm border dark:border-white/10">
+            <GlowCard glowColor="purple" customSize className="min-h-[560px] flex items-center justify-center [--backdrop:#130d1b] border border-white/10">
               <TheoSmsDemo />
             </GlowCard>
-            <GlowCard glowColor="purple" customSize className="min-h-[560px] flex items-center justify-center dark:bg-black/60 dark:backdrop-blur-sm border dark:border-white/10">
+            <GlowCard glowColor="purple" customSize className="min-h-[560px] flex items-center justify-center [--backdrop:#130d1b] border border-white/10">
               <AriaPhoneDemo />
             </GlowCard>
           </div>

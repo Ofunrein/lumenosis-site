@@ -105,7 +105,7 @@ export function Topbar() {
         <button
           type="button"
           onClick={() => setOpen(!open)}
-          className="grid size-8 place-items-center rounded-full border border-[var(--color-line)] text-[var(--color-ink-charcoal)] md:hidden pointer-events-auto"
+          className="grid size-10 place-items-center rounded-full border border-[var(--color-line)] text-[var(--color-ink-charcoal)] md:hidden pointer-events-auto"
           aria-label="Toggle menu"
         >
           <MenuToggleIcon open={open} className="size-4" duration={300} />
