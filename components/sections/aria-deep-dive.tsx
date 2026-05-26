@@ -608,22 +608,45 @@ function AriaPhoneDemo() {
           ))}
         </div>
 
-        {/* Clickable progress bar */}
+        {/* Progress scrubber — taller hit target */}
         <div className="space-y-1">
           <div
-            className="h-0.5 w-full cursor-pointer rounded-full bg-white/10 relative"
+            className="group relative h-5 flex items-center cursor-pointer"
             onClick={(e) => {
               const audio = audioRef.current;
               if (!audio || !duration) return;
               const rect = e.currentTarget.getBoundingClientRect();
-              const pct = (e.clientX - rect.left) / rect.width;
+              const pct = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
               audio.currentTime = pct * duration;
             }}
+            onMouseDown={(e) => {
+              const container = e.currentTarget;
+              const handleMove = (moveEvent: MouseEvent) => {
+                const audio = audioRef.current;
+                if (!audio || !duration) return;
+                const rect = container.getBoundingClientRect();
+                const pct = Math.max(0, Math.min(1, (moveEvent.clientX - rect.left) / rect.width));
+                audio.currentTime = pct * duration;
+              };
+              const handleUp = () => {
+                window.removeEventListener("mousemove", handleMove);
+                window.removeEventListener("mouseup", handleUp);
+              };
+              window.addEventListener("mousemove", handleMove);
+              window.addEventListener("mouseup", handleUp);
+            }}
           >
-            <div
-              className="absolute inset-y-0 left-0 rounded-full bg-[var(--color-brand-violet)]"
-              style={{ width: `${progress * 100}%` }}
-            />
+            <div className="relative w-full h-1 rounded-full bg-white/10">
+              <div
+                className="absolute inset-y-0 left-0 rounded-full bg-[var(--color-brand-violet)] transition-none"
+                style={{ width: `${progress * 100}%` }}
+              />
+              {/* Thumb */}
+              <div
+                className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 size-3 rounded-full bg-[var(--color-brand-violet)] opacity-0 group-hover:opacity-100 transition-opacity"
+                style={{ left: `${progress * 100}%` }}
+              />
+            </div>
           </div>
           <div className="flex justify-between text-xs text-white/50">
             <span>{fmt(currentTime)}</span>
@@ -791,10 +814,10 @@ export function AriaDeepDive() {
           <p className="mb-4 text-[var(--text-eyebrow)] font-semibold uppercase tracking-[0.16em] text-[var(--color-brand-violet)]">
             04 - Live follow-up desk
           </p>
-          <h2 className="font-[family-name:var(--font-display)] text-[clamp(2.5rem,4.6vw,4.7rem)] font-semibold leading-[0.99] text-white">
+          <h2 className="font-[family-name:var(--font-display)] text-[clamp(2.5rem,4.6vw,4.7rem)] font-semibold leading-[0.99] text-[var(--color-ink-charcoal)]">
             The front desk that never sleeps and never asks for a raise.
           </h2>
-          <p className="mt-6 max-w-xl text-lg leading-8 text-white/82">
+          <p className="mt-6 max-w-xl text-lg leading-8 text-[var(--color-muted)]">
             A buyer asks about a listing. Iris replies with real property details, Aria answers the
             call, and Theo keeps the text thread moving until a showing or valuation is booked.
           </p>
@@ -803,10 +826,10 @@ export function AriaDeepDive() {
             {microFeatures.map(({ icon: Icon, title, body }) => (
               <div key={title} className="rounded-[24px] border border-[#3f3350] bg-[#120d19] p-4">
                 <Icon className="size-5 text-[var(--color-brand-violet)]" aria-hidden />
-                <p className="mt-4 font-[family-name:var(--font-display)] text-xl font-semibold text-white">
+                <p className="mt-4 font-[family-name:var(--font-display)] text-xl font-semibold text-[var(--color-ink-charcoal)]">
                   {title}
                 </p>
-                <p className="mt-2 text-sm leading-6 text-white/75">{body}</p>
+                <p className="mt-2 text-sm leading-6 text-[var(--color-muted)]">{body}</p>
               </div>
             ))}
           </div>
