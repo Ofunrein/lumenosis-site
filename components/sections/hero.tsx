@@ -27,10 +27,13 @@ export function Hero() {
   return (
     <section
       id="top"
-      className="relative overflow-hidden border-b border-[var(--color-line)] bg-[var(--color-bg-cream)] dark:bg-transparent pb-16 pt-20 md:pt-28"
+      className="relative border-b border-[var(--color-line)] bg-[var(--color-bg-cream)] dark:bg-transparent pt-20 md:pt-0"
     >
-      <div className="relative z-10 mx-auto grid w-[min(1200px,calc(100%-48px))] sm:w-[min(1200px,calc(100%-32px))] items-start gap-8 md:grid-cols-[0.65fr_1.35fr] lg:grid-cols-[0.6fr_1.4fr] xl:grid-cols-[0.55fr_1.45fr] md:gap-10">
-        <div>
+      {/* Two-column: text left, image right — image fills full column height */}
+      <div className="mx-auto grid w-[min(1400px,100%)] md:grid-cols-[minmax(0,1fr)_minmax(0,1.4fr)] md:min-h-[calc(100svh-72px)] md:items-stretch">
+
+        {/* Text column */}
+        <div className="flex flex-col justify-center px-6 py-16 sm:px-10 md:pl-[max(32px,calc((100vw-1400px)/2+40px))] md:pr-14 lg:pl-[max(48px,calc((100vw-1400px)/2+60px))]">
           <h1 className="font-[family-name:var(--font-display)] text-[length:var(--text-display-hero)] font-semibold leading-[1.04] tracking-tight text-[var(--color-ink-charcoal)]">
             AI agents for your{" "}
             <span
@@ -59,11 +62,11 @@ export function Hero() {
             </span>{" "}
             team.
           </h1>
-          <p className="mt-5 max-w-xl text-[length:var(--text-body-lg)] leading-snug text-[var(--color-muted)]">
+          <p className="mt-5 max-w-lg text-[length:var(--text-body-lg)] leading-snug text-[var(--color-muted)]">
             Olivia answers your website. Aria answers the phone. Theo texts every lead in under
             sixty seconds. Iris turns inbound emails into booked valuations.
           </p>
-          <div className="mt-7 flex flex-col items-start gap-3">
+          <div className="mt-8">
             <Magnet padding={60} magnetStrength={5}>
               <SpotlightButtonWrapper>
                 <StarButton
@@ -78,28 +81,33 @@ export function Hero() {
           </div>
         </div>
 
-        <div className="relative aspect-[4/5] w-full max-w-[460px] justify-self-center md:max-w-none">
-          <div className="relative h-full w-full overflow-hidden rounded-2xl bg-[var(--color-brand-charcoal)] border border-[var(--color-line)]">
+        {/* Image column — full height, no aspect ratio cap */}
+        <div className="relative aspect-[4/5] md:aspect-auto md:h-auto md:min-h-full">
+          <div className="absolute inset-0 overflow-hidden md:rounded-none rounded-2xl bg-[var(--color-brand-charcoal)]">
             <Image
               src="/images/product-card-mockup.png"
-              alt="Lumenosis AI dashboard with CRM, iMessage thread, and booked appointment"
+              alt="Lumenosis AI — AI agents for real estate teams"
               fill
               priority
-              sizes="(max-width: 768px) 100vw, (max-width: 1024px) 67vw, 72vw"
-              className="object-cover opacity-80"
+              sizes="(max-width: 768px) 100vw, 58vw"
+              className="object-cover opacity-85"
             />
+            {/* subtle gradient overlay */}
+            <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(245,244,238,0.18),transparent_30%)] dark:bg-[linear-gradient(to_right,rgba(10,7,15,0.22),transparent_30%)]" />
           </div>
+
+          {/* Stat callouts */}
           <GlassStatCallout
             label="Avg lead response"
             value="60 seconds"
             icon={<Clock className="size-4" />}
-            className="absolute -left-3 top-4 md:-left-6"
+            className="absolute left-6 top-10 md:-left-4 md:top-16 z-10"
           />
           <GlassStatCallout
             label="Always-on coverage"
             value="24 / 7"
             icon={<ShieldCheck className="size-4" />}
-            className="absolute -bottom-4 left-12 md:-bottom-6"
+            className="absolute left-6 bottom-10 md:-left-4 md:bottom-16 z-10"
           />
         </div>
       </div>
