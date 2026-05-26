@@ -1,8 +1,7 @@
 "use client";
 
 import { Check } from "lucide-react";
-import { StarButton } from "@/components/ui/star-button";
-import { SpotlightButtonWrapper } from "@/components/spotlight-button";
+import { GlowCard } from "@/components/spotlight-card";
 
 const paths = [
   {
@@ -66,21 +65,25 @@ export function TwoWaysIn() {
                   MOST POPULAR
                 </span>
               )}
-              <div
-                className={`isolate relative flex min-h-[560px] h-full flex-col overflow-hidden rounded-2xl border p-8 md:p-10 ${
+              <GlowCard
+                glowColor="purple"
+                customSize
+                radius={16}
+                className={`min-h-[560px] h-full flex flex-col !p-0 ${
                   path.dark
-                    ? "md:-mt-4 border-[rgb(232_196_122_/_0.28)] bg-[#0b0711] text-white shadow-[0_34px_90px_rgb(10_7_17_/_0.32)] dark:shadow-[0_34px_90px_rgb(203_108_230_/_0.16)]"
-                    : "border-[rgb(33_30_25_/_0.12)] bg-[#fffdf7] text-[var(--color-ink-charcoal)] shadow-[0_18px_50px_rgb(33_30_25_/_0.08)] dark:border-[rgb(255_255_255_/_0.1)] dark:bg-[#17111f] dark:text-white dark:shadow-none"
+                    ? "md:-mt-4 [--backup-border:rgb(232,196,122,0.4)] [--backdrop:#0b0711] shadow-[0_34px_90px_rgb(10_7_17_/_0.32)] dark:shadow-[0_34px_90px_rgb(203_108_230_/_0.16)] text-white"
+                    : "[--backup-border:rgb(33,30,25,0.15)] [--backdrop:#fffdf7] dark:[--backup-border:rgb(255,255,255,0.12)] dark:[--backdrop:#17111f] shadow-[0_18px_50px_rgb(33_30_25_/_0.08)] dark:shadow-none text-[var(--color-ink-charcoal)] dark:text-white"
                 }`}
               >
                 <div
-                  className={`pointer-events-none absolute inset-0 -z-10 ${
+                  className={`pointer-events-none absolute inset-0 -z-10 rounded-[16px] ${
                     path.dark
                       ? "bg-[radial-gradient(circle_at_18%_0%,rgb(203_108_230_/_0.24),transparent_34%),radial-gradient(circle_at_86%_10%,rgb(232_196_122_/_0.18),transparent_30%),linear-gradient(135deg,#12081a_0%,#07050b_62%,#151008_100%)]"
                       : "bg-[radial-gradient(circle_at_8%_0%,rgb(203_108_230_/_0.08),transparent_28%),linear-gradient(180deg,rgb(255_253_247_/_0.96),rgb(248_244_233_/_0.86))] dark:bg-[radial-gradient(circle_at_8%_0%,rgb(203_108_230_/_0.12),transparent_28%),linear-gradient(180deg,rgb(23_17_31_/_0.96),rgb(12_9_17_/_0.94))]"
                   }`}
                 />
 
+                <div className="flex flex-1 flex-col p-8 md:p-10">
                 <p
                   className={`mb-5 text-[var(--text-eyebrow)] font-semibold uppercase tracking-[0.18em] ${
                     path.dark ? "text-[var(--color-gold-italic)]" : "text-[var(--color-brand-violet)]"
@@ -152,23 +155,21 @@ export function TwoWaysIn() {
                   ))}
                 </ul>
 
-                <SpotlightButtonWrapper className="w-full">
-                  <StarButton
-                    lightColor={path.dark ? "#e8c47a" : "#cb6ce6"}
-                    backgroundColor={path.dark ? "#e8c47a" : "#cb6ce6"}
-                    className={`h-12 w-full justify-center rounded-xl text-sm shadow-none ${
-                      path.dark
-                        ? "bg-[var(--color-gold-italic)] text-black [&_span]:!text-black"
-                        : "bg-[var(--color-brand-charcoal)] text-white dark:bg-[var(--color-brand-violet)] [&_span]:!text-white"
-                    }`}
-                    onClick={() => {
-                      document.getElementById("book")?.scrollIntoView({ behavior: "smooth" });
-                    }}
-                  >
-                    {path.cta}
-                  </StarButton>
-                </SpotlightButtonWrapper>
-              </div>
+                <button
+                  type="button"
+                  onClick={() => {
+                    document.getElementById("book")?.scrollIntoView({ behavior: "smooth" });
+                  }}
+                  className={`h-12 w-full rounded-xl text-sm font-semibold transition-opacity hover:opacity-85 ${
+                    path.dark
+                      ? "bg-[var(--color-gold-italic)] text-black"
+                      : "bg-[var(--color-brand-charcoal)] text-white dark:bg-[var(--color-brand-violet)]"
+                  }`}
+                >
+                  {path.cta}
+                </button>
+                </div>
+              </GlowCard>
             </div>
           ))}
         </div>
