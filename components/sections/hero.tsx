@@ -92,29 +92,30 @@ export function Hero() {
   return (
     <section
       id="top"
-      className="relative border-b border-[var(--color-line)] bg-[var(--color-bg-cream)] pt-20 pb-10 dark:bg-transparent md:pb-0 md:pt-0"
+      className="relative border-b border-[var(--color-line)] bg-[var(--color-bg-cream)] pt-28 pb-10 dark:bg-transparent xl:pb-0 xl:pt-0"
     >
-      {/* Two-column: text left, image right — image fills full column height */}
-      <div className="mx-auto grid w-full gap-8 px-5 sm:px-6 md:w-[min(1400px,100%)] md:gap-10 md:px-0 md:grid-cols-[minmax(0,0.92fr)_minmax(0,0.88fr)] md:min-h-[580px] lg:min-h-[660px] md:items-stretch lg:gap-16">
+      {/* Two-column only when zoomed desktop viewports still leave enough room. */}
+      <div className="mx-auto grid w-full gap-8 px-5 sm:px-6 xl:w-[min(1400px,100%)] xl:grid-cols-[minmax(0,0.92fr)_minmax(0,0.88fr)] xl:items-stretch xl:gap-16 xl:px-0 xl:min-h-[660px]">
         {/* Text column */}
-        <div className="flex flex-col items-center justify-center px-1 py-12 text-center sm:px-4 sm:py-16 md:items-start md:pl-[max(24px,calc((100vw-1400px)/2+24px))] md:pr-0 lg:pl-[max(32px,calc((100vw-1400px)/2+32px))]">
-          <h1 className="w-full max-w-[650px] text-center font-[family-name:var(--font-display)] text-[clamp(2.4rem,4.45vw,4.75rem)] font-semibold leading-[1.04] tracking-tight text-[var(--color-ink-charcoal)]">
-            AI agents for your{" "}
+        <div className="flex flex-col items-center justify-center px-1 py-12 text-center sm:px-4 sm:py-16 xl:items-start xl:pl-[max(32px,calc((100vw-1400px)/2+32px))] xl:pr-0">
+          <h1 className="w-full max-w-[650px] text-center font-[family-name:var(--font-display)] text-[clamp(2.4rem,4.45vw,4.75rem)] font-semibold leading-[1.04] tracking-tight text-[var(--color-ink-charcoal)] xl:text-[clamp(3.25rem,4vw,4.75rem)]">
+            <span className="block">AI agents for</span>
+            <span className="block">your</span>
             <span
-              className="relative inline-grid overflow-hidden align-bottom text-[0.82em] italic text-[var(--color-gold-italic)] sm:text-[1em]"
+              className="relative mx-auto block max-w-full overflow-hidden text-[0.82em] italic text-[var(--color-gold-italic)] sm:text-[1em]"
               aria-live="polite"
               aria-atomic="true"
             >
-              <span className="invisible whitespace-nowrap" aria-hidden>
+              <span className="invisible block whitespace-nowrap" aria-hidden>
                 {longestNiche}
               </span>
               {!mounted ? (
-                <span className="absolute inset-x-0 top-0 whitespace-nowrap">{niches[0]}</span>
+                <span className="absolute inset-x-0 top-0 block whitespace-nowrap">{niches[0]}</span>
               ) : (
                 niches.map((niche, index) => (
                   <motion.span
                     key={niche}
-                    className="absolute inset-x-0 top-0 whitespace-nowrap"
+                    className="absolute inset-x-0 top-0 block whitespace-nowrap"
                     initial={false}
                     transition={reduceMotion ? { duration: 0 } : { type: "spring", stiffness: 50 }}
                     animate={
@@ -127,8 +128,8 @@ export function Hero() {
                   </motion.span>
                 ))
               )}
-            </span>{" "}
-            team.
+            </span>
+            <span className="block">team.</span>
           </h1>
           <p className="mt-5 w-full max-w-[590px] text-center text-[length:var(--text-body-lg)] leading-snug text-[var(--color-muted)]">
             Olivia answers your website. Aria answers the phone. Theo texts every lead in under
@@ -150,11 +151,11 @@ export function Hero() {
         </div>
 
         {/* Image column */}
-        <div className="relative mx-auto mt-4 w-full max-w-[350px] px-2 aspect-[11/13] md:mt-0 md:max-w-none md:px-0 md:aspect-auto md:h-auto md:min-h-full md:py-8 md:pr-8">
-          <div className="absolute inset-0 md:inset-y-8 md:right-8">
+        <div className="relative mx-auto mt-4 aspect-[11/13] w-full max-w-[420px] px-2 sm:aspect-[4/3] sm:max-w-[620px] xl:mt-0 xl:aspect-auto xl:h-auto xl:min-h-full xl:max-w-none xl:px-0 xl:py-8 xl:pr-8">
+          <div className="absolute inset-0 xl:inset-y-8 xl:right-8">
             <div
               aria-hidden
-              className="pointer-events-none absolute -inset-x-6 -inset-y-7 rounded-[36px] opacity-0 blur-2xl dark:hidden md:-inset-x-8 md:-inset-y-9 md:blur-3xl"
+              className="pointer-events-none absolute -inset-x-6 -inset-y-7 rounded-[36px] opacity-0 blur-2xl dark:hidden xl:-inset-x-8 xl:-inset-y-9 xl:blur-3xl"
               style={{
                 background:
                   "radial-gradient(72% 80% at 20% 12%, rgba(24,29,37,0.34), transparent 56%), radial-gradient(84% 88% at 82% 86%, rgba(22,26,33,0.28), transparent 60%), radial-gradient(100% 100% at 50% 50%, rgba(16,20,27,0.18), transparent 74%)",
@@ -198,13 +199,13 @@ export function Hero() {
             label="Avg lead response"
             value="60 seconds"
             icon={<Clock className="size-4" />}
-            className="absolute left-5 top-6 md:-left-5 md:top-20 z-10"
+            className="absolute left-5 top-6 xl:-left-5 xl:top-20 z-10"
           />
           <GlassStatCallout
             label="Always-on coverage"
             value="24 / 7"
             icon={<ShieldCheck className="size-4" />}
-            className="absolute left-5 bottom-6 md:-left-5 md:bottom-20 z-10"
+            className="absolute left-5 bottom-6 xl:-left-5 xl:bottom-20 z-10"
           />
         </div>
       </div>
