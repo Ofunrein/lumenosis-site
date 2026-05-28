@@ -211,17 +211,33 @@ function TypewriterText({ text, active }: { text: string; active: boolean }) {
 
 function SectionBadge({
   icon: Icon,
+  avatarSrc,
+  avatarAlt,
   title,
   subtitle,
 }: {
-  icon: typeof Mail;
+  icon?: typeof Mail;
+  avatarSrc?: string;
+  avatarAlt?: string;
   title: string;
   subtitle: string;
 }) {
   return (
     <div className="flex items-center gap-3">
       <span className="grid size-10 shrink-0 place-items-center rounded-2xl border border-[#3f3350] bg-[#21192c] text-[var(--color-brand-violet)]">
-        <Icon className="size-4" aria-hidden />
+        {avatarSrc ? (
+          <span className="relative size-8 overflow-hidden rounded-xl">
+            <Image
+              src={avatarSrc}
+              alt={avatarAlt ?? ""}
+              fill
+              sizes="32px"
+              className="object-cover"
+            />
+          </span>
+        ) : Icon ? (
+          <Icon className="size-4" aria-hidden />
+        ) : null}
       </span>
       <div className="min-w-0">
         <p className="text-sm font-semibold text-white">{title}</p>
@@ -324,7 +340,12 @@ function IrisEmailDemo() {
       <div className="grid min-h-0 lg:grid-cols-[1.25fr_0.75fr]">
         <div className="flex min-h-0 flex-col border-b border-[var(--color-line)] p-4 sm:p-5 lg:border-b-0 lg:border-r">
           <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[var(--color-line)] pb-4">
-            <SectionBadge icon={Mail} title="Iris email desk" subtitle="Live buyer inquiry" />
+            <SectionBadge
+              avatarSrc="/images/agents/iris.png"
+              avatarAlt="Iris"
+              title="Iris email desk"
+              subtitle="Live buyer inquiry"
+            />
             <div className="rounded-full border border-[var(--color-brand-violet)]/50 bg-[#2a1638] px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-white">
               {latestMessage?.from === "iris" ? "Typing reply" : "Reading lead"}
             </div>
