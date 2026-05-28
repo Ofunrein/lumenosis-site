@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { useTheme } from "next-themes";
 import React from "react";
 import { SpotlightButtonWrapper } from "@/components/spotlight-button";
@@ -40,17 +41,19 @@ function ThemeToggleIcon({ dark }: { dark: boolean }) {
 export function Topbar() {
   const [open, setOpen] = React.useState(false);
   const scrolled = useScroll(140);
+  const pathname = usePathname();
   const { resolvedTheme, setTheme } = useTheme();
   const [mounted, setMounted] = React.useState(false);
   React.useEffect(() => {
     setMounted(true);
   }, []);
 
+  const homePrefix = pathname === "/" ? "" : "/";
   const links = [
-    { label: "Method", href: "#method" },
-    { label: "Agents", href: "#agents" },
-    { label: "Process", href: "#process" },
-    { label: "FAQ", href: "#faq" },
+    { label: "Method", href: `${homePrefix}#method` },
+    { label: "Agents", href: `${homePrefix}#agents` },
+    { label: "Process", href: `${homePrefix}#process` },
+    { label: "FAQ", href: `${homePrefix}#faq` },
   ];
 
   React.useEffect(() => {
@@ -78,10 +81,12 @@ export function Topbar() {
 
         {/* Logo — absolutely centered on mobile, normal flow on desktop */}
         <a
-          href="#top"
+          href={pathname === "/" ? "#top" : "/"}
           onClick={(e) => {
-            e.preventDefault();
-            window.scrollTo({ top: 0, behavior: "smooth" });
+            if (pathname === "/") {
+              e.preventDefault();
+              window.scrollTo({ top: 0, behavior: "smooth" });
+            }
           }}
           className="
             absolute left-1/2 -translate-x-1/2
@@ -130,7 +135,7 @@ export function Topbar() {
                 lightColor="#cb6ce6"
                 className="bg-[var(--color-brand-violet)] text-white px-4 h-9 text-sm !text-white"
               >
-                <a href="#book">Book a Demo</a>
+                <a href={`${homePrefix}#book`}>Book a Demo</a>
               </StarButton>
             </SpotlightButtonWrapper>
           </div>
@@ -177,7 +182,7 @@ export function Topbar() {
               lightColor="#cb6ce6"
               className="w-full bg-[var(--color-brand-violet)] text-white h-11 text-sm justify-center !text-white"
             >
-              <a href="#book" onClick={() => setOpen(false)}>
+              <a href={`${homePrefix}#book`} onClick={() => setOpen(false)}>
                 Book a Demo
               </a>
             </StarButton>
