@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, JetBrains_Mono, Newsreader } from "next/font/google";
+import Script from "next/script";
 import { ThemeProvider } from "next-themes";
 import "./globals.css";
 
@@ -46,6 +47,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       suppressHydrationWarning
     >
       <body suppressHydrationWarning>
+        <Script
+          src="https://widgets.leadconnectorhq.com/loader.js"
+          data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js"
+          data-widget-id="6a183ecc96c166bea68f7c1f"
+          data-source="WEB_USER"
+          strategy="afterInteractive"
+        />
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
           <a
             href="#top"
