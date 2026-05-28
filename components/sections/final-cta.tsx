@@ -1,8 +1,8 @@
 "use client";
 import Magnet from "@/components/magnet";
 import { Reveal } from "@/components/reveal";
-import { StarButton } from "@/components/ui/star-button";
 import { SpotlightButtonWrapper } from "@/components/spotlight-button";
+import { StarButton } from "@/components/ui/star-button";
 
 export function FinalCTA() {
   return (
@@ -23,6 +23,9 @@ export function FinalCTA() {
                 lightColor="#cb6ce6"
                 backgroundColor="#cb6ce6"
                 className="bg-[var(--color-brand-purple)] text-white px-8 h-14 text-lg [&_span]:text-white"
+                onClick={() => {
+                  document.getElementById("book")?.scrollIntoView({ behavior: "smooth" });
+                }}
               >
                 Book a Demo
               </StarButton>

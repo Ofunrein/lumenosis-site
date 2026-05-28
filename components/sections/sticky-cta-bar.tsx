@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { StarButton } from "@/components/ui/star-button";
 import { SpotlightButtonWrapper } from "@/components/spotlight-button";
+import { StarButton } from "@/components/ui/star-button";
 
 export function StickyCtaBar() {
   const [show, setShow] = useState(false);
@@ -11,9 +11,13 @@ export function StickyCtaBar() {
     const onScroll = () => {
       const scrollY = window.scrollY;
       const totalHeight = document.body.scrollHeight - window.innerHeight;
+      const bookSection = document.getElementById("book");
+      const beforeBooking = bookSection
+        ? scrollY < bookSection.offsetTop - window.innerHeight * 0.2
+        : true;
       const pastHero = scrollY > window.innerHeight * 0.9;
       const nearBottom = scrollY > totalHeight - 900;
-      setShow(pastHero && !nearBottom);
+      setShow(pastHero && beforeBooking && !nearBottom);
     };
     window.addEventListener("scroll", onScroll, { passive: true });
     onScroll();

@@ -1,17 +1,15 @@
-import { FilloutEmbed } from "@/components/fillout-embed";
 import { GhlCalendar } from "@/components/ghl-calendar";
 import { Reveal } from "@/components/reveal";
 
 export function CalendarCTA() {
-  const formId = process.env.NEXT_PUBLIC_FILLOUT_FORM_ID ?? "";
   const embedUrl = process.env.NEXT_PUBLIC_GHL_CALENDAR_EMBED_URL ?? "";
 
   return (
     <section
       id="book"
-      className="border-b border-[var(--color-line)] bg-[#f8f6ef] py-16 dark:bg-transparent md:py-24"
+      className="border-b border-[var(--color-line)] bg-[#f8f6ef] py-8 dark:bg-transparent md:py-10"
     >
-      <div className="mx-auto grid w-[min(1200px,calc(100%-40px))] sm:w-[min(1200px,calc(100%-32px))] items-start gap-10 md:grid-cols-[0.85fr_1.15fr]">
+      <div className="mx-auto grid min-h-[calc(100svh-96px)] w-[min(1240px,calc(100%-40px))] items-center gap-7 sm:w-[min(1240px,calc(100%-32px))] md:grid-cols-[0.72fr_1.28fr]">
         <Reveal variant="left">
           <div>
             <p className="mb-3 text-[var(--text-eyebrow)] font-semibold uppercase tracking-[0.14em] text-[var(--color-brand-purple)]">
@@ -32,16 +30,13 @@ export function CalendarCTA() {
           </div>
         </Reveal>
         <Reveal variant="right" delay={0.08} className="grid gap-5">
-          {formId ? (
-            <FilloutEmbed formId={formId} />
-          ) : (
-            <div className="rounded-2xl border border-[var(--color-line)] bg-[var(--color-bg-cream)] p-6 text-[var(--color-muted)] dark:bg-white/[0.04]">
-              Form embed is configured via NEXT_PUBLIC_FILLOUT_FORM_ID env var.
-            </div>
-          )}
           {embedUrl ? (
             <GhlCalendar embedUrl={embedUrl} title="Lumenosis AI strategy call calendar" />
-          ) : null}
+          ) : (
+            <div className="rounded-2xl border border-[var(--color-line)] bg-[var(--color-bg-cream)] p-6 text-[var(--color-muted)] dark:bg-white/[0.04]">
+              Calendar embed is configured via NEXT_PUBLIC_GHL_CALENDAR_EMBED_URL env var.
+            </div>
+          )}
         </Reveal>
       </div>
     </section>

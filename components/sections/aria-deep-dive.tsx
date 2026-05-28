@@ -38,6 +38,10 @@ type ConversationLine = {
 
 type ThreadRef = ReturnType<typeof useRef<HTMLDivElement | null>>;
 
+const IDLE_WAVEFORM = Array.from({ length: 40 }, (_, i) =>
+  Number((14 + Math.abs(Math.sin(i * 0.38) * 22 + Math.sin(i * 0.85) * 14)).toFixed(4)),
+);
+
 const emailThread: EmailMessage[] = [
   {
     id: "email-1",
@@ -470,12 +474,7 @@ function AriaPhoneDemo() {
   const [callComplete, setCallComplete] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
-  const [bars, setBars] = useState<number[]>(
-    Array.from(
-      { length: 40 },
-      (_, i) => 14 + Math.abs(Math.sin(i * 0.38) * 22 + Math.sin(i * 0.85) * 14),
-    ),
-  );
+  const [bars, setBars] = useState<number[]>(IDLE_WAVEFORM);
 
   // Connect Web Audio API when first play
   const setupAudio = () => {
@@ -537,12 +536,7 @@ function AriaPhoneDemo() {
     if (playing) {
       audio.pause();
       cancelAnimationFrame(rafRef.current);
-      setBars(
-        Array.from(
-          { length: 40 },
-          (_, i) => 14 + Math.abs(Math.sin(i * 0.38) * 22 + Math.sin(i * 0.85) * 14),
-        ),
-      );
+      setBars(IDLE_WAVEFORM);
       setPlaying(false);
     } else {
       await audio.play();
@@ -561,12 +555,7 @@ function AriaPhoneDemo() {
       setCallComplete(true);
       cancelAnimationFrame(rafRef.current);
       // Reset bars to static idle waveform
-      setBars(
-        Array.from(
-          { length: 40 },
-          (_, i) => 14 + Math.abs(Math.sin(i * 0.38) * 22 + Math.sin(i * 0.85) * 14),
-        ),
-      );
+      setBars(IDLE_WAVEFORM);
     };
     audio.addEventListener("timeupdate", onTime);
     audio.addEventListener("loadedmetadata", onLoad);
