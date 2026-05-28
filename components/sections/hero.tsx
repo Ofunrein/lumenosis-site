@@ -1,4 +1,5 @@
 "use client";
+import { motion } from "framer-motion";
 import { Clock, ShieldCheck } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
@@ -24,7 +25,9 @@ export function Hero() {
   const [heroVisible, setHeroVisible] = useState(true);
   const [reduceMotion, setReduceMotion] = useState(false);
   const fadeTimerRef = useRef<number | null>(null);
-  const activeNiche = mounted ? niches[titleIndex] : niches[0];
+  const longestNiche = niches.reduce((longest, niche) =>
+    niche.length > longest.length ? niche : longest,
+  );
   const activeTheme = mounted && !isDarkTheme ? "light" : "dark";
   const heroSrc = HERO_IMAGES[activeTheme];
 
@@ -99,12 +102,28 @@ export function Hero() {
           <h1 className="w-full max-w-[650px] text-center font-[family-name:var(--font-display)] text-[clamp(2.4rem,4.45vw,4.75rem)] font-semibold leading-[1.04] tracking-tight text-[var(--color-ink-charcoal)] xl:text-[clamp(3.25rem,4vw,4.75rem)]">
             <span className="block">AI agents for your</span>
             <span
-              key={activeNiche}
-              className="mx-auto block max-w-full text-[0.82em] italic text-[var(--color-gold-italic)] motion-safe:animate-[niche-word-in_420ms_cubic-bezier(0.2,0.8,0.2,1)_both] sm:text-[1em]"
+              className="relative mx-auto flex max-w-full justify-center overflow-hidden pb-1 pt-0.5 text-[0.82em] italic text-[var(--color-gold-italic)] sm:text-[1em]"
               aria-live="polite"
               aria-atomic="true"
             >
-              {activeNiche}
+              <span className="invisible block whitespace-nowrap" aria-hidden>
+                {longestNiche}
+              </span>
+              {niches.map((niche, index) => (
+                <motion.span
+                  key={niche}
+                  className="absolute inset-x-0 top-0 block whitespace-nowrap"
+                  initial={{ opacity: 0, y: -120 }}
+                  transition={{ type: "spring", stiffness: 50, damping: 18 }}
+                  animate={
+                    titleIndex === index
+                      ? { y: 0, opacity: 1 }
+                      : { y: titleIndex > index ? -150 : 150, opacity: 0 }
+                  }
+                >
+                  {niche}
+                </motion.span>
+              ))}
             </span>
             <span className="block">team.</span>
           </h1>
