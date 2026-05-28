@@ -102,7 +102,7 @@ export function Hero() {
           <h1 className="w-full max-w-[650px] text-center font-[family-name:var(--font-display)] text-[clamp(2.4rem,4.45vw,4.75rem)] font-semibold leading-[1.04] tracking-tight text-[var(--color-ink-charcoal)] xl:text-[clamp(3.25rem,4vw,4.75rem)]">
             <span className="block">AI agents for your</span>
             <span
-              className="relative mx-auto flex max-w-full justify-center overflow-hidden pb-1 pt-0.5 text-[0.82em] italic text-[var(--color-gold-italic)] sm:text-[1em]"
+              className="relative mx-auto flex max-w-full justify-center overflow-hidden pb-1 pt-0.5 text-[clamp(1.68rem,8vw,2.85rem)] leading-[1.05] italic text-[var(--color-gold-italic)] sm:text-[clamp(2.6rem,5.1vw,3.65rem)] xl:text-[clamp(2.75rem,3.08vw,3.55rem)]"
               aria-live="polite"
               aria-atomic="true"
             >
