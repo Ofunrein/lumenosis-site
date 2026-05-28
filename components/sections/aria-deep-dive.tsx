@@ -596,6 +596,12 @@ function AriaPhoneDemo() {
   };
 
   const progress = duration > 0 ? currentTime / duration : 0;
+  const seekFromClientX = (clientX: number, rect: DOMRect) => {
+    const audio = audioRef.current;
+    if (!audio || !duration) return;
+    const pct = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
+    audio.currentTime = pct * duration;
+  };
 
   return (
     <div className="flex flex-col gap-5 w-full p-6">
@@ -631,16 +637,16 @@ function AriaPhoneDemo() {
           <button
             type="button"
             onClick={togglePlay}
-            className="grid size-10 shrink-0 place-items-center rounded-full bg-[var(--color-brand-violet)] text-white hover:scale-105 transition-transform"
+            className="grid size-14 shrink-0 place-items-center rounded-full bg-[var(--color-brand-violet)] text-white shadow-[0_12px_32px_rgba(203,108,230,0.32)] transition-transform hover:scale-105 active:scale-95 sm:size-16"
             aria-label={playing ? "Pause" : "Play"}
           >
             {playing ? (
-              <svg viewBox="0 0 24 24" className="size-4 fill-current">
+              <svg viewBox="0 0 24 24" className="size-5 fill-current sm:size-6">
                 <rect x="6" y="5" width="4" height="14" />
                 <rect x="14" y="5" width="4" height="14" />
               </svg>
             ) : (
-              <svg viewBox="0 0 24 24" className="size-4 fill-current">
+              <svg viewBox="0 0 24 24" className="ml-0.5 size-5 fill-current sm:size-6">
                 <path d="M8 5v14l11-7z" />
               </svg>
             )}
@@ -668,43 +674,45 @@ function AriaPhoneDemo() {
 
         {/* Progress bar — clickable and draggable */}
         <div
-          className="group relative h-6 flex items-center cursor-pointer"
-          onClick={(e) => {
-            const audio = audioRef.current;
-            if (!audio || !duration) return;
-            const rect = e.currentTarget.getBoundingClientRect();
-            audio.currentTime =
-              Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width)) * duration;
+          className="group relative flex h-10 cursor-pointer items-center touch-none"
+          role="slider"
+          aria-label="Seek call recording"
+          aria-valuemin={0}
+          aria-valuemax={Math.max(0, Math.round(duration))}
+          aria-valuenow={Math.round(currentTime)}
+          onPointerDown={(e) => {
+            if (!duration) return;
+            const container = e.currentTarget;
+            const rect = container.getBoundingClientRect();
+            container.setPointerCapture(e.pointerId);
+            seekFromClientX(e.clientX, rect);
           }}
-          onMouseDown={(e) => {
-            const audio = audioRef.current;
-            if (!audio || !duration) return;
-            const container = e.currentTarget as HTMLDivElement;
-            const rect = container.getBoundingClientRect(); // Capture rect at mousedown time
-
-            const setTime = (clientX: number) => {
-              const pct = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
-              audio.currentTime = pct * duration;
-            };
-
-            setTime(e.clientX);
-
-            const onMove = (me: MouseEvent) => setTime(me.clientX);
-            const onUp = () => {
-              window.removeEventListener("mousemove", onMove);
-              window.removeEventListener("mouseup", onUp);
-            };
-            window.addEventListener("mousemove", onMove);
-            window.addEventListener("mouseup", onUp);
+          onPointerMove={(e) => {
+            if (!duration || !e.currentTarget.hasPointerCapture(e.pointerId)) return;
+            seekFromClientX(e.clientX, e.currentTarget.getBoundingClientRect());
+          }}
+          onPointerUp={(e) => {
+            if (e.currentTarget.hasPointerCapture(e.pointerId)) {
+              e.currentTarget.releasePointerCapture(e.pointerId);
+            }
+          }}
+          onPointerCancel={(e) => {
+            if (e.currentTarget.hasPointerCapture(e.pointerId)) {
+              e.currentTarget.releasePointerCapture(e.pointerId);
+            }
+          }}
+          onClick={(e) => {
+            if (!duration) return;
+            seekFromClientX(e.clientX, e.currentTarget.getBoundingClientRect());
           }}
         >
-          <div className="relative w-full h-1 rounded-full bg-white/15">
+          <div className="relative h-2 w-full rounded-full bg-white/15">
             <div
-              className="absolute inset-y-0 left-0 rounded-full bg-[var(--color-brand-violet)]"
+              className="absolute inset-y-0 left-0 rounded-full bg-[var(--color-brand-violet)] shadow-[0_0_18px_rgba(203,108,230,0.38)]"
               style={{ width: `${progress * 100}%` }}
             />
             <div
-              className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 size-3.5 rounded-full bg-[var(--color-brand-violet)] opacity-0 group-hover:opacity-100 transition-opacity shadow-sm"
+              className="absolute top-1/2 size-5 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-white bg-[var(--color-brand-violet)] opacity-100 shadow-[0_0_0_5px_rgba(203,108,230,0.18),0_8px_18px_rgba(0,0,0,0.28)] transition-transform group-hover:scale-110 sm:size-6"
               style={{ left: `${progress * 100}%` }}
             />
           </div>

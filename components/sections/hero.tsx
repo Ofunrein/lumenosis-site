@@ -132,7 +132,7 @@ export function Hero() {
           <div className="absolute inset-0 xl:inset-y-8">
             <div
               aria-hidden
-              className="pointer-events-none absolute -inset-x-6 -inset-y-7 rounded-[36px] opacity-0 blur-2xl dark:hidden xl:-inset-x-8 xl:-inset-y-9 xl:blur-3xl"
+              className="pointer-events-none absolute inset-0 rounded-[36px] opacity-0 blur-2xl dark:hidden sm:-inset-x-6 sm:-inset-y-7 xl:-inset-x-8 xl:-inset-y-9 xl:blur-3xl"
               style={{
                 background:
                   "radial-gradient(72% 80% at 20% 12%, rgba(24,29,37,0.34), transparent 56%), radial-gradient(84% 88% at 82% 86%, rgba(22,26,33,0.28), transparent 60%), radial-gradient(100% 100% at 50% 50%, rgba(16,20,27,0.18), transparent 74%)",
