@@ -24,10 +24,10 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://lumenosis.com"),
   icons: {
     icon: [
-      { url: "/favicon.ico", sizes: "any" },
-      { url: "/icon.png", type: "image/png", sizes: "32x32" },
+      { url: "/favicon-rounded.ico", sizes: "any" },
+      { url: "/icon-rounded.png", type: "image/png", sizes: "32x32" },
     ],
-    apple: [{ url: "/apple-icon.png", type: "image/png", sizes: "180x180" }],
+    apple: [{ url: "/apple-icon-rounded.png", type: "image/png", sizes: "180x180" }],
   },
   openGraph: {
     title: "Lumenosis AI — AI agents for real estate",
