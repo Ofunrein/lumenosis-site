@@ -21,11 +21,18 @@ export const metadata: Metadata = {
   title: { default: "Lumenosis AI — AI agents for real estate", template: "%s — Lumenosis AI" },
   description:
     "AI agents that handle inbound calls, SMS, email, and lead recovery for real estate, brokerages, property management, short-term rentals, and investors.",
-  metadataBase: new URL("https://lumenosis.ai"),
+  metadataBase: new URL("https://lumenosis.com"),
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/icon.png", type: "image/png", sizes: "32x32" },
+    ],
+    apple: [{ url: "/apple-icon.png", type: "image/png", sizes: "180x180" }],
+  },
   openGraph: {
     title: "Lumenosis AI — AI agents for real estate",
     description: "AI agents that book qualified appointments while you sleep.",
-    url: "https://lumenosis.ai",
+    url: "https://lumenosis.com",
     siteName: "Lumenosis AI",
     type: "website",
   },
