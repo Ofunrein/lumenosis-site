@@ -48,12 +48,12 @@ export function Hero() {
   }, []);
 
   useEffect(() => {
-    if (reduceMotion || !mounted) return;
+    if (!mounted) return;
     const timeout = window.setTimeout(() => {
-      setTitleIndex(titleIndex === niches.length - 1 ? 0 : titleIndex + 1);
+      setTitleIndex((current) => (current === niches.length - 1 ? 0 : current + 1));
     }, 2000);
     return () => window.clearTimeout(timeout);
-  }, [mounted, reduceMotion, titleIndex]);
+  }, [mounted, titleIndex]);
 
   useEffect(() => {
     if (!mounted) return;
@@ -99,7 +99,8 @@ export function Hero() {
           <h1 className="w-full max-w-[650px] text-center font-[family-name:var(--font-display)] text-[clamp(2.4rem,4.45vw,4.75rem)] font-semibold leading-[1.04] tracking-tight text-[var(--color-ink-charcoal)] xl:text-[clamp(3.25rem,4vw,4.75rem)]">
             <span className="block">AI agents for your</span>
             <span
-              className="mx-auto block max-w-full text-[0.82em] italic text-[var(--color-gold-italic)] transition-opacity duration-300 sm:text-[1em]"
+              key={activeNiche}
+              className="mx-auto block max-w-full text-[0.82em] italic text-[var(--color-gold-italic)] motion-safe:animate-[niche-word-in_420ms_cubic-bezier(0.2,0.8,0.2,1)_both] sm:text-[1em]"
               aria-live="polite"
               aria-atomic="true"
             >

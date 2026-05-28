@@ -15,7 +15,7 @@ export function CalendarCTA() {
             <p className="mb-3 text-[var(--text-eyebrow)] font-semibold uppercase tracking-[0.14em] text-[var(--color-brand-purple)]">
               08 — Book
             </p>
-            <h2 className="font-[family-name:var(--font-display)] text-[length:var(--text-display-section)] font-semibold leading-[1.05] text-[var(--color-ink-charcoal)]">
+            <h2 className="font-[family-name:var(--font-display)] text-[clamp(2.4rem,5vw,4rem)] font-semibold leading-[1.04] text-[var(--color-ink-charcoal)]">
               A 30-minute conversation that&apos;s{" "}
               <em className="not-italic text-[var(--color-gold-italic)]">
                 actually worth your time.
