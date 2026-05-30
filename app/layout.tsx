@@ -46,7 +46,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       suppressHydrationWarning
     >
       <body suppressHydrationWarning>
-<ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
+<ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
           <a
             href="#top"
             className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-[var(--color-brand-purple)] focus:px-3 focus:py-2 focus:text-white"
