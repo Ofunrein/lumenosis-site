@@ -206,7 +206,7 @@ export function Hero() {
           />
         </div>
       </div>
-      <div aria-hidden className="pointer-events-none absolute inset-x-0 bottom-0 h-20 bg-gradient-to-b from-transparent to-[var(--color-bg-cream)] dark:to-[#0a0e0c] z-10" />
+      <div aria-hidden className="pointer-events-none absolute inset-x-0 bottom-0 h-10 backdrop-blur-sm [mask-image:linear-gradient(to_bottom,transparent,black_60%)] z-10" />
     </section>
   );
 }

@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { GlowCard } from "@/components/spotlight-card";
 import { Reveal } from "@/components/reveal";
@@ -93,15 +92,8 @@ export function FounderVSL() {
                   <span className="h-2 w-12 rounded-full bg-[var(--color-brand-purple)]/25 dark:bg-[var(--color-gold-italic)]/35" />
                 </div>
 
-                <div className="relative aspect-video w-full overflow-hidden bg-[var(--color-dark-section)]">
-                  <Image
-                    src="/images/martin-headshot.jpg"
-                    alt="Martin Ofunrein on Lumenosis AI strategy for real estate"
-                    fill
-                    sizes="(max-width: 768px) 100vw, 700px"
-                    className="scale-105 object-cover saturate-110"
-                  />
-                  <div className="absolute inset-0 bg-[linear-gradient(115deg,rgb(20_12_30_/_0.78),rgb(70_35_88_/_0.22)_48%,rgb(232_196_122_/_0.28))]" />
+                <div className="relative aspect-video w-full overflow-hidden bg-[#0c0914]">
+                  <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_60%_40%,rgb(120_60_160_/_0.35),transparent_60%),radial-gradient(ellipse_at_20%_80%,rgb(232_196_122_/_0.12),transparent_50%)]" />
                   <div className="absolute inset-x-0 bottom-0 bg-[linear-gradient(to_top,rgb(12_9_18_/_0.88),transparent)] p-5 text-white sm:p-7">
                     <p className="max-w-[26rem] font-[family-name:var(--font-display)] text-2xl font-semibold leading-tight sm:text-4xl">
                       The 7-minute case for an AI front desk.
