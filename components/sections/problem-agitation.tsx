@@ -13,7 +13,7 @@ const leaks = [
   {
     n: "02",
     title: "Weak qualification",
-    body: "The team does not capture timeline, intent, financing, property type, or next step cleanly.",
+    body: "The team never captures timeline, financing, or who owns the next call.",
   },
   {
     n: "03",

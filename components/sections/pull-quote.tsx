@@ -9,7 +9,7 @@ export function PullQuote() {
             &ldquo;I used to chase leads. Now I show up to appointments that already exist.&rdquo;
           </blockquote>
           <figcaption className="mt-5 text-[length:var(--text-eyebrow)] font-semibold uppercase tracking-[0.14em] text-[var(--color-muted)]">
-            &mdash; Real Estate Professional, Austin TX
+            Real Estate Professional, Austin TX
           </figcaption>
         </figure>
       </Reveal>

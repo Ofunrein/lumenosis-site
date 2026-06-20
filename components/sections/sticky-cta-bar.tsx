@@ -33,7 +33,7 @@ export function StickyCtaBar() {
       }`}
     >
       <span className="text-sm font-medium text-[var(--color-ink-charcoal)]">
-        Ready to scale? Book a demo.
+        See it handle a live lead. Book a demo.
       </span>
       {show && (
         <SpotlightButtonWrapper>

@@ -10,7 +10,7 @@ const paths = [
     title: "Start your",
     titleItalic: "team.",
     description:
-      "The complete AI front desk for solo agents and small teams who want to stop losing leads to slow follow-up — in 30 days.",
+      "The complete AI front desk for solo agents and small teams who want to stop losing leads to slow follow-up. Fully running in 30 days.",
     bestFor: "Solo agents & small teams",
     features: [
       "Olivia website chat agent",

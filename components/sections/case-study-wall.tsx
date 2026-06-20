@@ -45,7 +45,7 @@ export function CaseStudyWall() {
                 07 - Wall of Results
               </span>
               <h2 className="max-w-[980px] font-[family-name:var(--font-display)] text-[clamp(2.65rem,4.85vw,5.05rem)] font-semibold leading-[0.96] tracking-normal text-[var(--color-ink-charcoal)]">
-                What real estate teams actually say.
+                What real estate teams say.
               </h2>
             </div>
 

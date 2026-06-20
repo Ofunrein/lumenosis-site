@@ -10,9 +10,9 @@ export function FinalCTA() {
       <div className="mx-auto w-[min(900px,calc(100%-40px))] sm:w-[min(900px,calc(100%-32px))]">
         <Reveal variant="up">
           <h2 className="font-[family-name:var(--font-display)] text-[length:var(--text-display-section)] font-semibold leading-[1.05] text-[var(--color-ink-charcoal)]">
-            Have a thirty-minute conversation that&rsquo;s{" "}
+            Thirty minutes. Walk away knowing exactly{" "}
             <em className="not-italic text-[var(--color-brand-purple)]">
-              actually worth your time.
+              what your lead handoff costs you.
             </em>
           </h2>
         </Reveal>

@@ -147,7 +147,7 @@ const microFeatures = [
   {
     icon: MessageSquare,
     title: "Channel memory",
-    body: "Email, voice, and SMS share the same lead context.",
+    body: "Every channel reads from the same lead record.",
   },
   {
     icon: Home,
@@ -913,12 +913,10 @@ export function AriaDeepDive() {
               04 - Live follow-up desk
             </p>
             <h2 className="font-[family-name:var(--font-display)] text-[clamp(2.5rem,4.6vw,4.7rem)] font-semibold leading-[0.99] text-white">
-              The front desk that never sleeps and never asks for a raise.
+              Your front desk. Open every hour. No salary, no sick days, no dropped calls.
             </h2>
             <p className="mt-6 max-w-xl text-lg leading-8 text-white/75">
-              A buyer asks about a listing. Iris replies with real property details, Aria answers
-              the call, and Theo keeps the text thread moving until a showing or valuation is
-              booked.
+              A buyer asks about a listing. Iris replies with real property details before the lead opens another tab. Aria picks up if they call. The thread keeps moving until a showing is on the calendar.
             </p>
           </div>
 

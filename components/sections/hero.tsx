@@ -128,8 +128,9 @@ export function Hero() {
             <span className="block">team.</span>
           </h1>
           <p className="mt-5 w-full max-w-[590px] text-center text-[length:var(--text-body-lg)] leading-snug text-[var(--color-muted)]">
-            Olivia answers your website. Aria answers the phone. Theo texts every lead in under
-            sixty seconds. Iris turns inbound emails into booked valuations.
+            Every lead gets a reply in under sixty seconds. Every call gets answered. Every
+            inquiry gets qualified, followed up, and pushed toward a booking. Your team shows up
+            to the meeting.
           </p>
           <div className="mt-8 flex w-full max-w-[590px] justify-center">
             <Magnet padding={60} magnetStrength={5}>
@@ -205,6 +206,7 @@ export function Hero() {
           />
         </div>
       </div>
+      <div aria-hidden className="pointer-events-none absolute inset-x-0 bottom-0 h-20 bg-gradient-to-b from-transparent to-[var(--color-bg-cream)] dark:to-[#0a0e0c] z-10" />
     </section>
   );
 }
