@@ -100,7 +100,7 @@ export function Hero() {
         {/* Text column */}
         <div className="flex flex-col items-center justify-center px-1 py-12 text-center sm:px-4 sm:py-16 xl:px-0">
           <h1 className="w-full max-w-[650px] text-center font-[family-name:var(--font-display)] text-[clamp(2.4rem,4.45vw,4.75rem)] font-semibold leading-[1.04] tracking-tight text-[var(--color-ink-charcoal)] xl:text-[clamp(3.25rem,4vw,4.75rem)]">
-            <span className="block">AI agents for your</span>
+            <span className="block">The first agent to reply wins the deal.</span>
             <span
               className="relative mx-auto flex max-w-full justify-center overflow-hidden pb-1 pt-0.5 text-[clamp(1.68rem,8vw,2.85rem)] leading-[1.05] italic text-[var(--color-gold-italic)] sm:text-[clamp(2.6rem,5.1vw,3.65rem)] xl:text-[clamp(2.75rem,3.08vw,3.55rem)]"
               aria-live="polite"
@@ -125,12 +125,10 @@ export function Hero() {
                 </motion.span>
               ))}
             </span>
-            <span className="block">team.</span>
+            <span className="block">team — every time.</span>
           </h1>
           <p className="mt-5 w-full max-w-[590px] text-center text-[length:var(--text-body-lg)] leading-snug text-[var(--color-muted)]">
-            Every lead gets a reply in under sixty seconds. Every call gets answered. Every
-            inquiry gets qualified, followed up, and pushed toward a booking. Your team shows up
-            to the meeting.
+            Every lead gets a reply in under sixty seconds — before they tap 'call next agent.' Every call is answered. Every inquiry is qualified, followed up, and lands as a booked appointment. Your team walks in to a confirmed showing.
           </p>
           <div className="mt-8 flex w-full max-w-[590px] justify-center">
             <Magnet padding={60} magnetStrength={5}>
@@ -140,7 +138,7 @@ export function Hero() {
                   backgroundColor="#cb6ce6"
                   className="bg-[var(--color-brand-purple)] text-white px-6 h-12 text-base [&_span]:text-white"
                 >
-                  <a href="#book">Book a Demo</a>
+                  <a href="#book">See What Leads Are Costing You</a>
                 </StarButton>
               </SpotlightButtonWrapper>
             </Magnet>
@@ -193,7 +191,7 @@ export function Hero() {
 
           {/* Stat callouts */}
           <GlassStatCallout
-            label="Avg lead response"
+            label="First reply, every lead"
             value="60 seconds"
             icon={<Clock className="size-4" />}
             className="absolute left-5 top-6 xl:-left-5 xl:top-20 z-10"

@@ -8,7 +8,7 @@ const leaks = [
   {
     n: "01",
     title: "Slow first response",
-    body: "Portal leads, missed calls, and form submits sit while the prospect keeps searching.",
+    body: "Portal leads, missed calls, and form submits sit unread. The prospect moves on before your ISA's shift starts.",
   },
   {
     n: "02",
@@ -18,7 +18,7 @@ const leaks = [
   {
     n: "03",
     title: "No visible owner",
-    body: "Leads enter the CRM. Nobody can see who owns the next action or when it is due.",
+    body: "Leads enter the CRM and stop there. No owner, no next action, no follow-up. The record fills up. The deal does not.",
   },
 ];
 
@@ -96,9 +96,9 @@ export function ProblemAgitation() {
               <em className="text-[var(--color-gold-italic)]">are not ad spend.</em>
             </h2>
             <p className="mt-4 text-[length:var(--text-body-lg)] text-[var(--color-muted)]">
-              You already have leads. You already have a CRM. The leak is the missing operating
-              layer between them. Every minute a lead waits costs five hundred to two thousand
-              dollars in eventual deal value.
+              A lead submits Tuesday at 9:47 PM. Nobody replies until Wednesday at 9 AM. By then they have toured with the first agent who texted back. Your CRM says no contact. Your ISA says I saw it this morning. The deal was gone at 9:48 PM.
+
+              You already have leads. You already have a CRM. The gap between them is the nine hours that costs you the deal.
             </p>
           </div>
         </Reveal>
