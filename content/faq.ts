@@ -16,7 +16,7 @@ export const faq: FaqItem[] = [
   },
   {
     q: "Is this TCPA safe?",
-    a: "Yes. We collect prior express written consent through your existing forms, store the consent record, honor STOP and HELP, and never message outside your opted-in audience. We are not legal counsel—your compliance officer signs off before launch.",
+    a: "Yes. We collect prior express written consent through your existing forms, store the consent record, honor STOP and HELP, and never message outside your opted-in audience. We are not legal counsel. Your compliance officer signs off before launch.",
   },
   {
     q: "What happens if the AI gets a question wrong?",

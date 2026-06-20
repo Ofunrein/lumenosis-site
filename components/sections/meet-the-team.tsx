@@ -11,7 +11,7 @@ export function MeetTheTeam() {
       <div className="mx-auto w-[min(1200px,calc(100%-40px))] sm:w-[min(1200px,calc(100%-32px))]">
         <Reveal variant="up" className="max-w-2xl">
           <p className="mb-3 text-[var(--text-eyebrow)] font-semibold uppercase tracking-[0.14em] text-[var(--color-brand-purple)]">
-            03 — The team
+            03 · The team
           </p>
           <h2 className="font-[family-name:var(--font-display)] text-[length:var(--text-display-section)] font-semibold leading-[1.05] text-[var(--color-ink-charcoal)]">
             Meet your <em className="not-italic text-[var(--color-gold-italic)]">new team.</em>

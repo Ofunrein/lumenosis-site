@@ -13,7 +13,7 @@ export function CalendarCTA() {
         <Reveal variant="left">
           <div>
             <p className="mb-3 text-[var(--text-eyebrow)] font-semibold uppercase tracking-[0.14em] text-[var(--color-brand-purple)]">
-              08 — Book
+              08 · Book
             </p>
             <h2 className="font-[family-name:var(--font-display)] text-[clamp(2.4rem,5vw,4rem)] font-semibold leading-[1.04] text-[var(--color-ink-charcoal)]">
               A 30-minute conversation that&apos;s{" "}

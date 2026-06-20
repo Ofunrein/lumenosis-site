@@ -19,7 +19,7 @@ export function Faq() {
         <Reveal variant="left">
           <div>
             <span className="mb-3 inline-block text-[var(--text-eyebrow)] font-semibold uppercase tracking-[0.14em] text-[var(--color-brand-purple)]">
-              09 — FAQ
+              09 · FAQ
             </span>
             <h2 className="font-[family-name:var(--font-display)] text-[length:var(--text-display-section)] font-semibold leading-[1.05] text-[var(--color-ink-charcoal)]">
               Questions{" "}

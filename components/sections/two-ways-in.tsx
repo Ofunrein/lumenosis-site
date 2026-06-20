@@ -51,7 +51,7 @@ export function TwoWaysIn() {
       <div className="mx-auto w-[min(1200px,calc(100%-40px))] sm:w-[min(1200px,calc(100%-32px))]">
         <Reveal variant="up" className="mb-12 md:mb-16">
           <p className="mb-3 text-[var(--text-eyebrow)] font-semibold uppercase tracking-[0.16em] text-[var(--color-brand-violet)] dark:text-white">
-            06 — Programs
+            06 · Programs
           </p>
           <h2 className="max-w-4xl font-[family-name:var(--font-display)] text-[length:var(--text-display-section)] font-semibold leading-[1.05] text-[var(--color-ink-charcoal)] dark:text-white">
             Two ways in. <em className="text-[var(--color-gold-italic)]">One destination.</em>

@@ -31,11 +31,11 @@ export function FounderVSL() {
         <Reveal variant="left">
           <div>
             <p className="mb-3 text-[var(--text-eyebrow)] font-semibold uppercase tracking-[0.14em] text-[var(--color-brand-purple)]">
-              01 — Watch First
+              01 · Watch First
             </p>
             <h2 className="font-[family-name:var(--font-display)] text-[length:var(--text-display-section)] font-semibold leading-[1.05] text-[var(--color-ink-charcoal)]">
-              Why most agents are losing to faster competitors in 2026 —{" "}
-              <em className="text-[var(--color-gold-italic)]">and what to do instead.</em>
+              Why most agents are losing to faster competitors in 2026.{" "}
+              <em className="text-[var(--color-gold-italic)]">Here is what to do instead.</em>
             </h2>
             <ul className="mt-6 grid gap-3 text-[var(--color-muted)]">
               <li className="flex gap-3">

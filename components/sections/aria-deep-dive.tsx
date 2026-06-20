@@ -94,7 +94,7 @@ const theoThread: ConversationLine[] = [
     from: "ai",
     name: "Theo",
     detail: "9:21 AM",
-    text: "Hey! Yes it is — 3 bed, 2 bath, $529k. Are you pre-approved or working with an agent?",
+    text: "Hey! Yes, it is: 3 bed, 2 bath, $529k. Are you pre-approved or working with an agent?",
   },
   {
     id: "sms-3",

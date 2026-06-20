@@ -128,7 +128,7 @@ export function Hero() {
             <span className="block">team.</span>
           </h1>
           <p className="mt-5 w-full max-w-[590px] text-center text-[length:var(--text-body-lg)] leading-snug text-[var(--color-muted)]">
-            Every lead gets a reply in under sixty seconds — before they tap 'call next agent.' Every call is answered. Every inquiry is qualified, followed up, and lands as a booked appointment. Your team walks in to a confirmed showing.
+            78% of buyers go with the first agent who replies. We make sure that's you: every lead replied to in under 60 seconds, every call answered, every showing booked automatically.
           </p>
           <div className="mt-8 flex w-full max-w-[590px] justify-center">
             <Magnet padding={60} magnetStrength={5}>
