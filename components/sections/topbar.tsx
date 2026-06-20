@@ -130,6 +130,12 @@ export function Topbar() {
                 <ThemeToggleIcon dark={resolvedTheme === "dark"} />
               </button>
             )}
+            <a
+              href="https://app.lumenosis.com"
+              className="px-4 h-9 inline-flex items-center text-sm font-semibold text-[var(--color-ink-charcoal)] dark:text-white/80 hover:text-[var(--color-brand-violet)] dark:hover:text-white transition-colors rounded-full border border-[var(--color-line)] dark:border-white/15 hover:border-[var(--color-brand-violet)]/50"
+            >
+              Log in
+            </a>
             <SpotlightButtonWrapper>
               <StarButton
                 lightColor="#cb6ce6"
@@ -164,6 +170,13 @@ export function Topbar() {
             </a>
           ))}
           <div className="h-px bg-[var(--color-line)] dark:bg-white/10 my-1" />
+          <a
+            href="https://app.lumenosis.com"
+            onClick={() => setOpen(false)}
+            className="px-4 py-3 text-base font-semibold text-[var(--color-ink-charcoal)] dark:text-white rounded-xl hover:bg-[var(--color-brand-violet-soft)] transition-colors text-center"
+          >
+            Log in
+          </a>
           <div className="flex items-center justify-between px-4 py-2">
             <span className="text-sm text-[var(--color-muted)] dark:text-white/60">Appearance</span>
             {mounted && (
