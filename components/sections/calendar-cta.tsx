@@ -20,8 +20,8 @@ export function CalendarCTA() {
               <em className="not-italic text-[var(--color-gold-italic)]">actually useful.</em>
             </h2>
             <ul className="mt-6 grid gap-3 text-[var(--color-muted)]">
-              <li>We map your current lead sources, CRM, calendar, and handoff rules.</li>
-              <li>We identify where leads wait, repeat themselves, or lose context.</li>
+              <li>We map your current inquiry sources, CRM, calendar, and handoff rules.</li>
+              <li>We identify where conversations wait, repeat themselves, or lose context.</li>
               <li>You leave with a practical installation path and first-channel priority.</li>
               <li>If Iris is not the right fit, we tell you what to fix before buying anything.</li>
             </ul>

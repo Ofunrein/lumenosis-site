@@ -56,7 +56,7 @@ const emailThread: EmailMessage[] = [
     name: "Iris",
     email: "assistant@lumenosis.com",
     time: "9:13 AM",
-    label: "Listing details matched",
+    label: "Property details matched",
     listing: true,
     body: "Yes, Oak Ridge Modern is still active. The next private showing windows are Wednesday at 5:45 PM and Thursday at 6:10 PM.",
   },
@@ -84,21 +84,21 @@ const theoThread: ConversationLine[] = [
   {
     id: "sms-1",
     from: "lead",
-    name: "Zillow lead",
+    name: "Portal inquiry",
     detail: "9:21 AM",
-    text: "Hi, saw the listing at 412 Oak Ridge. Still available?",
+    text: "Hi, saw the property at 412 Oak Ridge. Still available?",
   },
   {
     id: "sms-2",
     from: "ai",
     name: "Theo",
     detail: "9:21 AM",
-    text: "Hey! Yes, it is: 3 bed, 2 bath, $529k. Are you pre-approved or working with an agent?",
+    text: "Hey! Yes, it is: 3 bed, 2 bath, $529k. Are you pre-approved or already working with someone?",
   },
   {
     id: "sms-3",
     from: "lead",
-    name: "Zillow lead",
+    name: "Portal inquiry",
     detail: "9:22 AM",
     text: "Pre-approved, looking to move in 60 days.",
   },
@@ -112,7 +112,7 @@ const theoThread: ConversationLine[] = [
   {
     id: "sms-5",
     from: "lead",
-    name: "Zillow lead",
+    name: "Portal inquiry",
     detail: "9:23 AM",
     text: "Tuesday at 4.",
   },
@@ -136,22 +136,22 @@ const microFeatures = [
   {
     icon: Clock3,
     title: "Fast first touch",
-    body: "Every new lead gets a useful reply before the conversation goes cold.",
+    body: "Every new inquiry gets a useful reply before the conversation goes cold.",
   },
   {
     icon: CalendarDays,
     title: "Routed next step",
-    body: "Showings, valuation calls, agent handoffs, and follow-ups land with the right owner.",
+    body: "Showings, valuation calls, operator handoffs, and follow-ups land with the right owner.",
   },
   {
     icon: MessageSquare,
     title: "Shared memory",
-    body: "Email, SMS, calls, website chat, and social DMs use the same lead timeline.",
+    body: "Email, SMS, calls, website chat, and social DMs use the same conversation timeline.",
   },
   {
     icon: Home,
     title: "Property aware",
-    body: "Replies use your sheet, database, enrichment, CRM, or listing source before guessing.",
+    body: "Replies use your sheet, database, enrichment, CRM, or property source before guessing.",
   },
 ];
 
@@ -335,10 +335,10 @@ function IrisEmailDemo() {
               avatarSrc="/images/agents/iris.png"
               avatarAlt="Iris"
               title="Iris email desk"
-              subtitle="Live buyer inquiry"
+              subtitle="Live property inquiry"
             />
             <div className="rounded-full border border-[var(--color-brand-violet)]/50 bg-[#2a1638] px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-white">
-              {latestMessage?.from === "iris" ? "Typing reply" : "Reading lead"}
+              {latestMessage?.from === "iris" ? "Typing reply" : "Reading inquiry"}
             </div>
           </div>
 
@@ -379,7 +379,7 @@ function IrisEmailDemo() {
                       <div className="relative size-9 shrink-0 overflow-hidden rounded-full border border-[#5e4b69] bg-[#21192c]">
                         <Image
                           src={isIris ? "/images/agents/iris.png" : "/images/agents/olivia.png"}
-                          alt={isIris ? "Iris" : "Lead profile"}
+                          alt={isIris ? "Iris" : "Inquiry profile"}
                           fill
                           sizes="36px"
                           className="object-cover"
@@ -418,14 +418,14 @@ function IrisEmailDemo() {
           <div className="relative min-h-[140px] overflow-hidden rounded-[28px] border border-[#443650] bg-[#07060a] shadow-[0_24px_70px_rgba(0,0,0,0.28)]">
             <Image
               src="https://ap.rdcpix.com/574f42a37829888fdbdf1cf4d48faa27l-m3739095458rd-w960_h720.webp"
-              alt="Modern home listing preview"
+              alt="Modern home property preview"
               fill
               sizes="(max-width: 1024px) 100vw, 440px"
               className="object-cover"
             />
             <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent p-4">
               <p className="text-xs font-semibold uppercase tracking-[0.18em] text-white">
-                Matched listing
+                Matched property
               </p>
               <p className="mt-1 font-[family-name:var(--font-display)] text-2xl font-semibold text-white">
                 Oak Ridge Modern
@@ -618,7 +618,7 @@ function AriaPhoneDemo() {
           ) : (
             <span className="size-1.5 rounded-full bg-amber-400 animate-pulse" />
           )}
-          {callComplete ? "Appointment booked" : "Recording call"}
+          {callComplete ? "Handoff routed" : "Recording call"}
         </div>
       </div>
 
@@ -735,7 +735,7 @@ function AriaPhoneDemo() {
 
       {/* Feature bullets */}
       <div className="grid gap-2">
-        {["Property details provided", "Questions answered", "Viewing booked automatically"].map(
+        {["Property details provided", "Questions answered", "Handoff routed automatically"].map(
           (f) => (
             <div key={f} className="flex items-center gap-2 text-sm text-white/80">
               <span className="size-4 grid place-items-center rounded-full bg-[var(--color-brand-violet)]/20 text-[var(--color-brand-violet)] text-xs">
@@ -784,11 +784,11 @@ const LOOP_DURATION = 19500;
 
 const getTheoStatus = (lastVisibleIndex: number | undefined) => {
   if (lastVisibleIndex === undefined || lastVisibleIndex === 0)
-    return { dot: "amber", text: "Qualifying lead" };
+    return { dot: "amber", text: "Qualifying inquiry" };
   if (lastVisibleIndex <= 2) return { dot: "amber", text: "Checking availability" };
   if (lastVisibleIndex <= 4) return { dot: "amber", text: "Scheduling showing" };
   // index 5 = final Theo reply "Done! Booked..."
-  return { dot: "green", text: "Appointment booked", check: true };
+  return { dot: "green", text: "Handoff routed", check: true };
 };
 
 function TheoSmsDemo() {
@@ -892,7 +892,7 @@ function TheoSmsDemo() {
                 )}
                 {!isTheo && (
                   <p className="mb-1 self-start text-[10px] font-semibold uppercase tracking-[0.14em] text-white/50">
-                    ZILLOW LEAD
+                    PORTAL INQUIRY
                   </p>
                 )}
                 <div
@@ -934,11 +934,11 @@ export function AriaDeepDive() {
               04 - Live follow-up desk
             </p>
             <h2 className="font-[family-name:var(--font-display)] text-[clamp(2.5rem,4.6vw,4.7rem)] font-semibold leading-[0.99] text-white">
-              One lead brain across every channel.
+              One conversation brain across every channel.
             </h2>
             <p className="mt-6 max-w-xl text-lg leading-8 text-white/75">
               Iris remembers the full conversation, pulls real property details, and coordinates the
-              channel agents so email, SMS, calls, website chat, and DMs all move toward a showing,
+              channel layers so email, SMS, calls, website chat, and DMs all move toward a showing,
               valuation, or human handoff.
             </p>
           </div>

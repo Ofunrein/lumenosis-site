@@ -10,13 +10,13 @@ const paths = [
     title: "Install Iris",
     titleItalic: "Lead Desk.",
     description:
-      "For real estate teams already investing in leads and losing opportunities to slow, fragmented follow-up.",
+      "For operators already investing in inquiries and losing opportunities to slow, fragmented follow-up.",
     bestFor:
-      "3 to 15 agent teams, portal lead buyers, Meta/Google ad teams, and brokerages without reliable ISA coverage",
+      "3 to 15 operator teams, portal inquiry buyers, Meta/Google ad teams, and brokerages without reliable response coverage",
     features: [
       // Saved for later: "$3,000 setup + $2,500/mo starting point",
       "Email, SMS, calls, website chat, and social DM coverage",
-      "Shared lead timeline across every channel",
+      "Shared conversation timeline across every channel",
       "Property data brain from sheets, CRM, IDX export, or enrichment",
       "Human review rules for financing, legal, pricing, and sensitive replies",
       "CRM and calendar routing",
@@ -32,14 +32,14 @@ const paths = [
     title: "Expand your",
     titleItalic: "operation.",
     description:
-      "A managed omnichannel lead desk for brokerages, growth teams, and agencies with multiple sources, agents, markets, or client accounts.",
-    bestFor: "Brokerages, multi-agent offices, white-label agencies, growth teams",
+      "A managed omnichannel desk for brokerages, growth teams, and agencies with multiple sources, operators, markets, or client accounts.",
+    bestFor: "Brokerages, multi-operator offices, white-label agencies, growth teams",
     features: [
       // Saved for later: "$7,500 to $10,000+ setup with custom monthly management",
-      "Agent routing by market, source, urgency, language, or office",
+      "Operator routing by market, source, urgency, language, or office",
       "Follow Up Boss, Lofty, kvCORE, GoHighLevel, HubSpot, or custom CRM",
-      "Calendar, lead source, and property source integrations",
-      "Owner visibility for agents, handoffs, and stuck leads",
+      "Calendar, inquiry source, and property source integrations",
+      "Owner visibility for operators, handoffs, and stuck conversations",
       "Ongoing monitoring, prompt tuning, reporting, and expansion",
     ],
     popular: true,

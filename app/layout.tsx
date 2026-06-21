@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     template: "%s — Lumenosis AI",
   },
   description:
-    "Iris is a managed AI lead desk for real estate teams. It answers leads fast, remembers the full conversation across every channel, uses real property data, and routes the next step to the right human.",
+    "Iris answers, qualifies, and routes property conversations before they go cold for real estate teams, property managers, and short-term rental operators.",
   metadataBase: new URL("https://lumenosis.com"),
   icons: {
     icon: [
@@ -35,7 +35,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Lumenosis AI — Managed AI lead desk for real estate operators",
     description:
-      "Managed AI lead handling for real estate teams that need fast replies, property-aware answers, and human routing.",
+      "Managed AI lead handling for operators that need fast replies, property-aware answers, and human handoffs.",
     url: "https://lumenosis.com",
     siteName: "Lumenosis AI",
     type: "website",

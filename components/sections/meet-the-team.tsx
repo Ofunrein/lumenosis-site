@@ -18,8 +18,8 @@ export function MeetTheTeam() {
             <em className="not-italic text-[var(--color-gold-italic)]">Four working layers.</em>
           </h2>
           <p className="mt-4 text-[length:var(--text-body-lg)] text-[var(--color-muted)]">
-            Each layer handles a specific part of lead response: memory, text, calls, website chat,
-            and social intake.
+            Each layer handles a specific part of conversation response: memory, text, calls,
+            website chat, and social intake.
           </p>
         </Reveal>
 

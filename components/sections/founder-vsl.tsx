@@ -34,7 +34,7 @@ export function FounderVSL() {
               01 · Watch First
             </p>
             <h2 className="font-[family-name:var(--font-display)] text-[length:var(--text-display-section)] font-semibold leading-[1.05] text-[var(--color-ink-charcoal)]">
-              You are already paying for leads.{" "}
+              You are already paying for conversations.{" "}
               <em className="text-[var(--color-gold-italic)]">Iris makes sure they get handled.</em>
             </h2>
             <ul className="mt-6 grid gap-3 text-[var(--color-muted)]">
@@ -43,7 +43,7 @@ export function FounderVSL() {
                   aria-hidden
                   className="mt-2 size-1.5 shrink-0 rounded-full bg-[var(--color-brand-purple)]"
                 />
-                <span>Speed-to-lead only works when every channel shares context.</span>
+                <span>Fast response only works when every channel shares memory.</span>
               </li>
               <li className="flex gap-3">
                 <span
@@ -51,7 +51,7 @@ export function FounderVSL() {
                   className="mt-2 size-1.5 shrink-0 rounded-full bg-[var(--color-brand-purple)]"
                 />
                 <span>
-                  Portal leads, ad leads, calls, chats, and DMs need one owner and one memory.
+                  Portal inquiries, paid ads, calls, chats, and DMs need one owner and one handoff.
                 </span>
               </li>
               <li className="flex gap-3">
@@ -59,7 +59,7 @@ export function FounderVSL() {
                   aria-hidden
                   className="mt-2 size-1.5 shrink-0 rounded-full bg-[var(--color-brand-purple)]"
                 />
-                <span>This is not an AI ISA. It is a managed lead response system.</span>
+                <span>This is not an AI ISA. It is a managed response system.</span>
               </li>
               <li className="flex gap-3">
                 <span
@@ -67,7 +67,7 @@ export function FounderVSL() {
                   className="mt-2 size-1.5 shrink-0 rounded-full bg-[var(--color-brand-purple)]"
                 />
                 <span>
-                  Done right, your team sees replies, qualification, handoffs, and review in one
+                  Done right, your operators see replies, qualification, handoffs, and review in one
                   place.
                 </span>
               </li>

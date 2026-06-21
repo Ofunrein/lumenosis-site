@@ -7,8 +7,8 @@ import { GlowCard } from "@/components/spotlight-card";
 const leaks = [
   {
     n: "01",
-    title: "Expensive leads wait",
-    body: "A paid lead keeps shopping while your team figures out who owns the response.",
+    title: "Expensive inquiries wait",
+    body: "A paid inquiry keeps shopping while your team figures out who owns the response.",
   },
   {
     n: "02",
@@ -18,7 +18,7 @@ const leaks = [
   {
     n: "03",
     title: "No clear next step",
-    body: "A lead may be ready to tour, sell, finance, or book, but the handoff is buried.",
+    body: "A conversation may be ready to tour, sell, book, or hand off, but the next step is buried.",
   },
 ];
 
@@ -119,13 +119,14 @@ export function ProblemAgitation() {
               02 — The leak
             </p>
             <h2 className="font-[family-name:var(--font-display)] text-[length:var(--text-display-section)] font-semibold leading-[1.05] text-[var(--color-ink-charcoal)]">
-              The leak is not lead volume.{" "}
+              The leak is not conversation volume.{" "}
               <em className="text-[var(--color-gold-italic)]">It is response continuity.</em>
             </h2>
             <p className="mt-4 text-[length:var(--text-body-lg)] text-[var(--color-muted)]">
-              Real estate teams already pay for attention through Zillow, Realtor.com, Meta, Google,
-              referrals, websites, and social. Iris sits between those lead sources, your inboxes,
-              phones, CRM, calendar, and agents so every lead gets a fast, contextual reply.
+              Operators already pay for attention through portals, paid ads, referrals, websites,
+              social, and guest or owner inquiry sources. Iris sits between email, SMS, calls,
+              website chat, Instagram, Facebook Messenger, WhatsApp, your CRM, calendar, and human
+              team so every conversation gets a fast, contextual reply.
             </p>
           </div>
         </Reveal>

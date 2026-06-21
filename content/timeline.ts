@@ -9,25 +9,25 @@ export const timeline: TimelineWeek[] = [
   {
     week: "DAY 01",
     kicker: "Foundation",
-    title: "Lead-source audit.",
-    body: "We trace your paid lead paths, inboxes, phone flow, CRM, calendar, and routing rules.",
+    title: "Source audit.",
+    body: "We trace your paid lead flow, property inquiries, inboxes, phone flow, CRM, calendar, and routing rules.",
   },
   {
     week: "DAY 03",
     kicker: "Build",
     title: "Shared brain build.",
-    body: "We connect your channels, property source, tone, review rules, and lead timeline.",
+    body: "We connect your channels, property source, tone, review rules, and conversation timeline.",
   },
   {
     week: "DAY 07",
     kicker: "Launch",
-    title: "Lead desk goes live.",
+    title: "The desk goes live.",
     body: "Email, SMS, calls, website chat, and approved social DMs start answering and routing.",
   },
   {
     week: "DAY 14",
     kicker: "Optimize",
     title: "Tuning + handoff review.",
-    body: "We review conversations, tighten human takeover, and report what is booking or leaking.",
+    body: "We review conversations, tighten human takeover, and report what is converting or leaking.",
   },
 ];

@@ -12,12 +12,12 @@ export const agents: Agent[] = [
   {
     slug: "iris",
     name: "Iris",
-    role: "Shared lead brain",
+    role: "Shared conversation brain",
     tagline:
       "Remembers every conversation across channels and answers email with real property facts.",
     bullets: [
       "Answers inbound emails in your approved voice",
-      "Uses real listing data for price, beds, baths, links, and photos",
+      "Uses real property data for price, beds, baths, links, and photos",
       "Flags legal, financing, and sensitive replies for review",
       "Keeps one timeline across email, SMS, calls, chat, and DMs",
     ],
@@ -29,11 +29,11 @@ export const agents: Agent[] = [
     name: "Theo",
     role: "SMS follow-up",
     tagline:
-      "Responds quickly, follows up, sends listing links, handles nurture, and respects opt-outs.",
+      "Responds quickly, follows up, sends property links, handles nurture, and respects opt-outs.",
     bullets: [
       "Sends the first text in under 60 seconds",
       "Shares property links, photos, and showing windows",
-      "Runs long-term nurture for unready leads",
+      "Runs long-term nurture for unready inquiries",
       "Honors consent, STOP, and human takeover rules",
     ],
     avatar: "/images/agents/theo.png",
@@ -43,12 +43,13 @@ export const agents: Agent[] = [
     slug: "aria",
     name: "Aria",
     role: "Voice call handler",
-    tagline: "Answers missed calls, qualifies urgency, summarizes calls, and routes hot leads.",
+    tagline:
+      "Answers missed calls, qualifies urgency, summarizes calls, and routes hot conversations.",
     bullets: [
       "Picks up after-hours and overflow calls",
-      "Qualifies buyer, seller, timeline, and urgency",
+      "Qualifies inquiry type, timeline, and urgency",
       "Summarizes every call for the human owner",
-      "Books showings or valuation calls when approved",
+      "Routes showings, valuations, guest issues, or owner handoffs when approved",
     ],
     avatar: "/images/agents/aria.png",
     accent: "indigo",
@@ -59,10 +60,10 @@ export const agents: Agent[] = [
     role: "Website + social intake",
     tagline: "Handles website chat, forms, Instagram, Facebook Messenger, and WhatsApp intake.",
     bullets: [
-      "Answers website chat and listing questions",
+      "Answers website chat and property questions",
       "Captures name, phone, intent, and source",
       "Connects Instagram, Facebook, and WhatsApp when needed",
-      "Routes hot leads into the right CRM workflow",
+      "Routes urgent conversations into the right CRM workflow",
     ],
     avatar: "/images/agents/olivia.png",
     accent: "violet",

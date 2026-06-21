@@ -112,13 +112,10 @@ export function Hero() {
             </span>
           </h1>
           <p className="mt-5 w-full max-w-[590px] text-center text-[length:var(--text-body-lg)] leading-snug text-[var(--color-muted)]">
-            We install and manage a shared-brain lead response system that answers, qualifies,
-            follows up, and routes conversations across email, SMS, calls, website chat, Instagram,
-            Facebook Messenger, and WhatsApp.
+            Iris answers, qualifies, and routes property conversations before they go cold.
           </p>
           <p className="mt-4 text-base font-medium text-[var(--color-ink-charcoal)]">
-            Built for operators already paying for lead flow, property inquiries, guest messages,
-            owner leads, and after-hours response.
+            Built for operators already paying for lead flow.
           </p>
           <div className="mt-8 flex w-full max-w-[590px] justify-center">
             <Magnet padding={60} magnetStrength={5}>
