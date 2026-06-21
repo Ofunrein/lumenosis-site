@@ -16,7 +16,7 @@ const HERO_IMAGES = {
   light: "/images/product-card-mockup-day.png",
 } as const;
 const HERO_FADE_MS = 240;
-const HERO_AUDIENCES = ["real estate", "property management", "short-term rentals"] as const;
+const HERO_AUDIENCES = ["real estate.", "property management.", "short-term rentals."] as const;
 
 export function Hero() {
   const [mounted, setMounted] = useState(false);
@@ -93,10 +93,9 @@ export function Hero() {
               <RotatingText
                 words={HERO_AUDIENCES}
                 intervalMs={2300}
-                minWidth="18ch"
+                minWidth="0"
                 className="text-center"
               />
-              .
             </span>
           </h1>
           <p className="mt-5 w-full max-w-[590px] text-center text-[length:var(--text-body-lg)] leading-snug text-[var(--color-muted)]">
