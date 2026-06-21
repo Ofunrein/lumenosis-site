@@ -10,7 +10,7 @@ const paths = [
     title: "Install Iris",
     titleItalic: "Lead Desk.",
     description:
-      "A high-touch installation for real estate teams already paying for leads and ready to stop losing them to slow follow-up.",
+      "A high-touch installation for real estate operators already paying for leads and ready to stop losing them to slow follow-up.",
     bestFor: "3 to 15 agent teams, portal lead buyers, Meta and Google ad teams",
     features: [
       "$3,000 setup + $2,500/mo starting point",
@@ -22,7 +22,7 @@ const paths = [
     ],
     popular: false,
     dark: false,
-    cta: "Book Lead Desk Consult →",
+    cta: "Book Demo →",
   },
   {
     path: "PACKAGE 02 · GROWTH",

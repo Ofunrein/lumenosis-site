@@ -16,10 +16,8 @@ export function CalendarCTA() {
               08 · Book
             </p>
             <h2 className="font-[family-name:var(--font-display)] text-[clamp(2.4rem,5vw,4rem)] font-semibold leading-[1.04] text-[var(--color-ink-charcoal)]">
-              A 30-minute lead desk consult that&apos;s{" "}
-              <em className="not-italic text-[var(--color-gold-italic)]">
-                actually worth your time.
-              </em>
+              A 30-minute demo that&apos;s{" "}
+              <em className="not-italic text-[var(--color-gold-italic)]">actually useful.</em>
             </h2>
             <ul className="mt-6 grid gap-3 text-[var(--color-muted)]">
               <li>We map your current lead sources, CRM, calendar, and handoff rules.</li>

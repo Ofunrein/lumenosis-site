@@ -36,7 +36,7 @@ const repeatedLogos = [
 export function TrustStrip() {
   return (
     <section
-      aria-label="Built for real estate teams already investing in leads"
+      aria-label="Built for real estate operators already investing in leads"
       className="border-b border-[var(--color-line)] bg-[#ede8db] py-8 dark:bg-black/30"
     >
       <Reveal variant="fade">

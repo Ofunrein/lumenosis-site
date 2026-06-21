@@ -25,7 +25,7 @@ const leaks = [
 const stats = [
   { prefix: "", suffix: " sec", target: 60, label: "first response target" },
   { prefix: "", suffix: "+", target: 7, label: "lead channels covered" },
-  { prefix: "", suffix: "", target: 1, label: "shared lead timeline" },
+  { prefix: "", suffix: " days", target: 30, label: "installation window" },
 ];
 
 function useCountUp(target: number, active: boolean, duration = 1200) {

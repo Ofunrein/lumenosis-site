@@ -32,7 +32,7 @@ export function Footer() {
             href="#book"
             className="transition-colors hover:text-[var(--color-ink-charcoal)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-brand-purple)] focus-visible:ring-offset-2"
           >
-            Book a call
+            Book Demo
           </a>
           <a
             href="mailto:hello@lumenosis.com"

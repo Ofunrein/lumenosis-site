@@ -25,7 +25,7 @@ export function FinalCTA() {
                   document.getElementById("book")?.scrollIntoView({ behavior: "smooth" });
                 }}
               >
-                Book a Lead Desk Consult
+                Book Demo
               </StarButton>
             </SpotlightButtonWrapper>
           </Magnet>

@@ -19,11 +19,11 @@ const jetbrains = JetBrains_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "Lumenosis AI — Iris Lead Desk for real estate teams",
+    default: "Lumenosis AI — Iris Lead Desk for real estate operators",
     template: "%s — Lumenosis AI",
   },
   description:
-    "A managed omnichannel AI lead desk for real estate teams. Iris answers, qualifies, follows up, remembers, and routes leads across email, SMS, calls, website chat, and social DMs.",
+    "A managed omnichannel AI lead desk for real estate, property management, and short-term rental operators. Iris answers, qualifies, follows up, remembers, and routes leads across email, SMS, calls, website chat, and social DMs.",
   metadataBase: new URL("https://lumenosis.com"),
   icons: {
     icon: [
@@ -33,9 +33,9 @@ export const metadata: Metadata = {
     apple: [{ url: "/apple-icon-rounded.png", type: "image/png", sizes: "180x180" }],
   },
   openGraph: {
-    title: "Lumenosis AI — Iris Lead Desk for real estate teams",
+    title: "Lumenosis AI — Iris Lead Desk for real estate operators",
     description:
-      "Managed omnichannel AI lead handling for real estate teams that already invest in leads.",
+      "Managed omnichannel AI lead handling for real estate, property management, and short-term rental operators.",
     url: "https://lumenosis.com",
     siteName: "Lumenosis AI",
     type: "website",

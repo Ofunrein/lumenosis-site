@@ -15,15 +15,18 @@ const HERO_IMAGES = {
   light: "/images/product-card-mockup-day.png",
 } as const;
 const HERO_FADE_MS = 240;
+const HERO_AUDIENCES = ["real estate", "property management", "short-term rentals"] as const;
 
 export function Hero() {
   const [mounted, setMounted] = useState(false);
   const [isDarkTheme, setIsDarkTheme] = useState(true);
   const [heroVisible, setHeroVisible] = useState(true);
   const [reduceMotion, setReduceMotion] = useState(false);
+  const [audienceIndex, setAudienceIndex] = useState(0);
   const fadeTimerRef = useRef<number | null>(null);
   const activeTheme = mounted && !isDarkTheme ? "light" : "dark";
   const heroSrc = HERO_IMAGES[activeTheme];
+  const heroAudience = HERO_AUDIENCES[audienceIndex];
 
   useEffect(() => {
     const root = document.documentElement;
@@ -59,6 +62,14 @@ export function Hero() {
     };
   }, []);
 
+  useEffect(() => {
+    if (reduceMotion) return;
+    const id = window.setInterval(() => {
+      setAudienceIndex((current) => (current + 1) % HERO_AUDIENCES.length);
+    }, 2400);
+    return () => window.clearInterval(id);
+  }, [reduceMotion]);
+
   // biome-ignore lint/correctness/useExhaustiveDependencies: activeTheme intentionally retriggers the image crossfade.
   useEffect(() => {
     if (!mounted || reduceMotion) {
@@ -90,7 +101,12 @@ export function Hero() {
           </p>
           <h1 className="w-full max-w-[650px] text-center font-[family-name:var(--font-display)] text-[clamp(2.4rem,4.45vw,4.75rem)] font-semibold leading-[1.04] tracking-tight text-[var(--color-ink-charcoal)] xl:text-[clamp(3.25rem,4vw,4.75rem)]">
             <span className="block">A managed AI lead desk for</span>
-            <span className="block italic text-[var(--color-gold-italic)]">real estate teams.</span>
+            <span
+              key={heroAudience}
+              className="block italic text-[var(--color-gold-italic)] transition-opacity duration-300"
+            >
+              {heroAudience}.
+            </span>
           </h1>
           <p className="mt-5 w-full max-w-[590px] text-center text-[length:var(--text-body-lg)] leading-snug text-[var(--color-muted)]">
             We install and manage a shared-brain lead response system that answers, qualifies,
@@ -108,7 +124,7 @@ export function Hero() {
                   backgroundColor="#cb6ce6"
                   className="bg-[var(--color-brand-purple)] text-white px-6 h-12 text-base [&_span]:text-white"
                 >
-                  <a href="#book">Book a lead desk consult</a>
+                  <a href="#book">Book a Demo</a>
                 </StarButton>
               </SpotlightButtonWrapper>
             </Magnet>

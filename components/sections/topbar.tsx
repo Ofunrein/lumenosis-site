@@ -53,7 +53,6 @@ export function Topbar() {
     { label: "Method", href: `${homePrefix}#method` },
     { label: "System", href: `${homePrefix}#agents` },
     { label: "Process", href: `${homePrefix}#process` },
-    { label: "Offer", href: `${homePrefix}#book` },
     { label: "FAQ", href: `${homePrefix}#faq` },
   ];
 
@@ -142,7 +141,7 @@ export function Topbar() {
                 lightColor="#cb6ce6"
                 className="bg-[var(--color-brand-violet)] text-white px-4 h-9 text-sm !text-white"
               >
-                <a href={`${homePrefix}#book`}>Book Consult</a>
+                <a href={`${homePrefix}#book`}>Book Demo</a>
               </StarButton>
             </SpotlightButtonWrapper>
           </div>
@@ -197,7 +196,7 @@ export function Topbar() {
               className="w-full bg-[var(--color-brand-violet)] text-white h-11 text-sm justify-center !text-white"
             >
               <a href={`${homePrefix}#book`} onClick={() => setOpen(false)}>
-                Book Consult
+                Book Demo
               </a>
             </StarButton>
           </SpotlightButtonWrapper>
