@@ -16,16 +16,16 @@ export function CalendarCTA() {
               08 · Book
             </p>
             <h2 className="font-[family-name:var(--font-display)] text-[clamp(2.4rem,5vw,4rem)] font-semibold leading-[1.04] text-[var(--color-ink-charcoal)]">
-              A 30-minute conversation that&apos;s{" "}
+              A 30-minute lead desk consult that&apos;s{" "}
               <em className="not-italic text-[var(--color-gold-italic)]">
                 actually worth your time.
               </em>
             </h2>
             <ul className="mt-6 grid gap-3 text-[var(--color-muted)]">
-              <li>You walk through your one biggest leak.</li>
-              <li>We map the smallest useful workflow to fix it.</li>
-              <li>You leave with a build path, not a sales pitch.</li>
-              <li>Not a fit? We tell you exactly what to do instead.</li>
+              <li>We map your current lead sources, CRM, calendar, and handoff rules.</li>
+              <li>We identify where leads wait, repeat themselves, or lose context.</li>
+              <li>You leave with a practical installation path and first-channel priority.</li>
+              <li>If Iris is not the right fit, we tell you what to fix before buying anything.</li>
             </ul>
           </div>
         </Reveal>

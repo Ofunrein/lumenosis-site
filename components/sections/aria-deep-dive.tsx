@@ -6,7 +6,7 @@ import {
   CalendarDays,
   Clock3,
   Home,
-  Mail,
+  type Mail,
   MapPin,
   MessageSquare,
   Ruler,
@@ -36,11 +36,10 @@ type ConversationLine = {
   detail?: string;
 };
 
-type ThreadRef = ReturnType<typeof useRef<HTMLDivElement | null>>;
-
 const IDLE_WAVEFORM = Array.from({ length: 40 }, (_, i) =>
   Number((14 + Math.abs(Math.sin(i * 0.38) * 22 + Math.sin(i * 0.85) * 14)).toFixed(4)),
 );
+const WAVEFORM_BAR_KEYS = IDLE_WAVEFORM.map((_, i) => `waveform-bar-${i}`);
 
 const emailThread: EmailMessage[] = [
   {
@@ -136,23 +135,23 @@ const listingStats = [
 const microFeatures = [
   {
     icon: Clock3,
-    title: "Fast pickup",
-    body: "Aria answers missed calls before the lead opens a second browser tab.",
+    title: "Fast first touch",
+    body: "Every new lead gets a useful reply before the conversation goes cold.",
   },
   {
     icon: CalendarDays,
-    title: "Calendar booking",
-    body: "Tours, valuation calls, and follow-ups land on the right calendar.",
+    title: "Routed next step",
+    body: "Showings, valuation calls, agent handoffs, and follow-ups land with the right owner.",
   },
   {
     icon: MessageSquare,
-    title: "Channel memory",
-    body: "Every channel reads from the same lead record.",
+    title: "Shared memory",
+    body: "Email, SMS, calls, website chat, and social DMs use the same lead timeline.",
   },
   {
     icon: Home,
-    title: "Listing aware",
-    body: "Every reply uses property facts, showing windows, and seller signals.",
+    title: "Property aware",
+    body: "Replies use your sheet, database, enrichment, CRM, or listing source before guessing.",
   },
 ];
 
@@ -167,15 +166,6 @@ function useRevealedCount(total: number, delayMs: number) {
   }, [delayMs, total]);
 
   return count;
-}
-
-function useAutoScroll(ref: ThreadRef, trigger: unknown) {
-  useEffect(() => {
-    void trigger;
-    const node = ref.current;
-    if (!node) return;
-    node.scrollTo({ top: node.scrollHeight, behavior: "smooth" });
-  }, [ref, trigger]);
 }
 
 function TypewriterText({ text, active }: { text: string; active: boolean }) {
@@ -330,6 +320,7 @@ function IrisEmailDemo() {
   };
 
   useEffect(() => {
+    void shown;
     if (!userScrolledRef.current && scrollRef.current) {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
     }
@@ -621,7 +612,7 @@ function AriaPhoneDemo() {
           }`}
         >
           {callComplete ? (
-            <svg viewBox="0 0 16 16" className="size-3 fill-current">
+            <svg viewBox="0 0 16 16" className="size-3 fill-current" aria-hidden="true">
               <path d="M13.5 3.5L6 11 2.5 7.5 1 9l5 5 9-9z" />
             </svg>
           ) : (
@@ -641,12 +632,16 @@ function AriaPhoneDemo() {
             aria-label={playing ? "Pause" : "Play"}
           >
             {playing ? (
-              <svg viewBox="0 0 24 24" className="size-5 fill-current sm:size-6">
+              <svg viewBox="0 0 24 24" className="size-5 fill-current sm:size-6" aria-hidden="true">
                 <rect x="6" y="5" width="4" height="14" />
                 <rect x="14" y="5" width="4" height="14" />
               </svg>
             ) : (
-              <svg viewBox="0 0 24 24" className="ml-0.5 size-5 fill-current sm:size-6">
+              <svg
+                viewBox="0 0 24 24"
+                className="ml-0.5 size-5 fill-current sm:size-6"
+                aria-hidden="true"
+              >
                 <path d="M8 5v14l11-7z" />
               </svg>
             )}
@@ -661,7 +656,7 @@ function AriaPhoneDemo() {
         <div className="flex items-center gap-[2px] h-14 w-full">
           {bars.map((h, i) => (
             <div
-              key={i}
+              key={WAVEFORM_BAR_KEYS[i]}
               className={`flex-1 rounded-full transition-all duration-75 ${
                 i / 40 < progress
                   ? "bg-[var(--color-brand-violet)]"
@@ -680,6 +675,21 @@ function AriaPhoneDemo() {
           aria-valuemin={0}
           aria-valuemax={Math.max(0, Math.round(duration))}
           aria-valuenow={Math.round(currentTime)}
+          tabIndex={0}
+          onKeyDown={(e) => {
+            const audio = audioRef.current;
+            if (!audio || !duration) return;
+
+            let next = currentTime;
+            if (e.key === "ArrowLeft") next = Math.max(0, currentTime - 5);
+            else if (e.key === "ArrowRight") next = Math.min(duration, currentTime + 5);
+            else if (e.key === "Home") next = 0;
+            else if (e.key === "End") next = duration;
+            else return;
+
+            e.preventDefault();
+            audio.currentTime = next;
+          }}
           onPointerDown={(e) => {
             if (!duration) return;
             const container = e.currentTarget;
@@ -743,7 +753,15 @@ function AriaPhoneDemo() {
         src="/aria-oak-ridge-call.mp3"
         preload="metadata"
         crossOrigin="anonymous"
-      />
+      >
+        <track
+          kind="captions"
+          src="/aria-oak-ridge-call.vtt"
+          srcLang="en"
+          label="English captions"
+          default
+        />
+      </audio>
     </div>
   );
 }
@@ -799,7 +817,6 @@ function TheoSmsDemo() {
 
   const visibleLines = visibleIndices.map((i) => theoThread[i]).filter(Boolean);
   const latestMsgIndex = visibleIndices[visibleIndices.length - 1];
-  const latest = latestMsgIndex !== undefined ? theoThread[latestMsgIndex] : undefined;
 
   const status = getTheoStatus(latestMsgIndex);
 
@@ -817,6 +834,7 @@ function TheoSmsDemo() {
   };
 
   useEffect(() => {
+    void elapsed;
     if (!userScrolledRef.current && transcriptRef.current) {
       transcriptRef.current.scrollTop = transcriptRef.current.scrollHeight;
     }
@@ -841,7 +859,11 @@ function TheoSmsDemo() {
             }`}
           >
             {status.check ? (
-              <svg viewBox="0 0 16 16" className="size-3 fill-current text-emerald-400">
+              <svg
+                viewBox="0 0 16 16"
+                className="size-3 fill-current text-emerald-400"
+                aria-hidden="true"
+              >
                 <path d="M13.5 3.5L6 11 2.5 7.5 1 9l5 5 9-9z" />
               </svg>
             ) : (
@@ -860,7 +882,6 @@ function TheoSmsDemo() {
         >
           {visibleLines.map((line) => {
             const isTheo = line.from === "ai";
-            const isLatest = latest?.id === line.id;
 
             return (
               <div key={line.id} className="flex flex-col">
@@ -913,10 +934,12 @@ export function AriaDeepDive() {
               04 - Live follow-up desk
             </p>
             <h2 className="font-[family-name:var(--font-display)] text-[clamp(2.5rem,4.6vw,4.7rem)] font-semibold leading-[0.99] text-white">
-              Your front desk. Open every hour. No salary, no sick days, no dropped calls.
+              One lead brain across every channel.
             </h2>
             <p className="mt-6 max-w-xl text-lg leading-8 text-white/75">
-              A buyer asks about a listing. Iris replies with real property details before the lead opens another tab. Aria picks up if they call. The thread keeps moving until a showing is on the calendar.
+              Iris remembers the full conversation, pulls real property details, and coordinates the
+              channel agents so email, SMS, calls, website chat, and DMs all move toward a showing,
+              valuation, or human handoff.
             </p>
           </div>
 

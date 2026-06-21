@@ -1,5 +1,4 @@
 "use client";
-import { motion } from "framer-motion";
 import { Clock, ShieldCheck } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
@@ -8,7 +7,6 @@ import Magnet from "@/components/magnet";
 import { SpotlightButtonWrapper } from "@/components/spotlight-button";
 import { GlowCard } from "@/components/spotlight-card";
 import { StarButton } from "@/components/ui/star-button";
-import { niches } from "@/content/niches";
 
 const HERO_IMAGE_ALT =
   "Exterior view of a modern two-story luxury home with large windows and a contemporary facade";
@@ -19,15 +17,11 @@ const HERO_IMAGES = {
 const HERO_FADE_MS = 240;
 
 export function Hero() {
-  const [titleIndex, setTitleIndex] = useState(0);
   const [mounted, setMounted] = useState(false);
   const [isDarkTheme, setIsDarkTheme] = useState(true);
   const [heroVisible, setHeroVisible] = useState(true);
   const [reduceMotion, setReduceMotion] = useState(false);
   const fadeTimerRef = useRef<number | null>(null);
-  const longestNiche = niches.reduce((longest, niche) =>
-    niche.length > longest.length ? niche : longest,
-  );
   const activeTheme = mounted && !isDarkTheme ? "light" : "dark";
   const heroSrc = HERO_IMAGES[activeTheme];
 
@@ -49,14 +43,6 @@ export function Hero() {
     mediaQuery.addEventListener("change", syncReduceMotion);
     return () => mediaQuery.removeEventListener("change", syncReduceMotion);
   }, []);
-
-  useEffect(() => {
-    if (!mounted) return;
-    const timeout = window.setTimeout(() => {
-      setTitleIndex((current) => (current === niches.length - 1 ? 0 : current + 1));
-    }, 2000);
-    return () => window.clearTimeout(timeout);
-  }, [mounted, titleIndex]);
 
   useEffect(() => {
     if (!mounted) return;
@@ -99,36 +85,20 @@ export function Hero() {
       <div className="mx-auto grid w-[min(1200px,calc(100%-40px))] gap-8 sm:w-[min(1200px,calc(100%-32px))] xl:min-h-[660px] xl:grid-cols-[minmax(0,0.92fr)_minmax(0,0.88fr)] xl:items-stretch xl:gap-16">
         {/* Text column */}
         <div className="flex flex-col items-center justify-center px-1 py-12 text-center sm:px-4 sm:py-16 xl:px-0">
+          <p className="mb-4 text-[var(--text-eyebrow)] font-semibold uppercase tracking-[0.18em] text-[var(--color-brand-purple)]">
+            Iris Lead Desk
+          </p>
           <h1 className="w-full max-w-[650px] text-center font-[family-name:var(--font-display)] text-[clamp(2.4rem,4.45vw,4.75rem)] font-semibold leading-[1.04] tracking-tight text-[var(--color-ink-charcoal)] xl:text-[clamp(3.25rem,4vw,4.75rem)]">
-            <span className="block">AI agents for your</span>
-            <span
-              className="relative mx-auto flex max-w-full justify-center overflow-hidden pb-1 pt-0.5 text-[clamp(1.68rem,8vw,2.85rem)] leading-[1.05] italic text-[var(--color-gold-italic)] sm:text-[clamp(2.6rem,5.1vw,3.65rem)] xl:text-[clamp(2.75rem,3.08vw,3.55rem)]"
-              aria-live="polite"
-              aria-atomic="true"
-            >
-              <span className="invisible block whitespace-nowrap" aria-hidden>
-                {longestNiche}
-              </span>
-              {niches.map((niche, index) => (
-                <motion.span
-                  key={niche}
-                  className="absolute inset-x-0 top-0 block whitespace-nowrap"
-                  initial={{ opacity: 0, y: -120 }}
-                  transition={{ type: "spring", stiffness: 50, damping: 18 }}
-                  animate={
-                    titleIndex === index
-                      ? { y: 0, opacity: 1 }
-                      : { y: titleIndex > index ? -150 : 150, opacity: 0 }
-                  }
-                >
-                  {niche}
-                </motion.span>
-              ))}
-            </span>
-            <span className="block">team.</span>
+            <span className="block">A managed AI lead desk for</span>
+            <span className="block italic text-[var(--color-gold-italic)]">real estate teams.</span>
           </h1>
           <p className="mt-5 w-full max-w-[590px] text-center text-[length:var(--text-body-lg)] leading-snug text-[var(--color-muted)]">
-            78% of buyers go with the first agent who replies. We make sure that's you: every lead replied to in under 60 seconds, every call answered, every showing booked automatically.
+            We install and manage a shared-brain lead response system that answers, qualifies,
+            follows up, and routes leads across email, SMS, calls, website chat, Instagram, Facebook
+            Messenger, and WhatsApp.
+          </p>
+          <p className="mt-4 w-full max-w-[560px] text-center text-base font-medium text-[var(--color-ink-charcoal)]">
+            Never lose a lead because nobody replied fast enough.
           </p>
           <div className="mt-8 flex w-full max-w-[590px] justify-center">
             <Magnet padding={60} magnetStrength={5}>
@@ -138,7 +108,7 @@ export function Hero() {
                   backgroundColor="#cb6ce6"
                   className="bg-[var(--color-brand-purple)] text-white px-6 h-12 text-base [&_span]:text-white"
                 >
-                  <a href="#book">Book a Demo</a>
+                  <a href="#book">Book a lead desk consult</a>
                 </StarButton>
               </SpotlightButtonWrapper>
             </Magnet>
@@ -191,20 +161,23 @@ export function Hero() {
 
           {/* Stat callouts */}
           <GlassStatCallout
-            label="Avg lead response"
+            label="First response target"
             value="60 seconds"
             icon={<Clock className="size-4" />}
             className="absolute left-5 top-6 xl:-left-5 xl:top-20 z-10"
           />
           <GlassStatCallout
-            label="Always-on coverage"
-            value="24 / 7"
+            label="Channels covered"
+            value="7+"
             icon={<ShieldCheck className="size-4" />}
             className="absolute left-5 bottom-6 xl:-left-5 xl:bottom-20 z-10"
           />
         </div>
       </div>
-      <div aria-hidden className="pointer-events-none absolute inset-x-0 bottom-0 h-10 backdrop-blur-sm [mask-image:linear-gradient(to_bottom,transparent,black_60%)] z-10" />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-10 backdrop-blur-sm [mask-image:linear-gradient(to_bottom,transparent,black_60%)] z-10"
+      />
     </section>
   );
 }

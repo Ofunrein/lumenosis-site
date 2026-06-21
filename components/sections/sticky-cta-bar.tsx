@@ -26,14 +26,14 @@ export function StickyCtaBar() {
 
   return (
     <aside
-      aria-label="Book a Demo"
+      aria-label="Book a lead desk consult"
       aria-hidden={!show}
       className={`fixed inset-x-3 bottom-3 z-40 mx-auto flex max-w-3xl items-center justify-between gap-3 rounded-2xl border border-[var(--color-line)] bg-[var(--color-bg-cream)]/95 dark:bg-black/70 backdrop-blur-md px-4 py-3 shadow-md transition-all md:inset-x-0 md:bottom-5 ${
         show ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-6 opacity-0"
       }`}
     >
       <span className="text-sm font-medium text-[var(--color-ink-charcoal)]">
-        See it handle a live lead. Book a demo.
+        Ready to stop losing paid leads? Book a consult.
       </span>
       {show && (
         <SpotlightButtonWrapper>
@@ -45,7 +45,7 @@ export function StickyCtaBar() {
               window.location.href = "#book";
             }}
           >
-            Book Demo
+            Book Consult
           </StarButton>
         </SpotlightButtonWrapper>
       )}

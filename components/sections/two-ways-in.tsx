@@ -1,47 +1,47 @@
 "use client";
 
 import { Check } from "lucide-react";
-import { GlowCard } from "@/components/spotlight-card";
 import { Reveal } from "@/components/reveal";
+import { GlowCard } from "@/components/spotlight-card";
 
 const paths = [
   {
-    path: "PATH 01 · LAUNCH",
-    title: "Start your",
-    titleItalic: "team.",
+    path: "PACKAGE 01 · TEAM",
+    title: "Install Iris",
+    titleItalic: "Lead Desk.",
     description:
-      "The complete AI front desk for solo agents and small teams who want to stop losing leads to slow follow-up. Fully running in 30 days.",
-    bestFor: "Solo agents & small teams",
+      "A high-touch installation for real estate teams already paying for leads and ready to stop losing them to slow follow-up.",
+    bestFor: "3 to 15 agent teams, portal lead buyers, Meta and Google ad teams",
     features: [
-      "Olivia website chat agent",
-      "Aria 24/7 voice receptionist",
-      "Theo SMS sales agent",
-      "CRM auto-sync + lead scoring",
-      "30-day launch sprint",
-      "2 weeks optimization included",
+      "$3,000 setup + $2,500/mo starting point",
+      "Email, SMS, calls, website chat, and social DM coverage",
+      "Shared lead timeline across every channel",
+      "Property data brain from sheets, CRM, IDX export, or enrichment",
+      "Human review rules for legal, financing, and sensitive replies",
+      "30-day installation with weekly optimization",
     ],
     popular: false,
     dark: false,
-    cta: "Book a Demo →",
+    cta: "Book Lead Desk Consult →",
   },
   {
-    path: "PATH 02 · SCALE",
-    title: "Scale your",
+    path: "PACKAGE 02 · GROWTH",
+    title: "Expand your",
     titleItalic: "operation.",
     description:
-      "Already running a team? We flood your pipeline with qualified booked appointments every month using the same system driving 300%+ booking lifts.",
-    bestFor: "Brokerages, property management & multi-location teams",
+      "A managed omnichannel lead desk for brokerages, growth teams, and agencies with multiple sources, agents, markets, or client accounts.",
+    bestFor: "Brokerages, multi-agent offices, white-label agencies, growth teams",
     features: [
-      "Everything in Launch",
-      "Iris email assistant",
-      "Per-agent + per-location coverage",
-      "Monthly review with Martin",
-      "Lead recovery sweep on dormant contacts",
-      "Priority new-agent buildouts",
+      "$7,500 to $10,000+ setup with custom monthly management",
+      "Agent routing by market, source, urgency, language, or office",
+      "Follow Up Boss, Lofty, kvCORE, GoHighLevel, HubSpot, or custom CRM",
+      "Calendar, lead source, and property source integrations",
+      "Dashboard visibility for owners, agents, handoffs, and stuck leads",
+      "Ongoing monitoring, prompt tuning, reporting, and expansion",
     ],
     popular: true,
     dark: true,
-    cta: "Book a Demo →",
+    cta: "Map the Growth Build →",
   },
 ] as const;
 
@@ -54,7 +54,8 @@ export function TwoWaysIn() {
             06 · Programs
           </p>
           <h2 className="max-w-4xl font-[family-name:var(--font-display)] text-[length:var(--text-display-section)] font-semibold leading-[1.05] text-[var(--color-ink-charcoal)] dark:text-white">
-            Two ways in. <em className="text-[var(--color-gold-italic)]">One destination.</em>
+            Productized service,{" "}
+            <em className="text-[var(--color-gold-italic)]">not cheap SaaS.</em>
           </h2>
         </Reveal>
 

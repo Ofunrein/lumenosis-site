@@ -14,11 +14,13 @@ export function MeetTheTeam() {
             03 · The team
           </p>
           <h2 className="font-[family-name:var(--font-display)] text-[length:var(--text-display-section)] font-semibold leading-[1.05] text-[var(--color-ink-charcoal)]">
-            Meet your <em className="not-italic text-[var(--color-gold-italic)]">new team.</em>
+            One lead desk.{" "}
+            <em className="not-italic text-[var(--color-gold-italic)]">Four working layers.</em>
           </h2>
           <p className="mt-4 text-[length:var(--text-body-lg)] text-[var(--color-muted)]">
-            Four named AI agents with one job each. Trained on your market, your inventory, your
-            hours, and your CRM.
+            Iris keeps the shared memory. Olivia, Aria, and Theo handle the channel work. Together
+            they answer with your listing facts, qualify intent, route the next step, and escalate
+            sensitive moments to a human.
           </p>
         </Reveal>
 

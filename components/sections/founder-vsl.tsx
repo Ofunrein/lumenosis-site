@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { GlowCard } from "@/components/spotlight-card";
 import { Reveal } from "@/components/reveal";
+import { GlowCard } from "@/components/spotlight-card";
 
 export function FounderVSL() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -34,8 +34,8 @@ export function FounderVSL() {
               01 · Watch First
             </p>
             <h2 className="font-[family-name:var(--font-display)] text-[length:var(--text-display-section)] font-semibold leading-[1.05] text-[var(--color-ink-charcoal)]">
-              Why most agents are losing to faster competitors in 2026.{" "}
-              <em className="text-[var(--color-gold-italic)]">Here is what to do instead.</em>
+              You are already paying for leads.{" "}
+              <em className="text-[var(--color-gold-italic)]">Iris makes sure they get handled.</em>
             </h2>
             <ul className="mt-6 grid gap-3 text-[var(--color-muted)]">
               <li className="flex gap-3">
@@ -43,35 +43,40 @@ export function FounderVSL() {
                   aria-hidden
                   className="mt-2 size-1.5 shrink-0 rounded-full bg-[var(--color-brand-purple)]"
                 />
-                <span>Speed-to-lead beats lead volume every time.</span>
+                <span>Speed-to-lead only works when every channel shares context.</span>
               </li>
               <li className="flex gap-3">
                 <span
                   aria-hidden
                   className="mt-2 size-1.5 shrink-0 rounded-full bg-[var(--color-brand-purple)]"
                 />
-                <span>Most teams already have leads. They lose them to slow follow-up.</span>
+                <span>
+                  Portal leads, ad leads, calls, chats, and DMs need one owner and one memory.
+                </span>
               </li>
               <li className="flex gap-3">
                 <span
                   aria-hidden
                   className="mt-2 size-1.5 shrink-0 rounded-full bg-[var(--color-brand-purple)]"
                 />
-                <span>AI agents are not a chatbot. They are a front desk.</span>
+                <span>This is not an AI ISA. It is a managed lead response system.</span>
               </li>
               <li className="flex gap-3">
                 <span
                   aria-hidden
                   className="mt-2 size-1.5 shrink-0 rounded-full bg-[var(--color-brand-purple)]"
                 />
-                <span>Done right, the first booked appointment lands inside week three.</span>
+                <span>
+                  Done right, your team sees replies, qualification, handoffs, and review in one
+                  place.
+                </span>
               </li>
             </ul>
             <a
               href="#book"
               className="mt-8 inline-flex h-12 items-center justify-center rounded-full bg-[var(--color-brand-charcoal)] px-6 text-sm font-semibold text-white shadow-[0_18px_40px_rgb(25_18_35_/_0.18)] transition hover:-translate-y-0.5 hover:bg-[var(--color-brand-purple)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-brand-purple)] focus-visible:ring-offset-2 focus-visible:ring-offset-[#f8f6ef] dark:bg-[var(--color-brand-violet)] dark:text-white dark:shadow-[var(--shadow-glow-violet)] dark:focus-visible:ring-offset-[#08050c]"
             >
-              Book a discovery call
+              Book a lead desk consult
             </a>
           </div>
         </Reveal>
@@ -96,7 +101,7 @@ export function FounderVSL() {
                   <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_60%_40%,rgb(120_60_160_/_0.35),transparent_60%),radial-gradient(ellipse_at_20%_80%,rgb(232_196_122_/_0.12),transparent_50%)]" />
                   <div className="absolute inset-x-0 bottom-0 bg-[linear-gradient(to_top,rgb(12_9_18_/_0.88),transparent)] p-5 text-white sm:p-7">
                     <p className="max-w-[26rem] font-[family-name:var(--font-display)] text-2xl font-semibold leading-tight sm:text-4xl">
-                      The 7-minute case for an AI front desk.
+                      The 7-minute case for a managed AI lead desk.
                     </p>
                   </div>
                   <button
@@ -129,7 +134,7 @@ export function FounderVSL() {
                     <span className="rounded-full bg-[var(--color-brand-violet-soft)] px-2.5 py-1 text-[9px] font-bold text-[var(--color-brand-violet)]">
                       FEATURED
                     </span>
-                    FROM THE FOUNDER · WHY SPEED-TO-LEAD WINS IN 2026
+                    FROM THE FOUNDER · WHY SHARED-BRAIN FOLLOW-UP WINS
                   </div>
                 </div>
               </div>

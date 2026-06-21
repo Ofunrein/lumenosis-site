@@ -1,12 +1,17 @@
-import type { NextConfig } from "next";
+import { dirname } from "node:path";
+import { fileURLToPath } from "node:url";
 import createMDX from "@next/mdx";
+import type { NextConfig } from "next";
+
+const projectRoot = dirname(fileURLToPath(import.meta.url));
 
 const nextConfig: NextConfig = {
   pageExtensions: ["ts", "tsx", "md", "mdx"],
+  turbopack: {
+    root: projectRoot,
+  },
   images: {
-    remotePatterns: [
-      { protocol: "https", hostname: "ap.rdcpix.com" },
-    ],
+    remotePatterns: [{ protocol: "https", hostname: "ap.rdcpix.com" }],
   },
 };
 

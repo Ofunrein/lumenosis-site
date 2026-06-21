@@ -51,8 +51,9 @@ export function Topbar() {
   const homePrefix = pathname === "/" ? "" : "/";
   const links = [
     { label: "Method", href: `${homePrefix}#method` },
-    { label: "Agents", href: `${homePrefix}#agents` },
+    { label: "System", href: `${homePrefix}#agents` },
     { label: "Process", href: `${homePrefix}#process` },
+    { label: "Offer", href: `${homePrefix}#book` },
     { label: "FAQ", href: `${homePrefix}#faq` },
   ];
 
@@ -141,7 +142,7 @@ export function Topbar() {
                 lightColor="#cb6ce6"
                 className="bg-[var(--color-brand-violet)] text-white px-4 h-9 text-sm !text-white"
               >
-                <a href={`${homePrefix}#book`}>Book a Demo</a>
+                <a href={`${homePrefix}#book`}>Book Consult</a>
               </StarButton>
             </SpotlightButtonWrapper>
           </div>
@@ -196,7 +197,7 @@ export function Topbar() {
               className="w-full bg-[var(--color-brand-violet)] text-white h-11 text-sm justify-center !text-white"
             >
               <a href={`${homePrefix}#book`} onClick={() => setOpen(false)}>
-                Book a Demo
+                Book Consult
               </a>
             </StarButton>
           </SpotlightButtonWrapper>

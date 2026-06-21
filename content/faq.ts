@@ -1,46 +1,57 @@
 export type FaqItem = { q: string; a: string };
 
 export const faq: FaqItem[] = [
-  // TODO(martin): real pricing strings replace $X / $Y throughout file when prices locked
   {
     q: "What does this actually cost?",
-    a: "Two paths. Build with us starts at $X for a one-time install. Scale with us starts at $Y per month for ongoing coverage. The strategy call walks through which one fits.",
+    a: "The best starting offer is $3,000 setup plus $2,500 per month for a real estate team. Smaller starter builds can begin around $1,500 setup plus $1,000 per month. Larger teams, brokerages, and white-label builds are custom.",
   },
   {
     q: "How long until it is running?",
-    a: "Thirty days from kickoff. Week one audit, week two build, week three launch, week four optimize. Most teams see first booked appointments inside week three.",
+    a: "Thirty days from kickoff for the core lead desk. Week one maps lead sources and rules. Week two builds the shared brain and integrations. Week three launches priority channels. Week four tunes review, routing, and reporting.",
   },
   {
-    q: "Which CRMs do you integrate with?",
-    a: "Follow Up Boss, Lofty, KvCORE, Sierra, HubSpot, Salesforce, GoHighLevel, Google Sheets. If your CRM has an API, we connect it.",
+    q: "Which teams are the best fit?",
+    a: "Real estate teams already spending money on leads. That includes 3 to 30 agent teams, Zillow or Realtor.com lead buyers, brokerages, agents running Meta or Google ads, and teams that need ISA coverage without hiring another full-time ISA.",
+  },
+  {
+    q: "Which channels can Iris Lead Desk cover?",
+    a: "Email, SMS, voice calls, website chat, Instagram DM, Facebook Messenger, and WhatsApp. The point is not just more channels. The point is one shared memory and one routing logic across all of them.",
+  },
+  {
+    q: "Which CRMs and calendars do you integrate with?",
+    a: "Follow Up Boss, Lofty, kvCORE, GoHighLevel, HubSpot, Google Sheets, Calendly, Google Calendar, and CRM calendars. If your system has an API, webhook, export, or clean enough workaround, we can usually connect it.",
+  },
+  {
+    q: "Where does property data come from?",
+    a: "The first version can use Google Sheets, a database, CRM listings, IDX or MLS exports, or Zillow and Apify enrichment. Iris uses available facts like price, beds, baths, square footage, links, photos, showing windows, and seller notes when they are present.",
   },
   {
     q: "Is this TCPA safe?",
-    a: "Yes. We collect prior express written consent through your existing forms, store the consent record, honor STOP and HELP, and never message outside your opted-in audience. We are not legal counsel. Your compliance officer signs off before launch.",
+    a: "We design around consent records, STOP and HELP handling, human takeover, and brokerage review. We are not legal counsel, so your compliance officer or attorney signs off before launch.",
   },
   {
     q: "What happens if the AI gets a question wrong?",
-    a: "Aria, Theo, and Iris escalate to a human owner the moment confidence drops. You see every escalation in the dashboard with full transcript. Iteration happens in the weekly review.",
+    a: "Sensitive, legal, financing, Fair Housing, low-confidence, or policy-bound replies can go to approval mode instead of auto-send. Human takeover is available anytime, and the full timeline stays visible.",
   },
   {
     q: "Can I cancel?",
-    a: "Build is one-time so there is nothing to cancel. Scale is month-to-month. Thirty days notice, no penalty, no clawback.",
+    a: "Setup is a one-time implementation fee. Monthly management is month-to-month unless a custom agreement says otherwise. Thirty days notice is the default.",
   },
   {
     q: "Do my agents need to be trained?",
-    a: "No. The AI agents handle the volume. Your humans handle the conversion meetings. We train you on the dashboard in one 30-minute session.",
+    a: "Your agents do not need to learn a complicated new tool. We train the owner or operator on the dashboard, routing rules, review mode, and takeover flow. Humans still handle judgment, negotiations, and relationship work.",
   },
   {
     q: "Will my brokerage approve this?",
-    a: "We hand you a one-page compliance summary covering recording, retention, consent, and Fair Housing language. We have not had a brokerage say no when the document is in front of their attorney.",
+    a: "We prepare the compliance and operating summary: recording, retention, consent, Fair Housing boundaries, review mode, and escalation rules. Brokerage approval depends on your office policies.",
   },
   {
-    q: "Can I run multiple AI agents at once?",
-    a: "Yes. Olivia + Aria + Theo + Iris is the standard four. Add a second voice line for after-hours or a Spanish-language agent on request.",
+    q: "Is this an AI ISA?",
+    a: "No. AI ISA is too narrow. Iris Lead Desk is a shared-brain response system for inbound real estate leads across channels. It answers, qualifies, follows up, remembers, and routes. Your licensed team still owns the relationship and decisions.",
   },
   {
-    q: "What can your AI agents NOT do?",
-    a: "They cannot replace the relationship your agent builds face-to-face, handle legally sensitive advice, negotiate on your behalf, or attend showings. Every conversation that requires professional judgment gets escalated to a human. We will not automate the parts that require your license.",
+    q: "What will Iris not do?",
+    a: "It will not give legal advice, financing advice, Fair Housing-sensitive guidance, negotiate on your behalf, or pretend to be a licensed agent. Those moments are routed to a human.",
   },
   {
     q: "What if I am not a fit?",

@@ -18,9 +18,12 @@ const jetbrains = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: { default: "Lumenosis AI — AI agents for real estate", template: "%s — Lumenosis AI" },
+  title: {
+    default: "Lumenosis AI — Iris Lead Desk for real estate teams",
+    template: "%s — Lumenosis AI",
+  },
   description:
-    "AI agents that handle inbound calls, SMS, email, and lead recovery for real estate, brokerages, property management, short-term rentals, and investors.",
+    "A managed omnichannel AI lead desk for real estate teams. Iris answers, qualifies, follows up, remembers, and routes leads across email, SMS, calls, website chat, and social DMs.",
   metadataBase: new URL("https://lumenosis.com"),
   icons: {
     icon: [
@@ -30,8 +33,9 @@ export const metadata: Metadata = {
     apple: [{ url: "/apple-icon-rounded.png", type: "image/png", sizes: "180x180" }],
   },
   openGraph: {
-    title: "Lumenosis AI — AI agents for real estate",
-    description: "AI agents that book qualified appointments while you sleep.",
+    title: "Lumenosis AI — Iris Lead Desk for real estate teams",
+    description:
+      "Managed omnichannel AI lead handling for real estate teams that already invest in leads.",
     url: "https://lumenosis.com",
     siteName: "Lumenosis AI",
     type: "website",
@@ -46,7 +50,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       suppressHydrationWarning
     >
       <body suppressHydrationWarning>
-<ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
+        <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
           <a
             href="#top"
             className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-[var(--color-brand-purple)] focus:px-3 focus:py-2 focus:text-white"

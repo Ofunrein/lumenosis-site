@@ -1,31 +1,31 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { GlowCard } from "@/components/spotlight-card";
 import { Reveal } from "@/components/reveal";
+import { GlowCard } from "@/components/spotlight-card";
 
 const leaks = [
   {
     n: "01",
-    title: "Slow first response",
-    body: "Portal leads, missed calls, and form submits sit unread. The prospect moves on before your ISA's shift starts.",
+    title: "Expensive leads wait",
+    body: "Zillow, Realtor.com, Meta, Google, and website leads keep shopping while your team is still deciding who should answer.",
   },
   {
     n: "02",
-    title: "Weak qualification",
-    body: "The team never captures timeline, financing, or who owns the next call.",
+    title: "Every channel starts over",
+    body: "Email, SMS, calls, chat, and social DMs live in separate threads, so the next reply misses the context that already exists.",
   },
   {
     n: "03",
-    title: "No visible owner",
-    body: "Leads enter the CRM and stop there. No owner, no next action, no follow-up. The record fills up. The deal does not.",
+    title: "No clear next step",
+    body: "A lead may be interested, qualified, or ready to book, but nobody can see the owner, urgency, or route without digging.",
   },
 ];
 
 const stats = [
-  { prefix: "", suffix: "%", target: 87, label: "of leads go cold in under 5 min" },
-  { prefix: "$", suffix: "k", target: 24, label: "avg deal value lost per slow reply" },
-  { prefix: "", suffix: "x", target: 3, label: "booking lift with AI follow-up" },
+  { prefix: "", suffix: " sec", target: 60, label: "first response target" },
+  { prefix: "", suffix: "+", target: 7, label: "lead channels covered" },
+  { prefix: "", suffix: "", target: 1, label: "shared lead timeline" },
 ];
 
 function useCountUp(target: number, active: boolean, duration = 1200) {
@@ -92,13 +92,13 @@ export function ProblemAgitation() {
               02 — The leak
             </p>
             <h2 className="font-[family-name:var(--font-display)] text-[length:var(--text-display-section)] font-semibold leading-[1.05] text-[var(--color-ink-charcoal)]">
-              The expensive leaks{" "}
-              <em className="text-[var(--color-gold-italic)]">are not ad spend.</em>
+              The leak is not lead volume.{" "}
+              <em className="text-[var(--color-gold-italic)]">It is response continuity.</em>
             </h2>
             <p className="mt-4 text-[length:var(--text-body-lg)] text-[var(--color-muted)]">
-              A lead submits Tuesday at 9:47 PM. Nobody replies until Wednesday at 9 AM. By then they have toured with the first agent who texted back. Your CRM says no contact. Your ISA says I saw it this morning. The deal was gone at 9:48 PM.
-
-              You already have leads. You already have a CRM. The gap between them is the nine hours that costs you the deal.
+              Real estate teams are already paying for attention. Iris Lead Desk sits between your
+              lead sources, inboxes, phones, website, social DMs, CRM, and calendar so no lead gets
+              a slow, fragmented, or context-free reply.
             </p>
           </div>
         </Reveal>
