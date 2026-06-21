@@ -19,7 +19,7 @@ const jetbrains = JetBrains_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "Lumenosis AI — Iris Lead Desk for real estate operators",
+    default: "Lumenosis AI — Managed AI lead desk for real estate operators",
     template: "%s — Lumenosis AI",
   },
   description:
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     apple: [{ url: "/apple-icon-rounded.png", type: "image/png", sizes: "180x180" }],
   },
   openGraph: {
-    title: "Lumenosis AI — Iris Lead Desk for real estate operators",
+    title: "Lumenosis AI — Managed AI lead desk for real estate operators",
     description:
       "Managed omnichannel AI lead handling for real estate, property management, and short-term rental operators.",
     url: "https://lumenosis.com",

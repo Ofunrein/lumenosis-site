@@ -8,14 +8,14 @@ export const faq: FaqItem[] = [
   },
   {
     q: "How long until it is running?",
-    a: "Thirty days from kickoff for the core lead desk. Week one maps lead sources and rules. Week two builds the shared brain and integrations. Week three launches priority channels. Week four tunes review, routing, and reporting.",
+    a: "Most first-channel installs can go live in about two weeks. Day one maps lead sources and rules. The first week builds the shared brain and priority integrations. Week two launches, tunes review, and tightens routing.",
   },
   {
     q: "Which teams are the best fit?",
     a: "Real estate teams already spending money on leads. That includes 3 to 30 agent teams, Zillow or Realtor.com lead buyers, brokerages, agents running Meta or Google ads, and teams that need ISA coverage without hiring another full-time ISA.",
   },
   {
-    q: "Which channels can Iris Lead Desk cover?",
+    q: "Which channels can Iris cover?",
     a: "Email, SMS, voice calls, website chat, Instagram DM, Facebook Messenger, and WhatsApp. The point is not just more channels. The point is one shared memory and one routing logic across all of them.",
   },
   {
@@ -36,11 +36,11 @@ export const faq: FaqItem[] = [
   },
   {
     q: "Can I cancel?",
-    a: "Setup is a one-time implementation fee. Monthly management is month-to-month unless a custom agreement says otherwise. Thirty days notice is the default.",
+    a: "Setup is a one-time implementation fee. Monthly management is month-to-month unless a custom agreement says otherwise. Notice terms are set in the agreement.",
   },
   {
     q: "Do my agents need to be trained?",
-    a: "Your agents do not need to learn a complicated new tool. We train the owner or operator on the dashboard, routing rules, review mode, and takeover flow. Humans still handle judgment, negotiations, and relationship work.",
+    a: "Your agents do not need to learn a complicated new tool. We train the owner or operator on routing rules, review mode, and takeover flow. Humans still handle judgment, negotiations, and relationship work.",
   },
   {
     q: "Will my brokerage approve this?",
@@ -48,7 +48,7 @@ export const faq: FaqItem[] = [
   },
   {
     q: "Is this an AI ISA?",
-    a: "No. AI ISA is too narrow. Iris Lead Desk is a shared-brain response system for inbound real estate leads across channels. It answers, qualifies, follows up, remembers, and routes. Your licensed team still owns the relationship and decisions.",
+    a: "No. AI ISA is too narrow. Iris is a shared-brain response system for inbound real estate leads across channels. It answers, qualifies, follows up, remembers, and routes. Your licensed team still owns the relationship and decisions.",
   },
   {
     q: "What will Iris not do?",

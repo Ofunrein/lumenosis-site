@@ -74,7 +74,7 @@ export const caseStudies: CaseStudy[] = [
     role: "Operations manager",
     location: "Miami",
     quote:
-      "We had 350 conversations in two months without adding another coordinator. The dashboard finally tells the truth.",
+      "We had 350 conversations in two months without adding another coordinator. Every handoff finally had an owner.",
     result: "350 conversations",
     tag: "Volume",
   },
@@ -85,7 +85,7 @@ export const caseStudies: CaseStudy[] = [
     location: "Tampa",
     quote:
       "Our cost per booked consult dropped because the AI followed up with every portal lead before they went cold.",
-    result: "$31 per appt",
+    result: "Lower cost/appt",
     tag: "Cost",
   },
   {

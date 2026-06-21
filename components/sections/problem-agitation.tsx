@@ -123,9 +123,9 @@ export function ProblemAgitation() {
               <em className="text-[var(--color-gold-italic)]">It is response continuity.</em>
             </h2>
             <p className="mt-4 text-[length:var(--text-body-lg)] text-[var(--color-muted)]">
-              Real estate teams are already paying for attention. Iris Lead Desk sits between your
-              lead sources, inboxes, phones, website, social DMs, CRM, and calendar so no lead gets
-              a slow, fragmented, or context-free reply.
+              Real estate teams are already paying for attention. Iris sits between your lead
+              sources, inboxes, phones, website, social DMs, CRM, and calendar so no lead gets a
+              slow, fragmented, or context-free reply.
             </p>
           </div>
         </Reveal>

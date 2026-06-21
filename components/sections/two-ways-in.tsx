@@ -18,7 +18,7 @@ const paths = [
       "Shared lead timeline across every channel",
       "Property data brain from sheets, CRM, IDX export, or enrichment",
       "Human review rules for legal, financing, and sensitive replies",
-      "30-day installation with weekly optimization",
+      "Two-week launch with optimization built in",
     ],
     popular: false,
     dark: false,
@@ -36,7 +36,7 @@ const paths = [
       "Agent routing by market, source, urgency, language, or office",
       "Follow Up Boss, Lofty, kvCORE, GoHighLevel, HubSpot, or custom CRM",
       "Calendar, lead source, and property source integrations",
-      "Dashboard visibility for owners, agents, handoffs, and stuck leads",
+      "Owner visibility for agents, handoffs, and stuck leads",
       "Ongoing monitoring, prompt tuning, reporting, and expansion",
     ],
     popular: true,
@@ -54,8 +54,8 @@ export function TwoWaysIn() {
             06 · Programs
           </p>
           <h2 className="max-w-4xl font-[family-name:var(--font-display)] text-[length:var(--text-display-section)] font-semibold leading-[1.05] text-[var(--color-ink-charcoal)] dark:text-white">
-            Productized service,{" "}
-            <em className="text-[var(--color-gold-italic)]">not cheap SaaS.</em>
+            Install the desk.{" "}
+            <em className="text-[var(--color-gold-italic)]">Skip the dashboard.</em>
           </h2>
         </Reveal>
 

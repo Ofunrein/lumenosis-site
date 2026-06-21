@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { GlassStatCallout } from "@/components/glass-stat-callout";
 import Magnet from "@/components/magnet";
+import { RotatingText } from "@/components/rotating-text";
 import { SpotlightButtonWrapper } from "@/components/spotlight-button";
 import { GlowCard } from "@/components/spotlight-card";
 import { StarButton } from "@/components/ui/star-button";
@@ -22,11 +23,9 @@ export function Hero() {
   const [isDarkTheme, setIsDarkTheme] = useState(true);
   const [heroVisible, setHeroVisible] = useState(true);
   const [reduceMotion, setReduceMotion] = useState(false);
-  const [audienceIndex, setAudienceIndex] = useState(0);
   const fadeTimerRef = useRef<number | null>(null);
   const activeTheme = mounted && !isDarkTheme ? "light" : "dark";
   const heroSrc = HERO_IMAGES[activeTheme];
-  const heroAudience = HERO_AUDIENCES[audienceIndex];
 
   useEffect(() => {
     const root = document.documentElement;
@@ -62,14 +61,6 @@ export function Hero() {
     };
   }, []);
 
-  useEffect(() => {
-    if (reduceMotion) return;
-    const id = window.setInterval(() => {
-      setAudienceIndex((current) => (current + 1) % HERO_AUDIENCES.length);
-    }, 2400);
-    return () => window.clearInterval(id);
-  }, [reduceMotion]);
-
   // biome-ignore lint/correctness/useExhaustiveDependencies: activeTheme intentionally retriggers the image crossfade.
   useEffect(() => {
     if (!mounted || reduceMotion) {
@@ -96,16 +87,16 @@ export function Hero() {
       <div className="mx-auto grid w-[min(1200px,calc(100%-40px))] gap-8 sm:w-[min(1200px,calc(100%-32px))] xl:min-h-[660px] xl:grid-cols-[minmax(0,0.92fr)_minmax(0,0.88fr)] xl:items-stretch xl:gap-16">
         {/* Text column */}
         <div className="flex flex-col items-center justify-center px-1 py-12 text-center sm:px-4 sm:py-16 xl:px-0">
-          <p className="mb-4 text-[var(--text-eyebrow)] font-semibold uppercase tracking-[0.18em] text-[var(--color-brand-purple)]">
-            Iris Lead Desk
-          </p>
           <h1 className="w-full max-w-[650px] text-center font-[family-name:var(--font-display)] text-[clamp(2.4rem,4.45vw,4.75rem)] font-semibold leading-[1.04] tracking-tight text-[var(--color-ink-charcoal)] xl:text-[clamp(3.25rem,4vw,4.75rem)]">
             <span className="block">A managed AI lead desk for</span>
-            <span
-              key={heroAudience}
-              className="block italic text-[var(--color-gold-italic)] transition-opacity duration-300"
-            >
-              {heroAudience}.
+            <span className="block italic text-[var(--color-gold-italic)]">
+              <RotatingText
+                words={HERO_AUDIENCES}
+                intervalMs={2300}
+                minWidth="18ch"
+                className="text-center"
+              />
+              .
             </span>
           </h1>
           <p className="mt-5 w-full max-w-[590px] text-center text-[length:var(--text-body-lg)] leading-snug text-[var(--color-muted)]">
