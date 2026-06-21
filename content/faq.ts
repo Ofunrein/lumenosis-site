@@ -27,8 +27,8 @@ export const faq: FaqItem[] = [
     a: "The first version can use Google Sheets, a database, CRM listings, IDX or MLS exports, or Zillow and Apify enrichment. Iris uses available facts like price, beds, baths, square footage, links, photos, showing windows, and seller notes when they are present.",
   },
   {
-    q: "Is this TCPA safe?",
-    a: "We design around consent records, STOP and HELP handling, human takeover, and brokerage review. We are not legal counsel, so your compliance officer or attorney signs off before launch.",
+    q: "How do consent and opt-outs work?",
+    a: "Iris is built with consent records, opt-out handling, STOP handling, and human takeover rules. We are not legal counsel, so your compliance officer or attorney signs off before launch.",
   },
   {
     q: "What happens if the AI gets a question wrong?",

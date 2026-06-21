@@ -18,9 +18,8 @@ export function MeetTheTeam() {
             <em className="not-italic text-[var(--color-gold-italic)]">Four working layers.</em>
           </h2>
           <p className="mt-4 text-[length:var(--text-body-lg)] text-[var(--color-muted)]">
-            Iris keeps the shared memory. Olivia, Aria, and Theo handle the channel work. Together
-            they answer with your listing facts, qualify intent, route the next step, and escalate
-            sensitive moments to a human.
+            Each layer handles a specific part of lead response: memory, text, calls, website chat,
+            and social intake.
           </p>
         </Reveal>
 

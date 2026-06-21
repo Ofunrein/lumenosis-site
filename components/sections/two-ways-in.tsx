@@ -10,15 +10,18 @@ const paths = [
     title: "Install Iris",
     titleItalic: "Lead Desk.",
     description:
-      "A high-touch installation for real estate operators already paying for leads and ready to stop losing them to slow follow-up.",
-    bestFor: "3 to 15 agent teams, portal lead buyers, Meta and Google ad teams",
+      "For real estate teams already investing in leads and losing opportunities to slow, fragmented follow-up.",
+    bestFor:
+      "3 to 15 agent teams, portal lead buyers, Meta/Google ad teams, and brokerages without reliable ISA coverage",
     features: [
       // Saved for later: "$3,000 setup + $2,500/mo starting point",
       "Email, SMS, calls, website chat, and social DM coverage",
       "Shared lead timeline across every channel",
       "Property data brain from sheets, CRM, IDX export, or enrichment",
-      "Human review rules for legal, financing, and sensitive replies",
+      "Human review rules for financing, legal, pricing, and sensitive replies",
+      "CRM and calendar routing",
       "Two-week launch with optimization built in",
+      "Ongoing monitoring and prompt updates",
     ],
     popular: false,
     dark: false,
@@ -54,8 +57,7 @@ export function TwoWaysIn() {
             06 · Programs
           </p>
           <h2 className="max-w-4xl font-[family-name:var(--font-display)] text-[length:var(--text-display-section)] font-semibold leading-[1.05] text-[var(--color-ink-charcoal)] dark:text-white">
-            Install the desk.{" "}
-            <em className="text-[var(--color-gold-italic)]">Skip the dashboard.</em>
+            Install the desk. <em className="text-[var(--color-gold-italic)]">Keep your CRM.</em>
           </h2>
         </Reveal>
 

@@ -42,10 +42,10 @@ export function CaseStudyWall() {
           <div className="grid gap-8 lg:grid-cols-[minmax(0,1.14fr)_minmax(0,0.86fr)] lg:items-end">
             <div>
               <span className="mb-3 inline-block text-[var(--text-eyebrow)] font-semibold uppercase tracking-[0.14em] text-[var(--color-brand-purple)]">
-                07 - Wall of Results
+                07 - Example outcomes
               </span>
               <h2 className="max-w-[980px] font-[family-name:var(--font-display)] text-[clamp(2.65rem,4.85vw,5.05rem)] font-semibold leading-[0.96] tracking-normal text-[var(--color-ink-charcoal)]">
-                What real estate operators say.
+                Example outcomes from managed deployments.
               </h2>
             </div>
 

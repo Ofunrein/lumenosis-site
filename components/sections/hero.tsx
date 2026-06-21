@@ -16,7 +16,11 @@ const HERO_IMAGES = {
   light: "/images/product-card-mockup-day.png",
 } as const;
 const HERO_FADE_MS = 240;
-const HERO_AUDIENCES = ["real estate.", "property management.", "short-term rentals."] as const;
+const HERO_AUDIENCES = [
+  "real estate teams",
+  "property managers",
+  "short-term rental operators",
+] as const;
 
 export function Hero() {
   const [mounted, setMounted] = useState(false);
@@ -88,8 +92,17 @@ export function Hero() {
         {/* Text column */}
         <div className="flex flex-col items-center justify-center px-1 py-12 text-center sm:px-4 sm:py-16 xl:px-0">
           <h1 className="w-full max-w-[650px] text-center font-[family-name:var(--font-display)] text-[clamp(2.4rem,4.45vw,4.75rem)] font-semibold leading-[1.04] tracking-tight text-[var(--color-ink-charcoal)] xl:text-[clamp(3.25rem,4vw,4.75rem)]">
-            <span className="block">A managed AI lead desk for</span>
-            <span className="block italic text-[var(--color-gold-italic)]">
+            <span className="sr-only">
+              A managed AI lead desk for real estate teams, property managers, and short-term rental
+              operators.
+            </span>
+            <span className="block" aria-hidden="true">
+              A managed AI lead desk for
+            </span>
+            <span
+              className="block min-h-[1.12em] italic text-[var(--color-gold-italic)]"
+              aria-hidden="true"
+            >
               <RotatingText
                 words={HERO_AUDIENCES}
                 intervalMs={2300}
@@ -100,8 +113,12 @@ export function Hero() {
           </h1>
           <p className="mt-5 w-full max-w-[590px] text-center text-[length:var(--text-body-lg)] leading-snug text-[var(--color-muted)]">
             We install and manage a shared-brain lead response system that answers, qualifies,
-            follows up, and routes leads across email, SMS, calls, website chat, Instagram, Facebook
-            Messenger, and WhatsApp.
+            follows up, and routes conversations across email, SMS, calls, website chat, Instagram,
+            Facebook Messenger, and WhatsApp.
+          </p>
+          <p className="mt-4 text-base font-medium text-[var(--color-ink-charcoal)]">
+            Built for operators already paying for lead flow, property inquiries, guest messages,
+            owner leads, and after-hours response.
           </p>
           <div className="mt-8 flex w-full max-w-[590px] justify-center">
             <Magnet padding={60} magnetStrength={5}>

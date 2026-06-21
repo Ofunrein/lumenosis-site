@@ -8,17 +8,17 @@ const leaks = [
   {
     n: "01",
     title: "Expensive leads wait",
-    body: "Zillow, Realtor.com, Meta, Google, and website leads keep shopping while your team is still deciding who should answer.",
+    body: "A paid lead keeps shopping while your team figures out who owns the response.",
   },
   {
     n: "02",
     title: "Every channel starts over",
-    body: "Email, SMS, calls, chat, and social DMs live in separate threads, so the next reply misses the context that already exists.",
+    body: "Email, SMS, calls, chats, and DMs live in separate threads, so context gets lost.",
   },
   {
     n: "03",
     title: "No clear next step",
-    body: "A lead may be interested, qualified, or ready to book, but nobody can see the owner, urgency, or route without digging.",
+    body: "A lead may be ready to tour, sell, finance, or book, but the handoff is buried.",
   },
 ];
 
@@ -32,8 +32,8 @@ type Stat = {
 
 const stats: Stat[] = [
   { kind: "response", target: 60, label: "first response target" },
-  { kind: "count", prefix: "", suffix: "+", target: 7, label: "lead channels covered" },
-  { kind: "count", prefix: "", suffix: "/7", target: 24, label: "coverage window" },
+  { kind: "count", prefix: "", suffix: "+", target: 7, label: "channels covered" },
+  { kind: "count", prefix: "", suffix: "/7", target: 24, label: "response window" },
 ];
 
 function useProgress(active: boolean, duration = 1400) {
@@ -123,9 +123,9 @@ export function ProblemAgitation() {
               <em className="text-[var(--color-gold-italic)]">It is response continuity.</em>
             </h2>
             <p className="mt-4 text-[length:var(--text-body-lg)] text-[var(--color-muted)]">
-              Real estate teams are already paying for attention. Iris sits between your lead
-              sources, inboxes, phones, website, social DMs, CRM, and calendar so no lead gets a
-              slow, fragmented, or context-free reply.
+              Real estate teams already pay for attention through Zillow, Realtor.com, Meta, Google,
+              referrals, websites, and social. Iris sits between those lead sources, your inboxes,
+              phones, CRM, calendar, and agents so every lead gets a fast, contextual reply.
             </p>
           </div>
         </Reveal>
