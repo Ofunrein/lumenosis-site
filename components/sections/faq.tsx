@@ -15,7 +15,7 @@ export function Faq() {
       id="faq"
       className="border-b border-[var(--color-line)] bg-[#f1eee6] py-16 dark:bg-[rgb(9_7_13_/_0.76)] md:py-24"
     >
-      <div className="mx-auto grid w-[min(1200px,calc(100%-40px))] sm:w-[min(1200px,calc(100%-32px))] gap-10 md:grid-cols-[0.6fr_1fr]">
+      <div className="mx-auto grid w-[min(1200px,calc(100vw_-_40px))] sm:w-[min(1200px,calc(100vw_-_32px))] gap-10 md:grid-cols-[0.6fr_1fr]">
         <Reveal variant="left">
           <div>
             <span className="mb-3 inline-block text-[var(--text-eyebrow)] font-semibold uppercase tracking-[0.14em] text-[var(--color-brand-purple)]">

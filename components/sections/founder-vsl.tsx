@@ -27,7 +27,7 @@ export function FounderVSL() {
       id="vsl"
       className="border-b border-[var(--color-line)] bg-[#f8f6ef] py-16 dark:bg-transparent md:py-24"
     >
-      <div className="mx-auto grid w-[min(1200px,calc(100%-40px))] sm:w-[min(1200px,calc(100%-32px))] items-center gap-10 md:grid-cols-[0.85fr_1.15fr]">
+      <div className="mx-auto grid w-[min(1200px,calc(100vw_-_40px))] sm:w-[min(1200px,calc(100vw_-_32px))] items-center gap-10 md:grid-cols-[0.85fr_1.15fr]">
         <Reveal variant="left">
           <div>
             <p className="mb-3 text-[var(--text-eyebrow)] font-semibold uppercase tracking-[0.14em] text-[var(--color-brand-purple)]">

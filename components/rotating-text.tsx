@@ -31,18 +31,18 @@ export function RotatingText({
 
   return (
     <span
-      className={`relative inline-flex justify-center overflow-hidden text-center align-baseline ${className ?? ""}`}
-      style={{ minWidth, minHeight: "1.16em" }}
+      className={`relative inline-flex max-w-full justify-center overflow-hidden text-center align-baseline ${className ?? ""}`}
+      style={{ minWidth, minHeight: "1.16em", maxWidth: "100%" }}
       aria-live="polite"
       aria-atomic="true"
     >
-      <span className="invisible whitespace-nowrap" aria-hidden="true">
+      <span className="invisible whitespace-normal sm:whitespace-nowrap" aria-hidden="true">
         {longestWord}
       </span>
       {words.map((word, wordIndex) => (
         <motion.span
           key={word}
-          className="absolute whitespace-nowrap font-semibold will-change-transform"
+          className="absolute max-w-full whitespace-normal px-1 font-semibold will-change-transform sm:whitespace-nowrap"
           initial={{ opacity: 0, y: -100 }}
           transition={reduce ? { duration: 0 } : { type: "spring", stiffness: 50 }}
           animate={

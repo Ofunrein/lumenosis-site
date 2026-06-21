@@ -924,7 +924,7 @@ export function AriaDeepDive() {
       <div className="absolute left-1/2 top-0 h-[460px] w-[720px] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,rgba(203,108,230,0.18),rgba(203,108,230,0)_62%)] blur-3xl" />
       <div className="absolute right-[-14rem] top-24 h-[460px] w-[520px] rounded-full bg-[radial-gradient(circle,rgba(124,58,237,0.14),rgba(124,58,237,0)_64%)] blur-3xl" />
 
-      <div className="relative mx-auto grid w-[min(1480px,calc(100%-40px))] sm:w-[min(1480px,calc(100%-32px))] gap-9 lg:grid-cols-[0.58fr_1.42fr] lg:items-start">
+      <div className="relative mx-auto grid w-[min(1480px,calc(100vw_-_40px))] sm:w-[min(1480px,calc(100vw_-_32px))] gap-9 lg:grid-cols-[0.58fr_1.42fr] lg:items-start">
         <Reveal variant="left" className="lg:sticky lg:top-32">
           <div>
             <p

@@ -72,8 +72,8 @@ export function Topbar() {
           "bg-[var(--color-bg-cream)]/70 dark:bg-black/40 backdrop-blur-xl",
           "dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.08),0_0_0_1px_rgba(255,255,255,0.04)]",
           scrolled
-            ? "w-[min(860px,calc(100%-32px))] shadow-md dark:shadow-[0_0_30px_rgba(203,108,230,0.1)]"
-            : "w-[min(1000px,calc(100%-32px))] shadow-sm dark:shadow-[0_0_30px_rgba(203,108,230,0.1)]",
+            ? "w-[min(860px,calc(100vw_-_32px))] shadow-md dark:shadow-[0_0_30px_rgba(203,108,230,0.1)]"
+            : "w-[min(1000px,calc(100vw_-_32px))] shadow-sm dark:shadow-[0_0_30px_rgba(203,108,230,0.1)]",
         )}
       >
         {/* Mobile left spacer — keeps logo centered when hamburger is on the right */}

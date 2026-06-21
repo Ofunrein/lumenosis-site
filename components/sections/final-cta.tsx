@@ -7,7 +7,7 @@ import { StarButton } from "@/components/ui/star-button";
 export function FinalCTA() {
   return (
     <section className="border-b border-[var(--color-line)] bg-[#f5f2e9] py-24 text-center dark:bg-transparent md:py-32">
-      <div className="mx-auto w-[min(900px,calc(100%-40px))] sm:w-[min(900px,calc(100%-32px))]">
+      <div className="mx-auto w-[min(900px,calc(100vw_-_40px))] sm:w-[min(900px,calc(100vw_-_32px))]">
         <Reveal variant="up">
           <h2 className="font-[family-name:var(--font-display)] text-[length:var(--text-display-section)] font-semibold leading-[1.05] text-[var(--color-ink-charcoal)]">
             Install the desk before your next paid inquiry source{" "}

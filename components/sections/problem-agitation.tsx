@@ -112,7 +112,7 @@ export function ProblemAgitation() {
       id="method"
       className="border-b border-[var(--color-line)] bg-[#f1eee6] py-16 dark:bg-[rgb(9_7_13_/_0.76)] md:py-24"
     >
-      <div className="mx-auto w-[min(1200px,calc(100%-52px))] sm:w-[min(1200px,calc(100%-32px))]">
+      <div className="mx-auto w-[min(1200px,calc(100vw_-_52px))] sm:w-[min(1200px,calc(100vw_-_32px))]">
         <Reveal variant="up">
           <div className="max-w-2xl">
             <p className="mb-3 text-[var(--text-eyebrow)] font-semibold uppercase tracking-[0.14em] text-[var(--color-brand-purple)]">

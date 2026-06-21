@@ -88,15 +88,15 @@ export function Hero() {
       className="relative border-b border-[var(--color-line)] bg-[var(--color-bg-cream)] pt-28 pb-10 dark:bg-transparent xl:pb-0 xl:pt-0"
     >
       {/* Match the bounded container behavior used by the rest of the page. */}
-      <div className="mx-auto grid w-[min(1200px,calc(100%-40px))] gap-8 sm:w-[min(1200px,calc(100%-32px))] xl:min-h-[660px] xl:grid-cols-[minmax(0,0.92fr)_minmax(0,0.88fr)] xl:items-stretch xl:gap-16">
+      <div className="mx-auto grid w-full max-w-[1200px] gap-8 px-5 sm:px-4 xl:min-h-[660px] xl:grid-cols-[minmax(0,0.92fr)_minmax(0,0.88fr)] xl:items-stretch xl:gap-16 xl:px-0">
         {/* Text column */}
         <div className="flex flex-col items-center justify-center px-1 py-12 text-center sm:px-4 sm:py-16 xl:px-0">
-          <h1 className="w-full max-w-[650px] text-center font-[family-name:var(--font-display)] text-[clamp(2.4rem,4.45vw,4.75rem)] font-semibold leading-[1.04] tracking-tight text-[var(--color-ink-charcoal)] xl:text-[clamp(3.25rem,4vw,4.75rem)]">
+          <h1 className="w-full max-w-[650px] text-center font-[family-name:var(--font-display)] text-[clamp(2rem,8.2vw,4.75rem)] font-semibold leading-[1.04] tracking-tight text-[var(--color-ink-charcoal)] [overflow-wrap:anywhere] [text-wrap:balance] xl:text-[clamp(3.25rem,4vw,4.75rem)]">
             <span className="sr-only">
               A managed AI lead desk for real estate teams, property managers, and short-term rental
               operators.
             </span>
-            <span className="block" aria-hidden="true">
+            <span className="block max-w-full" aria-hidden="true">
               A managed AI lead desk for
             </span>
             <span
@@ -106,7 +106,7 @@ export function Hero() {
               <RotatingText
                 words={HERO_AUDIENCES}
                 intervalMs={2300}
-                minWidth="0"
+                minWidth="min(100%, 8ch)"
                 className="text-center"
               />
             </span>
@@ -133,7 +133,7 @@ export function Hero() {
         </div>
 
         {/* Image column */}
-        <div className="relative mx-auto mt-4 aspect-[11/13] w-full max-w-[420px] px-2 sm:aspect-[4/3] sm:max-w-[620px] xl:mt-0 xl:aspect-auto xl:h-auto xl:min-h-full xl:max-w-none xl:px-0 xl:py-8">
+        <div className="relative mx-auto mt-4 aspect-[11/13] w-full max-w-[420px] min-w-0 px-2 sm:aspect-[4/3] sm:max-w-[620px] xl:mt-0 xl:aspect-auto xl:h-auto xl:min-h-full xl:max-w-none xl:px-0 xl:py-8">
           <div className="absolute inset-0 xl:inset-y-8">
             <div
               aria-hidden

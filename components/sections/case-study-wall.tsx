@@ -37,7 +37,7 @@ export function CaseStudyWall() {
       id="results"
       className="border-b border-[var(--color-line)] bg-[#f1eee6] py-16 dark:bg-transparent md:py-24"
     >
-      <div className="mx-auto w-[min(1200px,calc(100%-40px))] sm:w-[min(1200px,calc(100%-32px))]">
+      <div className="mx-auto w-[min(1200px,calc(100vw_-_40px))] sm:w-[min(1200px,calc(100vw_-_32px))]">
         <Reveal variant="up">
           <div className="grid gap-8 lg:grid-cols-[minmax(0,1.14fr)_minmax(0,0.86fr)] lg:items-end">
             <div>
