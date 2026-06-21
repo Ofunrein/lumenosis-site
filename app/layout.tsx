@@ -18,13 +18,44 @@ const jetbrains = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
+  applicationName: "Lumenosis AI",
   title: {
-    default: "Lumenosis AI — Managed AI lead desk for real estate operators",
+    default: "Lumenosis AI Agents for Real Estate Teams",
     template: "%s — Lumenosis AI",
   },
   description:
-    "Iris answers, qualifies, and routes property conversations before they go cold for real estate teams, property managers, and short-term rental operators.",
+    "Lumenosis AI builds real estate AI agents that answer calls, texts, email, and website leads, qualify buyers and sellers, and route property conversations before they go cold.",
   metadataBase: new URL("https://lumenosis.com"),
+  alternates: {
+    canonical: "/",
+  },
+  keywords: [
+    "Lumenosis AI",
+    "lumenosis",
+    "AI agents for real estate",
+    "real estate AI agents",
+    "AI real estate assistant",
+    "AI lead desk",
+    "real estate lead response software",
+    "real estate SMS AI",
+    "real estate voice AI",
+    "property management AI assistant",
+    "Iris AI real estate agent",
+  ],
+  authors: [{ name: "Lumenosis AI", url: "https://lumenosis.com" }],
+  creator: "Lumenosis AI",
+  publisher: "Lumenosis AI",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
   icons: {
     icon: [
       { url: "/favicon-rounded.ico", sizes: "any" },
@@ -33,12 +64,27 @@ export const metadata: Metadata = {
     apple: [{ url: "/apple-icon-rounded.png", type: "image/png", sizes: "180x180" }],
   },
   openGraph: {
-    title: "Lumenosis AI — Managed AI lead desk for real estate operators",
+    title: "Lumenosis AI Agents for Real Estate Teams",
     description:
-      "Managed AI lead handling for operators that need fast replies, property-aware answers, and human handoffs.",
+      "Real estate AI agents for calls, SMS, email, website chat, and social DMs. Iris answers, qualifies, and routes property conversations before they go cold.",
     url: "https://lumenosis.com",
     siteName: "Lumenosis AI",
     type: "website",
+    locale: "en_US",
+    images: [
+      {
+        url: "/images/lumenosis-logo-rounded.png",
+        width: 1200,
+        height: 630,
+        alt: "Lumenosis AI real estate AI agents",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Lumenosis AI Agents for Real Estate Teams",
+    description: "AI agents for real estate calls, texts, email, website leads, and social DMs.",
+    images: ["/images/lumenosis-logo-rounded.png"],
   },
 };
 

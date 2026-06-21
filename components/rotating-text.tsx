@@ -1,7 +1,7 @@
 "use client";
 
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { motion, useReducedMotion } from "framer-motion";
+import { useEffect, useMemo, useState } from "react";
 
 export function RotatingText({
   words,
@@ -16,34 +16,46 @@ export function RotatingText({
 }) {
   const [index, setIndex] = useState(0);
   const reduce = useReducedMotion();
+  const longestWord = useMemo(
+    () => words.reduce((longest, word) => (word.length > longest.length ? word : longest), ""),
+    [words],
+  );
 
   useEffect(() => {
-    if (reduce) return;
-    const id = setInterval(() => {
-      setIndex((i) => (i + 1) % words.length);
+    if (reduce || words.length <= 1) return;
+    const timeoutId = window.setTimeout(() => {
+      setIndex((current) => (current === words.length - 1 ? 0 : current + 1));
     }, intervalMs);
-    return () => clearInterval(id);
+    return () => window.clearTimeout(timeoutId);
   }, [words.length, intervalMs, reduce]);
 
   return (
     <span
-      className={`relative inline-block align-baseline ${className ?? ""}`}
-      style={{ minWidth, perspective: "700px" }}
+      className={`relative inline-flex justify-center overflow-hidden text-center align-baseline ${className ?? ""}`}
+      style={{ minWidth, minHeight: "1.16em" }}
       aria-live="polite"
       aria-atomic="true"
     >
-      <AnimatePresence mode="wait">
+      <span className="invisible whitespace-nowrap" aria-hidden="true">
+        {longestWord}
+      </span>
+      {words.map((word, wordIndex) => (
         <motion.span
-          key={words[index]}
-          initial={{ opacity: 0, rotateX: -72, y: 12 }}
-          animate={{ opacity: 1, rotateX: 0, y: 0 }}
-          exit={{ opacity: 0, rotateX: 72, y: -12 }}
-          transition={{ duration: reduce ? 0 : 0.34, ease: "easeOut" }}
-          className="inline-block origin-[50%_70%] will-change-transform"
+          key={word}
+          className="absolute whitespace-nowrap font-semibold will-change-transform"
+          initial={{ opacity: 0, y: -100 }}
+          transition={reduce ? { duration: 0 } : { type: "spring", stiffness: 50 }}
+          animate={
+            reduce
+              ? { y: 0, opacity: wordIndex === 0 ? 1 : 0 }
+              : index === wordIndex
+                ? { y: 0, opacity: 1 }
+                : { y: index > wordIndex ? -150 : 150, opacity: 0 }
+          }
         >
-          {words[index]}
+          {word}
         </motion.span>
-      </AnimatePresence>
+      ))}
     </span>
   );
 }
