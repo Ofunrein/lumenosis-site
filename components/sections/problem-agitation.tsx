@@ -22,41 +22,68 @@ const leaks = [
   },
 ];
 
-const stats = [
-  { prefix: "", suffix: " sec", target: 60, label: "first response target" },
-  { prefix: "", suffix: "+", target: 7, label: "lead channels covered" },
-  { prefix: "", suffix: " days", target: 30, label: "installation window" },
+type Stat = {
+  kind: "response" | "count";
+  prefix?: string;
+  suffix?: string;
+  target: number;
+  label: string;
+};
+
+const stats: Stat[] = [
+  { kind: "response", target: 60, label: "first response target" },
+  { kind: "count", prefix: "", suffix: "+", target: 7, label: "lead channels covered" },
+  { kind: "count", prefix: "", suffix: "/7", target: 24, label: "coverage window" },
 ];
 
-function useCountUp(target: number, active: boolean, duration = 1200) {
-  const [val, setVal] = useState(0);
+function useProgress(active: boolean, duration = 1400) {
+  const [progress, setProgress] = useState(0);
+
   useEffect(() => {
     if (!active) return;
+    setProgress(0);
     const start = performance.now();
+    let frame = 0;
+
     const raf = (now: number) => {
       const p = Math.min((now - start) / duration, 1);
-      setVal(Math.round(p * target));
-      if (p < 1) requestAnimationFrame(raf);
+      setProgress(p);
+      if (p < 1) frame = requestAnimationFrame(raf);
     };
-    requestAnimationFrame(raf);
-  }, [active, target, duration]);
-  return val;
+
+    frame = requestAnimationFrame(raf);
+    return () => cancelAnimationFrame(frame);
+  }, [active, duration]);
+
+  return progress;
 }
 
-function StatItem({
-  prefix,
-  suffix,
-  target,
-  label,
-  active,
-}: (typeof stats)[0] & { active: boolean }) {
-  const val = useCountUp(target, active);
+function formatResponseTarget(progress: number) {
+  if (progress < 0.35) {
+    const days = Math.max(1, Math.round(3 - (progress / 0.35) * 2));
+    return `${days} days`;
+  }
+
+  if (progress < 0.78) {
+    const hours = Math.max(1, Math.round(24 - ((progress - 0.35) / 0.43) * 23));
+    return `${hours} hrs`;
+  }
+
+  const seconds = Math.max(60, Math.round(300 - ((progress - 0.78) / 0.22) * 240));
+  return `${seconds} sec`;
+}
+
+function StatItem({ kind, prefix, suffix, target, label, active }: Stat & { active: boolean }) {
+  const progress = useProgress(active, kind === "response" ? 1800 : 1200);
+  const value =
+    kind === "response"
+      ? formatResponseTarget(progress)
+      : `${prefix ?? ""}${Math.round(progress * target)}${suffix ?? ""}`;
+
   return (
     <div className="flex flex-col items-center gap-1.5 text-center">
       <span className="font-[family-name:var(--font-display)] text-[clamp(2.2rem,4vw,3.5rem)] font-semibold leading-none text-[var(--color-ink-charcoal)] dark:text-white">
-        {prefix}
-        {val}
-        {suffix}
+        {value}
       </span>
       <span className="text-xs uppercase tracking-[0.12em] text-[var(--color-muted)]">{label}</span>
     </div>

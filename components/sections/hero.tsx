@@ -113,9 +113,6 @@ export function Hero() {
             follows up, and routes leads across email, SMS, calls, website chat, Instagram, Facebook
             Messenger, and WhatsApp.
           </p>
-          <p className="mt-4 w-full max-w-[560px] text-center text-base font-medium text-[var(--color-ink-charcoal)]">
-            Never lose a lead because nobody replied fast enough.
-          </p>
           <div className="mt-8 flex w-full max-w-[590px] justify-center">
             <Magnet padding={60} magnetStrength={5}>
               <SpotlightButtonWrapper>

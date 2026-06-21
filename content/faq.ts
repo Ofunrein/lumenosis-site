@@ -3,7 +3,8 @@ export type FaqItem = { q: string; a: string };
 export const faq: FaqItem[] = [
   {
     q: "What does this actually cost?",
-    a: "The best starting offer is $3,000 setup plus $2,500 per month for a real estate team. Smaller starter builds can begin around $1,500 setup plus $1,000 per month. Larger teams, brokerages, and white-label builds are custom.",
+    // Saved for later: "$3,000 setup + $2,500/mo", "$1,500 setup + $1,000/mo".
+    a: "Pricing is scoped after the demo. We map your channels, CRM, calendar, property data, review rules, and management needs before quoting the build.",
   },
   {
     q: "How long until it is running?",

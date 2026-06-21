@@ -13,7 +13,7 @@ const paths = [
       "A high-touch installation for real estate operators already paying for leads and ready to stop losing them to slow follow-up.",
     bestFor: "3 to 15 agent teams, portal lead buyers, Meta and Google ad teams",
     features: [
-      "$3,000 setup + $2,500/mo starting point",
+      // Saved for later: "$3,000 setup + $2,500/mo starting point",
       "Email, SMS, calls, website chat, and social DM coverage",
       "Shared lead timeline across every channel",
       "Property data brain from sheets, CRM, IDX export, or enrichment",
@@ -32,7 +32,7 @@ const paths = [
       "A managed omnichannel lead desk for brokerages, growth teams, and agencies with multiple sources, agents, markets, or client accounts.",
     bestFor: "Brokerages, multi-agent offices, white-label agencies, growth teams",
     features: [
-      "$7,500 to $10,000+ setup with custom monthly management",
+      // Saved for later: "$7,500 to $10,000+ setup with custom monthly management",
       "Agent routing by market, source, urgency, language, or office",
       "Follow Up Boss, Lofty, kvCORE, GoHighLevel, HubSpot, or custom CRM",
       "Calendar, lead source, and property source integrations",

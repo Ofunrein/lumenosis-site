@@ -13,8 +13,9 @@ export const pricingPaths: PricingPath[] = [
   {
     slug: "starter",
     label: "Starter",
-    price: "$1,500",
-    subtext: "setup + $1,000/mo",
+    // Saved for later: price: "$1,500", subtext: "setup + $1,000/mo".
+    price: "TBD",
+    subtext: "quoted after demo",
     pitch:
       "For a lead-spending solo agent or tiny team that needs one managed workflow live first.",
     bullets: [
@@ -28,8 +29,9 @@ export const pricingPaths: PricingPath[] = [
   {
     slug: "team",
     label: "Team",
-    price: "$3,000+",
-    subtext: "setup + $2,500/mo",
+    // Saved for later: price: "$3,000+", subtext: "setup + $2,500/mo".
+    price: "TBD",
+    subtext: "quoted after demo",
     pitch: "For 3 to 15 agent teams buying Zillow, Realtor.com, Meta, Google, or website leads.",
     bullets: [
       "Email, SMS, calls, website chat, and social DM handling",
@@ -44,8 +46,9 @@ export const pricingPaths: PricingPath[] = [
   {
     slug: "growth",
     label: "Growth Team",
-    price: "$10,000+",
-    subtext: "setup + custom monthly",
+    // Saved for later: price: "$10,000+", subtext: "setup + custom monthly".
+    price: "TBD",
+    subtext: "quoted after demo",
     pitch: "For teams with multiple agents, markets, lead sources, calendars, or routing rules.",
     bullets: [
       "Everything in Team",

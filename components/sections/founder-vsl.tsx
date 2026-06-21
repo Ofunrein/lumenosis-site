@@ -134,7 +134,6 @@ export function FounderVSL() {
                     <span className="rounded-full bg-[var(--color-brand-violet-soft)] px-2.5 py-1 text-[9px] font-bold text-[var(--color-brand-violet)]">
                       FEATURED
                     </span>
-                    FROM THE FOUNDER · WHY SHARED-BRAIN FOLLOW-UP WINS
                   </div>
                 </div>
               </div>
