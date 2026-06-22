@@ -22,7 +22,7 @@ export function Faq() {
               09 · FAQ
             </span>
             <h2 className="font-[family-name:var(--font-display)] text-[length:var(--text-display-section)] font-semibold leading-[1.05] text-[var(--color-ink-charcoal)]">
-              Questions{" "}
+              <span className="headline-plain">Questions</span>{" "}
               <em className="not-italic text-[var(--color-gold-italic)]">we get every week.</em>
             </h2>
           </div>

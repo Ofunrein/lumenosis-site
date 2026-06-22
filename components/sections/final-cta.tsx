@@ -10,7 +10,9 @@ export function FinalCTA() {
       <div className="mx-auto w-[min(900px,calc(100vw_-_40px))] sm:w-[min(900px,calc(100vw_-_32px))]">
         <Reveal variant="up">
           <h2 className="font-[family-name:var(--font-display)] text-[length:var(--text-display-section)] font-semibold leading-[1.05] text-[var(--color-ink-charcoal)]">
-            Install the desk before your next paid inquiry source{" "}
+            <span className="headline-plain">
+              Install the desk before your next paid inquiry source
+            </span>{" "}
             <em className="not-italic text-[var(--color-brand-purple)]">starts leaking.</em>
           </h2>
         </Reveal>

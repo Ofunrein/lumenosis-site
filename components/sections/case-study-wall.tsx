@@ -44,7 +44,7 @@ export function CaseStudyWall() {
               <span className="mb-3 inline-block text-[var(--text-eyebrow)] font-semibold uppercase tracking-[0.14em] text-[var(--color-brand-purple)]">
                 07 · Results
               </span>
-              <h2 className="max-w-[980px] font-[family-name:var(--font-display)] text-[clamp(2.65rem,4.85vw,5.05rem)] font-semibold leading-[0.96] tracking-normal text-[var(--color-ink-charcoal)]">
+              <h2 className="headline-plain max-w-[980px] text-[clamp(2.65rem,4.85vw,5.05rem)] text-[var(--color-ink-charcoal)]">
                 Real outcomes from managed deployments.
               </h2>
             </div>

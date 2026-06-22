@@ -99,7 +99,7 @@ export function Hero() {
               short-term rental operators, and investors.
             </span>
             <span
-              className="block max-w-full font-[family-name:var(--font-body)] font-semibold leading-[0.98] tracking-[-0.045em]"
+              className="headline-plain block max-w-full"
               aria-hidden="true"
             >
               The AI operations layer for

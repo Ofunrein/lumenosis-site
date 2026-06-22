@@ -119,7 +119,7 @@ export function ProblemAgitation() {
               02 — The leak
             </p>
             <h2 className="font-[family-name:var(--font-display)] text-[length:var(--text-display-section)] font-semibold leading-[1.05] text-[var(--color-ink-charcoal)]">
-              The leak is not conversation volume.{" "}
+              <span className="headline-plain">The leak is not conversation volume.</span>{" "}
               <em className="text-[var(--color-gold-italic)]">It is response continuity.</em>
             </h2>
             <p className="mt-4 text-[length:var(--text-body-lg)] text-[var(--color-muted)]">

@@ -34,7 +34,7 @@ export function FounderVSL() {
               01 · Watch First
             </p>
             <h2 className="font-[family-name:var(--font-display)] text-[length:var(--text-display-section)] font-semibold leading-[1.05] text-[var(--color-ink-charcoal)]">
-              You are already paying for conversations.{" "}
+              <span className="headline-plain">You are already paying for conversations.</span>{" "}
               <em className="text-[var(--color-gold-italic)]">Iris makes sure they get handled.</em>
             </h2>
             <ul className="mt-6 grid gap-3 text-[var(--color-muted)]">

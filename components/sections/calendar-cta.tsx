@@ -16,7 +16,7 @@ export function CalendarCTA() {
               08 · Book
             </p>
             <h2 className="font-[family-name:var(--font-display)] text-[clamp(2.4rem,5vw,4rem)] font-semibold leading-[1.04] text-[var(--color-ink-charcoal)]">
-              A 30-minute demo that&apos;s{" "}
+              <span className="headline-plain">A 30-minute demo that&apos;s</span>{" "}
               <em className="not-italic text-[var(--color-gold-italic)]">actually useful.</em>
             </h2>
             <ul className="mt-6 grid gap-3 text-[var(--color-muted)]">

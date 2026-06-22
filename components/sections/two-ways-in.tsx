@@ -57,7 +57,8 @@ export function TwoWaysIn() {
             06 · Programs
           </p>
           <h2 className="max-w-4xl font-[family-name:var(--font-display)] text-[length:var(--text-display-section)] font-semibold leading-[1.05] text-[var(--color-ink-charcoal)] dark:text-white">
-            Install the desk. <em className="text-[var(--color-gold-italic)]">Keep your CRM.</em>
+            <span className="headline-plain">Install the desk.</span>{" "}
+            <em className="text-[var(--color-gold-italic)]">Keep your CRM.</em>
           </h2>
         </Reveal>
 
@@ -105,7 +106,7 @@ export function TwoWaysIn() {
                     </p>
 
                     <h3 className="mb-4 font-[family-name:var(--font-display)] text-4xl font-semibold leading-[1.05] md:text-5xl">
-                      {path.title}{" "}
+                      <span className="headline-plain">{path.title}</span>{" "}
                       <em
                         className={
                           path.dark

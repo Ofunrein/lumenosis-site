@@ -65,6 +65,13 @@ body {
     color 0.3s ease;
 }
 
+.headline-plain {
+  font-family: var(--font-body);
+  font-weight: 600;
+  letter-spacing: -0.045em;
+  line-height: 0.98;
+}
+
 .dark {
   --color-bg-cream: transparent;
   --color-ink-charcoal: #ffffff;

@@ -14,7 +14,7 @@ export function MeetTheTeam() {
             03 · The team
           </p>
           <h2 className="font-[family-name:var(--font-display)] text-[length:var(--text-display-section)] font-semibold leading-[1.05] text-[var(--color-ink-charcoal)]">
-            One lead desk.{" "}
+            <span className="headline-plain">One lead desk.</span>{" "}
             <em className="not-italic text-[var(--color-gold-italic)]">Four working layers.</em>
           </h2>
           <p className="mt-4 text-[length:var(--text-body-lg)] text-[var(--color-muted)]">
