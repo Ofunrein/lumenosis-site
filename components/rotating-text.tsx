@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { useEffect, useMemo, useState } from "react";
 
 export function RotatingText({
@@ -20,42 +20,41 @@ export function RotatingText({
     () => words.reduce((longest, word) => (word.length > longest.length ? word : longest), ""),
     [words],
   );
+  const activeWord = words[index] ?? words[0] ?? "";
 
   useEffect(() => {
     if (reduce || words.length <= 1) return;
-    const timeoutId = window.setTimeout(() => {
+    const intervalId = window.setInterval(() => {
       setIndex((current) => (current === words.length - 1 ? 0 : current + 1));
     }, intervalMs);
-    return () => window.clearTimeout(timeoutId);
+    return () => window.clearInterval(intervalId);
   }, [words.length, intervalMs, reduce]);
 
   return (
     <span
-      className={`relative inline-flex max-w-full justify-center overflow-hidden text-center align-baseline ${className ?? ""}`}
+      className={`relative inline-grid max-w-full justify-items-center text-center align-baseline ${className ?? ""}`}
       style={{ minWidth, minHeight: "1.16em", maxWidth: "100%" }}
       aria-live="polite"
       aria-atomic="true"
     >
-      <span className="invisible whitespace-normal sm:whitespace-nowrap" aria-hidden="true">
+      <span
+        className="invisible col-start-1 row-start-1 max-w-full whitespace-normal px-1 font-semibold sm:whitespace-nowrap"
+        aria-hidden="true"
+      >
         {longestWord}
       </span>
-      {words.map((word, wordIndex) => (
+      <AnimatePresence mode="wait" initial={false}>
         <motion.span
-          key={word}
-          className="absolute max-w-full whitespace-normal px-1 font-semibold will-change-transform sm:whitespace-nowrap"
-          initial={{ opacity: 0, y: -100 }}
-          transition={reduce ? { duration: 0 } : { type: "spring", stiffness: 50 }}
-          animate={
-            reduce
-              ? { y: 0, opacity: wordIndex === 0 ? 1 : 0 }
-              : index === wordIndex
-                ? { y: 0, opacity: 1 }
-                : { y: index > wordIndex ? -150 : 150, opacity: 0 }
-          }
+          key={activeWord}
+          className="col-start-1 row-start-1 max-w-full whitespace-normal px-1 font-semibold will-change-transform sm:whitespace-nowrap"
+          initial={reduce ? { opacity: 1, y: 0 } : { opacity: 0, y: "0.36em" }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={reduce ? { opacity: 0, y: 0 } : { opacity: 0, y: "-0.36em" }}
+          transition={reduce ? { duration: 0 } : { duration: 0.34, ease: "easeOut" }}
         >
-          {word}
+          {activeWord}
         </motion.span>
-      ))}
+      </AnimatePresence>
     </span>
   );
 }

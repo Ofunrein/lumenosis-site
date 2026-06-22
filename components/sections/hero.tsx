@@ -18,8 +18,10 @@ const HERO_IMAGES = {
 const HERO_FADE_MS = 240;
 const HERO_AUDIENCES = [
   "real estate teams",
+  "brokerages",
   "property managers",
   "short-term rental operators",
+  "investors",
 ] as const;
 
 export function Hero() {
@@ -93,8 +95,8 @@ export function Hero() {
         <div className="flex flex-col items-center justify-center px-1 py-12 text-center sm:px-4 sm:py-16 xl:px-0">
           <h1 className="w-full max-w-[650px] text-center font-[family-name:var(--font-display)] text-[clamp(2rem,8.2vw,4.75rem)] font-semibold leading-[1.04] tracking-tight text-[var(--color-ink-charcoal)] [overflow-wrap:anywhere] [text-wrap:balance] xl:text-[clamp(3.25rem,4vw,4.75rem)]">
             <span className="sr-only">
-              A managed AI lead desk for real estate teams, property managers, and short-term rental
-              operators.
+              A managed AI lead desk for real estate teams, brokerages, property managers,
+              short-term rental operators, and investors.
             </span>
             <span className="block max-w-full" aria-hidden="true">
               A managed AI lead desk for
