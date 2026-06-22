@@ -48,7 +48,7 @@ export function Timeline30Day() {
 
               <Reveal variant={i % 2 === 0 ? "up" : "scale"} delay={i * 0.07}>
                 <div>
-                  <h3 className="font-[family-name:var(--font-display)] text-[clamp(1.55rem,2vw,2rem)] font-medium leading-tight text-[var(--color-ink-charcoal)]">
+                  <h3 className="headline-plain text-[clamp(1.55rem,2vw,2rem)] leading-tight text-[var(--color-ink-charcoal)]">
                     {w.title}
                   </h3>
                   <p className="mt-5 max-w-[330px] text-[1.05rem] leading-8 text-[var(--color-muted)]">

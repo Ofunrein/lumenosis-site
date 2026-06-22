@@ -934,7 +934,10 @@ export function AriaDeepDive() {
               04 - Live follow-up desk
             </p>
             <h2 className="font-[family-name:var(--font-display)] text-[clamp(2.5rem,4.6vw,4.7rem)] font-semibold leading-[0.99] text-white">
-              One conversation brain across every channel.
+              <span className="headline-plain">One conversation brain</span>{" "}
+              <em className="not-italic text-[var(--color-gold-italic)]">
+                across every channel.
+              </em>
             </h2>
             <p className="mt-6 max-w-xl text-lg leading-8 text-white/75">
               Iris remembers the full conversation, pulls real property details, and coordinates the

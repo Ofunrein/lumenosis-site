@@ -19,7 +19,7 @@ export function AgentPersonaCard({ agent }: { agent: Agent }) {
       <span className={`mx-auto mb-3 inline-block rounded-full px-3 py-1 text-[10px] font-bold uppercase tracking-[0.12em] whitespace-nowrap overflow-hidden text-ellipsis max-w-full ${accentClass[agent.accent]}`}>
         {agent.role}
       </span>
-      <h3 className="text-center font-[family-name:var(--font-display)] text-xl font-semibold text-[var(--color-ink-charcoal)]">
+      <h3 className="headline-plain text-center text-xl leading-tight text-[var(--color-ink-charcoal)]">
         {agent.name}
       </h3>
       <p className="mt-2 text-center text-sm text-[var(--color-muted)] line-clamp-2">{agent.tagline}</p>

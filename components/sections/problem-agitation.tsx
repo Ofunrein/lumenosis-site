@@ -155,7 +155,7 @@ export function ProblemAgitation() {
                 <div className="mb-3 grid size-9 place-items-center rounded-lg bg-[var(--color-brand-purple-soft)] text-sm font-bold text-[var(--color-brand-purple)]">
                   {leak.n}
                 </div>
-                <h3 className="font-[family-name:var(--font-display)] text-xl font-semibold text-[var(--color-ink-charcoal)]">
+                <h3 className="headline-plain text-xl leading-tight text-[var(--color-ink-charcoal)]">
                   {leak.title}
                 </h3>
                 <p className="mt-2 text-[var(--color-muted)]">{leak.body}</p>
