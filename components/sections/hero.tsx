@@ -102,7 +102,7 @@ export function Hero() {
               The AI operations layer for
             </span>
             <span
-              className="mt-[0.68em] block min-h-[1.22em] leading-[1.06] italic text-[var(--color-gold-italic)] sm:mt-[0.7em]"
+              className="mt-[0.86em] block min-h-[1.22em] leading-[1.06] italic text-[var(--color-gold-italic)] sm:mt-[0.78em] xl:mt-[0.7em]"
               aria-hidden="true"
             >
               <RotatingText
