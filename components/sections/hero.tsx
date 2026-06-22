@@ -95,11 +95,11 @@ export function Hero() {
         <div className="flex flex-col items-center justify-center px-1 py-12 text-center sm:px-4 sm:py-16 xl:px-0">
           <h1 className="w-full max-w-[650px] text-center font-[family-name:var(--font-display)] text-[clamp(2rem,8.2vw,4.75rem)] font-semibold leading-[1.04] tracking-tight text-[var(--color-ink-charcoal)] [overflow-wrap:anywhere] [text-wrap:balance] xl:text-[clamp(3.25rem,4vw,4.75rem)]">
             <span className="sr-only">
-              A managed AI lead desk for real estate teams, brokerages, property managers,
+              The AI operations layer for real estate teams, brokerages, property managers,
               short-term rental operators, and investors.
             </span>
             <span className="block max-w-full" aria-hidden="true">
-              A managed AI lead desk for
+              The AI operations layer for
             </span>
             <span
               className="block min-h-[1.12em] italic text-[var(--color-gold-italic)]"
@@ -114,7 +114,9 @@ export function Hero() {
             </span>
           </h1>
           <p className="mt-5 w-full max-w-[590px] text-center text-[length:var(--text-body-lg)] leading-snug text-[var(--color-muted)]">
-            Iris answers, qualifies, and routes property conversations before they go cold.
+            Iris handles the conversations between your lead sources and your agents, answering
+            inquiries, qualifying prospects, following up, and routing ready opportunities to the
+            right person.
           </p>
           <p className="mt-4 text-base font-medium text-[var(--color-ink-charcoal)]">
             Built for operators already paying for lead flow.
