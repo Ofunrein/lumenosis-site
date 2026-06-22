@@ -98,7 +98,10 @@ export function Hero() {
               The AI operations layer for real estate teams, brokerages, property managers,
               short-term rental operators, and investors.
             </span>
-            <span className="block max-w-full" aria-hidden="true">
+            <span
+              className="block max-w-full font-[family-name:var(--font-body)] font-semibold leading-[0.98] tracking-[-0.045em]"
+              aria-hidden="true"
+            >
               The AI operations layer for
             </span>
             <span
@@ -117,9 +120,6 @@ export function Hero() {
             Iris handles the conversations between your lead sources and your agents, answering
             inquiries, qualifying prospects, following up, and routing ready opportunities to the
             right person.
-          </p>
-          <p className="mt-4 text-base font-medium text-[var(--color-ink-charcoal)]">
-            Built for operators already paying for lead flow.
           </p>
           <div className="mt-8 flex w-full max-w-[590px] justify-center">
             <Magnet padding={60} magnetStrength={5}>
