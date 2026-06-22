@@ -70,7 +70,7 @@ export default function Page() {
       />
       <AuroraBackground />
       <Topbar />
-      <main className="pt-20">
+      <main className="pt-14 sm:pt-16 lg:pt-20">
         <Hero />
         <TrustStrip />
         <FounderVSL />
