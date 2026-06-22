@@ -149,7 +149,7 @@ export function Hero() {
               glowColor="purple"
               customSize
               radius={24}
-              className="h-full w-full !p-0 overflow-hidden shadow-[0_34px_90px_rgba(18,21,28,0.22),0_12px_34px_rgba(24,28,35,0.16)] [--backdrop:rgba(243,239,231,0.95)] [--backup-border:rgba(34,40,49,0.22)] [--outer:0.92] dark:shadow-none dark:[--backdrop:transparent] dark:[--backup-border:rgba(255,255,255,0.08)] dark:[--outer:1]"
+              className="h-full w-full !p-0 overflow-hidden shadow-[0_34px_90px_rgba(18,21,28,0.22),0_12px_34px_rgba(24,28,35,0.16)] [--border:0] [--backdrop:rgba(243,239,231,0.95)] [--backup-border:transparent] [--outer:0.92] dark:shadow-none dark:[--backdrop:transparent] dark:[--backup-border:transparent] dark:[--outer:1]"
             >
               <Image
                 key={heroSrc}
@@ -164,7 +164,7 @@ export function Hero() {
                   transitionDuration: `${reduceMotion ? 0 : HERO_FADE_MS}ms`,
                 }}
               />
-              <div className="pointer-events-none absolute inset-0 rounded-[24px] border border-[rgba(255,255,255,0.24)] shadow-[inset_0_1px_0_rgba(255,255,255,0.16),inset_0_0_0_1px_rgba(24,29,36,0.06)] dark:border-white/0 dark:shadow-none" />
+              <div className="pointer-events-none absolute inset-[1px] rounded-[23px] shadow-[inset_0_1px_0_rgba(255,255,255,0.16)] dark:shadow-none" />
               <div
                 aria-hidden
                 className="pointer-events-none absolute inset-0 rounded-[24px] dark:hidden"
