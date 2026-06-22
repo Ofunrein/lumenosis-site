@@ -98,14 +98,11 @@ export function Hero() {
               The AI operations layer for real estate teams, brokerages, property managers,
               short-term rental operators, and investors.
             </span>
-            <span
-              className="headline-plain block max-w-full"
-              aria-hidden="true"
-            >
+            <span className="headline-plain block max-w-full" aria-hidden="true">
               The AI operations layer for
             </span>
             <span
-              className="block min-h-[1.12em] italic text-[var(--color-gold-italic)]"
+              className="mt-[0.3em] block min-h-[1.12em] leading-[1.06] italic text-[var(--color-gold-italic)] sm:mt-[0.34em]"
               aria-hidden="true"
             >
               <RotatingText

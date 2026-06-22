@@ -32,7 +32,7 @@ export function RotatingText({
 
   return (
     <span
-      className={`relative inline-grid max-w-full justify-items-center text-center align-baseline ${className ?? ""}`}
+      className={`relative inline-grid max-w-full justify-items-center overflow-hidden text-center align-baseline ${className ?? ""}`}
       style={{ minWidth, minHeight: "1.16em", maxWidth: "100%" }}
       aria-live="polite"
       aria-atomic="true"
