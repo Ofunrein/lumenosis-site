@@ -27,7 +27,7 @@ export function FinalCTA() {
                   document.getElementById("book")?.scrollIntoView({ behavior: "smooth" });
                 }}
               >
-                Book Demo
+                Request Demo
               </StarButton>
             </SpotlightButtonWrapper>
           </Magnet>

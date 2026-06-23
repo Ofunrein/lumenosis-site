@@ -126,7 +126,7 @@ export function Hero() {
                   backgroundColor="#cb6ce6"
                   className="bg-[var(--color-brand-purple)] text-white px-6 h-12 text-base [&_span]:text-white"
                 >
-                  <a href="#book">Book a Demo</a>
+                  <a href="#book">Request a Demo</a>
                 </StarButton>
               </SpotlightButtonWrapper>
             </Magnet>

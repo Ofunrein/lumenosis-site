@@ -141,7 +141,7 @@ export function Topbar() {
                 lightColor="#cb6ce6"
                 className="bg-[var(--color-brand-violet)] text-white px-4 h-9 text-sm !text-white"
               >
-                <a href={`${homePrefix}#book`}>Book Demo</a>
+                <a href={`${homePrefix}#book`}>Request Demo</a>
               </StarButton>
             </SpotlightButtonWrapper>
           </div>
@@ -196,7 +196,7 @@ export function Topbar() {
               className="w-full bg-[var(--color-brand-violet)] text-white h-11 text-sm justify-center !text-white"
             >
               <a href={`${homePrefix}#book`} onClick={() => setOpen(false)}>
-                Book Demo
+                Request Demo
               </a>
             </StarButton>
           </SpotlightButtonWrapper>

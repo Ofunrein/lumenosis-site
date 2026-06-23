@@ -25,7 +25,7 @@ const paths = [
     ],
     popular: false,
     dark: false,
-    cta: "Book Demo →",
+    cta: "Request Demo →",
   },
   {
     path: "PACKAGE 02 · GROWTH",

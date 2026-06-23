@@ -76,7 +76,7 @@ export function FounderVSL() {
               href="#book"
               className="mt-8 inline-flex h-12 items-center justify-center rounded-full bg-[var(--color-brand-charcoal)] px-6 text-sm font-semibold text-white shadow-[0_18px_40px_rgb(25_18_35_/_0.18)] transition hover:-translate-y-0.5 hover:bg-[var(--color-brand-purple)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-brand-purple)] focus-visible:ring-offset-2 focus-visible:ring-offset-[#f8f6ef] dark:bg-[var(--color-brand-violet)] dark:text-white dark:shadow-[var(--shadow-glow-violet)] dark:focus-visible:ring-offset-[#08050c]"
             >
-              Book Demo
+              Request Demo
             </a>
           </div>
         </Reveal>
