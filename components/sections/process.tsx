@@ -34,7 +34,7 @@ const steps = [
 export function Process() {
   return (
     <section id="agents" className="py-24 md:py-32 border-t border-[var(--color-line)]">
-      <div className="mx-auto w-[min(1120px,calc(100vw-32px))]">
+      <div className="mx-auto w-[min(1120px,calc(100vw-48px))] sm:w-[min(1120px,calc(100vw-48px))] xl:w-[min(1120px,calc(100vw-80px))]">
 
         <div className="mb-16 md:mb-20">
           <h2 className="text-[clamp(1.9rem,4vw,3.1rem)] font-bold tracking-[-0.035em] leading-[1.05] text-[var(--color-ink)] max-w-[600px]">

@@ -10,6 +10,7 @@ import { PullQuote } from "@/components/sections/pull-quote";
 import { StickyCtaBar } from "@/components/sections/sticky-cta-bar";
 import { Topbar } from "@/components/sections/topbar";
 import { TrustStrip } from "@/components/sections/trust-strip";
+import { TwoWaysIn } from "@/components/sections/two-ways-in";
 
 const siteStructuredData = {
   "@context": "https://schema.org",
@@ -58,6 +59,7 @@ export default function Page() {
         <Hero />
         <TrustStrip />
         <Process />
+        <TwoWaysIn />
         <AriaDeepDive />
         <Faq />
         <CalendarCTA />

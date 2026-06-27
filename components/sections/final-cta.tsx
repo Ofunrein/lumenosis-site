@@ -1,7 +1,7 @@
 export function FinalCTA() {
   return (
     <section className="border-t border-[var(--color-line)] py-24 md:py-32">
-      <div className="mx-auto w-[min(1120px,calc(100vw-32px))]">
+      <div className="mx-auto w-[min(1120px,calc(100vw-48px))] sm:w-[min(1120px,calc(100vw-48px))] xl:w-[min(1120px,calc(100vw-80px))]">
         <h2 className="text-[clamp(2rem,4.5vw,3.5rem)] font-bold tracking-[-0.04em] leading-[1.05] text-[var(--color-ink)] max-w-[620px]">
           Set up your AI front desk before your next lead source goes live.
         </h2>

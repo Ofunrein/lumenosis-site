@@ -9,7 +9,7 @@ export function CalendarCTA() {
       id="book"
       className="border-t border-[var(--color-line)] py-16 md:py-20"
     >
-      <div className="mx-auto grid min-h-[calc(100svh-96px)] w-[min(1120px,calc(100vw-32px))] items-center gap-10 md:grid-cols-[0.72fr_1.28fr]">
+      <div className="mx-auto grid min-h-[calc(100svh-96px)] w-[min(1120px,calc(100vw-48px))] sm:w-[min(1120px,calc(100vw-48px))] xl:w-[min(1120px,calc(100vw-80px))] items-center gap-10 md:grid-cols-[0.72fr_1.28fr]">
         <Reveal variant="left">
           <div>
             <h2 className="text-[clamp(2rem,4vw,3rem)] font-bold tracking-[-0.04em] leading-[1.05] text-[var(--color-ink)]">

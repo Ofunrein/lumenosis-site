@@ -15,7 +15,7 @@ export function Faq() {
       id="faq"
       className="border-t border-[var(--color-line)] py-16 md:py-24"
     >
-      <div className="mx-auto grid w-[min(1120px,calc(100vw-32px))] gap-10 md:grid-cols-[0.55fr_1fr]">
+      <div className="mx-auto grid w-[min(1120px,calc(100vw-48px))] sm:w-[min(1120px,calc(100vw-48px))] xl:w-[min(1120px,calc(100vw-80px))] gap-10 md:grid-cols-[0.55fr_1fr]">
         <Reveal variant="left">
           <div>
             <h2 className="text-[clamp(2rem,4vw,3rem)] font-bold tracking-[-0.04em] leading-[1.05] text-[var(--color-ink)]">
