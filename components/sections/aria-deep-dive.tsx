@@ -214,7 +214,7 @@ function SectionBadge({
 }) {
   return (
     <div className="flex items-center gap-3">
-      <span className="grid size-10 shrink-0 place-items-center rounded-2xl border border-[#3f3350] bg-[#21192c] text-[var(--color-brand-violet)]">
+      <span className="grid size-10 shrink-0 place-items-center rounded-2xl border border-[#2e2e30] bg-[#1c1c1f] text-[var(--color-brand-violet)]">
         {avatarSrc ? (
           <span className="relative size-8 overflow-hidden rounded-xl">
             <Image
@@ -270,7 +270,7 @@ function InlineListingCard() {
 function TypingDots({ align = "left" }: { align?: "left" | "right" }) {
   return (
     <div
-      className={`flex w-fit items-center gap-1.5 rounded-[18px] border border-[#3f3350] bg-[#21192c] px-4 py-2.5 ${
+      className={`flex w-fit items-center gap-1.5 rounded-[18px] border border-[#2e2e30] bg-[#1c1c1f] px-4 py-2.5 ${
         align === "right" ? "ml-auto" : "mr-auto"
       }`}
       role="status"
@@ -327,7 +327,7 @@ function IrisEmailDemo() {
   }, [shown]);
 
   return (
-    <GlowCard glowColor="purple" customSize className="overflow-hidden p-0 [--backdrop:#130d1b]">
+    <GlowCard glowColor="purple" customSize className="overflow-hidden p-0 [--backdrop:#0e1010]">
       <div className="grid min-h-0 lg:grid-cols-[1.25fr_0.75fr]">
         <div className="flex min-h-0 flex-col border-b border-[var(--color-line)] p-4 sm:p-5 lg:border-b-0 lg:border-r">
           <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[var(--color-line)] pb-4">
@@ -337,12 +337,12 @@ function IrisEmailDemo() {
               title="Iris email desk"
               subtitle="Live property inquiry"
             />
-            <div className="rounded-full border border-[var(--color-brand-violet)]/50 bg-[#2a1638] px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-white">
+            <div className="rounded-full border border-[var(--color-brand-violet)]/50 bg-[#221c10] px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-white">
               {latestMessage?.from === "iris" ? "Typing reply" : "Reading inquiry"}
             </div>
           </div>
 
-          <div className="mt-4 flex min-h-0 flex-1 flex-col rounded-2xl border border-[#443650] bg-[#09070d] p-3 text-sm shadow-[0_18px_44px_rgba(3,7,5,0.28)]">
+          <div className="mt-4 flex min-h-0 flex-1 flex-col rounded-2xl border border-[#2e2e32] bg-[#0a0a0b] p-3 text-sm shadow-[0_18px_44px_rgba(3,7,5,0.28)]">
             <div className="flex items-start justify-between gap-3 border-b border-[var(--color-line)] pb-3">
               <div>
                 <p className="text-xs uppercase tracking-[0.18em] text-white">Subject</p>
@@ -371,12 +371,12 @@ function IrisEmailDemo() {
                     className={[
                       "rounded-2xl border p-3 shadow-sm transition-all duration-300",
                       isIris
-                        ? "border-[var(--color-brand-violet)]/45 bg-[#2a1438]"
-                        : "border-[#443650] bg-[#18131f]",
+                        ? "border-[var(--color-brand-violet)]/45 bg-[#1c1c1f]"
+                        : "border-[#2e2e32] bg-[#131315]",
                     ].join(" ")}
                   >
                     <div className="flex items-start gap-3">
-                      <div className="relative size-9 shrink-0 overflow-hidden rounded-full border border-[#5e4b69] bg-[#21192c]">
+                      <div className="relative size-9 shrink-0 overflow-hidden rounded-full border border-[#3d3d40] bg-[#1c1c1f]">
                         <Image
                           src={isIris ? "/images/agents/iris.png" : "/images/agents/olivia.png"}
                           alt={isIris ? "Iris" : "Inquiry profile"}
@@ -401,7 +401,7 @@ function IrisEmailDemo() {
                         {message.listing ? <InlineListingCard /> : null}
                         {message.valuation ? <ValuationLinkCard /> : null}
                         {message.label ? (
-                          <p className="mt-3 inline-flex rounded-full bg-[#3a1d4d] px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-white">
+                          <p className="mt-3 inline-flex rounded-full bg-[#2a1e0a] px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-white">
                             {message.label}
                           </p>
                         ) : null}
@@ -414,8 +414,8 @@ function IrisEmailDemo() {
           </div>
         </div>
 
-        <div className="flex flex-col gap-4 bg-[#100b18] p-4 sm:p-5">
-          <div className="relative min-h-[140px] overflow-hidden rounded-[28px] border border-[#443650] bg-[#07060a] shadow-[0_24px_70px_rgba(0,0,0,0.28)]">
+        <div className="flex flex-col gap-4 bg-[#0f1010] p-4 sm:p-5">
+          <div className="relative min-h-[140px] overflow-hidden rounded-[28px] border border-[#2e2e32] bg-[#080809] shadow-[0_24px_70px_rgba(0,0,0,0.28)]">
             <Image
               src="https://ap.rdcpix.com/574f42a37829888fdbdf1cf4d48faa27l-m3739095458rd-w960_h720.webp"
               alt="Modern home property preview"
@@ -433,7 +433,7 @@ function IrisEmailDemo() {
             </div>
           </div>
 
-          <div className="rounded-[24px] border border-[#443650] bg-[#1b1424] p-4">
+          <div className="rounded-[24px] border border-[#2e2e32] bg-[#181818] p-4">
             <div className="flex items-start gap-3">
               <MapPin
                 className="mt-1 size-4 shrink-0 text-[var(--color-brand-violet)]"
@@ -448,7 +448,7 @@ function IrisEmailDemo() {
               {listingStats.map((stat) => (
                 <div
                   key={stat.label}
-                  className="rounded-2xl border border-[#443650] bg-[#100b18] p-3"
+                  className="rounded-2xl border border-[#2e2e32] bg-[#0f1010] p-3"
                 >
                   <p className="text-[10px] uppercase tracking-[0.16em] text-white">{stat.label}</p>
                   <p className="mt-1 text-lg font-semibold text-white">{stat.value}</p>
@@ -608,7 +608,7 @@ function AriaPhoneDemo() {
           className={`mt-1.5 inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs transition-all duration-500 ${
             callComplete
               ? "border-emerald-500/30 bg-emerald-500/10 text-emerald-400"
-              : "border-white/15 bg-white/5 text-white/60"
+              : "border-white/15 bg-white/5 text-white/90"
           }`}
         >
           {callComplete ? (
@@ -628,7 +628,7 @@ function AriaPhoneDemo() {
           <button
             type="button"
             onClick={togglePlay}
-            className="grid size-14 shrink-0 place-items-center rounded-full bg-[var(--color-brand-violet)] text-white shadow-[0_12px_32px_rgba(203,108,230,0.32)] transition-transform hover:scale-105 active:scale-95 sm:size-16"
+            className="grid size-14 shrink-0 place-items-center rounded-full bg-[var(--color-brand-violet)] text-white shadow-[0_12px_32px_rgba(160,120,64,0.32)] transition-transform hover:scale-105 active:scale-95 sm:size-16"
             aria-label={playing ? "Pause" : "Play"}
           >
             {playing ? (
@@ -648,7 +648,7 @@ function AriaPhoneDemo() {
           </button>
           <div>
             <p className="text-sm font-semibold text-white">Oak Ridge inbound call</p>
-            <p className="text-xs text-white/70">Availability, tour time, valuation handoff.</p>
+            <p className="text-xs text-white/90">Availability, tour time, valuation handoff.</p>
           </div>
         </div>
 
@@ -718,11 +718,11 @@ function AriaPhoneDemo() {
         >
           <div className="relative h-2 w-full rounded-full bg-white/15">
             <div
-              className="absolute inset-y-0 left-0 rounded-full bg-[var(--color-brand-violet)] shadow-[0_0_18px_rgba(203,108,230,0.38)]"
+              className="absolute inset-y-0 left-0 rounded-full bg-[var(--color-brand-violet)] shadow-[0_0_18px_rgba(160,120,64,0.38)]"
               style={{ width: `${progress * 100}%` }}
             />
             <div
-              className="absolute top-1/2 size-5 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-white bg-[var(--color-brand-violet)] opacity-100 shadow-[0_0_0_5px_rgba(203,108,230,0.18),0_8px_18px_rgba(0,0,0,0.28)] transition-transform group-hover:scale-110 sm:size-6"
+              className="absolute top-1/2 size-5 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-white bg-[var(--color-brand-violet)] opacity-100 shadow-[0_0_0_5px_rgba(160,120,64,0.18),0_8px_18px_rgba(0,0,0,0.28)] transition-transform group-hover:scale-110 sm:size-6"
               style={{ left: `${progress * 100}%` }}
             />
           </div>
@@ -841,8 +841,8 @@ function TheoSmsDemo() {
   }, [elapsed]);
 
   return (
-    <div className="mx-auto w-full max-w-[360px] rounded-[38px] border border-[#3f3350] bg-[#07060a] p-2.5 shadow-[0_34px_120px_rgba(0,0,0,0.44)]">
-      <div className="flex h-[540px] flex-col overflow-hidden rounded-[30px] border border-[#332a3d] bg-[#120d19] p-4">
+    <div className="mx-auto w-full max-w-[360px] rounded-[38px] border border-[#2e2e30] bg-[#080809] p-2.5 shadow-[0_34px_120px_rgba(0,0,0,0.44)]">
+      <div className="flex h-[540px] flex-col overflow-hidden rounded-[30px] border border-[#252527] bg-[#0d0e0f] p-4">
         <div className="mx-auto mb-4 mt-1 h-5 w-20 rounded-full bg-black" />
         <div className="text-center">
           <div className="relative mx-auto size-14 overflow-hidden rounded-full border border-[var(--color-brand-violet)]/60 mb-2">
@@ -873,12 +873,12 @@ function TheoSmsDemo() {
           </div>
         </div>
 
-        <div className="my-4 h-px bg-[#3f3350]" />
+        <div className="my-4 h-px bg-[#2e2e30]" />
 
         <div
           ref={transcriptRef}
           onScroll={handleTheoScroll}
-          className="flex min-h-0 flex-1 flex-col gap-3 overflow-y-auto pr-1 scrollbar-thin scrollbar-thumb-[var(--color-brand-violet)]/40 scrollbar-track-transparent [scrollbar-color:#cb6ce6_#120d19] [scrollbar-width:thin]"
+          className="flex min-h-0 flex-1 flex-col gap-3 overflow-y-auto pr-1 scrollbar-thin scrollbar-thumb-[var(--color-brand-violet)]/40 scrollbar-track-transparent [scrollbar-color:#cb6ce6_#0d0e0f] [scrollbar-width:thin]"
         >
           {visibleLines.map((line) => {
             const isTheo = line.from === "ai";
@@ -899,8 +899,8 @@ function TheoSmsDemo() {
                   className={[
                     "max-w-[88%] rounded-[22px] px-4 py-3 text-sm leading-relaxed shadow-[0_12px_36px_rgba(0,0,0,0.18)]",
                     isTheo
-                      ? "self-end bg-[#35194a] text-white"
-                      : "self-start bg-[#21192c] text-white",
+                      ? "self-end bg-[#1e1508] text-white"
+                      : "self-start bg-[#1c1c1f] text-white",
                   ].join(" ")}
                 >
                   {line.text}
@@ -919,47 +919,38 @@ export function AriaDeepDive() {
   return (
     <section
       id="aria"
-      className="bg-[#0a0e0c] py-20 md:py-28 border-b border-white/5 relative overflow-hidden"
+      className="bg-[#0a0e0c] py-20 md:py-28 border-t border-b border-white/[0.07] relative overflow-hidden"
     >
-      <div className="absolute left-1/2 top-0 h-[460px] w-[720px] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,rgba(203,108,230,0.18),rgba(203,108,230,0)_62%)] blur-3xl" />
-      <div className="absolute right-[-14rem] top-24 h-[460px] w-[520px] rounded-full bg-[radial-gradient(circle,rgba(124,58,237,0.14),rgba(124,58,237,0)_64%)] blur-3xl" />
+      <div className="absolute left-1/2 top-0 h-[460px] w-[720px] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,rgba(196,154,82,0.1),rgba(196,154,82,0)_62%)] blur-3xl" />
+      <div className="absolute right-[-14rem] top-24 h-[460px] w-[520px] rounded-full bg-[radial-gradient(circle,rgba(196,154,82,0.07),rgba(196,154,82,0)_64%)] blur-3xl" />
 
-      <div className="relative mx-auto grid w-[min(1480px,calc(100vw_-_40px))] sm:w-[min(1480px,calc(100vw_-_32px))] gap-9 lg:grid-cols-[0.58fr_1.42fr] lg:items-start">
+      <div className="relative mx-auto grid w-[min(1480px,calc(100vw_-_32px))] sm:w-[min(1480px,calc(100vw_-_32px))] gap-9 lg:grid-cols-[0.58fr_1.42fr] lg:items-start">
         <Reveal variant="left" className="lg:sticky lg:top-32">
           <div>
-            <p
-              className="mb-4 text-[var(--text-eyebrow)] font-semibold uppercase tracking-[0.16em]"
-              style={{ color: "#ffffff" }}
-            >
-              04 - Live follow-up desk
-            </p>
-            <h2 className="font-[family-name:var(--font-display)] text-[clamp(2.5rem,4.6vw,4.7rem)] font-semibold leading-[0.99] text-white">
-              <span className="headline-plain">One conversation brain</span>{" "}
-              <em className="not-italic text-[var(--color-gold-italic)]">
-                across every channel.
-              </em>
+            <h2 className="text-[clamp(2.4rem,4.6vw,4.2rem)] font-bold tracking-[-0.04em] leading-[1.02] text-white">
+              One conversation brain across every channel.
             </h2>
-            <p className="mt-6 max-w-xl text-lg leading-8 text-white/75">
+            <p className="mt-6 max-w-xl text-lg leading-8 text-white/90">
               Iris remembers the full conversation, pulls real property details, and coordinates the
               channel layers so email, SMS, calls, website chat, and DMs all move toward a showing,
               valuation, or human handoff.
             </p>
           </div>
 
-          <div className="mt-10 grid gap-4 sm:grid-cols-2">
+          <div className="mt-10 grid gap-4 sm:grid-cols-2 auto-rows-fr">
             {microFeatures.map(({ icon: Icon, title, body }, index) => (
-              <Reveal key={title} variant="scale" delay={index * 0.06}>
+              <Reveal key={title} variant="scale" delay={index * 0.06} className="h-full">
                 <GlowCard
                   glowColor="purple"
                   customSize
                   radius={12}
-                  className="flex flex-col gap-0 p-4 [--backdrop:rgba(18,12,28,0.85)] [--backup-border:rgba(203,108,230,0.15)]"
+                  className="flex flex-col gap-0 p-4 h-full [--backdrop:rgba(18,12,28,0.85)] [--backup-border:rgba(160,120,64,0.15)]"
                 >
                   <Icon className="size-5 text-[var(--color-brand-violet)]" aria-hidden />
-                  <p className="mt-4 font-[family-name:var(--font-display)] text-xl font-semibold text-white">
+                  <p className="mt-4 text-[1rem] font-semibold text-white">
                     {title}
                   </p>
-                  <p className="mt-2 text-sm leading-6 text-white/65">{body}</p>
+                  <p className="mt-2 text-sm leading-6 text-white/90">{body}</p>
                 </GlowCard>
               </Reveal>
             ))}
@@ -979,7 +970,7 @@ export function AriaDeepDive() {
               <GlowCard
                 glowColor="purple"
                 customSize
-                className="flex min-h-[560px] items-center justify-center border border-white/10 [--backdrop:#130d1b]"
+                className="flex min-h-[560px] items-center justify-center border border-white/10 [--backdrop:#0e1010]"
               >
                 <TheoSmsDemo />
               </GlowCard>
@@ -988,7 +979,7 @@ export function AriaDeepDive() {
               <GlowCard
                 glowColor="purple"
                 customSize
-                className="flex min-h-[620px] items-center justify-center border border-white/10 [--backdrop:#130d1b]"
+                className="flex min-h-[620px] items-center justify-center border border-white/10 [--backdrop:#0e1010]"
               >
                 <AriaPhoneDemo />
               </GlowCard>

@@ -1,201 +1,229 @@
 "use client";
-import { Clock, ShieldCheck } from "lucide-react";
+
 import Image from "next/image";
+import type React from "react";
 import { useEffect, useRef, useState } from "react";
-import { GlassStatCallout } from "@/components/glass-stat-callout";
-import Magnet from "@/components/magnet";
 import { RotatingText } from "@/components/rotating-text";
-import { SpotlightButtonWrapper } from "@/components/spotlight-button";
-import { GlowCard } from "@/components/spotlight-card";
-import { StarButton } from "@/components/ui/star-button";
 
 const HERO_IMAGE_ALT =
-  "Exterior view of a modern two-story luxury home with large windows and a contemporary facade";
+  "Lumenosis AI agent inbox showing real estate conversations across channels";
 const HERO_IMAGES = {
   dark: "/images/product-card-mockup.png",
   light: "/images/product-card-mockup-day.png",
 } as const;
-const HERO_FADE_MS = 240;
-const HERO_AUDIENCES = [
-  "real estate teams",
-  "brokerages",
-  "property managers",
-  "short-term rental operators",
-  "investors",
-] as const;
+const HERO_FADE_MS = 300;
+
+const RESPONSE_STEPS = ["3 days", "12 hours", "60 minutes", "< 60 seconds"];
+const CHANNEL_MAX = 7;
+
+function useCountUp(to: number, durationMs = 1200) {
+  const [val, setVal] = useState(0);
+  const [started, setStarted] = useState(false);
+
+  useEffect(() => {
+    if (!started) return;
+    const steps = to;
+    const interval = durationMs / steps;
+    let current = 0;
+    const id = setInterval(() => {
+      current += 1;
+      setVal(current);
+      if (current >= to) clearInterval(id);
+    }, interval);
+    return () => clearInterval(id);
+  }, [started, to, durationMs]);
+
+  return { val, trigger: () => setStarted(true) };
+}
+
+function useResponseCycle(durationMs = 800) {
+  const [idx, setIdx] = useState(0);
+  const [visible, setVisible] = useState(true);
+  const [started, setStarted] = useState(false);
+
+  useEffect(() => {
+    if (!started) return;
+    if (idx >= RESPONSE_STEPS.length - 1) return;
+    const fadeOut = setTimeout(() => setVisible(false), durationMs - 150);
+    const next = setTimeout(() => {
+      setIdx((i) => i + 1);
+      setVisible(true);
+    }, durationMs);
+    return () => { clearTimeout(fadeOut); clearTimeout(next); };
+  }, [started, idx, durationMs]);
+
+  return { label: RESPONSE_STEPS[idx], visible, trigger: () => setStarted(true) };
+}
 
 export function Hero() {
   const [mounted, setMounted] = useState(false);
-  const [isDarkTheme, setIsDarkTheme] = useState(true);
-  const [heroVisible, setHeroVisible] = useState(true);
+  const [isDark, setIsDark] = useState(false);
+  const [imgVisible, setImgVisible] = useState(true);
   const [reduceMotion, setReduceMotion] = useState(false);
-  const fadeTimerRef = useRef<number | null>(null);
-  const activeTheme = mounted && !isDarkTheme ? "light" : "dark";
-  const heroSrc = HERO_IMAGES[activeTheme];
+  const fadeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const statsRef = useRef<HTMLDivElement>(null);
+  const [statsTriggered, setStatsTriggered] = useState(false);
+
+  const response = useResponseCycle(650);
+  const channels = useCountUp(CHANNEL_MAX, 1000);
 
   useEffect(() => {
     const root = document.documentElement;
-    const syncTheme = () => setIsDarkTheme(root.classList.contains("dark"));
-    syncTheme();
+    const sync = () => setIsDark(root.classList.contains("dark"));
+    sync();
     setMounted(true);
-
-    const observer = new MutationObserver(syncTheme);
-    observer.observe(root, { attributes: true, attributeFilter: ["class"] });
-    return () => observer.disconnect();
+    const obs = new MutationObserver(sync);
+    obs.observe(root, { attributes: true, attributeFilter: ["class"] });
+    return () => obs.disconnect();
   }, []);
 
   useEffect(() => {
-    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const syncReduceMotion = () => setReduceMotion(mediaQuery.matches);
-    syncReduceMotion();
-    mediaQuery.addEventListener("change", syncReduceMotion);
-    return () => mediaQuery.removeEventListener("change", syncReduceMotion);
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const sync = () => setReduceMotion(mq.matches);
+    sync();
+    mq.addEventListener("change", sync);
+    return () => mq.removeEventListener("change", sync);
   }, []);
 
+  // Trigger stat animations when section enters view
   useEffect(() => {
-    if (!mounted) return;
-    const alternateSrc = activeTheme === "dark" ? HERO_IMAGES.light : HERO_IMAGES.dark;
-    const preload = new window.Image();
-    preload.src = alternateSrc;
-  }, [activeTheme, mounted]);
+    if (statsTriggered || reduceMotion) return;
+    const el = statsRef.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setStatsTriggered(true);
+          response.trigger();
+          channels.trigger();
+          io.disconnect();
+        }
+      },
+      { threshold: 0.3 }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [statsTriggered, reduceMotion]);
 
+  const activeTheme = mounted ? (isDark ? "dark" : "light") : "light";
+  const heroSrc = HERO_IMAGES[activeTheme];
+
+  // biome-ignore lint/correctness/useExhaustiveDependencies: activeTheme triggers crossfade
   useEffect(() => {
-    return () => {
-      if (fadeTimerRef.current) {
-        window.clearTimeout(fadeTimerRef.current);
-      }
-    };
-  }, []);
-
-  // biome-ignore lint/correctness/useExhaustiveDependencies: activeTheme intentionally retriggers the image crossfade.
-  useEffect(() => {
-    if (!mounted || reduceMotion) {
-      setHeroVisible(true);
-      return;
-    }
-
-    setHeroVisible(false);
-    if (fadeTimerRef.current) {
-      window.clearTimeout(fadeTimerRef.current);
-    }
-    fadeTimerRef.current = window.setTimeout(() => {
-      setHeroVisible(true);
-      fadeTimerRef.current = null;
-    }, 30);
+    if (!mounted || reduceMotion) { setImgVisible(true); return; }
+    setImgVisible(false);
+    if (fadeTimer.current) clearTimeout(fadeTimer.current);
+    fadeTimer.current = setTimeout(() => { setImgVisible(true); fadeTimer.current = null; }, 30);
+    return () => { if (fadeTimer.current) clearTimeout(fadeTimer.current); };
   }, [activeTheme, mounted, reduceMotion]);
 
   return (
     <section
       id="top"
-      className="relative border-b border-[var(--color-line)] bg-[var(--color-bg-cream)] pt-6 pb-10 dark:bg-transparent md:pt-10 xl:pb-0 xl:pt-0"
+      className="relative min-h-[100dvh] flex flex-col justify-center overflow-hidden"
     >
-      {/* Match the bounded container behavior used by the rest of the page. */}
-      <div className="mx-auto grid w-full max-w-[1200px] min-w-0 justify-items-center gap-8 overflow-hidden px-5 sm:px-4 xl:min-h-[660px] xl:grid-cols-[minmax(0,0.92fr)_minmax(0,0.88fr)] xl:items-center xl:justify-items-stretch xl:gap-16 xl:px-0">
-        {/* Text column */}
-        <div className="flex flex-col items-center justify-center px-1 py-8 text-center sm:px-4 sm:py-12 xl:px-0 xl:py-16">
-          <h1 className="w-full max-w-[650px] text-center font-[family-name:var(--font-display)] text-[clamp(2rem,8.2vw,4.75rem)] font-semibold leading-[1.04] tracking-tight text-[var(--color-ink-charcoal)] [overflow-wrap:anywhere] [text-wrap:balance] xl:text-[clamp(3.25rem,4vw,4.75rem)]">
+      {/* Full-bleed atmospheric background image */}
+      <div className="absolute inset-0 z-0">
+        <Image
+          key={heroSrc}
+          src={heroSrc}
+          alt={HERO_IMAGE_ALT}
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-[55%_55%]"
+          style={{
+            opacity: imgVisible ? (isDark ? 0.65 : 0.75) : 0,
+            transitionProperty: "opacity",
+            transitionDuration: `${reduceMotion ? 0 : HERO_FADE_MS}ms`,
+          }}
+        />
+        {/* Left gradient — bg bleeds over image */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background: mounted && isDark
+              ? "linear-gradient(to right, #070708 22%, rgba(7,7,8,0.82) 40%, rgba(7,7,8,0.08) 62%, transparent 100%)"
+              : "linear-gradient(to right, #f5f4ee 22%, rgba(245,244,238,0.82) 40%, rgba(245,244,238,0.08) 62%, transparent 100%)",
+          }}
+        />
+        <div className="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-[var(--color-bg)] to-transparent" />
+        <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-[var(--color-bg)] to-transparent" />
+      </div>
+
+      {/* Content */}
+      <div className="relative z-10 mx-auto w-full max-w-[1120px] px-5 sm:px-8 lg:px-0 pt-28 pb-20 lg:pt-36 lg:pb-28">
+        <div className="max-w-[600px]">
+          <h1 className="text-[clamp(2rem,6vw,5.2rem)] font-bold leading-[1.08] tracking-[-0.04em] text-[var(--color-ink)]">
             <span className="sr-only">
-              The AI operations layer for real estate teams, brokerages, property managers,
-              short-term rental operators, and investors.
+              The AI operations layer for real estate teams, brokerages, property managers, short-term rental operators, and investors.
             </span>
-            <span className="headline-plain block max-w-full" aria-hidden="true">
-              The AI operations layer for
-            </span>
-            <span
-              className="mt-[1.12em] block min-h-[1.22em] leading-[1.06] italic text-[var(--color-gold-italic)] sm:mt-[0.96em] xl:mt-[0.82em]"
-              aria-hidden="true"
-            >
-              <RotatingText
-                words={HERO_AUDIENCES}
-                intervalMs={2300}
-                minWidth="min(100%, 8ch)"
-                className="text-center"
-              />
+            <span aria-hidden="true">
+              {/* 'pretty' prevents orphaning "for" at the end of the first line */}
+              <span className="block" style={{ textWrap: "pretty" } as React.CSSProperties}>
+                The AI operations layer for
+              </span>
+              <span className="block text-[var(--color-brand-amber)] min-h-[1.1em]">
+                <RotatingText
+                  words={["real estate teams", "brokerages", "property managers", "short-term rentals", "investors"]}
+                  intervalMs={2200}
+                  minWidth="min(100%, 8ch)"
+                />
+              </span>
             </span>
           </h1>
-          <p className="mx-auto mt-5 w-full max-w-[342px] min-w-0 text-center text-base leading-snug text-[var(--color-muted)] sm:max-w-[590px] sm:text-[length:var(--text-body-lg)]">
-            Iris handles the conversations between your lead sources and your agents, answering
-            inquiries, qualifying prospects, following up, and routing ready opportunities to the
-            right person.
+
+          <p className="mt-6 text-[1.0625rem] leading-[1.65] text-[var(--color-muted)] max-w-[460px]">
+            Iris, Aria, Theo, and Olivia handle every inbound conversation
+            across email, calls, SMS, and chat. Qualify, route, and follow
+            up before leads go cold.
           </p>
-          <div className="mt-8 flex w-full max-w-[590px] justify-center">
-            <Magnet padding={60} magnetStrength={5}>
-              <SpotlightButtonWrapper>
-                <StarButton
-                  lightColor="#cb6ce6"
-                  backgroundColor="#cb6ce6"
-                  className="bg-[var(--color-brand-purple)] text-white px-6 h-12 text-base [&_span]:text-white"
-                >
-                  <a href="#book">Request a Demo</a>
-                </StarButton>
-              </SpotlightButtonWrapper>
-            </Magnet>
-          </div>
-        </div>
 
-        {/* Image column */}
-        <div className="relative mx-auto mt-4 aspect-[11/13] w-full max-w-[342px] min-w-0 px-2 sm:aspect-[4/3] sm:max-w-[620px] xl:mt-0 xl:aspect-square xl:max-w-[540px] xl:self-center xl:px-0 xl:py-0">
-          <div className="absolute inset-0">
-            <div
-              aria-hidden
-              className="pointer-events-none absolute inset-0 rounded-[36px] opacity-0 blur-2xl dark:hidden sm:-inset-x-6 sm:-inset-y-7 xl:-inset-x-8 xl:-inset-y-9 xl:blur-3xl"
-              style={{
-                background:
-                  "radial-gradient(72% 80% at 20% 12%, rgba(24,29,37,0.34), transparent 56%), radial-gradient(84% 88% at 82% 86%, rgba(22,26,33,0.28), transparent 60%), radial-gradient(100% 100% at 50% 50%, rgba(16,20,27,0.18), transparent 74%)",
-                opacity: activeTheme === "light" ? 1 : 0,
-              }}
-            />
-            <GlowCard
-              glowColor="purple"
-              customSize
-              radius={24}
-              className="h-full w-full !p-0 overflow-hidden shadow-[0_34px_90px_rgba(18,21,28,0.22),0_12px_34px_rgba(24,28,35,0.16)] [--border:0] [--backdrop:rgba(243,239,231,0.95)] [--backup-border:transparent] [--outer:0.92] dark:shadow-none dark:[--backdrop:transparent] dark:[--backup-border:transparent] dark:[--outer:1]"
+          <div className="mt-9 flex flex-wrap items-center gap-3">
+            <a
+              href="#book"
+              className="inline-flex items-center px-6 h-11 rounded-full text-[14px] font-semibold bg-[var(--color-ink)] text-[var(--color-bg)] hover:opacity-85 transition-opacity active:scale-[0.97]"
             >
-              <Image
-                key={heroSrc}
-                src={heroSrc}
-                alt={HERO_IMAGE_ALT}
-                fill
-                priority
-                sizes="(max-width: 768px) 420px, 50vw"
-                className="object-cover transition-opacity"
-                style={{
-                  opacity: heroVisible ? 1 : 0,
-                  transitionDuration: `${reduceMotion ? 0 : HERO_FADE_MS}ms`,
-                }}
-              />
-              <div className="pointer-events-none absolute inset-[1px] rounded-[23px] shadow-[inset_0_1px_0_rgba(255,255,255,0.16)] dark:shadow-none" />
-              <div
-                aria-hidden
-                className="pointer-events-none absolute inset-0 rounded-[24px] dark:hidden"
-                style={{
-                  background:
-                    "linear-gradient(180deg, rgba(18,22,29,0.14) 0%, rgba(18,22,29,0.06) 34%, transparent 58%), radial-gradient(92% 92% at 16% 12%, rgba(37,45,57,0.16), transparent 42%), radial-gradient(76% 80% at 84% 84%, rgba(23,28,35,0.14), transparent 54%)",
-                }}
-              />
-              <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(245,244,238,0.1),transparent_25%)] dark:bg-[linear-gradient(to_right,rgba(10,7,15,0.1),transparent_25%)]" />
-            </GlowCard>
+              Request a Demo
+            </a>
+            <a
+              href="#agents"
+              className="inline-flex items-center px-6 h-11 rounded-full text-[14px] font-medium border border-[var(--color-line)] text-[var(--color-ink)] hover:bg-[var(--color-line)] transition-colors"
+            >
+              See how it works
+            </a>
           </div>
 
-          {/* Stat callouts */}
-          <GlassStatCallout
-            label="First response target"
-            value="60 seconds"
-            icon={<Clock className="size-4" />}
-            className="absolute left-5 top-6 xl:-left-5 xl:top-20 z-10"
-          />
-          <GlassStatCallout
-            label="Channels covered"
-            value="7+"
-            icon={<ShieldCheck className="size-4" />}
-            className="absolute left-5 bottom-6 xl:-left-5 xl:bottom-20 z-10"
-          />
+          {/* Animated stats */}
+          <div ref={statsRef} className="mt-10 flex flex-wrap gap-7">
+            {/* Stat 1: response time — cycles from days → hours → minutes → seconds */}
+            <div className="min-w-[130px]">
+              <p
+                className="text-[1.25rem] font-semibold tracking-[-0.025em] text-[var(--color-ink)] transition-opacity duration-150"
+                style={{ opacity: response.visible ? 1 : 0 }}
+              >
+                {reduceMotion ? "< 60 seconds" : response.label}
+              </p>
+              <p className="text-[0.8125rem] text-[var(--color-muted)] mt-0.5">first response</p>
+            </div>
+
+            {/* Stat 2: channel count — counts up 1→7 */}
+            <div>
+              <p className="text-[1.25rem] font-semibold tracking-[-0.025em] text-[var(--color-ink)] tabular-nums">
+                {reduceMotion ? "7+" : `${channels.val}${channels.val >= CHANNEL_MAX ? "+" : ""}`}
+              </p>
+              <p className="text-[0.8125rem] text-[var(--color-muted)] mt-0.5">channels covered</p>
+            </div>
+
+            {/* Stat 3: 24/7 — static */}
+            <div>
+              <p className="text-[1.25rem] font-semibold tracking-[-0.025em] text-[var(--color-ink)]">24/7</p>
+              <p className="text-[0.8125rem] text-[var(--color-muted)] mt-0.5">no nights or weekends</p>
+            </div>
+          </div>
         </div>
       </div>
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-x-0 bottom-0 h-10 backdrop-blur-sm [mask-image:linear-gradient(to_bottom,transparent,black_60%)] z-10"
-      />
     </section>
   );
 }

@@ -7,23 +7,19 @@ export function CalendarCTA() {
   return (
     <section
       id="book"
-      className="border-b border-[var(--color-line)] bg-[#f8f6ef] py-8 dark:bg-transparent md:py-10"
+      className="border-t border-[var(--color-line)] py-16 md:py-20"
     >
-      <div className="mx-auto grid min-h-[calc(100svh-96px)] w-[min(1240px,calc(100vw_-_40px))] items-center gap-7 sm:w-[min(1240px,calc(100vw_-_32px))] md:grid-cols-[0.72fr_1.28fr]">
+      <div className="mx-auto grid min-h-[calc(100svh-96px)] w-[min(1120px,calc(100vw-32px))] items-center gap-10 md:grid-cols-[0.72fr_1.28fr]">
         <Reveal variant="left">
           <div>
-            <p className="mb-3 text-[var(--text-eyebrow)] font-semibold uppercase tracking-[0.14em] text-[var(--color-brand-purple)]">
-              08 · Book
-            </p>
-            <h2 className="font-[family-name:var(--font-display)] text-[clamp(2.4rem,5vw,4rem)] font-semibold leading-[1.04] text-[var(--color-ink-charcoal)]">
-              <span className="headline-plain">A 30-minute demo that&apos;s</span>{" "}
-              <em className="not-italic text-[var(--color-gold-italic)]">actually useful.</em>
+            <h2 className="text-[clamp(2rem,4vw,3rem)] font-bold tracking-[-0.04em] leading-[1.05] text-[var(--color-ink)]">
+              A 30-minute demo that&apos;s actually useful.
             </h2>
-            <ul className="mt-6 grid gap-3 text-[var(--color-muted)]">
-              <li>We map your current inquiry sources, CRM, calendar, and handoff rules.</li>
-              <li>We identify where conversations wait, repeat themselves, or lose context.</li>
-              <li>You leave with a practical installation path and first-channel priority.</li>
-              <li>If Iris is not the right fit, we tell you what to fix before buying anything.</li>
+            <ul className="mt-6 grid gap-3 text-[0.9375rem] text-[var(--color-muted)] leading-relaxed">
+              <li>We map your inquiry sources, CRM, calendar, and handoff rules.</li>
+              <li>We find where conversations wait, repeat, or lose context.</li>
+              <li>You leave with an installation path and first-channel priority.</li>
+              <li>If we&apos;re not the right fit, we tell you what to fix first.</li>
             </ul>
           </div>
         </Reveal>

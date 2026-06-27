@@ -1,37 +1,28 @@
-"use client";
-import Magnet from "@/components/magnet";
-import { Reveal } from "@/components/reveal";
-import { SpotlightButtonWrapper } from "@/components/spotlight-button";
-import { StarButton } from "@/components/ui/star-button";
-
 export function FinalCTA() {
   return (
-    <section className="border-b border-[var(--color-line)] bg-[#f5f2e9] py-24 text-center dark:bg-transparent md:py-32">
-      <div className="mx-auto w-[min(900px,calc(100vw_-_40px))] sm:w-[min(900px,calc(100vw_-_32px))]">
-        <Reveal variant="up">
-          <h2 className="font-[family-name:var(--font-display)] text-[length:var(--text-display-section)] font-semibold leading-[1.05] text-[var(--color-ink-charcoal)]">
-            <span className="headline-plain">
-              Install the desk before your next paid inquiry source
-            </span>{" "}
-            <em className="not-italic text-[var(--color-brand-purple)]">starts leaking.</em>
-          </h2>
-        </Reveal>
-        <Reveal variant="scale" delay={0.08} className="mt-8 flex justify-center">
-          <Magnet padding={80} magnetStrength={5}>
-            <SpotlightButtonWrapper>
-              <StarButton
-                lightColor="#cb6ce6"
-                backgroundColor="#cb6ce6"
-                className="bg-[var(--color-brand-purple)] text-white px-8 h-14 text-lg [&_span]:text-white"
-                onClick={() => {
-                  document.getElementById("book")?.scrollIntoView({ behavior: "smooth" });
-                }}
-              >
-                Request Demo
-              </StarButton>
-            </SpotlightButtonWrapper>
-          </Magnet>
-        </Reveal>
+    <section className="border-t border-[var(--color-line)] py-24 md:py-32">
+      <div className="mx-auto w-[min(1120px,calc(100vw-32px))]">
+        <h2 className="text-[clamp(2rem,4.5vw,3.5rem)] font-bold tracking-[-0.04em] leading-[1.05] text-[var(--color-ink)] max-w-[620px]">
+          Set up your AI front desk before your next lead source goes live.
+        </h2>
+        <p className="mt-5 text-[1.0625rem] text-[var(--color-muted)] max-w-[440px] leading-relaxed">
+          Share your workflow, connect your channels, and go live in days. No
+          engineering required.
+        </p>
+        <div className="mt-9 flex flex-wrap gap-3">
+          <a
+            href="#book"
+            className="inline-flex items-center px-6 h-11 rounded-full text-[14px] font-semibold bg-[var(--color-ink)] text-[var(--color-bg)] hover:opacity-85 transition-opacity active:scale-[0.97]"
+          >
+            Request a Demo
+          </a>
+          <a
+            href="mailto:hello@lumenosis.com"
+            className="inline-flex items-center px-6 h-11 rounded-full text-[14px] font-medium border border-[var(--color-line)] text-[var(--color-ink)] hover:bg-[var(--color-line)] transition-colors"
+          >
+            Talk to the team
+          </a>
+        </div>
       </div>
     </section>
   );

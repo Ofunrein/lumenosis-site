@@ -1,20 +1,15 @@
 import { AuroraBackground } from "@/components/aurora-background";
 import { AriaDeepDive } from "@/components/sections/aria-deep-dive";
 import { CalendarCTA } from "@/components/sections/calendar-cta";
-import { CaseStudyWall } from "@/components/sections/case-study-wall";
 import { Faq } from "@/components/sections/faq";
 import { FinalCTA } from "@/components/sections/final-cta";
 import { Footer } from "@/components/sections/footer";
-import { FounderVSL } from "@/components/sections/founder-vsl";
 import { Hero } from "@/components/sections/hero";
-import { MeetTheTeam } from "@/components/sections/meet-the-team";
-import { ProblemAgitation } from "@/components/sections/problem-agitation";
+import { Process } from "@/components/sections/process";
 import { PullQuote } from "@/components/sections/pull-quote";
 import { StickyCtaBar } from "@/components/sections/sticky-cta-bar";
-import { Timeline30Day } from "@/components/sections/timeline-30day";
 import { Topbar } from "@/components/sections/topbar";
 import { TrustStrip } from "@/components/sections/trust-strip";
-import { TwoWaysIn } from "@/components/sections/two-ways-in";
 
 const siteStructuredData = {
   "@context": "https://schema.org",
@@ -45,17 +40,6 @@ const siteStructuredData = {
         availability: "https://schema.org/InStock",
       },
     },
-    {
-      "@type": "Service",
-      "@id": "https://lumenosis.com/#service",
-      name: "Real Estate AI Agents",
-      provider: { "@id": "https://lumenosis.com/#organization" },
-      serviceType: "AI agents for real estate lead response",
-      areaServed: "United States",
-      url: "https://lumenosis.com",
-      description:
-        "AI agents that answer real estate calls, texts, emails, website leads, and social DMs, then qualify and route property conversations.",
-    },
   ],
 };
 
@@ -70,20 +54,15 @@ export default function Page() {
       />
       <AuroraBackground />
       <Topbar />
-      <main className="pt-14 sm:pt-16 lg:pt-20">
+      <main id="top">
         <Hero />
         <TrustStrip />
-        <FounderVSL />
-        <ProblemAgitation />
-        <MeetTheTeam />
+        <Process />
         <AriaDeepDive />
-        <Timeline30Day />
-        <TwoWaysIn />
-        <CaseStudyWall />
-        <CalendarCTA />
-        <Faq />
-        <FinalCTA />
         <PullQuote />
+        <Faq />
+        <CalendarCTA />
+        <FinalCTA />
       </main>
       <Footer />
       <StickyCtaBar />

@@ -37,7 +37,7 @@ export function TrustStrip() {
   return (
     <section
       aria-label="Built for operators already investing in conversations"
-      className="border-b border-[var(--color-line)] bg-[#ede8db] py-6 dark:bg-black/30"
+      className="border-t border-b border-[var(--color-line)] py-5"
     >
       <Reveal variant="scale">
         <div
@@ -63,7 +63,7 @@ export function TrustStrip() {
                     <span
                       aria-label={logo.label}
                       role="img"
-                      className="block h-8 w-36 bg-[var(--color-ink-charcoal)] dark:bg-white"
+                      className="block h-7 w-32 bg-[var(--color-ink)] opacity-40"
                       style={{
                         WebkitMask: `url(${logo.src}) center / contain no-repeat`,
                         mask: `url(${logo.src}) center / contain no-repeat`,
