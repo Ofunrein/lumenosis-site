@@ -26,7 +26,7 @@ export function StickyCtaBar() {
     <aside
       aria-label="Request demo"
       aria-hidden={!show}
-      className={`fixed inset-x-3 bottom-3 z-40 mx-auto flex max-w-3xl items-center justify-between gap-3 rounded-2xl border border-[var(--color-line)] bg-[var(--color-bg)]/95 backdrop-blur-md px-4 py-3 shadow-md transition-all md:inset-x-0 md:bottom-5 ${
+      className={`fixed inset-x-3 bottom-3 z-40 mx-auto flex max-w-3xl items-center justify-between gap-3 rounded-2xl border border-[var(--color-line)] bg-[var(--color-bg)]/50 backdrop-blur-xl dark:bg-black/60 dark:border-white/[0.08] px-4 py-3 shadow-md transition-all md:inset-x-0 md:bottom-5 ${
         show ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-6 opacity-0"
       }`}
     >
