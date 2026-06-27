@@ -61,8 +61,8 @@ export default function Page() {
         <Process />
         <AriaDeepDive />
         <TwoWaysIn />
-        <Faq />
         <CalendarCTA />
+        <Faq />
         <FinalCTA />
         <PullQuote />
       </main>
