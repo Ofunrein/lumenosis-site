@@ -157,7 +157,7 @@ export function Hero() {
       {/* Content */}
       <div className="relative z-10 mx-auto w-[min(1120px,calc(100vw-48px))] xl:w-[min(1120px,calc(100vw-80px))] pt-28 pb-20 lg:pt-36 lg:pb-28">
         <div className="max-w-[600px]">
-          <h1 className="text-[clamp(1.75rem,5.5vw,5rem)] font-bold leading-[1.08] tracking-[-0.04em] text-[var(--color-ink)]">
+          <h1 className="text-[clamp(1.75rem,3.8vw,3.5rem)] font-bold leading-[1.08] tracking-[-0.04em] text-[var(--color-ink)]">
             <span className="sr-only">
               The AI operations layer for real estate teams, brokerages, property managers, short-term rental operators, and investors.
             </span>
