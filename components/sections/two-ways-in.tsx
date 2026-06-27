@@ -13,7 +13,7 @@ const plans = [
       "Property data brain from sheets, CRM, IDX export, or enrichment",
       "Human review rules for financing, legal, pricing, and sensitive replies",
       "CRM and calendar routing",
-      "Two-week launch with optimization built in",
+      "Two-week launch with optimization included",
     ],
     cta: "Request a Demo",
     ctaHref: "#book",
@@ -46,7 +46,7 @@ export function TwoWaysIn() {
         {/* Header */}
         <div className="mb-14 md:mb-16">
           <h2 className="text-[clamp(1.9rem,4vw,3.1rem)] font-bold tracking-[-0.035em] leading-[1.05] text-[var(--color-ink)] max-w-[560px]">
-            Two ways to install the desk.
+            Install the desk that fits your operation.
           </h2>
           <p className="mt-4 text-[1.0625rem] text-[var(--color-muted)] max-w-[440px] leading-relaxed">
             Both options include the same AI system. The difference is scope, routing complexity, and how many channels you're coordinating.
@@ -64,13 +64,13 @@ export function TwoWaysIn() {
               className={[
                 "flex flex-col p-7 border h-full",
                 plan.featured
-                  ? "border-[var(--color-brand-amber)]/40 bg-[#0a0e0c] dark:bg-[#0a0e0c]"
+                  ? "[border-color:rgba(196,154,82,0.4)] bg-[#0a0e0c]"
                   : "border-[var(--color-line)]",
               ].join(" ")}
             >
               {/* Plan label */}
               <div className="flex items-center justify-between gap-3 mb-6">
-                <span className="text-[0.6875rem] font-mono font-semibold uppercase tracking-[0.1em] text-[var(--color-muted)]">
+                <span className="text-[0.6875rem] font-mono font-semibold uppercase tracking-[0.1em] text-[rgba(255,255,255,0.5)]">
                   {plan.label}
                 </span>
                 {plan.featured && (
@@ -86,12 +86,12 @@ export function TwoWaysIn() {
               </h3>
 
               {/* Description */}
-              <p className={`mt-3 text-[0.9375rem] leading-relaxed ${plan.featured ? "text-white/75" : "text-[var(--color-muted)]"}`}>
+              <p className={`mt-3 text-[0.9375rem] leading-relaxed ${plan.featured ? "text-white/85" : "text-[var(--color-muted)]"}`}>
                 {plan.description}
               </p>
 
               {/* Best for */}
-              <p className={`mt-4 text-[0.8125rem] leading-relaxed ${plan.featured ? "text-white/55" : "text-[var(--color-muted)] opacity-70"}`}>
+              <p className={`mt-4 text-[0.8125rem] leading-relaxed ${plan.featured ? "text-white/60" : "text-[var(--color-muted)] opacity-70"}`}>
                 <span className="font-semibold uppercase tracking-[0.08em] text-[0.625rem]">Best for: </span>
                 {plan.bestFor}
               </p>
@@ -105,7 +105,7 @@ export function TwoWaysIn() {
                         <path d="M2 5l2 2 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                       </svg>
                     </span>
-                    <span className={plan.featured ? "text-white/80" : "text-[var(--color-muted)]"}>{f}</span>
+                    <span className={plan.featured ? "text-white/85" : "text-[var(--color-muted)]"}>{f}</span>
                   </li>
                 ))}
               </ul>
