@@ -59,8 +59,8 @@ export default function Page() {
         <Hero />
         <TrustStrip />
         <Process />
-        <TwoWaysIn />
         <AriaDeepDive />
+        <TwoWaysIn />
         <Faq />
         <CalendarCTA />
         <FinalCTA />
