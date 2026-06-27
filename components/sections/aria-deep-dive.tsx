@@ -927,7 +927,7 @@ export function AriaDeepDive() {
         <Reveal variant="left" className="lg:sticky lg:top-32">
           <div>
             <h2 className="text-[clamp(2.4rem,4.6vw,4.2rem)] font-bold tracking-[-0.04em] leading-[1.02] text-white">
-              One conversation brain across every channel.
+              One brain across every channel.
             </h2>
             <p className="mt-6 max-w-xl text-lg leading-8 text-white/90">
               Iris remembers the full conversation, pulls real property details, and coordinates the
