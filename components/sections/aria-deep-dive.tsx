@@ -752,7 +752,6 @@ function AriaPhoneDemo() {
         ref={audioRef}
         src="/aria-oak-ridge-call.mp3"
         preload="metadata"
-        crossOrigin="anonymous"
       >
         <track
           kind="captions"
