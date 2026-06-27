@@ -5,6 +5,7 @@ import { type ReactNode, useEffect, useRef } from "react";
 interface GlowCardProps {
   children: ReactNode;
   className?: string;
+  style?: React.CSSProperties;
   glowColor?: "purple" | "blue" | "green" | "red" | "orange";
   customSize?: boolean;
   radius?: number;
@@ -21,6 +22,7 @@ const glowColorMap = {
 export function GlowCard({
   children,
   className = "",
+  style: userStyle,
   glowColor = "purple",
   customSize = true,
   radius,
@@ -74,7 +76,7 @@ export function GlowCard({
       <div
         ref={cardRef}
         data-glow
-        style={{ ...style, borderRadius: `${radius ?? 16}px` }}
+        style={{ ...style, borderRadius: `${radius ?? 16}px`, ...userStyle }}
         className={`group relative p-6 ${className}`}
       >
         <div

@@ -1,3 +1,6 @@
+import type React from "react";
+import { GlowCard } from "@/components/spotlight-card";
+
 const plans = [
   {
     pkg: "PACKAGE 01 · TEAM",
@@ -56,13 +59,17 @@ export function TwoWaysIn() {
 
         <div className="grid gap-5 md:grid-cols-2 auto-rows-fr">
           {plans.map((plan) => (
-            <div
+            <GlowCard
               key={plan.pkg}
-              className="relative flex flex-col rounded-[14px] border p-7 h-full"
+              glowColor="purple"
+              customSize
+              radius={14}
+              className="relative flex flex-col p-7 h-full"
               style={{
                 background: plan.featured ? "#0f0c08" : "transparent",
                 borderColor: plan.featured ? "rgba(196,154,82,0.5)" : "var(--color-line)",
-              }}
+                border: `1px solid ${plan.featured ? "rgba(196,154,82,0.5)" : "var(--color-line)"}`,
+              } as React.CSSProperties}
             >
               <div className="flex items-center justify-between gap-3 mb-5">
                 <span
@@ -143,7 +150,7 @@ export function TwoWaysIn() {
               >
                 {plan.cta}
               </a>
-            </div>
+            </GlowCard>
           ))}
         </div>
       </div>
