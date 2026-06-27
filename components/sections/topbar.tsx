@@ -91,7 +91,7 @@ export function Topbar() {
             <a
               key={link.label}
               href={link.href}
-              className="px-3.5 py-1.5 text-[15px] text-[var(--color-muted)] hover:text-[var(--color-ink)] transition-colors rounded-full hover:bg-[var(--color-line)]"
+              className="px-3.5 py-1.5 text-[15px] font-medium text-[var(--color-ink)] transition-colors rounded-full hover:bg-[var(--color-line)]"
             >
               {link.label}
             </a>
@@ -106,14 +106,14 @@ export function Topbar() {
                 type="button"
                 onClick={toggleTheme}
                 aria-label="Toggle theme"
-                className="grid size-9 place-items-center rounded-full text-[var(--color-muted)] hover:text-[var(--color-ink)] hover:bg-[var(--color-line)] transition-colors"
+                className="grid size-9 place-items-center rounded-full text-[var(--color-ink)] hover:bg-[var(--color-line)] transition-colors"
               >
                 <ThemeIcon dark={isDark} />
               </button>
             )}
             <a
               href="https://app.lumenosis.com"
-              className="px-3.5 h-8 inline-flex items-center text-sm font-medium text-[var(--color-muted)] hover:text-[var(--color-ink)] transition-colors rounded-full border border-[var(--color-line)] dark:border-white/12"
+              className="px-3.5 h-8 inline-flex items-center text-sm font-semibold text-[var(--color-ink)] transition-colors rounded-full border border-[var(--color-line)] dark:border-white/12"
             >
               Log in
             </a>
