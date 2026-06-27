@@ -537,23 +537,33 @@ function AriaPhoneDemo() {
     const audio = audioRef.current;
     if (!audio) return;
 
-    if (!audioCtxRef.current) {
-      setupAudio();
-    }
-
-    if (audioCtxRef.current?.state === "suspended") {
-      await audioCtxRef.current.resume();
-    }
-
     if (playing) {
       audio.pause();
       cancelAnimationFrame(rafRef.current);
       setBars(IDLE_WAVEFORM);
       setPlaying(false);
-    } else {
-      await audio.play();
+      return;
+    }
+
+    // Setup Web Audio synchronously — must happen before any await to keep gesture context
+    if (!audioCtxRef.current) {
+      try { setupAudio(); } catch (_) {}
+    }
+
+    // Call play() synchronously (no await before) — iOS Safari requires this
+    const playPromise = audio.play();
+
+    // Resume AudioContext after play() is initiated — safe to do async
+    if (audioCtxRef.current?.state === "suspended") {
+      audioCtxRef.current.resume().catch(() => {});
+    }
+
+    try {
+      await playPromise;
       setPlaying(true);
       animateBars();
+    } catch (_) {
+      // play blocked by browser (autoplay policy, etc.)
     }
   };
 
