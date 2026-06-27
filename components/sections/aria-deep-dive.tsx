@@ -478,9 +478,6 @@ function IrisEmailDemo() {
 
 function AriaPhoneDemo() {
   const audioRef = useRef<HTMLAudioElement>(null);
-  const audioCtxRef = useRef<AudioContext | null>(null);
-  const analyserRef = useRef<AnalyserNode | null>(null);
-  const sourceRef = useRef<MediaElementAudioSourceNode | null>(null);
   const rafRef = useRef<number>(0);
   const [playing, setPlaying] = useState(false);
   const [callComplete, setCallComplete] = useState(false);
@@ -488,40 +485,13 @@ function AriaPhoneDemo() {
   const [duration, setDuration] = useState(0);
   const [bars, setBars] = useState<number[]>(IDLE_WAVEFORM);
 
-  // Connect Web Audio API when first play
-  const setupAudio = () => {
-    const audio = audioRef.current;
-    if (!audio || audioCtxRef.current) return;
-
-    const audioCtx = new (
-      window.AudioContext ||
-      (window as typeof window & { webkitAudioContext?: typeof AudioContext }).webkitAudioContext
-    )();
-    const analyser = audioCtx.createAnalyser();
-    analyser.fftSize = 128; // 64 frequency bins
-    const source = audioCtx.createMediaElementSource(audio);
-    source.connect(analyser);
-    analyser.connect(audioCtx.destination);
-
-    audioCtxRef.current = audioCtx;
-    analyserRef.current = analyser;
-    sourceRef.current = source;
-  };
-
   const animateBars = () => {
     const t = Date.now();
 
     // Get real audio energy if available, but floor it so bars always move when playing
-    let energy = 0.45;
-    if (analyserRef.current) {
-      const dataArray = new Uint8Array(analyserRef.current.frequencyBinCount);
-      analyserRef.current.getByteFrequencyData(dataArray);
-      const raw = Array.from(dataArray.slice(0, 32)).reduce((s, v) => s + v, 0) / (32 * 255);
-      energy = Math.max(0.35, raw * 2.5); // ensure minimum visible movement
-    }
+    const energy = 0.45;
 
     const newBars = Array.from({ length: 40 }, (_, i) => {
-      // Multiple phase oscillators for organic movement across full width
       const p1 = Math.sin(t * 0.002 + i * 0.28) * 0.5 + 0.5;
       const p2 = Math.sin(t * 0.0035 + i * 0.55) * 0.5 + 0.5;
       const p3 = Math.sin(t * 0.0015 + i * 0.18) * 0.5 + 0.5;
@@ -533,7 +503,7 @@ function AriaPhoneDemo() {
     rafRef.current = requestAnimationFrame(animateBars);
   };
 
-  const togglePlay = async () => {
+  const togglePlay = () => {
     const audio = audioRef.current;
     if (!audio) return;
 
@@ -542,28 +512,11 @@ function AriaPhoneDemo() {
       cancelAnimationFrame(rafRef.current);
       setBars(IDLE_WAVEFORM);
       setPlaying(false);
-      return;
-    }
-
-    // Setup Web Audio synchronously — must happen before any await to keep gesture context
-    if (!audioCtxRef.current) {
-      try { setupAudio(); } catch (_) {}
-    }
-
-    // Call play() synchronously (no await before) — iOS Safari requires this
-    const playPromise = audio.play();
-
-    // Resume AudioContext after play() is initiated — safe to do async
-    if (audioCtxRef.current?.state === "suspended") {
-      audioCtxRef.current.resume().catch(() => {});
-    }
-
-    try {
-      await playPromise;
-      setPlaying(true);
-      animateBars();
-    } catch (_) {
-      // play blocked by browser (autoplay policy, etc.)
+    } else {
+      audio.play().then(() => {
+        setPlaying(true);
+        animateBars();
+      }).catch(() => {});
     }
   };
 

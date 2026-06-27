@@ -155,7 +155,7 @@ export function Hero() {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 mx-auto w-full max-w-[1120px] px-6 sm:px-10 lg:px-8 pt-28 pb-20 lg:pt-36 lg:pb-28">
+      <div className="relative z-10 mx-auto w-[min(1120px,calc(100vw-48px))] xl:w-[min(1120px,calc(100vw-80px))] pt-28 pb-20 lg:pt-36 lg:pb-28">
         <div className="max-w-[600px]">
           <h1 className="text-[clamp(1.75rem,5.5vw,5rem)] font-bold leading-[1.08] tracking-[-0.04em] text-[var(--color-ink)]">
             <span className="sr-only">
