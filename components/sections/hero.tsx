@@ -64,9 +64,9 @@ export function Hero() {
   const statsRef = useRef<HTMLDivElement>(null);
   const [statsTriggered, setStatsTriggered] = useState(false);
 
-  const response = useResponseCycle(650);
-  const channels = useCountUp(CHANNEL_MAX, 1000);
-  const hours = useCountUp(24, 900);
+  const response = useResponseCycle(1100);
+  const channels = useCountUp(CHANNEL_MAX, 1800);
+  const hours = useCountUp(24, 1600);
 
   useEffect(() => {
     const root = document.documentElement;
