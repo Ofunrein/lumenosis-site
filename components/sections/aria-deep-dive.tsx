@@ -944,7 +944,7 @@ export function AriaDeepDive() {
                   glowColor="purple"
                   customSize
                   radius={12}
-                  className="flex flex-col gap-0 p-4 h-full [--backdrop:rgba(18,12,28,0.85)] [--backup-border:rgba(160,120,64,0.15)]"
+                  className="flex flex-col gap-0 p-4 h-full [--backdrop:rgba(18,12,28,0.28)] [--backup-border:rgba(160,120,64,0.15)]"
                 >
                   <Icon className="size-5 text-[var(--color-brand-violet)]" aria-hidden />
                   <p className="mt-4 text-[1rem] font-semibold text-white">

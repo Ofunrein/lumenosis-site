@@ -132,7 +132,7 @@ export function Hero() {
           fill
           priority
           sizes="100vw"
-          className="object-cover object-[48%_90%]"
+          className="object-cover object-[48%_100%]"
           style={{
             opacity: imgVisible ? (isDark ? 0.82 : 0.75) : 0,
             transitionProperty: "opacity",

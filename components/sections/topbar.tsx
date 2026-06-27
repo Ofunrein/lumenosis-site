@@ -61,7 +61,7 @@ export function Topbar() {
           scrolled
             ? [
                 "border w-[min(860px,calc(100vw-32px))]",
-                "bg-[var(--color-bg)]/85 backdrop-blur-xl border-[var(--color-line)]",
+                "bg-[var(--color-bg)]/50 backdrop-blur-xl border-[var(--color-line)]",
                 "dark:bg-black/60 dark:border-white/[0.08]",
                 "shadow-[0_2px_20px_rgba(0,0,0,0.08)] dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.06),0_2px_20px_rgba(0,0,0,0.3)]",
               ]

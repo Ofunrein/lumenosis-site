@@ -78,6 +78,13 @@ export function GlowCard({
         data-glow
         style={{ ...style, borderRadius: `${radius ?? 16}px`, ...userStyle }}
         className={`group relative p-6 ${className}`}
+        onPointerMove={(e) => {
+          const el = cardRef.current;
+          if (!el) return;
+          const rect = el.getBoundingClientRect();
+          el.style.setProperty("--lx", (e.clientX - rect.left).toFixed(2));
+          el.style.setProperty("--ly", (e.clientY - rect.top).toFixed(2));
+        }}
       >
         <div
           data-glow
@@ -100,7 +107,7 @@ export function GlowCard({
           style={{
             borderRadius: "calc(var(--radius,var(--default-radius))*1px)",
             background:
-              "radial-gradient(400px circle at var(--x, 50%) var(--y, 50%), rgba(203,108,230,0.45), transparent 38%)",
+              "radial-gradient(400px circle at calc(var(--lx, -9999) * 1px) calc(var(--ly, -9999) * 1px), rgba(203,108,230,0.65), transparent 38%)",
             WebkitMask: "linear-gradient(#fff,#fff) content-box, linear-gradient(#fff,#fff)",
             WebkitMaskComposite: "xor",
             maskComposite: "exclude",

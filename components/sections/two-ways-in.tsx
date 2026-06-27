@@ -66,7 +66,7 @@ export function TwoWaysIn() {
               radius={14}
               className="relative flex flex-col p-7 h-full"
               style={{
-                background: plan.featured ? "#0f0c08" : "transparent",
+                "--backdrop": plan.featured ? "rgba(5,5,5,0.55)" : "transparent",
                 borderColor: plan.featured ? "rgba(196,154,82,0.5)" : "var(--color-line)",
                 border: `1px solid ${plan.featured ? "rgba(196,154,82,0.5)" : "var(--color-line)"}`,
               } as React.CSSProperties}
@@ -143,9 +143,9 @@ export function TwoWaysIn() {
                 href={plan.ctaHref}
                 className="mt-8 inline-flex items-center justify-center h-11 rounded-full text-[14px] font-semibold transition-opacity hover:opacity-85 active:scale-[0.97]"
                 style={{
-                  background: plan.featured ? "transparent" : "var(--color-ink)",
-                  color: plan.featured ? "rgba(196,154,82,0.9)" : "var(--color-bg)",
-                  border: plan.featured ? "1px solid rgba(196,154,82,0.5)" : "none",
+                  background: plan.featured ? "rgba(196,154,82,1)" : "var(--color-ink)",
+                  color: plan.featured ? "#0f0c08" : "var(--color-bg)",
+                  border: "none",
                 }}
               >
                 {plan.cta}
