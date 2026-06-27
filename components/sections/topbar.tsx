@@ -57,15 +57,15 @@ export function Topbar() {
       {/* Main pill nav */}
       <nav
         className={cn(
-          "pointer-events-auto relative flex items-center justify-between gap-4 rounded-full border px-4 py-2.5 transition-all duration-300 ease-out",
-          "bg-[var(--color-bg)]/75 backdrop-blur-xl",
-          "border-[var(--color-line)]",
-          "dark:bg-black/50 dark:border-white/[0.08]",
-          "shadow-[0_2px_20px_rgba(0,0,0,0.06)] dark:shadow-[0_2px_20px_rgba(0,0,0,0.28)]",
-          "dark:[box-shadow:inset_0_1px_0_rgba(255,255,255,0.06),0_2px_20px_rgba(0,0,0,0.3)]",
+          "pointer-events-auto relative flex items-center justify-between gap-4 rounded-full px-4 py-2.5 transition-all duration-500 ease-out",
           scrolled
-            ? "w-[min(860px,calc(100vw-32px))]"
-            : "w-[min(1000px,calc(100vw-32px))]",
+            ? [
+                "border w-[min(860px,calc(100vw-32px))]",
+                "bg-[var(--color-bg)]/85 backdrop-blur-xl border-[var(--color-line)]",
+                "dark:bg-black/60 dark:border-white/[0.08]",
+                "shadow-[0_2px_20px_rgba(0,0,0,0.08)] dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.06),0_2px_20px_rgba(0,0,0,0.3)]",
+              ]
+            : "border-transparent w-[min(1000px,calc(100vw-32px))]",
         )}
       >
         {/* Mobile spacer keeps logo centered */}

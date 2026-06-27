@@ -59,10 +59,10 @@ export default function Page() {
         <TrustStrip />
         <Process />
         <AriaDeepDive />
-        <PullQuote />
         <Faq />
         <CalendarCTA />
         <FinalCTA />
+        <PullQuote />
       </main>
       <Footer />
       <StickyCtaBar />

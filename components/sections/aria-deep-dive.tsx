@@ -327,8 +327,8 @@ function IrisEmailDemo() {
   }, [shown]);
 
   return (
-    <GlowCard glowColor="purple" customSize className="overflow-hidden p-0 [--backdrop:#0e1010]">
-      <div className="grid min-h-0 lg:grid-cols-[1.25fr_0.75fr]">
+    <GlowCard glowColor="purple" customSize className="p-0 border border-white/[0.08] [--backdrop:#0e1010]">
+      <div className="overflow-hidden rounded-[inherit] grid min-h-0 lg:grid-cols-[1.25fr_0.75fr]">
         <div className="flex min-h-0 flex-col border-b border-[var(--color-line)] p-4 sm:p-5 lg:border-b-0 lg:border-r">
           <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[var(--color-line)] pb-4">
             <SectionBadge
@@ -924,7 +924,7 @@ export function AriaDeepDive() {
       <div className="absolute left-1/2 top-0 h-[460px] w-[720px] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,rgba(196,154,82,0.1),rgba(196,154,82,0)_62%)] blur-3xl" />
       <div className="absolute right-[-14rem] top-24 h-[460px] w-[520px] rounded-full bg-[radial-gradient(circle,rgba(196,154,82,0.07),rgba(196,154,82,0)_64%)] blur-3xl" />
 
-      <div className="relative mx-auto grid w-[min(1480px,calc(100vw_-_32px))] sm:w-[min(1480px,calc(100vw_-_32px))] gap-9 lg:grid-cols-[0.58fr_1.42fr] lg:items-start">
+      <div className="relative mx-auto grid w-[min(1480px,calc(100vw_-_32px))] sm:w-[min(1480px,calc(100vw_-_32px))] gap-9 lg:grid-cols-[0.58fr_1.42fr] lg:items-start px-4 sm:px-0">
         <Reveal variant="left" className="lg:sticky lg:top-32">
           <div>
             <h2 className="text-[clamp(2.4rem,4.6vw,4.2rem)] font-bold tracking-[-0.04em] leading-[1.02] text-white">

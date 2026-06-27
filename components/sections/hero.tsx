@@ -132,9 +132,9 @@ export function Hero() {
           fill
           priority
           sizes="100vw"
-          className="object-cover object-[55%_55%]"
+          className="object-cover object-[48%_90%]"
           style={{
-            opacity: imgVisible ? (isDark ? 0.65 : 0.75) : 0,
+            opacity: imgVisible ? (isDark ? 0.82 : 0.75) : 0,
             transitionProperty: "opacity",
             transitionDuration: `${reduceMotion ? 0 : HERO_FADE_MS}ms`,
           }}
@@ -144,7 +144,7 @@ export function Hero() {
           className="absolute inset-0"
           style={{
             background: mounted && isDark
-              ? "linear-gradient(to right, #070708 22%, rgba(7,7,8,0.82) 40%, rgba(7,7,8,0.08) 62%, transparent 100%)"
+              ? "linear-gradient(to right, #070708 22%, rgba(7,7,8,0.80) 38%, rgba(7,7,8,0.0) 55%, transparent 100%)"
               : "linear-gradient(to right, #f5f4ee 22%, rgba(245,244,238,0.82) 40%, rgba(245,244,238,0.08) 62%, transparent 100%)",
           }}
         />
@@ -153,9 +153,9 @@ export function Hero() {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 mx-auto w-full max-w-[1120px] px-5 sm:px-8 lg:px-0 pt-28 pb-20 lg:pt-36 lg:pb-28">
+      <div className="relative z-10 mx-auto w-full max-w-[1120px] px-6 sm:px-10 lg:px-8 pt-28 pb-20 lg:pt-36 lg:pb-28">
         <div className="max-w-[600px]">
-          <h1 className="text-[clamp(2rem,6vw,5.2rem)] font-bold leading-[1.08] tracking-[-0.04em] text-[var(--color-ink)]">
+          <h1 className="text-[clamp(1.75rem,5.5vw,5rem)] font-bold leading-[1.08] tracking-[-0.04em] text-[var(--color-ink)]">
             <span className="sr-only">
               The AI operations layer for real estate teams, brokerages, property managers, short-term rental operators, and investors.
             </span>
