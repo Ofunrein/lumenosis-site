@@ -66,6 +66,7 @@ export function Hero() {
 
   const response = useResponseCycle(650);
   const channels = useCountUp(CHANNEL_MAX, 1000);
+  const hours = useCountUp(24, 900);
 
   useEffect(() => {
     const root = document.documentElement;
@@ -96,6 +97,7 @@ export function Hero() {
           setStatsTriggered(true);
           response.trigger();
           channels.trigger();
+          hours.trigger();
           io.disconnect();
         }
       },
@@ -216,9 +218,11 @@ export function Hero() {
               <p className="text-[0.8125rem] text-[var(--color-muted)] mt-0.5">channels covered</p>
             </div>
 
-            {/* Stat 3: 24/7 — static */}
+            {/* Stat 3: 24/7 — counts up to 24 */}
             <div>
-              <p className="text-[1.25rem] font-semibold tracking-[-0.025em] text-[var(--color-ink)]">24/7</p>
+              <p className="text-[1.25rem] font-semibold tracking-[-0.025em] text-[var(--color-ink)] tabular-nums">
+                {reduceMotion ? "24/7" : `${hours.val}/7`}
+              </p>
               <p className="text-[0.8125rem] text-[var(--color-muted)] mt-0.5">no nights or weekends</p>
             </div>
           </div>
