@@ -66,7 +66,7 @@ export function TwoWaysIn() {
               radius={14}
               className="relative flex flex-col p-7 h-full"
               style={{
-                "--backdrop": plan.featured ? "rgba(5,5,5,0.55)" : "transparent",
+                "--backdrop": plan.featured ? "#0d0d0e" : "transparent",
                 borderColor: plan.featured ? "rgba(196,154,82,0.5)" : "var(--color-line)",
                 border: `1px solid ${plan.featured ? "rgba(196,154,82,0.5)" : "var(--color-line)"}`,
               } as React.CSSProperties}

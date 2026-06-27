@@ -148,7 +148,7 @@ export function Hero() {
               : "linear-gradient(to right, #f5f4ee 22%, rgba(245,244,238,0.82) 40%, rgba(245,244,238,0.08) 62%, transparent 100%)",
           }}
         />
-        <div className="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-[var(--color-bg)] to-transparent" />
+
         <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-[var(--color-bg)] to-transparent" />
       </div>
 
