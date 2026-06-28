@@ -32,8 +32,8 @@ export function RotatingText({
 
   return (
     <span
-      className={`relative inline-grid max-w-full justify-items-start overflow-hidden align-baseline ${className ?? ""}`}
-      style={{ minWidth, minHeight: "1.16em", maxWidth: "100%" }}
+      className={`relative inline-grid max-w-full justify-items-start align-baseline ${className ?? ""}`}
+      style={{ minWidth, minHeight: "1.12em", maxWidth: "100%", lineHeight: 1.08 }}
       aria-live="polite"
       aria-atomic="true"
     >
@@ -43,14 +43,14 @@ export function RotatingText({
       >
         {longestWord}
       </span>
-      <AnimatePresence mode="wait" initial={false}>
+      <AnimatePresence initial={false}>
         <motion.span
           key={activeWord}
-          className="col-start-1 row-start-1 max-w-full whitespace-nowrap px-1 font-semibold will-change-transform"
-          initial={reduce ? { opacity: 1, y: 0 } : { opacity: 0, y: "0.36em" }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={reduce ? { opacity: 0, y: 0 } : { opacity: 0, y: "-0.36em" }}
-          transition={reduce ? { duration: 0 } : { duration: 0.34, ease: "easeOut" }}
+          className="col-start-1 row-start-1 max-w-full whitespace-nowrap px-1 font-semibold will-change-[opacity,filter]"
+          initial={reduce ? { opacity: 1 } : { opacity: 0, filter: "blur(8px)" }}
+          animate={reduce ? { opacity: 1 } : { opacity: 1, filter: "blur(0px)" }}
+          exit={reduce ? { opacity: 0 } : { opacity: 0, filter: "blur(8px)" }}
+          transition={reduce ? { duration: 0 } : { duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
         >
           {activeWord}
         </motion.span>

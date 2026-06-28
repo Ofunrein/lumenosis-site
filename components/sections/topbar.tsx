@@ -47,10 +47,9 @@ export function Topbar() {
 
   const homePrefix = pathname === "/" ? "" : "/";
   const isDark = resolvedTheme === "dark";
-  const toggleTheme = (origin?: HTMLElement | null) => {
+  const toggleTheme = () => {
     runThemeTransition({
       nextTheme: isDark ? "light" : "dark",
-      origin,
       reduceMotion: Boolean(reduceMotion),
       updateTheme: setTheme,
     });
@@ -114,7 +113,7 @@ export function Topbar() {
             {mounted && (
               <button
                 type="button"
-                onClick={(event) => toggleTheme(event.currentTarget)}
+                onClick={toggleTheme}
                 aria-label="Toggle theme"
                 className="grid size-9 place-items-center rounded-full text-[var(--color-ink)] hover:bg-[var(--color-line)] transition-colors"
               >
@@ -175,7 +174,7 @@ export function Topbar() {
             {mounted && (
               <button
                 type="button"
-                onClick={(event) => toggleTheme(event.currentTarget)}
+                onClick={toggleTheme}
                 aria-label="Toggle theme"
                 className="grid size-9 place-items-center rounded-full text-[var(--color-muted)] hover:bg-[var(--color-line)] transition-colors"
               >

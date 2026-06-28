@@ -170,7 +170,7 @@ export function Hero() {
                 <RotatingText
                   words={["real estate teams", "brokerages", "property managers", "short-term rentals", "investors"]}
                   intervalMs={2200}
-                  minWidth="min(100%, 8ch)"
+                  minWidth="min(100%, 17ch)"
                 />
               </span>
             </span>
