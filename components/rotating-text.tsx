@@ -15,12 +15,17 @@ export function RotatingText({
   className?: string;
 }) {
   const [index, setIndex] = useState(0);
+  const [canAnimate, setCanAnimate] = useState(false);
   const reduce = useReducedMotion();
   const longestWord = useMemo(
     () => words.reduce((longest, word) => (word.length > longest.length ? word : longest), ""),
     [words],
   );
   const activeWord = words[index] ?? words[0] ?? "";
+
+  useEffect(() => {
+    setCanAnimate(true);
+  }, []);
 
   useEffect(() => {
     if (reduce || words.length <= 1) return;
@@ -47,7 +52,7 @@ export function RotatingText({
         <motion.span
           key={activeWord}
           className="col-start-1 row-start-1 max-w-full whitespace-nowrap px-1 font-semibold will-change-[opacity,filter]"
-          initial={reduce ? { opacity: 1 } : { opacity: 0, filter: "blur(8px)" }}
+          initial={canAnimate && !reduce ? { opacity: 0, filter: "blur(8px)" } : false}
           animate={reduce ? { opacity: 1 } : { opacity: 1, filter: "blur(0px)" }}
           exit={reduce ? { opacity: 0 } : { opacity: 0, filter: "blur(8px)" }}
           transition={reduce ? { duration: 0 } : { duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
