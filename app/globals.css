@@ -67,8 +67,38 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   transition:
-    background 0.25s ease,
-    color 0.25s ease;
+    background-color 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    color 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+:where(body, section, nav, header, footer, a, button, div, span, svg, path, circle) {
+  transition-property: background-color, border-color, color, fill, stroke, box-shadow, opacity;
+  transition-duration: 0.35s;
+  transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.55s;
+  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  mix-blend-mode: normal;
+}
+
+::view-transition-old(root) {
+  animation: none;
+}
+
+::view-transition-new(root) {
+  animation-name: theme-radial-reveal;
+}
+
+@keyframes theme-radial-reveal {
+  from {
+    clip-path: circle(0 at var(--theme-transition-x, 50vw) var(--theme-transition-y, 0));
+  }
+  to {
+    clip-path: circle(var(--theme-transition-radius, 150vmax) at var(--theme-transition-x, 50vw) var(--theme-transition-y, 0));
+  }
 }
 
 .headline-plain {
@@ -137,6 +167,10 @@ header {
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
+  }
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation-duration: 0.01ms !important;
   }
   *,
   *::before,

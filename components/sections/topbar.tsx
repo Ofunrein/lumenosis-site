@@ -1,11 +1,13 @@
 "use client";
 
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useTheme } from "next-themes";
 import React from "react";
 import { cn } from "@/lib/utils";
 import { MenuToggleIcon } from "@/components/ui/menu-toggle-icon";
+import { runThemeTransition } from "@/lib/theme-transition";
 
 function ThemeIcon({ dark }: { dark: boolean }) {
   if (dark) {
@@ -31,6 +33,7 @@ export function Topbar() {
   const pathname = usePathname();
   const { resolvedTheme, setTheme } = useTheme();
   const [mounted, setMounted] = React.useState(false);
+  const reduceMotion = useReducedMotion();
 
   React.useEffect(() => { setMounted(true); }, []);
 
@@ -44,7 +47,14 @@ export function Topbar() {
 
   const homePrefix = pathname === "/" ? "" : "/";
   const isDark = resolvedTheme === "dark";
-  const toggleTheme = () => setTheme(isDark ? "light" : "dark");
+  const toggleTheme = (origin?: HTMLElement | null) => {
+    runThemeTransition({
+      nextTheme: isDark ? "light" : "dark",
+      origin,
+      reduceMotion: Boolean(reduceMotion),
+      updateTheme: setTheme,
+    });
+  };
 
   const links = [
     { label: "System", href: `${homePrefix}#agents` },
@@ -104,11 +114,21 @@ export function Topbar() {
             {mounted && (
               <button
                 type="button"
-                onClick={toggleTheme}
+                onClick={(event) => toggleTheme(event.currentTarget)}
                 aria-label="Toggle theme"
                 className="grid size-9 place-items-center rounded-full text-[var(--color-ink)] hover:bg-[var(--color-line)] transition-colors"
               >
-                <ThemeIcon dark={isDark} />
+                <AnimatePresence mode="wait" initial={false}>
+                  <motion.span
+                    key={isDark ? "moon" : "sun"}
+                    initial={reduceMotion ? false : { opacity: 0, rotate: -24, scale: 0.82 }}
+                    animate={{ opacity: 1, rotate: 0, scale: 1 }}
+                    exit={reduceMotion ? { opacity: 0 } : { opacity: 0, rotate: 24, scale: 0.82 }}
+                    transition={{ duration: reduceMotion ? 0 : 0.18, ease: [0.22, 1, 0.36, 1] }}
+                  >
+                    <ThemeIcon dark={isDark} />
+                  </motion.span>
+                </AnimatePresence>
               </button>
             )}
             <a
@@ -155,11 +175,21 @@ export function Topbar() {
             {mounted && (
               <button
                 type="button"
-                onClick={toggleTheme}
+                onClick={(event) => toggleTheme(event.currentTarget)}
                 aria-label="Toggle theme"
                 className="grid size-9 place-items-center rounded-full text-[var(--color-muted)] hover:bg-[var(--color-line)] transition-colors"
               >
-                <ThemeIcon dark={isDark} />
+                <AnimatePresence mode="wait" initial={false}>
+                  <motion.span
+                    key={isDark ? "mobile-moon" : "mobile-sun"}
+                    initial={reduceMotion ? false : { opacity: 0, rotate: -24, scale: 0.82 }}
+                    animate={{ opacity: 1, rotate: 0, scale: 1 }}
+                    exit={reduceMotion ? { opacity: 0 } : { opacity: 0, rotate: 24, scale: 0.82 }}
+                    transition={{ duration: reduceMotion ? 0 : 0.18, ease: [0.22, 1, 0.36, 1] }}
+                  >
+                    <ThemeIcon dark={isDark} />
+                  </motion.span>
+                </AnimatePresence>
               </button>
             )}
           </div>
