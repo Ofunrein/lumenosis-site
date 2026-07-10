@@ -83,12 +83,14 @@ Patterns **not** adopted: WorkReady's 3D mannequin renders (commission real avat
 | — | Sticky bottom CTA bar | `sticky-cta-bar.tsx` | Persistent CTA after scroll past hero on mobile |
 
 ### 6.1 Hero spec
-- Eyebrow chip: `5.0 from 50+ verified real estate professionals`
-- Display headline: `AI agents for your [Real Estate / Brokerage / Property Management / Short-Term Rental / Investor] team.` — italic gold word rotates every 2.5s with 300ms cross-fade
-- Sub: 2 sentences, pain → vehicle. Daniel's clear-language rule, no jargon
-- Primary CTA: violet pill `Book a strategy call →` (anchors to calendar section)
-- Secondary CTA: outline `Watch 90s overview` (opens VSL inline)
-- Right column: dark product-card mockup (laptop GHL CRM + iMessage + booking notification) with floating glassmorphism stat callouts (`60s avg response` / `300% more bookings` / `24/7 coverage`)
+- Full-bleed hillside photography: raw daytime image in light mode, raw dusk image in dark mode.
+- Theme switching is CSS-only: both images render, with `dark:opacity-*` selecting the visible image. This avoids hydration/theme-state drift.
+- No full-image tint, white/dark wash, backdrop blur, rectangle, image shadow, or text shadow.
+- Dark mode uses one localized left scrim only: `from-black/68 via-black/38 to-transparent`, limited to `min(800px, 72vw)`. It fades before the image's right side and exists only to protect text contrast.
+- Display headline: `AI operations for [real estate teams / brokerages / property managers / short-term rentals / investors]` — amber phrase rotates every 2.2s.
+- Light mode uses dark text; dark mode uses light text through the site theme tokens.
+- Primary CTA: `Request a Demo`; secondary CTA: `See how it works`.
+- Hero stats: first response, channels covered, and 24/7 coverage.
 
 ### 6.2 Aria deep-dive spec (dark section)
 - Bg `#0F1612` for editorial contrast vs cream

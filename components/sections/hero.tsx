@@ -1,18 +1,11 @@
 "use client";
 
 import Image from "next/image";
-import type React from "react";
 import { useEffect, useRef, useState } from "react";
 import { RotatingText } from "@/components/rotating-text";
 
 const HERO_IMAGE_ALT =
-  "Lumenosis AI agent inbox showing real estate conversations across channels";
-const HERO_IMAGES = {
-  dark: "/images/product-card-mockup.png",
-  light: "/images/product-card-mockup-day.png",
-} as const;
-const HERO_FADE_MS = 300;
-
+  "Modern hillside home overlooking a valley, wildflower meadow in the foreground";
 const RESPONSE_STEPS = ["3 days", "12 hours", "60 minutes", "< 60 seconds"];
 const CHANNEL_MAX = 7;
 
@@ -56,11 +49,7 @@ function useResponseCycle(durationMs = 800) {
 }
 
 export function Hero() {
-  const [mounted, setMounted] = useState(false);
-  const [isDark, setIsDark] = useState(false);
-  const [imgVisible, setImgVisible] = useState(true);
   const [reduceMotion, setReduceMotion] = useState(false);
-  const fadeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const statsRef = useRef<HTMLDivElement>(null);
   const [statsTriggered, setStatsTriggered] = useState(false);
 
@@ -68,15 +57,6 @@ export function Hero() {
   const channels = useCountUp(CHANNEL_MAX, 1800);
   const hours = useCountUp(24, 1600);
 
-  useEffect(() => {
-    const root = document.documentElement;
-    const sync = () => setIsDark(root.classList.contains("dark"));
-    sync();
-    setMounted(true);
-    const obs = new MutationObserver(sync);
-    obs.observe(root, { attributes: true, attributeFilter: ["class"] });
-    return () => obs.disconnect();
-  }, []);
 
   useEffect(() => {
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -108,63 +88,45 @@ export function Hero() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [statsTriggered, reduceMotion]);
 
-  const activeTheme = mounted ? (isDark ? "dark" : "light") : "light";
-  const heroSrc = HERO_IMAGES[activeTheme];
-
-  // biome-ignore lint/correctness/useExhaustiveDependencies: activeTheme triggers crossfade
-  useEffect(() => {
-    if (!mounted || reduceMotion) { setImgVisible(true); return; }
-    setImgVisible(false);
-    if (fadeTimer.current) clearTimeout(fadeTimer.current);
-    fadeTimer.current = setTimeout(() => { setImgVisible(true); fadeTimer.current = null; }, 30);
-    return () => { if (fadeTimer.current) clearTimeout(fadeTimer.current); };
-  }, [activeTheme, mounted, reduceMotion]);
-
   return (
     <section
       id="top"
       className="relative min-h-[100dvh] flex flex-col justify-center overflow-hidden"
     >
-      {/* Full-bleed atmospheric background image */}
+      {/* Full-bleed image with no vignette or drop shadow. */}
       <div className="absolute inset-0 z-0">
-        <Image
-          key={heroSrc}
-          src={heroSrc}
-          alt={HERO_IMAGE_ALT}
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover object-[48%_100%]"
-          style={{
-            opacity: imgVisible ? (isDark ? 0.82 : 0.75) : 0,
-            transitionProperty: "opacity",
-            transitionDuration: `${reduceMotion ? 0 : HERO_FADE_MS}ms`,
-          }}
-        />
-        {/* Left gradient — bg bleeds over image */}
-        <div
-          className="absolute inset-0"
-          style={{
-            background: mounted && isDark
-              ? "linear-gradient(to right, #070708 22%, rgba(7,7,8,0.80) 38%, rgba(7,7,8,0.0) 55%, transparent 100%)"
-              : "linear-gradient(to right, #f5f4ee 22%, rgba(245,244,238,0.82) 40%, rgba(245,244,238,0.08) 62%, transparent 100%)",
-          }}
-        />
-
-        <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-[var(--color-bg)] to-transparent" />
+        <div className="absolute inset-0">
+          <Image
+            src="/images/hero-hillside-day.webp"
+            alt={HERO_IMAGE_ALT}
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover object-[58%_center] opacity-100 transition-opacity duration-300 dark:opacity-0"
+          />
+          <Image
+            src="/images/hero-hillside-dusk.webp"
+            alt=""
+            aria-hidden
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover object-[58%_center] opacity-0 transition-opacity duration-300 dark:opacity-100"
+          />
+          <div className="absolute inset-y-0 left-0 hidden w-[min(800px,72vw)] bg-gradient-to-r from-black/68 via-black/38 to-transparent dark:block" />
+        </div>
       </div>
 
       {/* Content */}
       <div className="relative z-10 mx-auto w-[min(1120px,calc(100vw-48px))] xl:w-[min(1120px,calc(100vw-80px))] pt-28 pb-20 lg:pt-36 lg:pb-28">
-        <div className="max-w-[600px]">
+        <div className="max-w-[620px]">
           <h1 className="text-[clamp(1.75rem,3.8vw,3.5rem)] font-bold leading-[1.08] tracking-[-0.04em] text-[var(--color-ink)]">
             <span className="sr-only">
               The AI operations layer for real estate teams, brokerages, property managers, short-term rental operators, and investors.
             </span>
             <span aria-hidden="true">
-              {/* 'pretty' prevents orphaning "for" at the end of the first line */}
-              <span className="block" style={{ textWrap: "pretty" } as React.CSSProperties}>
-                The AI operations layer for
+              <span className="block whitespace-nowrap">
+                AI operations for
               </span>
               <span className="block text-[var(--color-brand-amber)] min-h-[1.1em]">
                 <RotatingText
