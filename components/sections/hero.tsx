@@ -127,27 +127,29 @@ export function Hero() {
     >
       {/* Full-bleed atmospheric background image */}
       <div className="absolute inset-0 z-0">
-        <Image
-          key={heroSrc}
-          src={heroSrc}
-          alt={HERO_IMAGE_ALT}
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover object-[48%_100%]"
-          style={{
-            opacity: imgVisible ? (isDark ? 0.82 : 0.75) : 0,
-            transitionProperty: "opacity",
-            transitionDuration: `${reduceMotion ? 0 : HERO_FADE_MS}ms`,
-          }}
-        />
+        <div className="absolute inset-0 scale-[0.92]">
+          <Image
+            key={heroSrc}
+            src={heroSrc}
+            alt={HERO_IMAGE_ALT}
+            fill
+            priority
+            sizes="100vw"
+            className="object-contain object-[48%_100%]"
+            style={{
+              opacity: imgVisible ? (isDark ? 0.82 : 0.75) : 0,
+              transitionProperty: "opacity",
+              transitionDuration: `${reduceMotion ? 0 : HERO_FADE_MS}ms`,
+            }}
+          />
+        </div>
         {/* Left gradient — bg bleeds over image */}
         <div
           className="absolute inset-0"
           style={{
             background: mounted && isDark
-              ? "linear-gradient(to right, #070708 22%, rgba(7,7,8,0.80) 38%, rgba(7,7,8,0.0) 55%, transparent 100%)"
-              : "linear-gradient(to right, #f5f4ee 22%, rgba(245,244,238,0.82) 40%, rgba(245,244,238,0.08) 62%, transparent 100%)",
+              ? "linear-gradient(to right, #070708 22%, rgba(7,7,8,0.52) 38%, rgba(7,7,8,0.0) 55%, transparent 100%)"
+              : "linear-gradient(to right, #f5f4ee 22%, rgba(245,244,238,0.5) 40%, rgba(245,244,238,0.05) 62%, transparent 100%)",
           }}
         />
 
