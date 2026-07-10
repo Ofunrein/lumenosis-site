@@ -7,8 +7,8 @@ import { RotatingText } from "@/components/rotating-text";
 const HERO_IMAGE_ALT =
   "Modern hillside home overlooking a valley, wildflower meadow in the foreground";
 const HERO_IMAGES = {
-  dark: "/images/hero-hillside-day.webp",
-  light: "/images/hero-hillside-dusk.webp",
+  dark: "/images/hero-hillside-dusk.webp",
+  light: "/images/hero-hillside-day.webp",
 } as const;
 const HERO_FADE_MS = 300;
 
