@@ -33,7 +33,7 @@ const steps = [
 
 export function Process() {
   return (
-    <section id="agents" className="py-24 md:py-32 border-t border-[var(--color-line)]">
+    <section id="agents" className="py-24 md:py-32">
       <div className="mx-auto w-[min(1120px,calc(100vw-48px))] sm:w-[min(1120px,calc(100vw-48px))] xl:w-[min(1120px,calc(100vw-80px))]">
 
         <div className="mb-16 md:mb-20">
