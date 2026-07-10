@@ -1,15 +1,14 @@
 "use client";
 
 import Image from "next/image";
-import type React from "react";
 import { useEffect, useRef, useState } from "react";
 import { RotatingText } from "@/components/rotating-text";
 
 const HERO_IMAGE_ALT =
   "Modern hillside home overlooking a valley, wildflower meadow in the foreground";
 const HERO_IMAGES = {
-  dark: "/images/hero-hillside-dusk.webp",
-  light: "/images/hero-hillside-day.webp",
+  dark: "/images/hero-hillside-day.webp",
+  light: "/images/hero-hillside-dusk.webp",
 } as const;
 const HERO_FADE_MS = 300;
 
@@ -148,15 +147,14 @@ export function Hero() {
 
       {/* Content */}
       <div className="relative z-10 mx-auto w-[min(1120px,calc(100vw-48px))] xl:w-[min(1120px,calc(100vw-80px))] pt-28 pb-20 lg:pt-36 lg:pb-28">
-        <div className="max-w-[620px] rounded-[var(--radius)] border border-black/15 bg-[var(--color-bg)]/82 p-6 backdrop-blur-md dark:border-white/20 dark:bg-black/58 md:p-8">
+        <div className="max-w-[620px] [text-shadow:0_1px_12px_rgba(245,244,238,0.9)] dark:[text-shadow:0_2px_14px_rgba(0,0,0,0.95)]">
           <h1 className="text-[clamp(1.75rem,3.8vw,3.5rem)] font-bold leading-[1.08] tracking-[-0.04em] text-[var(--color-ink)]">
             <span className="sr-only">
               The AI operations layer for real estate teams, brokerages, property managers, short-term rental operators, and investors.
             </span>
             <span aria-hidden="true">
-              {/* 'pretty' prevents orphaning "for" at the end of the first line */}
-              <span className="block" style={{ textWrap: "pretty" } as React.CSSProperties}>
-                The AI operations layer for
+              <span className="block whitespace-nowrap">
+                AI operations for
               </span>
               <span className="block text-[var(--color-brand-amber)] min-h-[1.1em]">
                 <RotatingText

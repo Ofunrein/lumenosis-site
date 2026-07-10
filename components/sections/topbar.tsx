@@ -110,26 +110,24 @@ export function Topbar() {
         {/* Right actions */}
         <div className="flex items-center gap-2">
           <div className="hidden md:flex items-center gap-1.5">
-            {mounted && (
-              <button
-                type="button"
-                onClick={toggleTheme}
-                aria-label="Toggle theme"
-                className="grid size-9 place-items-center rounded-full text-[var(--color-ink)] hover:bg-[var(--color-line)] transition-colors"
-              >
-                <AnimatePresence mode="wait" initial={false}>
-                  <motion.span
-                    key={isDark ? "moon" : "sun"}
-                    initial={reduceMotion ? false : { opacity: 0, rotate: -24, scale: 0.82 }}
-                    animate={{ opacity: 1, rotate: 0, scale: 1 }}
-                    exit={reduceMotion ? { opacity: 0 } : { opacity: 0, rotate: 24, scale: 0.82 }}
-                    transition={{ duration: reduceMotion ? 0 : 0.18, ease: [0.22, 1, 0.36, 1] }}
-                  >
-                    <ThemeIcon dark={isDark} />
-                  </motion.span>
-                </AnimatePresence>
-              </button>
-            )}
+            <button
+              type="button"
+              onClick={toggleTheme}
+              aria-label="Toggle theme"
+              className="grid size-9 place-items-center rounded-full text-[var(--color-ink)] hover:bg-[var(--color-line)] transition-colors"
+            >
+              <AnimatePresence mode="wait" initial={false}>
+                <motion.span
+                  key={mounted && isDark ? "moon" : "sun"}
+                  initial={reduceMotion ? false : { opacity: 0, rotate: -24, scale: 0.82 }}
+                  animate={{ opacity: 1, rotate: 0, scale: 1 }}
+                  exit={reduceMotion ? { opacity: 0 } : { opacity: 0, rotate: 24, scale: 0.82 }}
+                  transition={{ duration: reduceMotion ? 0 : 0.18, ease: [0.22, 1, 0.36, 1] }}
+                >
+                  <ThemeIcon dark={mounted && isDark} />
+                </motion.span>
+              </AnimatePresence>
+            </button>
             <a
               href="https://app.lumenosis.com"
               className="px-3.5 h-8 inline-flex items-center text-sm font-semibold text-[var(--color-ink)] transition-colors rounded-full border border-[var(--color-line)] dark:border-white/12"
@@ -171,26 +169,24 @@ export function Topbar() {
           <div className="h-px bg-[var(--color-line)] my-1" />
           <div className="flex items-center justify-between px-4 py-2">
             <span className="text-sm text-[var(--color-muted)]">Appearance</span>
-            {mounted && (
-              <button
-                type="button"
-                onClick={toggleTheme}
-                aria-label="Toggle theme"
-                className="grid size-9 place-items-center rounded-full text-[var(--color-muted)] hover:bg-[var(--color-line)] transition-colors"
-              >
-                <AnimatePresence mode="wait" initial={false}>
-                  <motion.span
-                    key={isDark ? "mobile-moon" : "mobile-sun"}
-                    initial={reduceMotion ? false : { opacity: 0, rotate: -24, scale: 0.82 }}
-                    animate={{ opacity: 1, rotate: 0, scale: 1 }}
-                    exit={reduceMotion ? { opacity: 0 } : { opacity: 0, rotate: 24, scale: 0.82 }}
-                    transition={{ duration: reduceMotion ? 0 : 0.18, ease: [0.22, 1, 0.36, 1] }}
-                  >
-                    <ThemeIcon dark={isDark} />
-                  </motion.span>
-                </AnimatePresence>
-              </button>
-            )}
+            <button
+              type="button"
+              onClick={toggleTheme}
+              aria-label="Toggle theme"
+              className="grid size-9 place-items-center rounded-full text-[var(--color-muted)] hover:bg-[var(--color-line)] transition-colors"
+            >
+              <AnimatePresence mode="wait" initial={false}>
+                <motion.span
+                  key={mounted && isDark ? "mobile-moon" : "mobile-sun"}
+                  initial={reduceMotion ? false : { opacity: 0, rotate: -24, scale: 0.82 }}
+                  animate={{ opacity: 1, rotate: 0, scale: 1 }}
+                  exit={reduceMotion ? { opacity: 0 } : { opacity: 0, rotate: 24, scale: 0.82 }}
+                  transition={{ duration: reduceMotion ? 0 : 0.18, ease: [0.22, 1, 0.36, 1] }}
+                >
+                  <ThemeIcon dark={mounted && isDark} />
+                </motion.span>
+              </AnimatePresence>
+            </button>
           </div>
           <a
             href="https://app.lumenosis.com"
