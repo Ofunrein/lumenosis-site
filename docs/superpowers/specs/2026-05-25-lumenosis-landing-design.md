@@ -85,8 +85,10 @@ Patterns **not** adopted: WorkReady's 3D mannequin renders (commission real avat
 ### 6.1 Hero spec
 - Full-bleed hillside photography: raw daytime image in light mode, raw dusk image in dark mode.
 - Theme switching is CSS-only: both images render, with `dark:opacity-*` selecting the visible image. This avoids hydration/theme-state drift.
-- No full-image tint, white/dark wash, backdrop blur, rectangle, image shadow, or text shadow.
-- Dark mode uses one localized left scrim only: `from-black/68 via-black/38 to-transparent`, limited to `min(800px, 72vw)`. It fades before the image's right side and exists only to protect text contrast.
+- No full-image tint, backdrop blur, rectangle, image shadow, or text shadow.
+- Light mode uses a localized left scrim: `from-white/68 via-white/38 to-transparent`, limited to `min(800px, 72vw)`.
+- Dark mode uses a localized left scrim: `from-black/68 via-black/38 to-transparent`, limited to `min(800px, 72vw)`.
+- Both scrims fade before the image's right side and exist only to protect text contrast.
 - Display headline: `AI operations for [real estate teams / brokerages / property managers / short-term rentals / investors]` — amber phrase rotates every 2.2s.
 - Light mode uses dark text; dark mode uses light text through the site theme tokens.
 - Primary CTA: `Request a Demo`; secondary CTA: `See how it works`.
