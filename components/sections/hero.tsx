@@ -6,12 +6,6 @@ import { RotatingText } from "@/components/rotating-text";
 
 const HERO_IMAGE_ALT =
   "Modern hillside home overlooking a valley, wildflower meadow in the foreground";
-const HERO_IMAGES = {
-  dark: "/images/hero-hillside-dusk.webp",
-  light: "/images/hero-hillside-day.webp",
-} as const;
-const HERO_FADE_MS = 300;
-
 const RESPONSE_STEPS = ["3 days", "12 hours", "60 minutes", "< 60 seconds"];
 const CHANNEL_MAX = 7;
 
@@ -55,11 +49,7 @@ function useResponseCycle(durationMs = 800) {
 }
 
 export function Hero() {
-  const [mounted, setMounted] = useState(false);
-  const [isDark, setIsDark] = useState(false);
-  const [imgVisible, setImgVisible] = useState(true);
   const [reduceMotion, setReduceMotion] = useState(false);
-  const fadeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const statsRef = useRef<HTMLDivElement>(null);
   const [statsTriggered, setStatsTriggered] = useState(false);
 
@@ -67,15 +57,6 @@ export function Hero() {
   const channels = useCountUp(CHANNEL_MAX, 1800);
   const hours = useCountUp(24, 1600);
 
-  useEffect(() => {
-    const root = document.documentElement;
-    const sync = () => setIsDark(root.classList.contains("dark"));
-    sync();
-    setMounted(true);
-    const obs = new MutationObserver(sync);
-    obs.observe(root, { attributes: true, attributeFilter: ["class"] });
-    return () => obs.disconnect();
-  }, []);
 
   useEffect(() => {
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -107,18 +88,6 @@ export function Hero() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [statsTriggered, reduceMotion]);
 
-  const activeTheme = mounted ? (isDark ? "dark" : "light") : "light";
-  const heroSrc = HERO_IMAGES[activeTheme];
-
-  // biome-ignore lint/correctness/useExhaustiveDependencies: activeTheme triggers crossfade
-  useEffect(() => {
-    if (!mounted || reduceMotion) { setImgVisible(true); return; }
-    setImgVisible(false);
-    if (fadeTimer.current) clearTimeout(fadeTimer.current);
-    fadeTimer.current = setTimeout(() => { setImgVisible(true); fadeTimer.current = null; }, 30);
-    return () => { if (fadeTimer.current) clearTimeout(fadeTimer.current); };
-  }, [activeTheme, mounted, reduceMotion]);
-
   return (
     <section
       id="top"
@@ -128,26 +97,29 @@ export function Hero() {
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0">
           <Image
-            key={heroSrc}
-            src={heroSrc}
+            src="/images/hero-hillside-day.webp"
             alt={HERO_IMAGE_ALT}
             fill
             priority
             sizes="100vw"
-            className="object-cover object-[58%_center]"
-            style={{
-              opacity: imgVisible ? (isDark ? 0.72 : 0.78) : 0,
-              transitionProperty: "opacity",
-              transitionDuration: `${reduceMotion ? 0 : HERO_FADE_MS}ms`,
-            }}
+            className="object-cover object-[58%_center] opacity-100 transition-opacity duration-300 dark:opacity-0"
           />
+          <Image
+            src="/images/hero-hillside-dusk.webp"
+            alt=""
+            aria-hidden
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover object-[58%_center] opacity-0 transition-opacity duration-300 dark:opacity-100"
+          />
+          <div className="absolute inset-y-0 left-0 hidden w-[min(800px,72vw)] bg-gradient-to-r from-black/68 via-black/38 to-transparent dark:block" />
         </div>
-        <div className="absolute inset-0 bg-white/10 dark:bg-black/20" />
       </div>
 
       {/* Content */}
       <div className="relative z-10 mx-auto w-[min(1120px,calc(100vw-48px))] xl:w-[min(1120px,calc(100vw-80px))] pt-28 pb-20 lg:pt-36 lg:pb-28">
-        <div className="max-w-[620px] [text-shadow:0_1px_12px_rgba(245,244,238,0.9)] dark:[text-shadow:0_2px_14px_rgba(0,0,0,0.95)]">
+        <div className="max-w-[620px]">
           <h1 className="text-[clamp(1.75rem,3.8vw,3.5rem)] font-bold leading-[1.08] tracking-[-0.04em] text-[var(--color-ink)]">
             <span className="sr-only">
               The AI operations layer for real estate teams, brokerages, property managers, short-term rental operators, and investors.
