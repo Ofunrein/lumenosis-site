@@ -43,7 +43,7 @@ export function RotatingText({
       aria-atomic="true"
     >
       <span
-        className="invisible col-start-1 row-start-1 max-w-full whitespace-nowrap px-1 font-semibold"
+        className="invisible col-start-1 row-start-1 max-w-full whitespace-nowrap font-semibold"
         aria-hidden="true"
       >
         {longestWord}
@@ -51,7 +51,7 @@ export function RotatingText({
       <AnimatePresence initial={false}>
         <motion.span
           key={activeWord}
-          className="col-start-1 row-start-1 max-w-full whitespace-nowrap px-1 font-semibold will-change-[opacity,filter]"
+          className="col-start-1 row-start-1 max-w-full whitespace-nowrap font-semibold will-change-[opacity,filter]"
           initial={canAnimate && !reduce ? { opacity: 0, filter: "blur(8px)" } : false}
           animate={reduce ? { opacity: 1 } : { opacity: 1, filter: "blur(0px)" }}
           exit={reduce ? { opacity: 0 } : { opacity: 0, filter: "blur(8px)" }}

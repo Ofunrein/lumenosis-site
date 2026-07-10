@@ -113,6 +113,7 @@ export function Hero() {
             sizes="100vw"
             className="object-cover object-[58%_center] opacity-0 transition-opacity duration-300 dark:opacity-100"
           />
+          <div className="absolute inset-y-0 left-0 w-[min(800px,72vw)] bg-gradient-to-r from-white/68 via-white/38 to-transparent dark:hidden" />
           <div className="absolute inset-y-0 left-0 hidden w-[min(800px,72vw)] bg-gradient-to-r from-black/68 via-black/38 to-transparent dark:block" />
         </div>
       </div>
