@@ -125,9 +125,9 @@ export function Hero() {
       id="top"
       className="relative min-h-[100dvh] flex flex-col justify-center overflow-hidden"
     >
-      {/* Full-bleed atmospheric background image */}
+      {/* Full-bleed image with no vignette or drop shadow. */}
       <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 scale-[0.92]">
+        <div className="absolute inset-0">
           <Image
             key={heroSrc}
             src={heroSrc}
@@ -135,30 +135,20 @@ export function Hero() {
             fill
             priority
             sizes="100vw"
-            className="object-contain object-[48%_100%]"
+            className="object-cover object-[58%_center]"
             style={{
-              opacity: imgVisible ? (isDark ? 0.82 : 0.75) : 0,
+              opacity: imgVisible ? (isDark ? 0.72 : 0.78) : 0,
               transitionProperty: "opacity",
               transitionDuration: `${reduceMotion ? 0 : HERO_FADE_MS}ms`,
             }}
           />
         </div>
-        {/* Left gradient — bg bleeds over image */}
-        <div
-          className="absolute inset-0"
-          style={{
-            background: mounted && isDark
-              ? "linear-gradient(to right, #070708 22%, rgba(7,7,8,0.52) 38%, rgba(7,7,8,0.0) 55%, transparent 100%)"
-              : "linear-gradient(to right, #f5f4ee 22%, rgba(245,244,238,0.5) 40%, rgba(245,244,238,0.05) 62%, transparent 100%)",
-          }}
-        />
-
-        <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-[var(--color-bg)] to-transparent" />
+        <div className="absolute inset-0 bg-white/10 dark:bg-black/20" />
       </div>
 
       {/* Content */}
       <div className="relative z-10 mx-auto w-[min(1120px,calc(100vw-48px))] xl:w-[min(1120px,calc(100vw-80px))] pt-28 pb-20 lg:pt-36 lg:pb-28">
-        <div className="max-w-[600px]">
+        <div className="max-w-[620px] rounded-[var(--radius)] border border-black/15 bg-[var(--color-bg)]/82 p-6 backdrop-blur-md dark:border-white/20 dark:bg-black/58 md:p-8">
           <h1 className="text-[clamp(1.75rem,3.8vw,3.5rem)] font-bold leading-[1.08] tracking-[-0.04em] text-[var(--color-ink)]">
             <span className="sr-only">
               The AI operations layer for real estate teams, brokerages, property managers, short-term rental operators, and investors.
