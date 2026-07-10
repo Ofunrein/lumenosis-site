@@ -6,10 +6,10 @@ import { useEffect, useRef, useState } from "react";
 import { RotatingText } from "@/components/rotating-text";
 
 const HERO_IMAGE_ALT =
-  "Lumenosis AI agent inbox showing real estate conversations across channels";
+  "Modern hillside home overlooking a valley, wildflower meadow in the foreground";
 const HERO_IMAGES = {
-  dark: "/images/product-card-mockup.png",
-  light: "/images/product-card-mockup-day.png",
+  dark: "/images/hero-hillside-dusk.webp",
+  light: "/images/hero-hillside-day.webp",
 } as const;
 const HERO_FADE_MS = 300;
 
