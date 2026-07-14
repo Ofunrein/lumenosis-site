@@ -42,7 +42,7 @@ export function IrisLeadDeskSpotlight() {
             One agent. Every channel.
           </h2>
           <p className="mx-auto mt-4 text-[1.0625rem] text-[var(--color-muted)] max-w-[520px] leading-relaxed">
-            Meet Iris, your front desk. One shared memory across email, calls, texts, chat, and DMs,
+            Meet Iris, your new front desk. One shared memory across email, calls, texts, chat, and DMs,
             so nothing falls through.
           </p>
         </div>
