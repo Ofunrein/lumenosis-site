@@ -141,8 +141,8 @@ export function Hero() {
 
           <p className="mt-6 text-[1.0625rem] leading-[1.65] text-[var(--color-muted)] max-w-[460px]">
             One team, all channels, nothing missed. Never let a conversation
-            go cold or an opportunity go unnoticed. Busy work — scheduling,
-            follow-ups, and the rest — handled too.
+            go cold or an opportunity go unnoticed. Busy work, scheduling,
+            follow-ups, and the rest handled too.
           </p>
 
           <div className="mt-9 flex flex-wrap items-center gap-3">
