@@ -15,7 +15,7 @@ export const caseStudies: CaseStudy[] = [
     role: "Operations lead",
     location: "Austin",
     quote:
-      "Aria handled more after-hours conversations on a Saturday than our team could cover manually.",
+      "Iris handled more after-hours conversations on a Saturday than our team could cover manually.",
     result: "+7 deals in 90 days",
     tag: "Volume",
   },
@@ -54,7 +54,7 @@ export const caseStudies: CaseStudy[] = [
     role: "Property manager",
     location: "San Antonio",
     quote:
-      "Theo answered before I knew the inquiry came in. The whole leasing team could see the thread in the CRM.",
+      "Iris answered before I knew the inquiry came in. The whole leasing team could see the thread in the CRM.",
     result: "Under 60 seconds",
     tag: "Speed",
   },

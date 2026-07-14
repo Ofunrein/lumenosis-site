@@ -91,7 +91,7 @@ const theoThread: ConversationLine[] = [
   {
     id: "sms-2",
     from: "ai",
-    name: "Theo",
+    name: "Iris",
     detail: "9:21 AM",
     text: "Hey! Yes, it is: 3 bed, 2 bath, $529k. Are you pre-approved or already working with someone?",
   },
@@ -105,7 +105,7 @@ const theoThread: ConversationLine[] = [
   {
     id: "sms-4",
     from: "ai",
-    name: "Theo",
+    name: "Iris",
     detail: "9:22 AM",
     text: "Perfect timing. I have Tuesday 4pm or Thursday 10am for a showing. Which works?",
   },
@@ -119,7 +119,7 @@ const theoThread: ConversationLine[] = [
   {
     id: "sms-6",
     from: "ai",
-    name: "Theo",
+    name: "Iris",
     detail: "9:23 AM",
     text: "Done! Booked Tuesday 4pm. You'll get a confirmation text. See you there!",
   },
@@ -327,7 +327,11 @@ function IrisEmailDemo() {
   }, [shown]);
 
   return (
-    <GlowCard glowColor="purple" customSize className="p-0 border border-white/[0.08] [--backdrop:#0e1010]">
+    <GlowCard
+      glowColor="gold"
+      customSize
+      className="p-0 border border-white/[0.08] [--backdrop:#0e1010]"
+    >
       <div className="overflow-hidden rounded-[inherit] grid min-h-0 lg:grid-cols-[1.25fr_0.75fr]">
         <div className="flex min-h-0 flex-col border-b border-[var(--color-line)] p-4 sm:p-5 lg:border-b-0 lg:border-r">
           <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[var(--color-line)] pb-4">
@@ -513,10 +517,13 @@ function AriaPhoneDemo() {
       setBars(IDLE_WAVEFORM);
       setPlaying(false);
     } else {
-      audio.play().then(() => {
-        setPlaying(true);
-        animateBars();
-      }).catch(() => {});
+      audio
+        .play()
+        .then(() => {
+          setPlaying(true);
+          animateBars();
+        })
+        .catch(() => {});
     }
   };
 
@@ -562,10 +569,16 @@ function AriaPhoneDemo() {
       {/* Header */}
       <div className="text-center">
         <div className="relative size-14 overflow-hidden rounded-full mx-auto mb-3">
-          <Image src="/images/agents/aria.png" alt="Aria AI" fill className="object-cover" />
+          <Image
+            src="/images/agents/iris.png"
+            alt="Iris AI"
+            fill
+            sizes="56px"
+            className="object-cover"
+          />
         </div>
         <p className="font-[family-name:var(--font-display)] text-lg font-semibold text-white">
-          Aria AI
+          Iris AI
         </p>
         <div
           className={`mt-1.5 inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs transition-all duration-500 ${
@@ -711,11 +724,7 @@ function AriaPhoneDemo() {
       </div>
 
       {/* Hidden audio */}
-      <audio
-        ref={audioRef}
-        src="/aria-oak-ridge-call.mp3"
-        preload="metadata"
-      >
+      <audio ref={audioRef} src="/aria-oak-ridge-call.mp3" preload="metadata">
         <track
           kind="captions"
           src="/aria-oak-ridge-call.vtt"
@@ -808,10 +817,16 @@ function TheoSmsDemo() {
         <div className="mx-auto mb-4 mt-1 h-5 w-20 rounded-full bg-black" />
         <div className="text-center">
           <div className="relative mx-auto size-14 overflow-hidden rounded-full border border-[var(--color-brand-violet)]/60 mb-2">
-            <Image src="/images/agents/theo.png" alt="Theo" fill className="object-cover" />
+            <Image
+              src="/images/agents/iris.png"
+              alt="Iris AI"
+              fill
+              sizes="56px"
+              className="object-cover"
+            />
           </div>
           <p className="mt-2 font-[family-name:var(--font-display)] text-2xl font-semibold text-white">
-            Theo AI
+            Iris AI
           </p>
           <div
             className={`mt-2 inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-xs font-semibold transition-all duration-500 ${
@@ -849,7 +864,7 @@ function TheoSmsDemo() {
               <div key={line.id} className="flex flex-col">
                 {isTheo && (
                   <p className="mb-1 self-end text-[10px] font-semibold uppercase tracking-[0.14em] text-white/50">
-                    THEO · AI
+                    IRIS · AI
                   </p>
                 )}
                 {!isTheo && (
@@ -903,15 +918,13 @@ export function AriaDeepDive() {
             {microFeatures.map(({ icon: Icon, title, body }, index) => (
               <Reveal key={title} variant="scale" delay={index * 0.06} className="h-full">
                 <GlowCard
-                  glowColor="purple"
+                  glowColor="gold"
                   customSize
                   radius={12}
                   className="flex flex-col gap-0 p-4 h-full [--backdrop:rgba(18,12,28,0.28)] [--backup-border:rgba(160,120,64,0.15)]"
                 >
                   <Icon className="size-5 text-[var(--color-brand-violet)]" aria-hidden />
-                  <p className="mt-4 text-[1rem] font-semibold text-white">
-                    {title}
-                  </p>
+                  <p className="mt-4 text-[1rem] font-semibold text-white">{title}</p>
                   <p className="mt-2 text-sm leading-6 text-white/90">{body}</p>
                 </GlowCard>
               </Reveal>
@@ -930,7 +943,7 @@ export function AriaDeepDive() {
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
             <Reveal variant="left" delay={0.06} className="h-full">
               <GlowCard
-                glowColor="purple"
+                glowColor="gold"
                 customSize
                 className="flex min-h-[560px] items-center justify-center border border-white/10 [--backdrop:#0e1010]"
               >
@@ -939,7 +952,7 @@ export function AriaDeepDive() {
             </Reveal>
             <Reveal variant="scale" delay={0.12} className="h-full">
               <GlowCard
-                glowColor="purple"
+                glowColor="gold"
                 customSize
                 className="flex min-h-[620px] items-center justify-center border border-white/10 [--backdrop:#0e1010]"
               >

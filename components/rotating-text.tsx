@@ -53,7 +53,7 @@ export function RotatingText({
           key={activeWord}
           className="col-start-1 row-start-1 max-w-full whitespace-nowrap font-semibold will-change-[opacity,filter]"
           initial={canAnimate && !reduce ? { opacity: 0, filter: "blur(8px)" } : false}
-          animate={reduce ? { opacity: 1 } : { opacity: 1, filter: "blur(0px)" }}
+          animate={canAnimate && !reduce ? { opacity: 1, filter: "blur(0px)" } : { opacity: 1 }}
           exit={reduce ? { opacity: 0 } : { opacity: 0, filter: "blur(8px)" }}
           transition={reduce ? { duration: 0 } : { duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
         >

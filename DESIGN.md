@@ -1,136 +1,69 @@
 # Lumenosis Design System
 
+Source of truth: `app/globals.css` (@theme tokens) + `app/layout.tsx` (fonts).
+This doc mirrors them — if they disagree, the code wins. Last synced: 2026-07-14.
+
 ## Brand Positioning
-AI-powered real estate front-desk platform. Editorial, authoritative, warm — not SaaS-cold. Think: boutique agency meets modern AI infrastructure.
+AI-powered real estate front-desk platform. Editorial, authoritative, warm — not
+SaaS-cold. Boutique agency meets modern AI infrastructure. **Dark theme is the
+default** (`ThemeProvider defaultTheme="dark"`); light must always work.
 
----
+## Agent
+One agent: **Iris** (`/images/agents/iris.png`), accent gold. The former
+four-persona system (Olivia/Aria/Theo/Iris) is retired — do not reintroduce
+per-channel personalities. Legacy avatars remain in `/images/agents/` (olivia.png
+doubles as a generic lead/customer photo in demos).
 
-## Colour Palette
+## Color
 
-| Token | Hex | Usage |
+| Token | Light | Dark (`.dark`) |
 |---|---|---|
-| `--color-bg-cream` | `#f5f4ee` | Page background (light) |
-| `--color-ink-charcoal` | `#1a1a1a` | Body text, headings |
-| `--color-primary-indigo` | `#1e1b4b` | Deep accent, CTAs on light bg |
-| `--color-brand-violet` | `#cb6ce6` | Primary brand accent, highlights, active states |
-| `--color-brand-violet-soft` | `rgba(203,108,230,0.12)` | Tinted backgrounds, hover states |
-| `--color-gold-italic` | `#9a7a3e` | Iris agent accent, editorial gold |
-| `--color-dark-section` | `#0f1612` | Dark section backgrounds |
-| `--color-line` | `#e2ddd1` | Dividers, borders |
+| `--color-bg` / `--color-bg-cream` | `#f5f4ee` | `#070708` |
+| `--color-ink` / `--color-ink-charcoal` | `#0e0e0f` | `#f0eeeb` |
+| `--color-muted` / `--color-ink-muted` | `rgba(14,14,15,0.82)` | `rgba(240,238,235,0.9)` |
+| `--color-line` | `rgba(14,14,15,0.1)` | `rgba(255,255,255,0.08)` |
+| `--color-brand-amber` (primary accent) | `#c49a52` | `#c49a52` |
+| `--color-brand-amber-soft` | `rgba(196,154,82,0.12)` | same |
+| `--color-dark-section` | — | `#0c0c0d` |
 
-**Dark mode overrides:** Background goes transparent (dark bg from parent), ink flips to `#ffffff`, indigo and violet become the same `#cb6ce6`.
-
----
+Legacy aliases (`--color-brand-violet`, `--color-brand-purple`,
+`--color-gold-italic`, `--color-primary-indigo`) all resolve to amber now.
+Prefer `--color-brand-amber` in new code. There is no violet in the brand anymore.
 
 ## Typography
 
-| Role | Font | Weight | Notes |
-|---|---|---|---|
-| Display / Hero | Newsreader (serif) | 400–600 | Italic for emphasis, editorial feel |
-| Body | Inter | 400–600 | Clean, readable at all sizes |
-| Mono | JetBrains Mono | 400 | Code snippets, terminal |
-| Eyebrow | Inter | 600 | All-caps, 0.75rem, tight tracking |
+| Role | Font | Token |
+|---|---|---|
+| Display + body | DM Sans | `--font-display`, `--font-body` |
+| Mono (numbers, eyebrows, stats) | DM Mono | `--font-mono` |
+| Serif (loaded, rarely used) | Playfair Display | `--font-playfair` |
 
-### Type Scale
-```
-Hero display:   clamp(2.5rem, 7vw, 5.5rem)
-Section title:  clamp(2rem, 4.5vw, 3.5rem)
-Body large:     1.1875rem
-Body:           1rem
-Eyebrow:        0.75rem
-```
+Scale in practice:
+- Section heading: `text-[clamp(1.9rem,4vw,3.1rem)] font-bold tracking-[-0.035em] leading-[1.05]`
+- Big feature heading (demo section): `text-[clamp(2.4rem,4.6vw,4.2rem)] tracking-[-0.04em]`
+- Body: `text-[0.9375rem] leading-[1.7]`; lede: `text-[1.0625rem] leading-relaxed`
+- Mono numerals: `font-mono tabular-nums`
 
----
+## Layout
+- Section container: `mx-auto w-[min(1120px,calc(100vw-48px))]` (demo section uses 1480px)
+- Section padding: `py-24 md:py-32`
+- Section anchors: `#agents` (Iris section), `#aria` (demo), used by topbar + hero
 
-## Spacing
+## Components
+- **GlowCard** (`components/spotlight-card.tsx`): pointer-tracking spotlight card.
+  Use `glowColor="gold"` (amber band, hue 34–50) — never `purple` (legacy).
+  Overrides via CSS vars: `[--backdrop:…]` `[--backup-border:…]` `[--border:2]`.
+  Light mode: use `[--border:2]` + soft `--backup-border`; default 4px reads heavy.
+- **Reveal** (`components/reveal.tsx`): currently a no-op wrapper (variant/delay ignored).
+- **Iris section**: live = `sections/iris-lead-desk.tsx` (editorial, sticky identity
+  card + numbered channel rows). Alternate = `sections/iris-lead-desk-spotlight.tsx`
+  (hero GlowCard + 4 channel cards). Compare at `/preview/iris`. Rollback:
+  `sections/process.tsx` (pre-Iris, four personas — reference only).
+- Eyebrow: `font-mono text-[0.6875rem] uppercase tracking-[0.06em+]` muted or amber.
+- Stat grid: `grid gap-px` over `bg-[var(--color-line)]` with `rounded-[10px]` frame.
 
-- Base unit: `4px` (0.25rem)
-- Section padding: `py-24` to `py-32` (96–128px)
-- Component gap: `gap-8` to `gap-16` (32–64px)
-- Content max-width: `max-w-6xl` (72rem) centered
-
----
-
-## Radius & Shadows
-
-| Token | Value |
-|---|---|
-| `--radius` | `0.625rem` (10px) — cards, inputs |
-| `--radius-pill` | `999px` — badges, pill buttons |
-| `--shadow-soft` | `0 18px 45px rgba(17,21,19,0.08)` |
-| `--shadow-glow-violet` | `0 0 60px rgba(203,108,230,0.45)` — hero glow |
-
----
-
-## Component Vocabulary
-
-### Eyebrow Label
-```tsx
-<span className="text-[0.75rem] font-semibold tracking-[0.15em] uppercase text-[var(--color-brand-violet)]">
-  Label
-</span>
-```
-
-### Section Heading
-```tsx
-<h2 className="font-display text-[clamp(2rem,4.5vw,3.5rem)] font-semibold leading-[1.05] tracking-[-0.03em]">
-  Heading
-</h2>
-```
-
-### Primary CTA Button
-```tsx
-<button className="bg-[var(--color-brand-violet)] text-white font-semibold px-8 py-3.5 rounded-[var(--radius-pill)] hover:opacity-90 transition-opacity">
-  Get Started
-</button>
-```
-
-### Ghost Button
-```tsx
-<button className="border border-[var(--color-line)] text-[var(--color-ink-charcoal)] font-semibold px-8 py-3.5 rounded-[var(--radius-pill)] hover:border-[var(--color-brand-violet)] transition-colors">
-  Learn More
-</button>
-```
-
-### Card
-```tsx
-<div className="bg-white rounded-[var(--radius)] shadow-[var(--shadow-soft)] p-8 border border-[var(--color-line)]">
-```
-
-### Dark Section
-```tsx
-<section className="bg-[var(--color-dark-section)] text-white">
-```
-
----
-
-## Agent Accents
-
-| Agent | Colour |
-|---|---|
-| Iris (email) | `--color-gold-italic` `#9a7a3e` |
-| Theo (SMS/WhatsApp) | `--color-brand-violet` `#cb6ce6` |
-| Aria (voice) | `--color-primary-indigo` `#1e1b4b` |
-| Olivia (chat) | cyan `#06b6d4` |
-
----
-
-## Layout Patterns
-
-- **Hero:** Full-width, cream bg, large serif headline, violet glow behind key word, dual CTA row
-- **Feature sections:** Alternating text/visual, 2-col grid at `md:`, eyebrow + heading + body + CTA
-- **Dark bands:** Used for social proof, pricing, and final CTA — break cream monotony
-- **Trust strip:** Single row of logos, muted opacity, thin top/bottom border
-- **Cards:** White on cream, soft shadow, no heavy border — feels like paper layers
-
----
-
-## Anti-Patterns (never use)
-
-- `border-radius > 16px` on section containers
-- `transition: all` — always specify property
-- `#3B82F6` blue — not in this palette
-- Inter as display font — serif (Newsreader) for all large headings
-- `max-w-screen-xl` or `max-w-7xl` — use `max-w-6xl`
-- Gradient backgrounds on hero (use solid cream + glow shadow instead)
-- Card grids more than 3-col at desktop
+## Hard rules
+- No violet/indigo accents; amber only.
+- Keep DM Sans/DM Mono; don't introduce new fonts without updating layout.tsx.
+- Every `next/image` with `fill` needs a `sizes` prop.
+- Radius: cards 12–18px via GlowCard `radius` prop; pills `rounded-full`.

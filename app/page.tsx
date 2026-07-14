@@ -5,7 +5,7 @@ import { Faq } from "@/components/sections/faq";
 import { FinalCTA } from "@/components/sections/final-cta";
 import { Footer } from "@/components/sections/footer";
 import { Hero } from "@/components/sections/hero";
-import { Process } from "@/components/sections/process";
+import { IrisLeadDesk } from "@/components/sections/iris-lead-desk";
 import { PullQuote } from "@/components/sections/pull-quote";
 import { StickyCtaBar } from "@/components/sections/sticky-cta-bar";
 import { Topbar } from "@/components/sections/topbar";
@@ -58,7 +58,7 @@ export default function Page() {
       <main id="top">
         <Hero />
         <TrustStrip />
-        <Process />
+        <IrisLeadDesk />
         <AriaDeepDive />
         <TwoWaysIn />
         <CalendarCTA />

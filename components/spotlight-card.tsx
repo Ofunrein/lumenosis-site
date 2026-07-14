@@ -6,7 +6,7 @@ interface GlowCardProps {
   children: ReactNode;
   className?: string;
   style?: React.CSSProperties;
-  glowColor?: "purple" | "blue" | "green" | "red" | "orange";
+  glowColor?: "purple" | "blue" | "green" | "red" | "orange" | "gold";
   customSize?: boolean;
   radius?: number;
 }
@@ -17,6 +17,9 @@ const glowColorMap = {
   green: { base: 120, spread: 200 },
   red: { base: 0, spread: 200 },
   orange: { base: 30, spread: 200 },
+  // Brand amber (#c49a52 ≈ hue 38). Tight spread keeps the sweep inside the
+  // gold band instead of cycling the whole wheel as the pointer crosses the page.
+  gold: { base: 34, spread: 16 },
 };
 
 export function GlowCard({
@@ -106,8 +109,7 @@ export function GlowCard({
           className="absolute inset-[-1px] rounded-[16px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
           style={{
             borderRadius: "calc(var(--radius,var(--default-radius))*1px)",
-            background:
-              "radial-gradient(400px circle at calc(var(--lx, -9999) * 1px) calc(var(--ly, -9999) * 1px), rgba(203,108,230,0.65), transparent 38%)",
+            background: `radial-gradient(400px circle at calc(var(--lx, -9999) * 1px) calc(var(--ly, -9999) * 1px), hsl(var(--hue, ${base}) 78% 66% / 0.6), transparent 38%)`,
             WebkitMask: "linear-gradient(#fff,#fff) content-box, linear-gradient(#fff,#fff)",
             WebkitMaskComposite: "xor",
             maskComposite: "exclude",
