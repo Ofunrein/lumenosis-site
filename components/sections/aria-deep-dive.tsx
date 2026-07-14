@@ -1,18 +1,18 @@
 "use client";
 
-import {
-  Bath,
-  BedDouble,
-  CalendarDays,
-  Clock3,
-  Home,
-  type Mail,
-  MapPin,
-  MessageSquare,
-  Ruler,
-} from "lucide-react";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
+import {
+  BathIcon,
+  BedIcon,
+  DoorIcon,
+  LensIcon,
+  type LetterIcon,
+  PinIcon,
+  RouteIcon,
+  RuleIcon,
+  StopwatchIcon,
+} from "@/components/icons/editorial";
 import { Reveal } from "@/components/reveal";
 import { GlowCard } from "@/components/spotlight-card";
 
@@ -134,22 +134,22 @@ const listingStats = [
 
 const microFeatures = [
   {
-    icon: Clock3,
+    icon: StopwatchIcon,
     title: "Fast first touch",
     body: "Every new inquiry gets a useful reply before the conversation goes cold.",
   },
   {
-    icon: CalendarDays,
+    icon: RouteIcon,
     title: "Routed next step",
     body: "Showings, valuation calls, operator handoffs, and follow-ups land with the right owner.",
   },
   {
-    icon: MessageSquare,
+    icon: LensIcon,
     title: "Shared memory",
     body: "Email, SMS, calls, website chat, and social DMs use the same conversation timeline.",
   },
   {
-    icon: Home,
+    icon: DoorIcon,
     title: "Property aware",
     body: "Replies use your sheet, database, enrichment, CRM, or property source before guessing.",
   },
@@ -206,7 +206,7 @@ function SectionBadge({
   title,
   subtitle,
 }: {
-  icon?: typeof Mail;
+  icon?: typeof LetterIcon;
   avatarSrc?: string;
   avatarAlt?: string;
   title: string;
@@ -439,10 +439,7 @@ function IrisEmailDemo() {
 
           <div className="rounded-[24px] border border-[#2e2e32] bg-[#181818] p-4">
             <div className="flex items-start gap-3">
-              <MapPin
-                className="mt-1 size-4 shrink-0 text-[var(--color-brand-violet)]"
-                aria-hidden
-              />
+              <PinIcon className="mt-1 size-[18px] shrink-0 text-white/85" aria-hidden />
               <div>
                 <p className="font-semibold text-white">1842 Oak Ridge Lane</p>
                 <p className="text-sm text-white">Austin, TX 78746</p>
@@ -461,15 +458,15 @@ function IrisEmailDemo() {
             </div>
             <div className="mt-4 grid gap-2 text-sm text-white">
               <p className="flex items-center gap-2">
-                <BedDouble className="size-4 text-[var(--color-brand-violet)]" aria-hidden />
+                <BedIcon className="size-[18px] text-white/85" aria-hidden />
                 New primary suite and walk-in closet
               </p>
               <p className="flex items-center gap-2">
-                <Bath className="size-4 text-[var(--color-brand-violet)]" aria-hidden />
+                <BathIcon className="size-[18px] text-white/85" aria-hidden />
                 Three updated bathrooms
               </p>
               <p className="flex items-center gap-2">
-                <Ruler className="size-4 text-[var(--color-brand-violet)]" aria-hidden />
+                <RuleIcon className="size-[18px] text-white/85" aria-hidden />
                 Seller prefers closing before July 15
               </p>
             </div>
@@ -923,7 +920,7 @@ export function AriaDeepDive() {
                   radius={12}
                   className="flex flex-col gap-0 p-4 h-full [--backdrop:rgba(18,12,28,0.28)] [--backup-border:rgba(160,120,64,0.15)]"
                 >
-                  <Icon className="size-5 text-[var(--color-brand-violet)]" aria-hidden />
+                  <Icon className="size-6 text-white/90" aria-hidden />
                   <p className="mt-4 text-[1rem] font-semibold text-white">{title}</p>
                   <p className="mt-2 text-sm leading-6 text-white/90">{body}</p>
                 </GlowCard>

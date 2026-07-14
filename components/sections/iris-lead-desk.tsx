@@ -1,5 +1,5 @@
-import { Mail, MessageSquare, Phone, Zap } from "lucide-react";
 import Image from "next/image";
+import { AtIcon, LetterIcon, ReplyIcon, SignalIcon } from "@/components/icons/editorial";
 import { Reveal } from "@/components/reveal";
 import { GlowCard } from "@/components/spotlight-card";
 
@@ -7,28 +7,28 @@ const channels = [
   {
     num: "01",
     channel: "Email",
-    icon: Mail,
+    icon: LetterIcon,
     kicker: "approved voice",
     body: "Answers inbound email in your approved voice with real property facts — price, beds, baths, links, and photos. Flags legal, financing, and sensitive replies for your review.",
   },
   {
     num: "02",
     channel: "Voice",
-    icon: Phone,
+    icon: SignalIcon,
     kicker: "12s avg pickup",
     body: "Picks up after-hours and overflow calls, qualifies inquiry type, timeline, and urgency, then summarizes every call and routes showings and valuations when approved.",
   },
   {
     num: "03",
     channel: "SMS",
-    icon: MessageSquare,
+    icon: ReplyIcon,
     kicker: "<60s first text",
     body: "Sends the first text in under 60 seconds, shares property links and showing windows, runs long-term nurture for leads not ready to move, and honors every opt-out.",
   },
   {
     num: "04",
     channel: "Web + Social",
-    icon: Zap,
+    icon: AtIcon,
     kicker: "always on",
     body: "Handles website chat, form fills, Instagram, Facebook Messenger, and WhatsApp. Captures name, phone, intent, and source, then routes urgent conversations into your CRM.",
   },
@@ -138,7 +138,7 @@ export function IrisLeadDesk() {
                   <div className="flex flex-col gap-1">
                     <div className="flex items-center gap-3">
                       <c.icon
-                        className="size-4 shrink-0 text-[var(--color-brand-amber)] transition-transform duration-300 group-hover:scale-110"
+                        className="size-[18px] shrink-0 text-[var(--color-ink)] transition-transform duration-300 group-hover:scale-110"
                         aria-hidden
                       />
                       <p className="text-[0.9375rem] font-semibold tracking-[-0.01em] text-[var(--color-ink)]">
