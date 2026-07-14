@@ -18,7 +18,7 @@ export function Timeline30Day() {
         <Reveal variant="up" delay={0.05}>
           <h2 className="max-w-[760px] font-[family-name:var(--font-display)] text-[clamp(3.1rem,5.1vw,5.6rem)] font-medium leading-[0.98] tracking-normal text-[var(--color-ink-charcoal)]">
             <span className="headline-plain">Two weeks to a</span>{" "}
-            <em className="font-normal text-[var(--color-gold-italic)]">live lead desk.</em>
+            <em className="font-normal text-[var(--color-gold-italic)]">live front desk.</em>
           </h2>
         </Reveal>
 

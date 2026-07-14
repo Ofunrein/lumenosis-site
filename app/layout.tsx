@@ -49,7 +49,7 @@ export const metadata: Metadata = {
     "AI agents for real estate",
     "real estate AI agents",
     "AI real estate assistant",
-    "AI lead desk",
+    "front desk",
     "real estate lead response software",
     "real estate SMS AI",
     "real estate voice AI",

@@ -12,7 +12,7 @@ export const agents: Agent[] = [
   {
     slug: "iris",
     name: "Iris",
-    role: "Your AI lead desk",
+    role: "Your front desk",
     tagline:
       "One agent across email, voice, SMS, website chat, and social DMs — with one shared memory per lead.",
     bullets: [

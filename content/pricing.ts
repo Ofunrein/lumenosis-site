@@ -66,7 +66,7 @@ export const pricingPaths: PricingPath[] = [
     price: "Custom",
     subtext: "",
     pitch:
-      "For offices, brokerages, and agencies that need a managed lead desk across many users or clients.",
+      "For offices, brokerages, and agencies that need a managed front desk across many users or clients.",
     bullets: [
       "Multi-office deployment",
       "Agency client management",

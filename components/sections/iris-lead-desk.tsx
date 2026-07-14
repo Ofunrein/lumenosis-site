@@ -63,7 +63,7 @@ export function IrisLeadDesk() {
             One agent. Every channel.
           </h2>
           <p className="mt-4 text-[1.0625rem] text-[var(--color-muted)] max-w-[520px] leading-relaxed">
-            Meet Iris — your AI lead desk. She answers every channel with one shared memory, so your
+            Meet Iris, your front desk. She answers every channel with one shared memory, so your
             leads never repeat themselves and nothing falls through.
           </p>
         </div>
@@ -80,7 +80,7 @@ export function IrisLeadDesk() {
                 <div className="relative size-20 overflow-hidden rounded-full border-2 border-[var(--color-brand-amber)]/40 shadow-[0_0_24px_rgba(196,154,82,0.18)]">
                   <Image
                     src="/images/agents/iris.png"
-                    alt="Iris, the Lumenosis AI lead desk agent"
+                    alt="Iris, the Lumenosis front desk agent"
                     fill
                     sizes="80px"
                     className="object-cover"
@@ -98,7 +98,7 @@ export function IrisLeadDesk() {
                 Iris
               </p>
               <p className="mt-1 text-[0.875rem] text-[var(--color-brand-amber)] font-medium">
-                Your AI lead desk
+                Your front desk
               </p>
               <p className="mt-4 text-[0.9375rem] text-[var(--color-muted)] leading-[1.7]">
                 Remembers the full conversation across every channel, pulls real property details,

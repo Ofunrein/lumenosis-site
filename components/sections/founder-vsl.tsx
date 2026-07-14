@@ -101,7 +101,7 @@ export function FounderVSL() {
                   <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_60%_40%,rgb(120_60_160_/_0.35),transparent_60%),radial-gradient(ellipse_at_20%_80%,rgb(232_196_122_/_0.12),transparent_50%)]" />
                   <div className="absolute inset-x-0 bottom-0 bg-[linear-gradient(to_top,rgb(12_9_18_/_0.88),transparent)] p-5 text-white sm:p-7">
                     <p className="max-w-[26rem] font-[family-name:var(--font-display)] text-2xl font-semibold leading-tight sm:text-4xl">
-                      The 7-minute case for a managed AI lead desk.
+                      The 7-minute case for a managed front desk.
                     </p>
                   </div>
                   <button

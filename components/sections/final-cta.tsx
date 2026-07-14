@@ -3,7 +3,7 @@ export function FinalCTA() {
     <section className="border-t border-[var(--color-line)] py-24 md:py-32">
       <div className="mx-auto w-[min(1120px,calc(100vw-48px))] sm:w-[min(1120px,calc(100vw-48px))] xl:w-[min(1120px,calc(100vw-80px))]">
         <h2 className="text-[clamp(2rem,4.5vw,3.5rem)] font-bold tracking-[-0.04em] leading-[1.05] text-[var(--color-ink)] max-w-[620px]">
-          Set up your AI front desk before your next lead source goes live.
+          Set up your front desk before your next lead source goes live.
         </h2>
         <p className="mt-5 text-[1.0625rem] text-[var(--color-muted)] max-w-[440px] leading-relaxed">
           Share your workflow, connect your channels, and go live in days. No

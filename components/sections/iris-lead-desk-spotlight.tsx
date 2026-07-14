@@ -42,7 +42,7 @@ export function IrisLeadDeskSpotlight() {
             One agent. Every channel.
           </h2>
           <p className="mx-auto mt-4 text-[1.0625rem] text-[var(--color-muted)] max-w-[520px] leading-relaxed">
-            Meet Iris — your AI lead desk. One shared memory across email, calls, texts, chat, and
+            Meet Iris, your front desk. One shared memory across email, calls, texts, chat, and
             DMs, so nothing falls through.
           </p>
         </div>
@@ -57,7 +57,7 @@ export function IrisLeadDeskSpotlight() {
             <div className="relative size-24 shrink-0 overflow-hidden rounded-full border-2 border-[var(--color-brand-amber-soft)] md:size-28">
               <Image
                 src="/images/agents/iris.png"
-                alt="Iris, the Lumenosis AI lead desk agent"
+                alt="Iris, the Lumenosis front desk agent"
                 fill
                 sizes="112px"
                 className="object-cover"
@@ -69,7 +69,7 @@ export function IrisLeadDeskSpotlight() {
                   Iris
                 </p>
                 <p className="text-[0.875rem] font-medium text-[var(--color-brand-amber)]">
-                  Your AI lead desk · 24/7
+                  Your front desk · 24/7
                 </p>
               </div>
               <p className="mt-3 max-w-[560px] text-[0.9375rem] leading-[1.7] text-[var(--color-muted)]">

@@ -34,7 +34,7 @@ const siteStructuredData = {
       url: "https://lumenosis.com",
       creator: { "@id": "https://lumenosis.com/#organization" },
       description:
-        "AI lead desk software for real estate teams, property managers, and short-term rental operators.",
+        "Front desk software for real estate teams, property managers, and short-term rental operators.",
       offers: {
         "@type": "Offer",
         category: "Real estate AI agents",
