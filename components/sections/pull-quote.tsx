@@ -1,6 +1,9 @@
 export function PullQuote() {
   return (
-    <section className="border-t border-b border-[var(--color-line)] py-16 md:py-20 bg-[#edeadf] dark:bg-[rgba(255,255,255,0.02)]">
+    <section
+      data-motion="pull-quote"
+      className="border-t border-b border-[var(--color-line)] py-16 md:py-20 bg-[#edeadf] dark:bg-[rgba(255,255,255,0.02)]"
+    >
       <div className="mx-auto w-[min(700px,calc(100vw-64px))] text-center">
         <blockquote>
           <p

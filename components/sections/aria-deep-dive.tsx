@@ -895,11 +895,17 @@ export function AriaDeepDive() {
       id="aria"
       className="bg-[#0a0e0c] py-20 md:py-28 border-t border-b border-white/[0.07] relative overflow-hidden"
     >
-      <div className="absolute left-1/2 top-0 h-[460px] w-[720px] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,rgba(196,154,82,0.1),rgba(196,154,82,0)_62%)] blur-3xl" />
-      <div className="absolute right-[-14rem] top-24 h-[460px] w-[520px] rounded-full bg-[radial-gradient(circle,rgba(196,154,82,0.07),rgba(196,154,82,0)_64%)] blur-3xl" />
+      <div
+        data-motion="demo-glow"
+        className="absolute left-1/2 top-0 h-[460px] w-[720px] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,rgba(196,154,82,0.1),rgba(196,154,82,0)_62%)] blur-3xl"
+      />
+      <div
+        data-motion="demo-glow"
+        className="absolute right-[-14rem] top-24 h-[460px] w-[520px] rounded-full bg-[radial-gradient(circle,rgba(196,154,82,0.07),rgba(196,154,82,0)_64%)] blur-3xl"
+      />
 
       <div className="relative mx-auto grid w-[min(1480px,calc(100vw_-_32px))] sm:w-[min(1480px,calc(100vw_-_32px))] gap-9 lg:grid-cols-[0.58fr_1.42fr] lg:items-start px-4 sm:px-0">
-        <Reveal variant="left" className="lg:sticky lg:top-32">
+        <Reveal variant="left" data-motion="demo-copy" className="lg:sticky lg:top-32">
           <div>
             <h2 className="text-[clamp(2.4rem,4.6vw,4.2rem)] font-bold tracking-[-0.04em] leading-[1.02] text-white">
               Context across every channel.
@@ -932,13 +938,13 @@ export function AriaDeepDive() {
         {/* Bento grid: TOP=email full-width, BOTTOM=phone left + call right */}
         <div className="flex flex-col gap-6">
           {/* TOP: Email card — full width */}
-          <Reveal variant="right" className="min-h-[420px] w-full">
+          <Reveal variant="right" data-motion="demo-panel" className="min-h-[420px] w-full">
             <IrisEmailDemo />
           </Reveal>
 
           {/* BOTTOM: Phone left + Call right — equal halves */}
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
-            <Reveal variant="left" delay={0.06} className="h-full">
+            <Reveal variant="left" delay={0.06} data-motion="demo-panel" className="h-full">
               <GlowCard
                 glowColor="gold"
                 customSize
@@ -947,7 +953,7 @@ export function AriaDeepDive() {
                 <TheoSmsDemo />
               </GlowCard>
             </Reveal>
-            <Reveal variant="scale" delay={0.12} className="h-full">
+            <Reveal variant="scale" delay={0.12} data-motion="demo-panel" className="h-full">
               <GlowCard
                 glowColor="gold"
                 customSize

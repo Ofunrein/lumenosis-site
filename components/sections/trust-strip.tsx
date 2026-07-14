@@ -39,7 +39,7 @@ export function TrustStrip() {
       aria-label="Built for operators already investing in conversations"
       className="border-t border-b border-[var(--color-line)] py-5"
     >
-      <Reveal variant="scale">
+      <Reveal variant="scale" data-motion="trust">
         <div
           className="relative w-full"
           style={{

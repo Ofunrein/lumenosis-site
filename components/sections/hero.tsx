@@ -42,7 +42,10 @@ function useResponseCycle(durationMs = 800) {
       setIdx((i) => i + 1);
       setVisible(true);
     }, durationMs);
-    return () => { clearTimeout(fadeOut); clearTimeout(next); };
+    return () => {
+      clearTimeout(fadeOut);
+      clearTimeout(next);
+    };
   }, [started, idx, durationMs]);
 
   return { label: RESPONSE_STEPS[idx], visible, trigger: () => setStarted(true) };
@@ -56,7 +59,6 @@ export function Hero() {
   const response = useResponseCycle(1100);
   const channels = useCountUp(CHANNEL_MAX, 1800);
   const hours = useCountUp(24, 1600);
-
 
   useEffect(() => {
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -81,11 +83,11 @@ export function Hero() {
           io.disconnect();
         }
       },
-      { threshold: 0.3 }
+      { threshold: 0.3 },
     );
     io.observe(el);
     return () => io.disconnect();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [statsTriggered, reduceMotion]);
 
   return (
@@ -94,7 +96,7 @@ export function Hero() {
       className="relative min-h-[100dvh] flex flex-col justify-center overflow-hidden"
     >
       {/* Full-bleed image with no vignette or drop shadow. */}
-      <div className="absolute inset-0 z-0">
+      <div data-motion="hero-media" className="absolute inset-0 z-0">
         <div className="absolute inset-0">
           <Image
             src="/images/hero-hillside-day.webp"
@@ -120,18 +122,23 @@ export function Hero() {
 
       {/* Content */}
       <div className="relative z-10 mx-auto w-[min(1120px,calc(100vw-48px))] xl:w-[min(1120px,calc(100vw-80px))] pt-28 pb-20 lg:pt-36 lg:pb-28">
-        <div className="max-w-[620px]">
+        <div data-motion="hero-copy" className="max-w-[620px]">
           <h1 className="text-[clamp(1.75rem,3.8vw,3.5rem)] font-bold leading-[1.08] tracking-[-0.04em] text-[var(--color-ink)]">
             <span className="sr-only">
-              The AI operations layer for real estate teams, brokerages, property managers, short-term rental operators, and investors.
+              The AI operations layer for real estate teams, brokerages, property managers,
+              short-term rental operators, and investors.
             </span>
             <span aria-hidden="true">
-              <span className="block whitespace-nowrap">
-                AI operations for
-              </span>
+              <span className="block whitespace-nowrap">AI operations for</span>
               <span className="block text-[var(--color-brand-amber)] min-h-[1.1em]">
                 <RotatingText
-                  words={["real estate teams", "brokerages", "property managers", "short-term rentals", "investors"]}
+                  words={[
+                    "real estate teams",
+                    "brokerages",
+                    "property managers",
+                    "short-term rentals",
+                    "investors",
+                  ]}
                   intervalMs={2200}
                   minWidth="min(100%, 17ch)"
                 />
@@ -186,7 +193,9 @@ export function Hero() {
               <p className="text-[1.25rem] font-semibold tracking-[-0.025em] text-[var(--color-ink)] tabular-nums">
                 {reduceMotion ? "24/7" : `${hours.val}/7`}
               </p>
-              <p className="text-[0.8125rem] text-[var(--color-muted)] mt-0.5">no nights or weekends</p>
+              <p className="text-[0.8125rem] text-[var(--color-muted)] mt-0.5">
+                no nights or weekends
+              </p>
             </div>
           </div>
         </div>

@@ -8,6 +8,7 @@ const channels = [
     num: "01",
     channel: "Email",
     icon: LetterIcon,
+    stat: "timeline",
     kicker: "approved voice",
     body: "Answers inbound email in your approved voice with real property facts — price, beds, baths, links, and photos. Flags legal, financing, and sensitive replies for your review.",
   },
@@ -15,6 +16,7 @@ const channels = [
     num: "02",
     channel: "Voice",
     icon: SignalIcon,
+    stat: "avg pickup",
     kicker: "12s avg pickup",
     body: "Picks up after-hours and overflow calls, qualifies inquiry type, timeline, and urgency, then summarizes every call and routes showings and valuations when approved.",
   },
@@ -22,6 +24,7 @@ const channels = [
     num: "03",
     channel: "SMS",
     icon: ReplyIcon,
+    stat: "first text",
     kicker: "<60s first text",
     body: "Sends the first text in under 60 seconds, shares property links and showing windows, runs long-term nurture for leads not ready to move, and honors every opt-out.",
   },
@@ -29,6 +32,7 @@ const channels = [
     num: "04",
     channel: "Web + Social",
     icon: AtIcon,
+    stat: "coverage",
     kicker: "always on",
     body: "Handles website chat, form fills, Instagram, Facebook Messenger, and WhatsApp. Captures name, phone, intent, and source, then routes urgent conversations into your CRM.",
   },
@@ -55,7 +59,7 @@ export function IrisLeadDesk() {
       />
 
       <div className="relative mx-auto w-[min(1120px,calc(100vw-48px))] sm:w-[min(1120px,calc(100vw-48px))] xl:w-[min(1120px,calc(100vw-80px))]">
-        <div className="mb-14 md:mb-18">
+        <div data-motion="iris-header" className="mb-14 md:mb-18">
           <p className="mb-3 font-mono text-[0.6875rem] font-medium uppercase tracking-[0.14em] text-[var(--color-brand-amber)]">
             The system
           </p>
@@ -70,7 +74,7 @@ export function IrisLeadDesk() {
 
         <div className="grid gap-10 lg:grid-cols-[340px_1fr] lg:gap-14 items-start">
           {/* Iris identity card */}
-          <Reveal variant="left" className="lg:sticky lg:top-32">
+          <Reveal variant="left" data-motion="iris-card" className="lg:sticky lg:top-32">
             <GlowCard
               glowColor="gold"
               radius={16}
@@ -108,6 +112,7 @@ export function IrisLeadDesk() {
                 {stats.map((s) => (
                   <div
                     key={s.label}
+                    data-stat-cell={s.label}
                     className="bg-[var(--color-bg-cream)] px-4 py-3 dark:bg-[#111013]"
                   >
                     <p className="font-mono text-[1.0625rem] font-medium text-[var(--color-ink)] tabular-nums">
@@ -126,13 +131,21 @@ export function IrisLeadDesk() {
           <div className="divide-y divide-[var(--color-line)]">
             {channels.map((c, index) => (
               <Reveal key={c.num} variant="up" delay={index * 0.06}>
-                <div className="group relative grid grid-cols-[3rem_1fr] md:grid-cols-[3rem_180px_1fr] gap-x-5 md:gap-x-8 gap-y-1 py-7 md:py-8 items-start">
+                <div
+                  data-motion="iris-row"
+                  data-stat={c.stat}
+                  className="group relative grid grid-cols-[3rem_1fr] md:grid-cols-[3rem_180px_1fr] gap-x-5 md:gap-x-8 gap-y-1 py-7 md:py-8 items-start"
+                >
                   {/* Hover rail */}
                   <span
                     aria-hidden
+                    data-motion="iris-rail"
                     className="absolute left-[-1.25rem] top-1/2 h-0 w-[2px] -translate-y-1/2 rounded-full bg-[var(--color-brand-amber)] transition-all duration-300 ease-out group-hover:h-[calc(100%-3.5rem)]"
                   />
-                  <span className="text-[0.6875rem] font-mono font-medium text-[var(--color-muted)] tracking-[0.06em] pt-1.5 tabular-nums transition-colors duration-300 group-hover:text-[var(--color-brand-amber)]">
+                  <span
+                    data-motion="iris-num"
+                    className="text-[0.6875rem] font-mono font-medium text-[var(--color-muted)] tracking-[0.06em] pt-1.5 tabular-nums transition-colors duration-300 group-hover:text-[var(--color-brand-amber)]"
+                  >
                     {c.num}
                   </span>
                   <div className="flex flex-col gap-1">
