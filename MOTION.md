@@ -1,8 +1,8 @@
 # Motion system
 
-Scroll choreography for lumenosis.com. Currently mounted **only** on
-`/preview/scroll` (approval gate); production `app/page.tsx` does not load it.
-To go live, add `<ScrollExperience />` to `app/page.tsx` above `<AuroraBackground />`.
+Scroll choreography for lumenosis.com. Mounted on the production homepage
+(`app/page.tsx`) and on `/preview/scroll` (kept as a staging ground for
+future motion work).
 
 ## Architecture
 

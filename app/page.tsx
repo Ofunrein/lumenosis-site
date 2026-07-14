@@ -1,4 +1,5 @@
 import { AuroraBackground } from "@/components/aurora-background";
+import { ScrollExperience } from "@/components/motion/scroll-experience";
 import { AriaDeepDive } from "@/components/sections/aria-deep-dive";
 import { CalendarCTA } from "@/components/sections/calendar-cta";
 import { Faq } from "@/components/sections/faq";
@@ -53,6 +54,7 @@ export default function Page() {
         // biome-ignore lint/security/noDangerouslySetInnerHtml: JSON-LD is static SEO metadata generated from local constants.
         dangerouslySetInnerHTML={{ __html: JSON.stringify(siteStructuredData) }}
       />
+      <ScrollExperience />
       <AuroraBackground />
       <Topbar />
       <main id="top">
