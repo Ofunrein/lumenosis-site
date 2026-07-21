@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { AuroraBackground } from "@/components/aurora-background";
 import { Footer } from "@/components/sections/footer";
@@ -37,8 +38,15 @@ export default function TeamPage() {
                 className="rounded-[var(--radius)] border border-[var(--color-line)] bg-[var(--color-bg-cream)] p-6 shadow-[var(--shadow-soft)] md:p-8"
               >
                 <div className="flex items-start gap-4">
-                  <div className="grid size-12 shrink-0 place-items-center rounded-full bg-[var(--color-brand-amber-soft)] text-sm font-semibold text-[var(--color-ink)]">
-                    {member.initials}
+                  <div className="relative grid size-12 shrink-0 place-items-center overflow-hidden rounded-full bg-[var(--color-brand-amber-soft)] text-sm font-semibold text-[var(--color-ink)]">
+                    <span>{member.initials}</span>
+                    <Image
+                      src={member.image}
+                      alt={`${member.name} profile photo`}
+                      fill
+                      sizes="48px"
+                      className="object-cover"
+                    />
                   </div>
                   <div>
                     <h2 className="text-xl font-semibold tracking-[-0.02em] text-[var(--color-ink)]">
