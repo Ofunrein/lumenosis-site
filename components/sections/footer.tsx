@@ -6,7 +6,7 @@ export function Footer() {
     <footer className="border-t border-[var(--color-line)] py-8">
       <div className="mx-auto flex w-[min(1120px,calc(100vw-40px))] flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div className="flex items-center gap-2.5">
-          <Image src="/images/lumenosis-logo.png" alt="Lumenosis AI" width={24} height={24} className="rounded-md opacity-80" />
+          <Image src="/images/lumenosis-logo-white.png" alt="Lumenosis AI" width={24} height={24} className="rounded-md opacity-80" />
           <span className="text-[0.8125rem] text-[var(--color-muted)]">&copy; {new Date().getFullYear()} Lumenosis AI</span>
         </div>
         <nav aria-label="Footer" className="flex flex-wrap gap-5">

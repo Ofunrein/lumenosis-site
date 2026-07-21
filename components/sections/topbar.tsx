@@ -88,7 +88,7 @@ export function Topbar() {
           }}
           className="absolute left-1/2 -translate-x-1/2 md:relative md:left-auto md:translate-x-0 md:flex-none inline-flex items-center gap-2 shrink-0"
         >
-          <Image src="/images/lumenosis-logo.png" alt="Lumenosis AI" width={32} height={32} className="rounded-lg" />
+          <Image src="/images/lumenosis-logo-white.png" alt="Lumenosis AI" width={32} height={32} className="rounded-lg" />
           <span className="font-semibold text-[17px] tracking-[-0.01em] text-[var(--color-ink)]">
             Lumenosis <span className="text-[#b34dcc] dark:text-[var(--color-brand-amber)]">AI</span>
           </span>
