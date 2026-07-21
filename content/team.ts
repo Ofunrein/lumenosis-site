@@ -13,16 +13,10 @@ export const teamMembers = [
     bio: "Aima brings the family perspective that keeps Lumenosis practical, grounded, and focused on the people using it every day.",
   },
   {
-    name: "Ken Ofunrein",
-    role: "Founding team",
-    initials: "KO",
-    bio: "Ken contributes an operations-first perspective shaped by years of public-service leadership and team management.",
-    linkedin: "https://www.linkedin.com/in/ken-ofunrein-43977918",
-  },
-  {
-    name: "Ohireme Ofunrein",
-    role: "Founding team",
+    name: "Oje Ofunrein",
+    role: "AI Consultant",
     initials: "OO",
-    bio: "Ohireme helps keep the company connected to its family roots and its commitment to thoughtful, dependable service.",
+    bio: "Oje supports Lumenosis as an AI consultant, bringing technical experience, customer-service skills, and the discipline of a Division I student-athlete.",
+    linkedin: "https://www.linkedin.com/in/ojeofunrein",
   },
 ] as const;
