@@ -7,10 +7,11 @@ export const teamMembers = [
     linkedin: "https://www.linkedin.com/in/martn-ai",
   },
   {
-    name: "Aima Ofunrein",
-    role: "Founding team",
-    initials: "AO",
-    bio: "Aima brings the family perspective that keeps Lumenosis practical, grounded, and focused on the people using it every day.",
+    name: "Naomi Ofunrein",
+    role: "Sales Director",
+    initials: "NO",
+    bio: "Naomi leads sales at Lumenosis, pairing biomedical engineering training at Brown University with the focus and resilience of a student-athlete.",
+    linkedin: "https://www.linkedin.com/in/naomi-ofunrein",
   },
   {
     name: "Oje Ofunrein",
