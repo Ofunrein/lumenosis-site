@@ -80,7 +80,7 @@ export const metadata: Metadata = {
     locale: "en_US",
     images: [
       {
-        url: "/images/lumenosis-logo-white-rounded.png",
+        url: "/images/lumenosis-logo-warm-rounded.png",
         width: 1200,
         height: 630,
         alt: "Lumenosis AI real estate AI agents",
@@ -91,7 +91,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Lumenosis AI Agents for Real Estate Teams",
     description: "AI agents for real estate calls, texts, email, website leads, and social DMs.",
-    images: ["/images/lumenosis-logo-white-rounded.png"],
+    images: ["/images/lumenosis-logo-warm-rounded.png"],
   },
 };
 

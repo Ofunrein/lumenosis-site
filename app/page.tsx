@@ -22,7 +22,7 @@ const siteStructuredData = {
       name: "Lumenosis AI",
       alternateName: ["Lumenosis", "Lumenosis AI Agents"],
       url: "https://lumenosis.com",
-      logo: "https://lumenosis.com/images/lumenosis-logo-white-rounded.png",
+      logo: "https://lumenosis.com/images/lumenosis-logo-warm-rounded.png",
       description:
         "Lumenosis AI builds real estate AI agents for calls, SMS, email, website chat, and social DMs.",
     },

@@ -362,8 +362,7 @@ function IrisEmailDemo() {
             <div
               ref={scrollRef}
               onScroll={handleScroll}
-              className="mt-3 flex h-[420px] flex-col gap-3 overflow-y-auto pr-2"
-              style={{ scrollbarWidth: "none" }}
+              className="mt-3 flex h-[420px] flex-col gap-3 overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-[var(--color-brand-violet)]/40 scrollbar-track-transparent [scrollbar-color:#cb6ce6_#0a0a0b] [scrollbar-width:thin]"
             >
               {visibleMessages.map((message) => {
                 const isLatest = latestMessage?.id === message.id;
