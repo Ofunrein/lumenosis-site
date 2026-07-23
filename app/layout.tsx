@@ -2,6 +2,7 @@ import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata, Viewport } from "next";
 import { DM_Mono, DM_Sans, Playfair_Display } from "next/font/google";
+import { AnalyticsProvider } from "@/components/posthog-provider";
 import { ThemeProvider } from "@/components/theme-provider";
 import "./globals.css";
 
@@ -103,15 +104,17 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       suppressHydrationWarning
     >
       <body suppressHydrationWarning>
-        <ThemeProvider>
-          <a
-            href="#top"
-            className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-[var(--color-brand-purple)] focus:px-3 focus:py-2 focus:text-white"
-          >
-            Skip to content
-          </a>
-          {children}
-        </ThemeProvider>
+        <AnalyticsProvider>
+          <ThemeProvider>
+            <a
+              href="#top"
+              className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-[var(--color-brand-purple)] focus:px-3 focus:py-2 focus:text-white"
+            >
+              Skip to content
+            </a>
+            {children}
+          </ThemeProvider>
+        </AnalyticsProvider>
         <Analytics />
         <SpeedInsights />
       </body>
