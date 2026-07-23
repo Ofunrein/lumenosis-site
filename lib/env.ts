@@ -4,6 +4,9 @@ const ServerEnv = z.object({
   FILLOUT_API_KEY: z.string().min(10).optional(),
   GHL_LOCATION_PIT: z.string().min(10).optional(),
   GHL_CALENDAR_ID: z.string().min(1).optional(),
+  MAUTIC_BASE_URL: z.string().url().optional(),
+  MAUTIC_USERNAME: z.string().min(1).optional(),
+  MAUTIC_PASSWORD: z.string().min(1).optional(),
 });
 
 const ClientEnv = z.object({
@@ -15,6 +18,9 @@ export const serverEnv = ServerEnv.parse({
   FILLOUT_API_KEY: process.env.FILLOUT_API_KEY,
   GHL_LOCATION_PIT: process.env.GHL_LOCATION_PIT,
   GHL_CALENDAR_ID: process.env.GHL_CALENDAR_ID,
+  MAUTIC_BASE_URL: process.env.MAUTIC_BASE_URL,
+  MAUTIC_USERNAME: process.env.MAUTIC_USERNAME,
+  MAUTIC_PASSWORD: process.env.MAUTIC_PASSWORD,
 });
 
 export const clientEnv = ClientEnv.parse({
