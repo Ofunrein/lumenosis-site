@@ -56,9 +56,10 @@ export function Topbar() {
   };
 
   const links = [
-    { label: "System", href: `${homePrefix}#agents` },
-    { label: "Demo", href: `${homePrefix}#aria` },
-    { label: "FAQ", href: `${homePrefix}#faq` },
+    { label: "Contact", href: `${homePrefix}#book` },
+    { label: "FAQs", href: `${homePrefix}#faq` },
+    { label: "About", href: `${homePrefix}#agents` },
+    { label: "Meet the Founder", href: "/team" },
   ];
 
   return (
