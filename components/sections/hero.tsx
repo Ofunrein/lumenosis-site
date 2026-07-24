@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
+import { RotatingText } from "@/components/rotating-text";
 
 const HERO_IMAGE_ALT =
   "Modern hillside home overlooking a valley, wildflower meadow in the foreground";
@@ -92,7 +93,7 @@ export function Hero() {
   return (
     <section
       id="top"
-      className="relative min-h-[100svh] overflow-hidden"
+      className="relative min-h-[100dvh] flex flex-col justify-center overflow-hidden"
     >
       {/* Full-bleed image with no vignette or drop shadow. */}
       <div data-motion="hero-media" className="absolute inset-0 z-0">
@@ -120,19 +121,38 @@ export function Hero() {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 mx-auto flex min-h-[100svh] w-[min(1120px,calc(100vw-48px))] items-center pt-20 pb-10 sm:pt-24 sm:pb-16 lg:pt-28 lg:pb-20 xl:w-[min(1120px,calc(100vw-80px))] [@media(max-height:700px)]:pt-16 [@media(max-height:700px)]:pb-8">
-        <div data-motion="hero-copy" className="max-w-[620px] -translate-y-4 md:-translate-y-6">
-          <h1 className="max-w-[12ch] text-[clamp(2rem,5vw,4rem)] font-bold leading-[1.02] tracking-[-0.05em] text-[var(--color-ink)] [@media(max-height:700px)]:text-[clamp(1.75rem,4.5vw,3rem)]">
-            Amazon One Team Plans It, Designs It, and Runs Your Day.
+      <div className="relative z-10 mx-auto w-[min(1120px,calc(100vw-48px))] xl:w-[min(1120px,calc(100vw-80px))] pt-28 pb-20 lg:pt-36 lg:pb-28">
+        <div data-motion="hero-copy" className="max-w-[620px]">
+          <h1 className="text-[clamp(1.75rem,3.8vw,3.5rem)] font-bold leading-[1.08] tracking-[-0.04em] text-[var(--color-ink)]">
+            <span className="sr-only">
+              The AI operations layer for real estate teams, brokerages, property managers,
+              short-term rental operators, and investors.
+            </span>
+            <span aria-hidden="true">
+              <span className="block whitespace-nowrap">AI operations for</span>
+              <span className="block text-[var(--color-brand-amber)] min-h-[1.1em]">
+                <RotatingText
+                  words={[
+                    "real estate teams",
+                    "brokerages",
+                    "property managers",
+                    "short-term rentals",
+                    "investors",
+                  ]}
+                  intervalMs={2200}
+                  minWidth="min(100%, 17ch)"
+                />
+              </span>
+            </span>
           </h1>
 
-          <p className="mt-5 max-w-[460px] text-[1rem] leading-[1.55] text-[var(--color-muted)] sm:mt-6 sm:text-[1.0625rem] sm:leading-[1.65]">
+          <p className="mt-6 text-[1.0625rem] leading-[1.65] text-[var(--color-muted)] max-w-[460px]">
             One team, all channels, nothing missed. Never let a conversation
             go cold or an opportunity go unnoticed. Busy work, scheduling,
             follow-ups, and the rest handled too.
           </p>
 
-          <div className="mt-7 flex flex-wrap items-center gap-3 sm:mt-9">
+          <div className="mt-9 flex flex-wrap items-center gap-3">
             <a
               href="#book"
               className="inline-flex items-center px-6 h-11 rounded-full text-[14px] font-semibold bg-[var(--color-ink)] text-[var(--color-bg)] hover:opacity-85 transition-opacity active:scale-[0.97]"
@@ -148,7 +168,7 @@ export function Hero() {
           </div>
 
           {/* Animated stats */}
-          <div ref={statsRef} className="mt-7 flex flex-wrap gap-x-7 gap-y-3 sm:mt-10 [@media(max-height:700px)]:hidden">
+          <div ref={statsRef} className="mt-10 flex flex-wrap gap-7">
             {/* Stat 1: response time — cycles from days → hours → minutes → seconds */}
             <div className="min-w-[130px]">
               <p
