@@ -60,6 +60,13 @@ function scoreAudit(answers: Answers) {
   return Math.min(100, 28 + volume * 9 + response * 13 + coverage * 10 + answers.channels.length * 3);
 }
 
+function auditResult(score: number, answers: Answers) {
+  const level = score >= 80 ? "High exposure" : score >= 60 ? "Meaningful exposure" : "Manageable exposure";
+  const responseGap = answers.responseTime === "Under 5 minutes" ? "Fast response is in place." : `${answers.responseTime} first response creates avoidable wait time.`;
+  const coverageGap = answers.coverage === "Every lead gets covered" ? "Coverage is consistent." : `${answers.coverage} leaves coverage uneven.`;
+  return { level, responseGap, coverageGap };
+}
+
 export function InboxAudit() {
   const posthog = usePostHog();
   const [step, setStep] = useState(0);
@@ -78,6 +85,7 @@ export function InboxAudit() {
   }, [posthog]);
 
   const score = useMemo(() => scoreAudit(answers), [answers]);
+  const result = useMemo(() => auditResult(score, answers), [answers, score]);
   const progress = Math.min(100, ((step + 1) / 5) * 100);
   const headline = variant === "missed-leads" ? "Find where your next lead goes cold." : "See how fast your team can respond to every lead.";
 
@@ -113,15 +121,37 @@ export function InboxAudit() {
 
   if (submitted) {
     return (
-      <section className="mx-auto min-h-screen w-[min(760px,calc(100vw-40px))] py-16 sm:py-24">
+      <section className="mx-auto min-h-screen w-[min(860px,calc(100vw-40px))] py-12 sm:py-20">
         <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-[var(--color-brand-amber)]">Your inbox coverage snapshot</p>
-        <h1 className="mt-4 max-w-[14ch] text-[clamp(2.3rem,6vw,4.6rem)] font-semibold leading-[0.95] tracking-[-0.06em]">{score}/100 opportunity exposure</h1>
-        <p className="mt-6 max-w-[58ch] text-lg text-[var(--color-muted)]">Your answers point to the biggest gap between lead arrival and a useful first conversation. Lumenosis can cover calls, text, email, website chat, and follow-up without making your team switch tabs.</p>
-        <div className="mt-10 border-y border-[var(--color-line)] py-6 text-sm leading-7">
-          <p><span className="font-semibold">First place to fix:</span> {answers.responseTime === "Under 5 minutes" ? "coverage across every channel and after-hours handoff." : "speed and consistency of first response."}</p>
-          <p><span className="font-semibold">Priority:</span> give every new lead a fast answer, qualification, and clear next step before a human has to jump in.</p>
+        <div className="mt-5 grid gap-8 border-y border-[var(--color-line)] py-8 sm:grid-cols-[minmax(0,1fr)_220px] sm:items-end">
+          <div>
+            <p className="text-sm font-semibold text-[var(--color-brand-amber)]">{result.level}</p>
+            <h1 className="mt-2 max-w-[13ch] text-[clamp(2.7rem,6vw,5rem)] font-semibold leading-[0.92] tracking-[-0.065em]">Your team has gaps worth closing.</h1>
+          </div>
+          <div className="border-l-2 border-[var(--color-brand-amber)] pl-5 sm:pb-1">
+            <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-[var(--color-muted)]">Exposure score</p>
+            <p className="mt-1 flex items-baseline gap-1 text-5xl font-semibold leading-none tracking-[-0.06em]"><span>{score}</span><span className="text-xl tracking-[-0.03em] text-[var(--color-muted)]">/100</span></p>
+          </div>
         </div>
-        <a href="#book" onClick={() => posthog.capture("inbox_audit_calendar_clicked", { score })} className="mt-10 inline-flex h-12 items-center bg-[var(--color-ink)] px-6 text-sm font-semibold text-[var(--color-bg)]">Book an inbox teardown <span aria-hidden className="ml-3">→</span></a>
+        <p className="mt-7 max-w-[62ch] text-lg text-[var(--color-muted)]">Your score reflects response speed, coverage, lead volume, and channels. Priority: make sure every new lead gets a useful first conversation before a human has to jump in.</p>
+        <div className="mt-10 grid gap-px border border-[var(--color-line)] bg-[var(--color-line)] sm:grid-cols-3">
+          <div className="bg-[var(--color-bg)] p-5">
+            <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-[var(--color-brand-amber)]">Response</p>
+            <p className="mt-3 text-sm leading-6">{result.responseGap}</p>
+          </div>
+          <div className="bg-[var(--color-bg)] p-5">
+            <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-[var(--color-brand-amber)]">Coverage</p>
+            <p className="mt-3 text-sm leading-6">{result.coverageGap}</p>
+          </div>
+          <div className="bg-[var(--color-bg)] p-5">
+            <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-[var(--color-brand-amber)]">Inbound mix</p>
+            <p className="mt-3 text-sm leading-6">{answers.channels.length} channel{answers.channels.length === 1 ? "" : "s"} need a consistent handoff.</p>
+          </div>
+        </div>
+        <div className="mt-10 flex flex-wrap items-center gap-4">
+          <a href="#book" onClick={() => posthog.capture("inbox_audit_calendar_clicked", { score })} className="inline-flex h-12 items-center bg-[var(--color-ink)] px-6 text-sm font-semibold text-[var(--color-bg)]">Book an inbox teardown <span aria-hidden className="ml-3">→</span></a>
+          <p className="text-sm text-[var(--color-muted)]">We will map the highest-impact handoff first.</p>
+        </div>
         {process.env.NEXT_PUBLIC_GHL_CALENDAR_EMBED_URL ? <div id="book" className="mt-10 overflow-hidden border border-[var(--color-line)] bg-white"><iframe title="Book an inbox teardown" src={process.env.NEXT_PUBLIC_GHL_CALENDAR_EMBED_URL} className="h-[720px] w-full border-0" /></div> : null}
       </section>
     );
