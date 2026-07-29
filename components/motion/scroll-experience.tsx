@@ -306,9 +306,6 @@ export function ScrollExperience() {
               gsap.from(panel, {
                 y: 90 + i * 22,
                 opacity: 0,
-                rotateX: 7,
-                transformPerspective: 900,
-                transformOrigin: "50% 100%",
                 duration: 1.15,
                 ease: EASE,
                 scrollTrigger: {

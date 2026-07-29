@@ -36,8 +36,8 @@ future motion work).
    the matching stat on the card pulses once. Rails settle to 40% opacity after
    igniting so focus stays with the current row.
 4. **Demo** (`demo-copy`, `demo-panel`, `demo-glow`) — copy slides in from the
-   left, micro-feature cards scale in, demo panels rise with a slight 3D settle
-   (rotateX 7°, perspective 900). Ambient amber pools drift on scrub.
+   left, micro-feature cards scale in, and demo panels rise without 3D tilt.
+   Ambient amber pools drift on scrub.
 5. **Plans** (`#plans`) — the two package cards swing in from opposite sides.
 6. **Calendar** (`#book`) — scales/settles into place.
 7. **FAQ** (`#faq`) — ledger-line stagger.

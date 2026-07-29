@@ -70,7 +70,7 @@ export function GlowCard({
     position: "relative" as const,
   } as React.CSSProperties;
 
-  const beforeAfterCSS = `[data-glow]::before,[data-glow]::after{pointer-events:none;content:"";position:absolute;inset:calc(var(--border-size)*-1);border:var(--border-size) solid transparent;border-radius:calc(var(--default-radius)*1px + var(--border-size));background-attachment:fixed;background-size:calc(100% + (2*var(--border-size))) calc(100% + (2*var(--border-size)));background-repeat:no-repeat;background-position:50% 50%;mask:linear-gradient(transparent,transparent),linear-gradient(white,white);mask-clip:padding-box,border-box;mask-composite:intersect;}[data-glow]::before{background-image:radial-gradient(calc(var(--spotlight-size)*.75) calc(var(--spotlight-size)*.75) at calc(var(--x,-9999)*1px) calc(var(--y,-9999)*1px),hsl(var(--hue,280) 100% 70% / 1),transparent 100%);filter:brightness(2);}[data-glow]::after{background-image:radial-gradient(calc(var(--spotlight-size)*.5) calc(var(--spotlight-size)*.5) at calc(var(--x,-9999)*1px) calc(var(--y,-9999)*1px),hsl(0 100% 100% / .5),transparent 100%);}`;
+  const beforeAfterCSS = `[data-glow]::before,[data-glow]::after{pointer-events:none;content:"";position:absolute;inset:calc(var(--border-size)*-1);border:var(--border-size) solid transparent;border-radius:calc(var(--default-radius)*1px + var(--border-size));background-attachment:fixed;background-size:calc(100% + (2*var(--border-size))) calc(100% + (2*var(--border-size)));background-repeat:no-repeat;background-position:50% 50%;mask:linear-gradient(transparent,transparent),linear-gradient(white,white);mask-clip:padding-box,border-box;mask-composite:intersect;}[data-glow]::before{background-image:radial-gradient(calc(var(--spotlight-size)*.75) calc(var(--spotlight-size)*.75) at calc(var(--x,-9999)*1px) calc(var(--y,-9999)*1px),hsl(var(--hue,280) 100% 70% / 1),transparent 100%);filter:brightness(2);}[data-glow]::after{background-image:radial-gradient(calc(var(--spotlight-size)*.5) calc(var(--spotlight-size)*.5) at calc(var(--x,-9999)*1px) calc(var(--y,-9999)*1px),hsl(0 100% 100% / .5),transparent 100%);}@media (max-width:640px),(hover:none),(pointer:coarse){[data-glow]{background-image:none!important;}[data-glow]::before,[data-glow]::after{display:none;}}`;
 
   return (
     <>
@@ -106,7 +106,7 @@ export function GlowCard({
         />
         {/* Aceternity-style border glow on hover */}
         <div
-          className="absolute inset-[-1px] rounded-[16px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+          className="absolute inset-[-1px] hidden rounded-[16px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none sm:block"
           style={{
             borderRadius: "calc(var(--radius,var(--default-radius))*1px)",
             background: `radial-gradient(400px circle at calc(var(--lx, -9999) * 1px) calc(var(--ly, -9999) * 1px), hsl(var(--hue, ${base}) 78% 66% / 0.6), transparent 38%)`,
