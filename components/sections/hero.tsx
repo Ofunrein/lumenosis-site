@@ -6,6 +6,7 @@ import { RotatingText } from "@/components/rotating-text";
 
 const HERO_IMAGE_ALT =
   "Modern hillside home overlooking a valley, wildflower meadow in the foreground";
+const HERO_IMAGE_QUALITY = 90;
 const RESPONSE_STEPS = ["3 days", "12 hours", "60 minutes", "< 60 seconds"];
 const CHANNEL_MAX = 7;
 
@@ -103,6 +104,7 @@ export function Hero() {
             alt={HERO_IMAGE_ALT}
             fill
             priority
+            quality={HERO_IMAGE_QUALITY}
             sizes="100vw"
             className="object-cover object-[58%_center] opacity-100 transition-opacity duration-300 dark:opacity-0"
           />
@@ -112,6 +114,7 @@ export function Hero() {
             aria-hidden
             fill
             priority
+            quality={HERO_IMAGE_QUALITY}
             sizes="100vw"
             className="object-cover object-[58%_center] opacity-0 transition-opacity duration-300 dark:opacity-100"
           />

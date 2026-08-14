@@ -11,6 +11,8 @@ const nextConfig: NextConfig = {
     root: projectRoot,
   },
   images: {
+    formats: ["image/avif", "image/webp"],
+    qualities: [75, 90],
     remotePatterns: [{ protocol: "https", hostname: "ap.rdcpix.com" }],
   },
 };
