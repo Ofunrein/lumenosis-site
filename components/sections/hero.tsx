@@ -6,7 +6,7 @@ import { RotatingText } from "@/components/rotating-text";
 
 const HERO_IMAGE_ALT =
   "Modern hillside home overlooking a valley, wildflower meadow in the foreground";
-const HERO_IMAGE_QUALITY = 90;
+const HERO_IMAGE_QUALITY = 95;
 const RESPONSE_STEPS = ["3 days", "12 hours", "60 minutes", "< 60 seconds"];
 const CHANNEL_MAX = 7;
 
