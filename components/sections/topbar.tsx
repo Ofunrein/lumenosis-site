@@ -90,7 +90,7 @@ export function Topbar() {
         >
           <Image src="/images/lumenosis-logo-warm.png" alt="Lumenosis AI" width={32} height={32} className="rounded-lg" />
           <span className="font-semibold text-[17px] tracking-[-0.01em] text-[var(--color-ink)]">
-            Lumenosis <span className="text-[#b34dcc] dark:text-[var(--color-brand-amber)]">AI</span>
+            Lumenosis <span className="text-[var(--color-brand-amber)]">AI</span>
           </span>
         </a>
 
