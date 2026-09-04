@@ -394,13 +394,13 @@ export function DemoRoomExperience({ room, token }: { room: DemoRoom; token: str
       </section>
 
       <section className="mx-auto w-[min(1200px,calc(100%-32px))] py-16 md:py-24">
-        <span className="mb-3 inline-block text-[var(--text-eyebrow)] font-semibold uppercase tracking-[0.14em] text-[var(--color-brand-violet)]">
+        <span className="mb-3 inline-block text-[var(--text-eyebrow)] font-semibold uppercase tracking-[0.14em] text-[var(--color-brand-amber)]">
           Conservative opportunity model
         </span>
         <h2 className="headline-plain max-w-3xl text-[var(--text-display-section)]">
           Use your numbers. No revenue guarantee.
         </h2>
-        <div className="mt-8 grid gap-8 rounded-[var(--radius)] border border-[var(--color-line)] bg-white p-6 shadow-[var(--shadow-soft)] lg:grid-cols-[1fr_0.8fr] md:p-8">
+        <div className="mt-8 grid gap-8 rounded-[var(--radius)] bg-[#f8f7f3] p-6 text-[#151515] shadow-[0_20px_60px_rgba(0,0,0,0.16)] lg:grid-cols-[1fr_0.8fr] md:p-8">
           <div className="grid gap-5 sm:grid-cols-2">
             {[
               { label: "Inbound leads / month", value: leads, setter: setLeads, min: 1, max: 2000 },
@@ -443,7 +443,7 @@ export function DemoRoomExperience({ room, token }: { room: DemoRoom; token: str
                   max={max}
                   step={min}
                   onChange={(e) => setter(Number(e.target.value))}
-                  className="mt-2 w-full rounded-[var(--radius)] border border-[var(--color-line)] bg-[var(--color-bg-cream)] px-3 py-3"
+                  className="mt-2 w-full rounded-[10px] border border-black/15 bg-white px-3 py-3 text-base text-[#151515] outline-none focus:border-[var(--color-brand-amber)] focus:ring-2 focus:ring-[var(--color-brand-amber)]/20"
                 />
               </label>
             ))}
