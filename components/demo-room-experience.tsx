@@ -1,9 +1,10 @@
 "use client";
 
+import Image from "next/image";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type { DemoRoom } from "@/content/demo-rooms";
 
-type EmailResult = { reply: string; captured: string[]; nextAction: string };
+type EmailResult = { subject: string; reply: string; captured: string[]; nextAction: string };
 type VoiceConfig = { publicKey: string; assistantId: string };
 
 function money(value: number) {
@@ -150,13 +151,13 @@ export function DemoRoomExperience({ room, token }: { room: DemoRoom; token: str
 
       <section className="mx-auto grid w-[min(1200px,calc(100%-32px))] gap-12 py-16 md:grid-cols-[1.05fr_0.95fr] md:py-24">
         <div>
-          <span className="mb-3 inline-block text-[var(--text-eyebrow)] font-semibold uppercase tracking-[0.14em] text-[var(--color-brand-violet)]">
+          <span className="mb-3 inline-block text-[var(--text-eyebrow)] font-semibold uppercase tracking-[0.14em] text-[var(--color-brand-amber)]">
             Built for {room.prospect.businessName}
           </span>
           <h1 className="headline-plain max-w-3xl text-[var(--text-display-hero)]">
             See how Iris handles the lead before it goes cold.
           </h1>
-          <p className="mt-6 max-w-2xl text-[var(--text-body-lg)] text-[var(--color-ink-muted)]">
+          <p className="mt-6 max-w-2xl text-[var(--text-body-lg)] leading-relaxed text-[var(--color-ink-muted)]">
             {room.prospect.firstName}, this isolated demo uses your active listing at{" "}
             {room.listing.address}. Nothing connects to your inbox, phone, calendar, or CRM.
           </p>
@@ -177,117 +178,218 @@ export function DemoRoomExperience({ room, token }: { room: DemoRoom; token: str
           </div>
         </div>
 
-        <div className="rounded-[var(--radius)] border border-[var(--color-line)] bg-white p-6 shadow-[var(--shadow-soft)]">
-          <p className="font-[var(--font-mono)] text-xs uppercase tracking-[0.14em] text-[var(--color-brand-violet)]">
-            Live listing context
-          </p>
-          <h2 className="mt-3 text-2xl font-semibold">{room.listing.address}</h2>
-          <p className="mt-2 text-3xl font-semibold">{money(room.listing.price)}</p>
-          <div className="mt-6 grid grid-cols-2 gap-4 text-sm sm:grid-cols-4">
-            <span>
-              <strong className="block text-xl">{room.listing.beds}</strong>Beds
-            </span>
-            <span>
-              <strong className="block text-xl">{room.listing.baths}</strong>Baths
-            </span>
-            <span>
-              <strong className="block text-xl">{room.listing.squareFeet.toLocaleString()}</strong>
-              Sq ft
-            </span>
-            <span>
-              <strong className="block text-xl">{room.listing.acreage}</strong>Acres
-            </span>
+        <div className="overflow-hidden rounded-[var(--radius)] bg-[#151515] text-white shadow-[0_24px_70px_rgba(0,0,0,0.22)]">
+          <div className="grid h-56 grid-cols-[2fr_1fr] gap-1 bg-[#242424]">
+            {room.listing.images.map((image, index) => (
+              <Image
+                key={image.src}
+                src={image.src}
+                alt={image.alt}
+                width={900}
+                height={600}
+                sizes={
+                  index === 0 ? "(min-width: 768px) 32vw, 66vw" : "(min-width: 768px) 16vw, 33vw"
+                }
+                className={`h-full w-full object-cover ${index === 0 ? "row-span-2" : ""}`}
+              />
+            ))}
           </div>
-          <p className="mt-6 font-[var(--font-mono)] text-xs text-[var(--color-ink-muted)]">
-            MLS {room.listing.mls} · verified active September 4, 2026
-          </p>
+          <div className="p-6">
+            <p className="font-[var(--font-mono)] text-xs uppercase tracking-[0.14em] text-[var(--color-brand-amber)]">
+              Verified active listing
+            </p>
+            <h2 className="mt-3 text-2xl font-semibold text-white">{room.listing.address}</h2>
+            <p className="mt-2 text-3xl font-semibold text-white">{money(room.listing.price)}</p>
+            <div className="mt-6 grid grid-cols-2 gap-4 text-sm sm:grid-cols-4">
+              <span>
+                <strong className="block text-xl">{room.listing.beds}</strong>Beds
+              </span>
+              <span>
+                <strong className="block text-xl">{room.listing.baths}</strong>Baths
+              </span>
+              <span>
+                <strong className="block text-xl">
+                  {room.listing.squareFeet.toLocaleString()}
+                </strong>
+                Sq ft
+              </span>
+              <span>
+                <strong className="block text-xl">{room.listing.acreage}</strong>Acres
+              </span>
+            </div>
+            <p className="mt-6 text-sm leading-6 text-white/70">{room.listing.summary}</p>
+            <p className="mt-4 font-[var(--font-mono)] text-xs text-white/60">
+              MLS {room.listing.mls} · {room.listing.propertyType} · built {room.listing.yearBuilt}
+            </p>
+          </div>
         </div>
       </section>
 
       <section className="bg-[var(--color-dark-section)] py-20 text-white md:py-28">
-        <div className="mx-auto grid w-[min(1200px,calc(100%-32px))] gap-8 lg:grid-cols-2">
-          <article className="rounded-[var(--radius)] border border-white/10 bg-white/[0.04] p-6 md:p-8">
-            <span className="text-xs font-semibold uppercase tracking-[0.14em] text-[var(--color-gold-italic)]">
-              Email lead test
-            </span>
-            <h2 className="mt-3 text-3xl font-semibold">Send Iris a buyer inquiry.</h2>
-            <div className="mt-6 grid gap-2">
-              {presets.map((preset) => (
-                <button
-                  key={preset}
-                  type="button"
-                  onClick={() => setMessage(preset)}
-                  className="rounded-[var(--radius)] border border-white/10 px-4 py-3 text-left text-sm hover:bg-white/10"
-                >
-                  {preset}
-                </button>
-              ))}
-            </div>
-            <label className="mt-6 block text-sm font-medium" htmlFor="demo-message">
-              Or type anything
-            </label>
-            <textarea
-              id="demo-message"
-              value={message}
-              onChange={(e) => setMessage(e.target.value)}
-              maxLength={1200}
-              rows={4}
-              className="mt-2 w-full rounded-[var(--radius)] border border-white/15 bg-black/20 p-4 text-white"
-            />
-            <button
-              type="button"
-              disabled={sending || message.trim().length < 2}
-              onClick={runEmailDemo}
-              className="mt-4 rounded-[var(--radius)] bg-[var(--color-brand-amber)] px-5 py-3 font-semibold text-black disabled:opacity-50"
-            >
-              {sending ? "Iris is responding…" : "Run email demo"}
-            </button>
-            {emailError ? (
-              <p role="alert" className="mt-4 text-sm text-red-300">
-                {emailError}
-              </p>
-            ) : null}
-            {emailResult ? (
-              <div className="mt-6 rounded-[var(--radius)] bg-white p-5 text-[var(--color-ink-charcoal)]">
-                <p className="whitespace-pre-wrap text-sm leading-6">{emailResult.reply}</p>
-                <div className="mt-5 border-t border-[var(--color-line)] pt-4 text-sm">
-                  <strong>What Iris captured</strong>
-                  <p className="mt-1 text-[var(--color-ink-muted)]">
-                    {emailResult.captured.length
-                      ? emailResult.captured.join(" · ")
-                      : "No new lead details yet"}
-                  </p>
-                  <strong className="mt-3 block">Next action</strong>
-                  <p className="mt-1 text-[var(--color-ink-muted)]">{emailResult.nextAction}</p>
-                </div>
+        <div className="mx-auto w-[min(1200px,calc(100%-32px))]">
+          <div className="max-w-3xl">
+            <p className="text-sm font-medium text-[var(--color-brand-amber)]">Start here</p>
+            <h2 className="mt-3 text-[clamp(2.4rem,4.6vw,4.2rem)] font-semibold leading-[1.02] tracking-[-0.04em]">
+              Watch Iris work a buyer email.
+            </h2>
+            <p className="mt-6 max-w-2xl text-[var(--text-body-lg)] leading-relaxed text-white/70">
+              This is the reply a buyer would receive, the lead intelligence Iris would capture, and
+              the handoff Patricia would see.
+            </p>
+          </div>
+          <article className="mt-12 overflow-hidden rounded-[var(--radius)] bg-[#ece9e1] text-[#151515] shadow-[0_28px_90px_rgba(0,0,0,0.35)]">
+            <div className="flex items-center justify-between border-b border-black/10 bg-[#f8f7f3] px-4 py-3 sm:px-6">
+              <div className="flex gap-2" aria-hidden="true">
+                <span className="h-3 w-3 rounded-full bg-[#ff5f57]" />
+                <span className="h-3 w-3 rounded-full bg-[#febc2e]" />
+                <span className="h-3 w-3 rounded-full bg-[#28c840]" />
               </div>
-            ) : null}
+              <span className="font-[var(--font-mono)] text-[11px] uppercase tracking-[0.12em] text-black/50">
+                Iris email workspace
+              </span>
+              <span className="text-xs text-black/50">Live demo</span>
+            </div>
+            <div className="grid lg:grid-cols-[0.9fr_1.1fr]">
+              <div className="border-b border-black/10 p-6 lg:border-r lg:border-b-0 md:p-8">
+                <span className="text-xs font-semibold uppercase tracking-[0.14em] text-[var(--color-gold-italic)]">
+                  Buyer inquiry
+                </span>
+                <h3 className="mt-3 text-3xl font-semibold">Write as the buyer.</h3>
+                <div className="mt-6 grid gap-2">
+                  {presets.map((preset) => (
+                    <button
+                      key={preset}
+                      type="button"
+                      onClick={() => setMessage(preset)}
+                      className="rounded-[10px] border border-black/10 bg-white/60 px-4 py-3 text-left text-sm leading-5 transition hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-brand-amber)]"
+                    >
+                      {preset}
+                    </button>
+                  ))}
+                </div>
+                <label className="mt-6 block text-sm font-medium" htmlFor="demo-message">
+                  Buyer email
+                </label>
+                <textarea
+                  id="demo-message"
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
+                  maxLength={1200}
+                  rows={4}
+                  className="mt-2 w-full rounded-[10px] border border-black/15 bg-white p-4 text-base leading-6 text-[#151515] outline-none focus:border-[var(--color-brand-amber)] focus:ring-2 focus:ring-[var(--color-brand-amber)]/20"
+                />
+                <button
+                  type="button"
+                  disabled={sending || message.trim().length < 2}
+                  onClick={runEmailDemo}
+                  className="mt-4 rounded-[10px] bg-[#151515] px-5 py-3 font-semibold text-white transition hover:bg-black active:translate-y-px disabled:cursor-not-allowed disabled:opacity-50"
+                >
+                  {sending ? "Iris is responding…" : "Run email demo"}
+                </button>
+                {emailError ? (
+                  <p
+                    role="alert"
+                    className="mt-4 rounded-[10px] bg-red-50 p-3 text-sm text-red-800"
+                  >
+                    {emailError} Try again in a moment.
+                  </p>
+                ) : null}
+              </div>
+              <div className="min-w-0 bg-white p-6 md:p-8" aria-live="polite">
+                {emailResult ? (
+                  <>
+                    <div className="border-b border-black/10 pb-5">
+                      <p className="text-xs font-medium text-black/50">
+                        From: Iris &lt;iris@americanrealestate.com&gt;
+                      </p>
+                      <p className="mt-1 break-words text-xs text-black/50">
+                        To: buyer@example.com
+                      </p>
+                      <h3 className="mt-4 text-xl font-semibold text-[#151515]">
+                        {emailResult.subject}
+                      </h3>
+                    </div>
+                    <p className="mt-6 whitespace-pre-wrap text-[15px] leading-7 text-[#242424]">
+                      {emailResult.reply}
+                    </p>
+                    <div className="mt-8 rounded-[10px] bg-[#f1eee7] p-5 text-sm">
+                      <strong className="text-[#151515]">Private agent handoff</strong>
+                      <p className="mt-2 leading-6 text-[#555]">
+                        {emailResult.captured.length
+                          ? emailResult.captured.join(" · ")
+                          : "No new buyer details captured yet"}
+                      </p>
+                      <p className="mt-3 font-medium leading-6 text-[#151515]">
+                        {emailResult.nextAction}
+                      </p>
+                    </div>
+                  </>
+                ) : (
+                  <div className="flex min-h-80 flex-col justify-center">
+                    <p className="font-[var(--font-mono)] text-xs uppercase tracking-[0.12em] text-black/40">
+                      Reply preview
+                    </p>
+                    <h3 className="mt-4 text-3xl font-semibold tracking-[-0.03em] text-[#151515]">
+                      A complete reply appears here.
+                    </h3>
+                    <p className="mt-4 max-w-md leading-7 text-[#666]">
+                      Iris answers from verified property facts, asks one useful follow-up, captures
+                      buyer intent, and prepares Patricia’s next action.
+                    </p>
+                  </div>
+                )}
+              </div>
+            </div>
           </article>
 
-          <article className="rounded-[var(--radius)] border border-white/10 bg-white/[0.04] p-6 md:p-8">
-            <span className="text-xs font-semibold uppercase tracking-[0.14em] text-[var(--color-gold-italic)]">
-              Voice lead test
-            </span>
-            <h2 className="mt-3 text-3xl font-semibold">Talk with Iris in your browser.</h2>
-            <p className="mt-3 text-sm leading-6 text-white/70">
-              Three-minute limit. No phone number. No recording. No live booking or CRM writes.
-            </p>
-            {!voiceConfig ? (
-              <button
-                type="button"
-                onClick={loadVoiceDemo}
-                className="mt-6 rounded-[var(--radius)] bg-[var(--color-brand-amber)] px-5 py-3 font-semibold text-black"
-              >
-                Load secure voice demo
-              </button>
-            ) : null}
-            <div ref={voiceHost} className="mt-6 min-h-40" />
-            {voiceError ? (
-              <p role="alert" className="mt-4 text-sm text-red-300">
-                {voiceError}
+          <div className="mt-16 grid gap-8 lg:grid-cols-[0.75fr_1.25fr]">
+            <article className="rounded-[var(--radius)] border border-white/10 bg-white/[0.04] p-6 md:p-8">
+              <span className="text-xs font-semibold uppercase tracking-[0.14em] text-[var(--color-gold-italic)]">
+                Voice lead test
+              </span>
+              <h2 className="mt-3 text-3xl font-semibold">Talk with Iris in your browser.</h2>
+              <p className="mt-3 text-sm leading-6 text-white/70">
+                Three-minute limit. No phone number. No recording. No live booking or CRM writes.
               </p>
-            ) : null}
-          </article>
+              {!voiceConfig ? (
+                <button
+                  type="button"
+                  onClick={loadVoiceDemo}
+                  className="mt-6 rounded-[var(--radius)] bg-[var(--color-brand-amber)] px-5 py-3 font-semibold text-black"
+                >
+                  Load secure voice demo
+                </button>
+              ) : null}
+              <div ref={voiceHost} className="mt-6 min-h-40" />
+              {voiceError ? (
+                <p role="alert" className="mt-4 text-sm text-red-300">
+                  {voiceError}
+                </p>
+              ) : null}
+            </article>
+            <article className="p-2 md:p-8">
+              <h2 className="text-3xl font-semibold">What Iris already knows</h2>
+              <div className="mt-8 grid gap-x-8 gap-y-5 sm:grid-cols-2">
+                {room.listing.highlights.map((item) => (
+                  <div
+                    key={item}
+                    className="border-t border-white/15 pt-4 text-sm leading-6 text-white/75"
+                  >
+                    {item}
+                  </div>
+                ))}
+                <div className="border-t border-white/15 pt-4 text-sm leading-6 text-white/75">
+                  {room.listing.lotSquareFeet.toLocaleString()} sq ft lot · $
+                  {room.listing.pricePerSquareFoot}/sq ft · listed {room.listing.listedAt}
+                </div>
+              </div>
+              <p className="mt-8 text-sm leading-6 text-white/50">
+                Iris can answer verified facts immediately. Questions about availability, financing,
+                insurance, restrictions, condition, or negotiations route to Patricia instead of
+                getting guessed.
+              </p>
+            </article>
+          </div>
         </div>
       </section>
 

@@ -10,6 +10,15 @@ export type DemoRoom = {
     squareFeet: number;
     acreage: number;
     mls: string;
+    propertyType: string;
+    yearBuilt: number;
+    lotSquareFeet: number;
+    pricePerSquareFoot: number;
+    listedAt: string;
+    summary: string;
+    highlights: string[];
+    buyerNotes: string[];
+    images: { src: string; alt: string }[];
   };
   sources: { label: string; url: string; checkedAt: string }[];
   expiresAt: string;
@@ -33,6 +42,39 @@ export const demoRooms: DemoRoom[] = [
       squareFeet: 2000,
       acreage: 12.41,
       mls: "82557177",
+      propertyType: "Farm · single-family home",
+      yearBuilt: 1976,
+      lotSquareFeet: 540797,
+      pricePerSquareFoot: 195,
+      listedAt: "June 1, 2026",
+      summary:
+        "A 3-bedroom country home on 12.41 acres with updated flooring, energy-efficient windows, and quick access to Highway 96.",
+      highlights: [
+        "Updated flooring throughout",
+        "New energy-efficient windows",
+        "Retaining wall added for flood protection",
+        "Space for gardening, recreation, livestock, or additional structures",
+        "Minutes from Highway 96 with access to Buna, Kirbyville, and Beaumont",
+      ],
+      buyerNotes: [
+        "No upcoming open houses are published",
+        "Property facts and measurements should be independently verified",
+        "Financing, insurance, restrictions, and showing availability require human confirmation",
+      ],
+      images: [
+        {
+          src: "https://images-listings.coldwellbanker.com/HARMLS/82/55/71/77/_P/82557177_P00.jpg",
+          alt: "Front exterior of 471 Any Old Street East",
+        },
+        {
+          src: "https://images-listings.coldwellbanker.com/HARMLS/82/55/71/77/_P/82557177_P01.jpg",
+          alt: "Second listing view of 471 Any Old Street East",
+        },
+        {
+          src: "https://images-listings.coldwellbanker.com/HARMLS/82/55/71/77/_P/82557177_P02.jpg",
+          alt: "Third listing view of 471 Any Old Street East",
+        },
+      ],
     },
     sources: [
       {
@@ -43,6 +85,11 @@ export const demoRooms: DemoRoom[] = [
       {
         label: "Listing agent and brokerage profile",
         url: "https://www.har.com/patricia-mack/agent_trishamack",
+        checkedAt: "2026-09-04",
+      },
+      {
+        label: "Property description, features, and photography",
+        url: "https://www.coldwellbanker.com/tx/buna/471-any-old-st/lid-P00800000HByybC1WR98EX9G2nIyMLUBIeqCT4RP",
         checkedAt: "2026-09-04",
       },
     ],
