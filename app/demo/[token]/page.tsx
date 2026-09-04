@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { DemoRoomExperience } from "@/components/demo-room-experience";
+import { isAdmin } from "@/lib/admin-auth";
 import { demoRoomForToken } from "@/lib/demo-room";
 
 export const dynamic = "force-dynamic";
@@ -13,7 +14,7 @@ export const metadata: Metadata = {
 
 export default async function DemoRoomPage({ params }: { params: Promise<{ token: string }> }) {
   const { token } = await params;
-  const match = demoRoomForToken(token);
+  const match = await demoRoomForToken(token, await isAdmin());
   if (!match) notFound();
 
   if (match.expired) {

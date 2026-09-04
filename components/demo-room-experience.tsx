@@ -228,7 +228,8 @@ export function DemoRoomExperience({ room, token }: { room: DemoRoom; token: str
             </div>
             <p className="mt-6 text-sm leading-6 text-white/70">{room.listing.summary}</p>
             <p className="mt-4 font-[var(--font-mono)] text-xs text-white/60">
-              MLS {room.listing.mls} · {room.listing.propertyType} · built {room.listing.yearBuilt}
+              MLS {room.listing.mls} · {room.listing.propertyType}
+              {room.listing.yearBuilt ? ` · built ${room.listing.yearBuilt}` : ""}
             </p>
           </div>
         </div>

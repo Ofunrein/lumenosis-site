@@ -1,5 +1,6 @@
 import { type NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
+import { isAdmin } from "@/lib/admin-auth";
 import { allowRequest, clientAddress } from "@/lib/demo-rate-limit";
 import { demoRoomForToken } from "@/lib/demo-room";
 
@@ -15,7 +16,7 @@ const Output = z.object({
 
 export async function POST(request: NextRequest, context: { params: Promise<{ token: string }> }) {
   const { token } = await context.params;
-  const match = demoRoomForToken(token);
+  const match = await demoRoomForToken(token, await isAdmin());
   if (!match) return NextResponse.json({ error: "Demo not found" }, { status: 404 });
   if (match.expired) return NextResponse.json({ error: "Demo expired" }, { status: 410 });
 
