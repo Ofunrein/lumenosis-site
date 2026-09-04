@@ -4,7 +4,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type { DemoRoom } from "@/content/demo-rooms";
 
 type EmailResult = { reply: string; captured: string[]; nextAction: string };
-type VoiceConfig = { publicKey: string; assistant: Record<string, unknown> };
+type VoiceConfig = { publicKey: string; assistantId: string };
 
 function money(value: number) {
   return new Intl.NumberFormat("en-US", {
@@ -58,7 +58,7 @@ export function DemoRoomExperience({ room, token }: { room: DemoRoom; token: str
 
     const widget = document.createElement("vapi-widget");
     widget.setAttribute("public-key", voiceConfig.publicKey);
-    widget.setAttribute("assistant", JSON.stringify(voiceConfig.assistant));
+    widget.setAttribute("assistant-id", voiceConfig.assistantId);
     widget.setAttribute("mode", "voice");
     widget.setAttribute("theme", "light");
     widget.setAttribute("size", "full");
