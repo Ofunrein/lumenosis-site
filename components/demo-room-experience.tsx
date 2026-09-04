@@ -248,8 +248,14 @@ export function DemoRoomExperience({ room, token }: { room: DemoRoom; token: str
           <article className="mt-12 overflow-hidden rounded-[var(--radius)] bg-[#ece9e1] text-[#151515] shadow-[0_28px_90px_rgba(0,0,0,0.35)]">
             <div className="flex items-center justify-between border-b border-black/10 bg-[#f8f7f3] px-4 py-3 sm:px-6">
               <div className="flex items-center gap-3">
-                <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#151515] text-sm font-semibold text-white">
-                  I
+                <span className="relative h-8 w-8 overflow-hidden rounded-full border border-black/10 bg-[#151515]">
+                  <Image
+                    src="/images/agents/iris.png"
+                    alt="Iris"
+                    fill
+                    sizes="32px"
+                    className="object-cover"
+                  />
                 </span>
                 <div>
                   <span className="block text-sm font-semibold">Iris Inbox</span>
