@@ -1,5 +1,6 @@
 "use client";
 
+import { Mic } from "lucide-react";
 import Image from "next/image";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type { DemoRoom } from "@/content/demo-rooms";
@@ -401,24 +402,37 @@ export function DemoRoomExperience({ room, token }: { room: DemoRoom; token: str
           </article>
 
           <div className="mt-16 grid gap-8 lg:grid-cols-[0.75fr_1.25fr]">
-            <article className="rounded-[var(--radius)] border border-white/10 bg-white/[0.04] p-6 md:p-8">
-              <span className="text-xs font-semibold uppercase tracking-[0.14em] text-[var(--color-gold-italic)]">
-                Voice lead test
-              </span>
-              <h2 className="mt-3 text-3xl font-semibold">Talk with Iris in your browser.</h2>
-              <p className="mt-3 text-sm leading-6 text-white/70">
-                Three-minute limit. No phone number. No recording. No live booking or CRM writes.
+            <article className="rounded-[var(--radius)] border border-[var(--color-brand-amber)]/40 bg-[var(--color-brand-amber-soft)] p-6 shadow-[0_20px_60px_rgba(0,0,0,0.24)] md:p-8">
+              <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.14em] text-[var(--color-brand-amber)]">
+                <span className="h-2 w-2 rounded-full bg-[var(--color-brand-amber)] motion-safe:animate-pulse" />
+                Voice channel available
+              </div>
+              <h2 className="mt-4 text-3xl font-semibold">Call Iris now.</h2>
+              <p className="mt-3 text-sm leading-6 text-white/75">
+                Ask about this property as a real buyer. Iris answers from the same verified listing
+                details and hands the conversation back to Patricia.
               </p>
               {!voiceConfig ? (
                 <button
                   type="button"
                   onClick={loadVoiceDemo}
-                  className="mt-6 rounded-[var(--radius)] bg-[var(--color-brand-amber)] px-5 py-3 font-semibold text-black"
+                  className="mt-6 flex w-full items-center gap-4 rounded-[12px] bg-[var(--color-brand-amber)] p-4 text-left text-black shadow-[0_10px_30px_rgba(196,154,82,0.24)] transition-[transform,background-color] duration-150 hover:bg-[#d3aa62] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-dark-section)]"
                 >
-                  Load secure voice demo
+                  <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-black text-white">
+                    <Mic aria-hidden="true" size={22} strokeWidth={2.4} />
+                  </span>
+                  <span className="min-w-0">
+                    <strong className="block text-lg">Start private voice demo</strong>
+                    <span className="mt-1 block text-sm text-black/70">
+                      Browser microphone · 3-minute limit
+                    </span>
+                  </span>
                 </button>
               ) : null}
               <div ref={voiceHost} className="mt-6 min-h-40" />
+              <p className="mt-4 text-xs leading-5 text-white/55">
+                No phone number. Recording disabled. No live calendar or CRM access.
+              </p>
               {voiceError ? (
                 <p role="alert" className="mt-4 text-sm text-red-300">
                   {voiceError}
