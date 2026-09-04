@@ -169,10 +169,10 @@ export function DemoRoomExperience({ room, token }: { room: DemoRoom; token: str
   return (
     <main
       id="top"
-      className="min-h-screen bg-[var(--color-bg-cream)] text-[var(--color-ink-charcoal)]"
+      className="min-h-screen bg-[var(--color-bg-cream)] text-[var(--color-ink-charcoal)] [overflow-wrap:anywhere] [&_.grid>*]:min-w-0"
     >
       <header className="border-b border-[var(--color-line)] bg-[var(--color-bg-cream)]">
-        <div className="mx-auto flex w-[min(1200px,calc(100%-32px))] items-center justify-between gap-4 py-4">
+        <div className="mx-auto flex w-[min(1200px,calc(100%-32px))] flex-wrap items-center justify-between gap-4 py-4">
           <div>
             <span className="block text-sm font-semibold tracking-[-0.02em]">
               Built for {room.prospect.businessName}
@@ -187,12 +187,12 @@ export function DemoRoomExperience({ room, token }: { room: DemoRoom; token: str
         </div>
       </header>
 
-      <section className="mx-auto grid w-[min(1200px,calc(100%-32px))] gap-12 py-16 md:grid-cols-[1.05fr_0.95fr] md:py-24">
+      <section className="mx-auto grid w-[min(1200px,calc(100%-32px))] gap-8 py-10 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] md:gap-12 md:py-24">
         <div>
           <span className="mb-3 inline-block text-[var(--text-eyebrow)] font-semibold uppercase tracking-[0.14em] text-[var(--color-brand-amber)]">
             Built for {room.prospect.businessName}
           </span>
-          <h1 className="headline-plain max-w-3xl text-[var(--text-display-hero)]">
+          <h1 className="headline-plain max-w-3xl text-[clamp(2rem,5.5vw,4.5rem)]">
             See how Iris handles every listing inquiry before it goes cold.
           </h1>
           <p className="mt-6 max-w-2xl text-[var(--text-body-lg)] leading-relaxed text-[var(--color-ink-muted)]">
@@ -288,7 +288,7 @@ export function DemoRoomExperience({ room, token }: { room: DemoRoom; token: str
             </p>
           </div>
           <article className="mt-12 overflow-hidden rounded-[var(--radius)] bg-[#ece9e1] text-[#151515] shadow-[0_28px_90px_rgba(0,0,0,0.35)]">
-            <div className="flex items-center justify-between border-b border-black/10 bg-[#f8f7f3] px-4 py-3 sm:px-6">
+            <div className="flex flex-wrap items-center justify-between gap-3 border-b border-black/10 bg-[#f8f7f3] px-4 py-3 sm:px-6">
               <div className="flex items-center gap-3">
                 <span className="relative h-8 w-8 overflow-hidden rounded-full border border-black/10 bg-[#151515]">
                   <Image
@@ -311,7 +311,7 @@ export function DemoRoomExperience({ room, token }: { room: DemoRoom; token: str
               </span>
             </div>
             <div className="grid lg:grid-cols-[0.9fr_1.1fr]">
-              <div className="border-b border-black/10 p-6 lg:border-r lg:border-b-0 md:p-8">
+              <div className="border-b border-black/10 p-4 sm:p-6 lg:border-r lg:border-b-0 md:p-8">
                 <span className="text-xs font-semibold uppercase tracking-[0.14em] text-[var(--color-gold-italic)]">
                   Buyer inquiry
                 </span>
@@ -356,7 +356,7 @@ export function DemoRoomExperience({ room, token }: { room: DemoRoom; token: str
                   </p>
                 ) : null}
               </div>
-              <div className="min-w-0 bg-white p-6 md:p-8" aria-live="polite">
+              <div className="min-w-0 bg-white p-4 sm:p-6 md:p-8" aria-live="polite">
                 {emailResult ? (
                   <>
                     <div className="border-b border-black/10 pb-5">
@@ -573,8 +573,8 @@ export function DemoRoomExperience({ room, token }: { room: DemoRoom; token: str
           </div>
           <div className="flex flex-col justify-center rounded-[var(--radius)] bg-[var(--color-dark-section)] p-6 text-white">
             <p className="text-sm text-white/60">Estimated monthly opportunity range</p>
-            <p className="mt-2 text-4xl font-semibold text-[var(--color-gold-italic)]">
-              {money(recovered.low)}–{money(recovered.high)}
+            <p className="mt-2 flex flex-wrap items-baseline gap-x-2 text-[clamp(1.5rem,3vw,2.25rem)] font-semibold text-[var(--color-gold-italic)]">
+              <span>{money(recovered.low)}</span><span>–</span><span>{money(recovered.high)}</span>
             </p>
             <p className="mt-4 text-sm leading-6 text-white/60">
               Directional estimate from your assumptions. Closings depend on lead quality,

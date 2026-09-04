@@ -8,6 +8,27 @@ const demoToken = createHmac("sha256", demoSecret)
   .digest("base64url");
 const demo = `/demo/${demoToken}`;
 
+for (const [width, height] of [[320, 568], [390, 844], [768, 1024], [1024, 768], [1440, 900]]) {
+  test(`demo fits ${width}x${height}`, async ({ page }) => {
+    await page.setViewportSize({ width, height });
+    await page.route("**/api/demo/*/email", (route) => route.fulfill({
+      json: { subject: "Property details", reply: "https://example.com/" + "a".repeat(180), captured: [], nextAction: "Confirm a showing" },
+    }));
+    await page.goto(demo);
+    await page.getByRole("button", { name: "Run email demo" }).click();
+    await expect(page.getByText("Property details", { exact: true })).toBeVisible();
+    await page.getByLabel("Average commission").fill("100000");
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth)).toBe(true);
+    const preview = page.locator('[aria-live="polite"]');
+    expect(await preview.evaluate(e => e.scrollWidth <= e.clientWidth)).toBe(true);
+    await page.getByRole("button", { name: "Open photo 1 of 3" }).first().click();
+    const bounds = await page.getByRole("dialog").boundingBox();
+    expect(bounds).not.toBeNull();
+    expect(bounds!.width).toBeLessThan(width);
+    expect(bounds!.height).toBeLessThan(height);
+  });
+}
+
 test("approved demo loads and property gallery works", async ({ page }) => {
   await page.goto(demo);
   await expect(page.getByRole("heading", { name: /every listing inquiry/i })).toBeVisible();
