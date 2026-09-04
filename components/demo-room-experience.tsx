@@ -164,11 +164,13 @@ export function DemoRoomExperience({ room, token }: { room: DemoRoom; token: str
             Built for {room.prospect.businessName}
           </span>
           <h1 className="headline-plain max-w-3xl text-[var(--text-display-hero)]">
-            See how Iris handles the lead before it goes cold.
+            See how Iris handles every listing inquiry before it goes cold.
           </h1>
           <p className="mt-6 max-w-2xl text-[var(--text-body-lg)] leading-relaxed text-[var(--color-ink-muted)]">
-            {room.prospect.firstName}, this isolated demo uses your active listing at{" "}
-            {room.listing.address}. Nothing connects to your inbox, phone, calendar, or CRM.
+            {room.prospect.firstName}, this demo uses {room.listing.address} as one live example. In
+            production, Iris works across your entire property inventory and pulls current details
+            from every connected listing source. Nothing in this demo connects to your inbox, phone,
+            calendar, or CRM.
           </p>
           <div className="mt-8 flex flex-wrap gap-3 text-sm">
             {[
@@ -243,8 +245,9 @@ export function DemoRoomExperience({ room, token }: { room: DemoRoom; token: str
               Watch Iris work a buyer email.
             </h2>
             <p className="mt-6 max-w-2xl text-[var(--text-body-lg)] leading-relaxed text-white/70">
-              This is the reply a buyer would receive, the lead intelligence Iris would capture, and
-              the handoff Patricia would see.
+              Try one property here. The same agent can identify any listing in your inventory,
+              answer from its current source data, capture buyer intent, and prepare the right
+              handoff.
             </p>
           </div>
           <article className="mt-12 overflow-hidden rounded-[var(--radius)] bg-[#ece9e1] text-[#151515] shadow-[0_28px_90px_rgba(0,0,0,0.35)]">
@@ -393,8 +396,8 @@ export function DemoRoomExperience({ room, token }: { room: DemoRoom; token: str
                       A complete reply appears here.
                     </h3>
                     <p className="mt-4 max-w-md leading-7 text-[#666]">
-                      Iris answers from verified property facts, asks one useful follow-up, captures
-                      buyer intent, and prepares Patricia’s next action.
+                      Iris answers this example from verified property facts. In production, it
+                      searches every connected listing source before replying.
                     </p>
                   </div>
                 )}
