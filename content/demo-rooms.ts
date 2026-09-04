@@ -1,6 +1,6 @@
 export type DemoRoom = {
   slug: string;
-  prospect: { firstName: string; businessName: string; role: string };
+  prospect: { firstName: string; fullName: string; businessName: string; role: string };
   listing: {
     address: string;
     status: "active";
@@ -30,6 +30,7 @@ export const demoRooms: DemoRoom[] = [
     slug: "patricia-any-old-street",
     prospect: {
       firstName: "Patricia",
+      fullName: "Patricia Mack",
       businessName: "American Real Estate, ERA Powered",
       role: "REALTOR®",
     },

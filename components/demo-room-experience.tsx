@@ -18,8 +18,9 @@ function money(value: number) {
 export function DemoRoomExperience({ room, token }: { room: DemoRoom; token: string }) {
   const presets = [
     `Is ${room.listing.address} still available, and when could I see it?`,
-    `We need ${room.listing.beds} bedrooms near ${room.listing.address.split(",")[1]?.trim()}. What should we know about this home?`,
-    "I may need to sell before buying. Can someone help me plan both?",
+    `Tell me more about the updates, acreage, location, and anything I should verify before touring ${room.listing.address}.`,
+    `We need ${room.listing.beds} bedrooms and room for horses. Is this property worth touring?`,
+    "I need to sell my Beaumont home before buying. Can Patricia help me plan both?",
   ];
   const [message, setMessage] = useState(presets[0]);
   const [emailResult, setEmailResult] = useState<EmailResult | null>(null);
@@ -141,8 +142,15 @@ export function DemoRoomExperience({ room, token }: { room: DemoRoom; token: str
       className="min-h-screen bg-[var(--color-bg-cream)] text-[var(--color-ink-charcoal)]"
     >
       <header className="border-b border-[var(--color-line)] bg-[var(--color-bg-cream)]">
-        <div className="mx-auto flex w-[min(1200px,calc(100%-32px))] items-center justify-between py-4">
-          <span className="text-sm font-semibold tracking-[-0.02em]">LUMENOSIS AI</span>
+        <div className="mx-auto flex w-[min(1200px,calc(100%-32px))] items-center justify-between gap-4 py-4">
+          <div>
+            <span className="block text-sm font-semibold tracking-[-0.02em]">
+              Built for {room.prospect.businessName}
+            </span>
+            <span className="mt-1 block text-xs text-[var(--color-ink-muted)]">
+              Prepared for {room.prospect.fullName} · {room.prospect.role}
+            </span>
+          </div>
           <span className="font-[var(--font-mono)] text-xs uppercase tracking-[0.14em] text-[var(--color-ink-muted)]">
             Private demo · expires in 14 days
           </span>
@@ -239,15 +247,20 @@ export function DemoRoomExperience({ room, token }: { room: DemoRoom; token: str
           </div>
           <article className="mt-12 overflow-hidden rounded-[var(--radius)] bg-[#ece9e1] text-[#151515] shadow-[0_28px_90px_rgba(0,0,0,0.35)]">
             <div className="flex items-center justify-between border-b border-black/10 bg-[#f8f7f3] px-4 py-3 sm:px-6">
-              <div className="flex gap-2" aria-hidden="true">
-                <span className="h-3 w-3 rounded-full bg-[#ff5f57]" />
-                <span className="h-3 w-3 rounded-full bg-[#febc2e]" />
-                <span className="h-3 w-3 rounded-full bg-[#28c840]" />
+              <div className="flex items-center gap-3">
+                <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#151515] text-sm font-semibold text-white">
+                  I
+                </span>
+                <div>
+                  <span className="block text-sm font-semibold">Iris Inbox</span>
+                  <span className="block text-[11px] text-black/50">
+                    {room.prospect.businessName}
+                  </span>
+                </div>
               </div>
-              <span className="font-[var(--font-mono)] text-[11px] uppercase tracking-[0.12em] text-black/50">
-                Iris email workspace
+              <span className="rounded-full bg-[#e8f0fe] px-3 py-1 text-xs font-medium text-[#174ea6]">
+                Live demo
               </span>
-              <span className="text-xs text-black/50">Live demo</span>
             </div>
             <div className="grid lg:grid-cols-[0.9fr_1.1fr]">
               <div className="border-b border-black/10 p-6 lg:border-r lg:border-b-0 md:p-8">
@@ -312,6 +325,45 @@ export function DemoRoomExperience({ room, token }: { room: DemoRoom; token: str
                     <p className="mt-6 whitespace-pre-wrap text-[15px] leading-7 text-[#242424]">
                       {emailResult.reply}
                     </p>
+                    <div className="mt-6 overflow-hidden rounded-[12px] border border-black/10 bg-[#f8f7f3]">
+                      <Image
+                        src={room.listing.images[0].src}
+                        alt={room.listing.images[0].alt}
+                        width={900}
+                        height={500}
+                        sizes="(min-width: 1024px) 42vw, 90vw"
+                        className="h-44 w-full object-cover sm:h-52"
+                      />
+                      <div className="p-5">
+                        <div className="flex flex-wrap items-start justify-between gap-3">
+                          <div>
+                            <p className="text-xl font-semibold text-[#151515]">
+                              {money(room.listing.price)}
+                            </p>
+                            <p className="mt-1 text-sm font-medium text-[#333]">
+                              {room.listing.address}
+                            </p>
+                          </div>
+                          <span className="rounded-full bg-[#e5f3e8] px-3 py-1 text-xs font-semibold text-[#1e6b35]">
+                            Active when verified
+                          </span>
+                        </div>
+                        <p className="mt-4 text-sm font-medium text-[#333]">
+                          {room.listing.beds} beds · {room.listing.baths} baths ·{" "}
+                          {room.listing.squareFeet.toLocaleString()} sq ft · {room.listing.acreage}{" "}
+                          acres
+                        </p>
+                        <p className="mt-3 text-sm leading-6 text-[#666]">{room.listing.summary}</p>
+                        <p className="mt-4 text-xs text-[#777]">
+                          MLS {room.listing.mls} · Details subject to independent verification
+                        </p>
+                      </div>
+                    </div>
+                    <div className="mt-6 border-t border-black/10 pt-5 text-sm leading-6 text-[#555]">
+                      <p className="font-semibold text-[#151515]">Iris · AI assistant</p>
+                      <p>{room.prospect.businessName}</p>
+                      <p>Working with {room.prospect.fullName}</p>
+                    </div>
                     <div className="mt-8 rounded-[10px] bg-[#f1eee7] p-5 text-sm">
                       <strong className="text-[#151515]">Private agent handoff</strong>
                       <p className="mt-2 leading-6 text-[#555]">
