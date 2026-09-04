@@ -1,6 +1,9 @@
 import { z } from "zod";
 
 const ServerEnv = z.object({
+  DEMO_ROOM_SECRET: z.string().min(32).optional(),
+  OPENAI_API_KEY: z.string().min(20).optional(),
+  VAPI_PUBLIC_KEY: z.string().min(10).optional(),
   FILLOUT_API_KEY: z.string().min(10).optional(),
   GHL_LOCATION_PIT: z.string().min(10).optional(),
   GHL_CALENDAR_ID: z.string().min(1).optional(),
@@ -15,6 +18,9 @@ const ClientEnv = z.object({
 });
 
 export const serverEnv = ServerEnv.parse({
+  DEMO_ROOM_SECRET: process.env.DEMO_ROOM_SECRET,
+  OPENAI_API_KEY: process.env.OPENAI_API_KEY,
+  VAPI_PUBLIC_KEY: process.env.VAPI_PUBLIC_KEY,
   FILLOUT_API_KEY: process.env.FILLOUT_API_KEY,
   GHL_LOCATION_PIT: process.env.GHL_LOCATION_PIT,
   GHL_CALENDAR_ID: process.env.GHL_CALENDAR_ID,
