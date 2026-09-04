@@ -6,6 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "test": "DEMO_ROOM_SECRET=test-demo-room-secret-at-least-32-characters LUMENOSIS_ADMIN_PASSWORD=7458 LUMENOSIS_TURSO_DATABASE_URL= LUMENOSIS_TURSO_AUTH_TOKEN= next build && playwright test",
     "lint": "biome check --write app/ public/",
     "format": "biome format --write ."
   },
@@ -42,8 +43,9 @@
   },
   "devDependencies": {
     "@biomejs/biome": "^2.4.15",
+    "@playwright/test": "^1.62.1",
     "@tailwindcss/postcss": "^4",
-    "@types/node": "^20.19.41",
+    "@types/node": "^24.13.3",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "tailwindcss": "^4",
