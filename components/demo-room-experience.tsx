@@ -174,7 +174,7 @@ export function DemoRoomExperience({ room, token }: { room: DemoRoom; token: str
           </p>
           <div className="mt-8 flex flex-wrap gap-3 text-sm">
             {[
-              "AI disclosed",
+              "Voice AI disclosed",
               "Public facts only",
               "No live-system access",
               "Recording disabled",
@@ -371,7 +371,9 @@ export function DemoRoomExperience({ room, token }: { room: DemoRoom; token: str
                       </div>
                     </div>
                     <div className="mt-6 border-t border-black/10 pt-5 text-sm leading-6 text-[#555]">
-                      <p className="font-semibold text-[#151515]">Iris · AI assistant</p>
+                      <p className="font-semibold text-[#151515]">
+                        Iris · Buyer inquiry coordinator
+                      </p>
                       <p>{room.prospect.businessName}</p>
                       <p>Working with {room.prospect.fullName}</p>
                     </div>
