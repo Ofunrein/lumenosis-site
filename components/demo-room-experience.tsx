@@ -1,6 +1,6 @@
 "use client";
 
-import { Mic } from "lucide-react";
+import { ChevronLeft, ChevronRight, Expand, Mic, X } from "lucide-react";
 import Image from "next/image";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type { DemoRoom } from "@/content/demo-rooms";
@@ -36,6 +36,35 @@ export function DemoRoomExperience({ room, token }: { room: DemoRoom; token: str
   const [appointmentRate, setAppointmentRate] = useState(35);
   const [closeRate, setCloseRate] = useState(12);
   const [commission, setCommission] = useState(9000);
+  const [galleryIndex, setGalleryIndex] = useState<number | null>(null);
+  const galleryDialog = useRef<HTMLDialogElement>(null);
+  const touchStart = useRef(0);
+
+  const moveGallery = useCallback(
+    (direction: number) =>
+      setGalleryIndex((current) =>
+        current === null
+          ? null
+          : (current + direction + room.listing.images.length) % room.listing.images.length,
+      ),
+    [room.listing.images.length],
+  );
+
+  useEffect(() => {
+    if (galleryIndex === null) return;
+    const keydown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setGalleryIndex(null);
+      if (e.key === "ArrowLeft") moveGallery(-1);
+      if (e.key === "ArrowRight") moveGallery(1);
+    };
+    galleryDialog.current?.showModal();
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", keydown);
+    return () => {
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", keydown);
+    };
+  }, [galleryIndex, moveGallery]);
 
   const event = useCallback(
     (name: string, durationSeconds?: number) =>
@@ -192,17 +221,25 @@ export function DemoRoomExperience({ room, token }: { room: DemoRoom; token: str
         <div className="overflow-hidden rounded-[var(--radius)] bg-[#151515] text-white shadow-[0_24px_70px_rgba(0,0,0,0.22)]">
           <div className="grid h-56 grid-cols-[2fr_1fr] gap-1 bg-[#242424]">
             {room.listing.images.map((image, index) => (
-              <Image
+              <button
                 key={image.src}
-                src={image.src}
-                alt={image.alt}
-                width={900}
-                height={600}
-                sizes={
-                  index === 0 ? "(min-width: 768px) 32vw, 66vw" : "(min-width: 768px) 16vw, 33vw"
-                }
-                className={`h-full w-full object-cover ${index === 0 ? "row-span-2" : ""}`}
-              />
+                type="button"
+                onClick={() => setGalleryIndex(index)}
+                aria-label={`Open photo ${index + 1} of ${room.listing.images.length}`}
+                className={`group relative overflow-hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-white ${index === 0 ? "row-span-2" : ""}`}
+              >
+                <Image
+                  src={image.src}
+                  alt={image.alt}
+                  width={900}
+                  height={600}
+                  sizes={
+                    index === 0 ? "(min-width: 768px) 32vw, 66vw" : "(min-width: 768px) 16vw, 33vw"
+                  }
+                  className="h-full w-full object-cover transition duration-200 group-hover:scale-[1.02]"
+                />
+                <Expand className="absolute right-3 bottom-3 h-5 w-5 rounded bg-black/60 p-1 text-white opacity-0 transition group-hover:opacity-100 group-focus-visible:opacity-100" />
+              </button>
             ))}
           </div>
           <div className="p-6">
@@ -337,14 +374,22 @@ export function DemoRoomExperience({ room, token }: { room: DemoRoom; token: str
                       {emailResult.reply}
                     </p>
                     <div className="mt-6 overflow-hidden rounded-[12px] border border-black/10 bg-[#f8f7f3]">
-                      <Image
-                        src={room.listing.images[0].src}
-                        alt={room.listing.images[0].alt}
-                        width={900}
-                        height={500}
-                        sizes="(min-width: 1024px) 42vw, 90vw"
-                        className="h-44 w-full object-cover sm:h-52"
-                      />
+                      <button
+                        type="button"
+                        onClick={() => setGalleryIndex(0)}
+                        className="group relative block w-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--color-brand-violet)]"
+                        aria-label={`Open photo 1 of ${room.listing.images.length}`}
+                      >
+                        <Image
+                          src={room.listing.images[0].src}
+                          alt={room.listing.images[0].alt}
+                          width={900}
+                          height={500}
+                          sizes="(min-width: 1024px) 42vw, 90vw"
+                          className="h-44 w-full object-cover sm:h-52"
+                        />
+                        <Expand className="absolute right-3 bottom-3 h-7 w-7 rounded bg-black/60 p-2 text-white" />
+                      </button>
                       <div className="p-5">
                         <div className="flex flex-wrap items-start justify-between gap-3">
                           <div>
@@ -573,6 +618,69 @@ export function DemoRoomExperience({ room, token }: { room: DemoRoom; token: str
           </div>
         </div>
       </section>
+      {galleryIndex !== null ? (
+        <dialog
+          ref={galleryDialog}
+          aria-label={`${room.listing.address} photo gallery`}
+          className="fixed inset-0 m-0 h-dvh max-h-none w-screen max-w-none flex-col bg-black p-0 text-white open:flex"
+          onCancel={() => setGalleryIndex(null)}
+          onTouchStart={(e) => {
+            touchStart.current = e.changedTouches[0].clientX;
+          }}
+          onTouchEnd={(e) => {
+            const distance = e.changedTouches[0].clientX - touchStart.current;
+            if (Math.abs(distance) > 50) moveGallery(distance > 0 ? -1 : 1);
+          }}
+        >
+          <header className="flex items-center justify-between gap-4 p-4 sm:p-6">
+            <div className="min-w-0">
+              <p className="truncate text-sm font-semibold">{room.listing.address}</p>
+              <p className="mt-1 text-xs text-white/60">
+                {galleryIndex + 1} of {room.listing.images.length} · {money(room.listing.price)}
+              </p>
+            </div>
+            <button
+              type="button"
+              onClick={() => setGalleryIndex(null)}
+              className="rounded-full bg-white/10 p-3 hover:bg-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+              aria-label="Close photo gallery"
+            >
+              <X className="h-6 w-6" />
+            </button>
+          </header>
+          <div className="relative flex min-h-0 flex-1 items-center justify-center px-4 pb-6 sm:px-16">
+            <Image
+              src={room.listing.images[galleryIndex].src}
+              alt={room.listing.images[galleryIndex].alt}
+              width={1600}
+              height={1200}
+              sizes="100vw"
+              priority
+              className="max-h-full w-auto max-w-full object-contain"
+            />
+            {room.listing.images.length > 1 ? (
+              <>
+                <button
+                  type="button"
+                  onClick={() => moveGallery(-1)}
+                  className="absolute left-4 rounded-full bg-black/70 p-3 hover:bg-black focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white sm:left-6"
+                  aria-label="Previous photo"
+                >
+                  <ChevronLeft className="h-7 w-7" />
+                </button>
+                <button
+                  type="button"
+                  onClick={() => moveGallery(1)}
+                  className="absolute right-4 rounded-full bg-black/70 p-3 hover:bg-black focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white sm:right-6"
+                  aria-label="Next photo"
+                >
+                  <ChevronRight className="h-7 w-7" />
+                </button>
+              </>
+            ) : null}
+          </div>
+        </dialog>
+      ) : null}
     </main>
   );
 }
