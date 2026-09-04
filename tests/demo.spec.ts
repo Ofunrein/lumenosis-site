@@ -19,7 +19,7 @@ test("approved demo loads and property gallery works", async ({ page }) => {
 
   await page.keyboard.press("ArrowRight");
   await expect(gallery).toContainText("2 of 3");
-  await page.keyboard.press("Escape");
+  await page.mouse.click(4, 4);
   await expect(gallery).toBeHidden();
 });
 

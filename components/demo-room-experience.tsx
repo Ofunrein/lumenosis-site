@@ -622,8 +622,14 @@ export function DemoRoomExperience({ room, token }: { room: DemoRoom; token: str
         <dialog
           ref={galleryDialog}
           aria-label={`${room.listing.address} photo gallery`}
-          className="fixed inset-0 m-0 h-dvh max-h-none w-screen max-w-none flex-col bg-black p-0 text-white open:flex"
+          className="m-auto h-[min(760px,calc(100dvh-32px))] max-h-none w-[min(1100px,calc(100%-32px))] max-w-none flex-col overflow-hidden rounded-[var(--radius)] border border-white/20 bg-black/85 p-0 text-white shadow-[0_24px_90px_rgba(0,0,0,0.45)] backdrop:bg-black/45 backdrop:backdrop-blur-sm open:flex"
           onCancel={() => setGalleryIndex(null)}
+          onClick={(e) => {
+            if (e.target === e.currentTarget) setGalleryIndex(null);
+          }}
+          onKeyDown={(e) => {
+            if (e.key === "Escape") setGalleryIndex(null);
+          }}
           onTouchStart={(e) => {
             touchStart.current = e.changedTouches[0].clientX;
           }}
@@ -632,7 +638,7 @@ export function DemoRoomExperience({ room, token }: { room: DemoRoom; token: str
             if (Math.abs(distance) > 50) moveGallery(distance > 0 ? -1 : 1);
           }}
         >
-          <header className="flex items-center justify-between gap-4 p-4 sm:p-6">
+          <header className="flex items-center justify-between gap-4 bg-black/35 p-4 sm:p-6">
             <div className="min-w-0">
               <p className="truncate text-sm font-semibold">{room.listing.address}</p>
               <p className="mt-1 text-xs text-white/60">
@@ -663,7 +669,7 @@ export function DemoRoomExperience({ room, token }: { room: DemoRoom; token: str
                 <button
                   type="button"
                   onClick={() => moveGallery(-1)}
-                  className="absolute left-4 rounded-full bg-black/70 p-3 hover:bg-black focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white sm:left-6"
+                  className="absolute left-4 rounded-full bg-white/90 p-3 text-black shadow-lg hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white sm:left-6"
                   aria-label="Previous photo"
                 >
                   <ChevronLeft className="h-7 w-7" />
@@ -671,7 +677,7 @@ export function DemoRoomExperience({ room, token }: { room: DemoRoom; token: str
                 <button
                   type="button"
                   onClick={() => moveGallery(1)}
-                  className="absolute right-4 rounded-full bg-black/70 p-3 hover:bg-black focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white sm:right-6"
+                  className="absolute right-4 rounded-full bg-white/90 p-3 text-black shadow-lg hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white sm:right-6"
                   aria-label="Next photo"
                 >
                   <ChevronRight className="h-7 w-7" />
