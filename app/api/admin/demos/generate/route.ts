@@ -4,6 +4,7 @@ import { z } from "zod";
 import type { DemoRoom } from "@/content/demo-rooms";
 import { isAdmin } from "@/lib/admin-auth";
 import { tokenHash } from "@/lib/demo-room";
+import { isAllowedListingImage } from "@/lib/listing-image-hosts";
 import { sql } from "@/lib/turso";
 
 const Input = z.object({
@@ -160,7 +161,10 @@ export async function POST(request: Request) {
       extracted.highlights = extracted.highlights.slice(0, 8);
     if (Array.isArray(extracted.buyerNotes))
       extracted.buyerNotes = extracted.buyerNotes.slice(0, 6);
-    if (Array.isArray(extracted.imageUrls)) extracted.imageUrls = extracted.imageUrls.slice(0, 3);
+    if (Array.isArray(extracted.imageUrls))
+      extracted.imageUrls = extracted.imageUrls
+        .filter((url: unknown) => typeof url === "string" && isAllowedListingImage(url))
+        .slice(0, 3);
   }
   const listing = Listing.safeParse(extracted);
   if (!listing.success)
