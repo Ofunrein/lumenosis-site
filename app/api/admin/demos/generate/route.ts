@@ -21,26 +21,29 @@ const Input = z.object({
   ]),
 });
 
-const Listing = z.object({
-  status: z.literal("active"),
-  price: z.number().int().positive(),
-  beds: z.number().nonnegative(),
-  baths: z.number().nonnegative(),
-  squareFeet: z.number().int().positive(),
-  acreage: z.number().nonnegative(),
-  mls: z.string().min(1),
-  propertyType: z.string().min(1),
-  yearBuilt: z.number().int().min(0).max(2100),
-  lotSquareFeet: z.number().int().nonnegative(),
-  pricePerSquareFoot: z.number().int().nonnegative(),
-  listedAt: z.string().min(1),
-  summary: z.string().min(30),
-  highlights: z.array(z.string()).min(3).max(8),
-  buyerNotes: z.array(z.string()).max(6),
-  imageUrls: z.array(z.string().url()).max(3),
-})
+const Listing = z
+  .object({
+    status: z.literal("active"),
+    price: z.number().int().positive(),
+    beds: z.number().nonnegative(),
+    baths: z.number().nonnegative(),
+    squareFeet: z.number().int().positive(),
+    acreage: z.number().nonnegative(),
+    mls: z.string().min(1),
+    propertyType: z.string().min(1),
+    yearBuilt: z.number().int().min(0).max(2100),
+    lotSquareFeet: z.number().int().nonnegative(),
+    pricePerSquareFoot: z.number().int().nonnegative(),
+    listedAt: z.string().min(1),
+    summary: z.string().min(30),
+    highlights: z.array(z.string()).min(3).max(8),
+    buyerNotes: z.array(z.string()).max(6),
+    imageUrls: z.array(z.string().url()).min(1).max(3),
+  })
   .refine((l) => l.price >= 25000, { message: "price looks like a rent amount, not a sale price" })
-  .refine((l) => !/lease|rent/i.test(l.propertyType), { message: "listing is a lease, not for sale" });
+  .refine((l) => !/lease|rent/i.test(l.propertyType), {
+    message: "listing is a lease, not for sale",
+  });
 
 const senderNames: Record<string, string> = {
   "iris-demo@agentmail.to": "Iris",
@@ -200,9 +203,10 @@ export async function POST(request: Request) {
     listing: {
       address: input.listingAddress,
       ...facts,
-      images: (facts.imageUrls.length ? facts.imageUrls : ["/images/agents/iris.png"]).map(
-        (src, index) => ({ src, alt: `${input.listingAddress} listing photo ${index + 1}` }),
-      ),
+      images: facts.imageUrls.map((src, index) => ({
+        src,
+        alt: `${input.listingAddress} listing photo ${index + 1}`,
+      })),
     },
     sources: [
       {

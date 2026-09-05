@@ -14,6 +14,7 @@ export const listingImageHosts = [
   "s3.amazonaws.com",
   "media.crmls.org",
   "img.hzcdn.com",
+  "sj-feeds.cdn.backatyou.com",
 ] as const;
 
 export function isAllowedListingImage(url: string) {
