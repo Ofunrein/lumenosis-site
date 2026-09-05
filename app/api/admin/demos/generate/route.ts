@@ -37,7 +37,9 @@ const Listing = z.object({
   highlights: z.array(z.string()).min(3).max(8),
   buyerNotes: z.array(z.string()).max(6),
   imageUrls: z.array(z.string().url()).max(3),
-});
+})
+  .refine((l) => l.price >= 25000, { message: "price looks like a rent amount, not a sale price" })
+  .refine((l) => !/lease|rent/i.test(l.propertyType), { message: "listing is a lease, not for sale" });
 
 const senderNames: Record<string, string> = {
   "iris-demo@agentmail.to": "Iris",
@@ -136,7 +138,7 @@ export async function POST(request: Request) {
         {
           role: "system",
           content:
-            "Extract only verified facts for the exact listing. The listing must be currently active. Use 0 for unavailable numeric facts. Never infer. Use source image URLs only when clearly tied to this listing.",
+            "Extract only verified facts for the exact listing. The listing must be currently for sale and active; never use a lease, rental, or off-market record, and never mix facts or photos from a different listing, unit, or past sale of the same address. Use 0 for unavailable numeric facts. Never infer. Use source image URLs only when clearly tied to this listing.",
         },
         {
           role: "user",
@@ -164,8 +166,8 @@ export async function POST(request: Request) {
   if (!listing.success)
     return NextResponse.json(
       {
-        error: "Listing could not be verified as active",
-        fields: listing.error.issues.map((issue) => issue.path.join(".")),
+        error: "Listing could not be verified as an active for-sale listing",
+        fields: listing.error.issues.map((issue) => issue.path.join(".") || issue.message),
       },
       { status: 422 },
     );
