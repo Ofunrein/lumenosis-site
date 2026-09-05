@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { isAdmin } from "@/lib/admin-auth";
+import { emailHtml } from "@/lib/email-html";
 import { sql } from "@/lib/turso";
 
 export const dynamic = "force-dynamic";
@@ -104,9 +105,12 @@ export default async function DemoAdminPage() {
               </div>
               <div className="mt-5 rounded-[10px] bg-white p-5">
                 <strong>{demo.subject}</strong>
-                <p className="mt-3 whitespace-pre-wrap text-sm leading-6 text-[#555]">
-                  {demo.body}
-                </p>
+                <iframe
+                  title={`Email preview for ${demo.full_name}`}
+                  srcDoc={emailHtml(demo.body)}
+                  sandbox=""
+                  className="mt-3 h-[440px] w-full rounded-[8px] border border-black/10"
+                />
               </div>
               <div className="mt-5 flex flex-wrap gap-3">
                 {demo.status === "draft" ? (

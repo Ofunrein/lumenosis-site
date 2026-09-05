@@ -1,16 +1,7 @@
 import { NextResponse } from "next/server";
 import { isAdmin } from "@/lib/admin-auth";
+import { emailHtml, emailText } from "@/lib/email-html";
 import { sql } from "@/lib/turso";
-
-function html(text: string) {
-  return `<div style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;max-width:600px;font-size:15px;line-height:1.6;color:#1f2937">${text
-    .split("\n\n")
-    .map(
-      (part) =>
-        `<p>${part.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\n", "<br>")}</p>`,
-    )
-    .join("")}</div>`;
-}
 
 export async function POST(request: Request, context: { params: Promise<{ id: string }> }) {
   if (!(await isAdmin())) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
@@ -33,8 +24,8 @@ export async function POST(request: Request, context: { params: Promise<{ id: st
       body: JSON.stringify({
         to: String(draft.recipient),
         subject: String(draft.subject),
-        text: String(draft.body),
-        html: html(String(draft.body)),
+        text: emailText(String(draft.body)),
+        html: emailHtml(String(draft.body)),
         labels: ["outreach", "demo-room"],
         headers: { "List-Unsubscribe": `<mailto:${inbox}?subject=unsubscribe>` },
       }),

@@ -4,6 +4,7 @@ import { ChevronLeft, ChevronRight, Expand, Mic, X } from "lucide-react";
 import Image from "next/image";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type { DemoRoom } from "@/content/demo-rooms";
+import { emailBodyHtml } from "@/lib/email-html";
 
 type EmailResult = { subject: string; reply: string; captured: string[]; nextAction: string };
 type VoiceConfig = { publicKey: string; assistantId: string };
@@ -370,9 +371,12 @@ export function DemoRoomExperience({ room, token }: { room: DemoRoom; token: str
                         {emailResult.subject}
                       </h3>
                     </div>
-                    <p className="mt-6 whitespace-pre-wrap text-[15px] leading-7 text-[#242424]">
-                      {emailResult.reply}
-                    </p>
+                    <div
+                      className="mt-6 text-[15px] leading-7 text-[#242424] [&_a]:font-semibold [&_a]:text-[#8a682c] [&_a]:underline [&_p]:mb-4 [&_p:last-child]:mb-0"
+                      // Built by emailBodyHtml, which escapes all text before linking.
+                      // biome-ignore lint/security/noDangerouslySetInnerHtml: sanitized by emailBodyHtml
+                      dangerouslySetInnerHTML={{ __html: emailBodyHtml(emailResult.reply) }}
+                    />
                     <div className="mt-6 overflow-hidden rounded-[12px] border border-black/10 bg-[#f8f7f3]">
                       <button
                         type="button"

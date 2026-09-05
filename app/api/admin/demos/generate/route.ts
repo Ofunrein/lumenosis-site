@@ -217,7 +217,7 @@ export async function POST(request: Request) {
   const senderName = senderNames[input.senderInbox];
   const demoUrl = `https://lumenosis.com/demo/${token}`;
   const subject = "I built you an AI agent to try for free";
-  const body = `Hi ${firstName},\n\nMy name is ${senderName}. I’m an AI consultant, and I help businesses implement AI solutions to save time, improve operations, and generate more revenue.\n\nI put together a private AI-powered demo specifically for ${input.businessName}. You can try the voice and email agent completely free:\n\n${demoUrl}\n\nYou can learn more about what we do here:\n\nhttps://lumenosis.com\n\nNo pressure. I thought it could be useful for your business and wanted to let you try it.\n\nIf you want to see how we would set it up, reply yes and I’ll send the next step.\n\nBest,\n${senderName}`;
+  const body = `Hi ${firstName},\n\nMy name is ${senderName}. I’m an AI consultant, and I help businesses implement AI solutions to save time, improve operations, and generate more revenue.\n\nI put together a [private AI demo for ${input.businessName}](${demoUrl}) built around your listing at ${input.listingAddress}. You can try the voice and email agent completely free, and you can [learn more about what we do here](https://lumenosis.com).\n\nNo pressure. I thought it could be useful for your business and wanted to let you try it.\n\nIf you want to see how we would set it up, reply yes and I’ll send the next step.\n\nBest,\n${senderName}`;
 
   await sql(
     "INSERT INTO prospects (id, full_name, first_name, email, business_name, sender_inbox) VALUES (?, ?, ?, ?, ?, ?)",
