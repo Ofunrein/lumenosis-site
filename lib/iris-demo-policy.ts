@@ -15,3 +15,19 @@ export function validIrisDemoReply(reply: string, firstName: string) {
   );
   return !forbidden.test(reply) && reply.trimEnd().endsWith(`Best,\n${firstName}`);
 }
+
+export function fairHousingDemoReply(message: string, firstName: string) {
+  if (
+    !/\b(?:safe neighborhood|family[- ]friendly|christian|religion|race|racial|children|families|disability|disabled|national origin|ethnicity|sex|gender)\b/i.test(
+      message,
+    )
+  )
+    return null;
+
+  return {
+    subject: "Objective property and area information",
+    reply: `I can’t characterize a neighborhood as safe or suitable based on personal or protected traits. I can share objective, source-backed property details and neutral information about nearby amenities, or point you to public data so you can evaluate the area directly. Which objective information would be most useful?\n\nBest,\n${firstName}`,
+    captured: [],
+    nextAction: "Provide only objective, source-backed property or area information.",
+  };
+}

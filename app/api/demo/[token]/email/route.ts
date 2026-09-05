@@ -3,7 +3,12 @@ import { z } from "zod";
 import { isAdmin } from "@/lib/admin-auth";
 import { reserveDemoGeneration } from "@/lib/demo-budget";
 import { demoRoomForToken } from "@/lib/demo-room";
-import { IRIS_DEMO_MODEL, irisDemoSystemPrompt, validIrisDemoReply } from "@/lib/iris-demo-policy";
+import {
+  fairHousingDemoReply,
+  IRIS_DEMO_MODEL,
+  irisDemoSystemPrompt,
+  validIrisDemoReply,
+} from "@/lib/iris-demo-policy";
 
 export const dynamic = "force-dynamic";
 
@@ -23,6 +28,10 @@ export async function POST(request: NextRequest, context: { params: Promise<{ to
 
   const parsed = Input.safeParse(await request.json().catch(() => null));
   if (!parsed.success) return NextResponse.json({ error: "Invalid inquiry" }, { status: 400 });
+
+  const protectedReply = fairHousingDemoReply(parsed.data.message, match.room.prospect.firstName);
+  if (protectedReply)
+    return NextResponse.json(protectedReply, { headers: { "Cache-Control": "no-store" } });
 
   const apiKey = process.env.OPENAI_API_KEY;
   if (!apiKey) return NextResponse.json({ error: "Email demo is not configured" }, { status: 503 });

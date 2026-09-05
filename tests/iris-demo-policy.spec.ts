@@ -1,7 +1,12 @@
 import { readFile } from "node:fs/promises";
 import { expect, test } from "@playwright/test";
 import { demoRooms } from "@/content/demo-rooms";
-import { IRIS_DEMO_MODEL, irisDemoSystemPrompt, validIrisDemoReply } from "@/lib/iris-demo-policy";
+import {
+  fairHousingDemoReply,
+  IRIS_DEMO_MODEL,
+  irisDemoSystemPrompt,
+  validIrisDemoReply,
+} from "@/lib/iris-demo-policy";
 
 const room = demoRooms[0];
 
@@ -22,6 +27,17 @@ test("reply guard accepts the agent voice", () => {
       room.prospect.firstName,
     ),
   ).toBe(true);
+});
+
+test("protected-trait housing questions use a deterministic zero-token reply", () => {
+  const result = fairHousingDemoReply(
+    "Is this a safe neighborhood for a Christian family with children?",
+    "Patricia",
+  );
+  expect(result?.reply).toContain("objective, source-backed");
+  expect(result?.reply).not.toMatch(/family-friendly|great for children|Christian neighborhood/i);
+  expect(result?.reply).toMatch(/Best,\nPatricia$/);
+  expect(fairHousingDemoReply("Does it have a garage?", "Patricia")).toBeNull();
 });
 
 for (const reply of [
