@@ -8,19 +8,36 @@ const demoToken = createHmac("sha256", demoSecret)
   .digest("base64url");
 const demo = `/demo/${demoToken}`;
 
-for (const [width, height] of [[320, 568], [390, 844], [768, 1024], [1024, 768], [1440, 900]]) {
+for (const [width, height] of [
+  [320, 568],
+  [390, 844],
+  [768, 1024],
+  [1024, 768],
+  [1440, 900],
+]) {
   test(`demo fits ${width}x${height}`, async ({ page }) => {
     await page.setViewportSize({ width, height });
-    await page.route("**/api/demo/*/email", (route) => route.fulfill({
-      json: { subject: "Property details", reply: "https://example.com/" + "a".repeat(180), captured: [], nextAction: "Confirm a showing" },
-    }));
+    await page.route("**/api/demo/*/email", (route) =>
+      route.fulfill({
+        json: {
+          subject: "Property details",
+          reply: "https://example.com/" + "a".repeat(180),
+          captured: [],
+          nextAction: "Confirm a showing",
+        },
+      }),
+    );
     await page.goto(demo);
     await page.getByRole("button", { name: "Run email demo" }).click();
     await expect(page.getByText("Property details", { exact: true })).toBeVisible();
     await page.getByLabel("Average commission").fill("100000");
-    expect(await page.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth)).toBe(true);
+    expect(
+      await page.evaluate(
+        () => document.documentElement.scrollWidth <= document.documentElement.clientWidth,
+      ),
+    ).toBe(true);
     const preview = page.locator('[aria-live="polite"]');
-    expect(await preview.evaluate(e => e.scrollWidth <= e.clientWidth)).toBe(true);
+    expect(await preview.evaluate((e) => e.scrollWidth <= e.clientWidth)).toBe(true);
     await page.getByRole("button", { name: "Open photo 1 of 3" }).first().click();
     const bounds = await page.getByRole("dialog").boundingBox();
     expect(bounds).not.toBeNull();
@@ -70,7 +87,7 @@ test("email preview reads like a team member", async ({ page }) => {
       body: JSON.stringify({
         subject: "471 Any Old Street East",
         reply:
-          "Hi, the home was listed as active at our last verification. Would you like Patricia to confirm weekend showing availability?",
+          "Hi, I had the home listed as active at my last verification. I’ll confirm weekend showing availability. What time works best for you?\n\nBest,\nPatricia",
         captured: ["Wants a weekend showing"],
         nextAction: "Confirm availability with Patricia",
       }),
@@ -78,9 +95,13 @@ test("email preview reads like a team member", async ({ page }) => {
   );
   await page.goto(demo);
   await page.getByRole("button", { name: "Run email demo" }).click();
-  await expect(page.getByText(/the home was listed as active/i)).toBeVisible();
-  await expect(page.locator("body")).not.toContainText(
-    /AI assistant|artificial intelligence|automated reply/i,
+  await expect(page.getByText(/I had the home listed as active/i)).toBeVisible();
+  await expect(
+    page.getByText(/From: Patricia Mack · American Real Estate, ERA Powered/i),
+  ).toBeVisible();
+  await expect(page.getByText(/Best,\s*Patricia/i)).toBeVisible();
+  await expect(page.locator('[aria-live="polite"]')).not.toContainText(
+    /AI assistant|artificial intelligence|automated reply|From: Iris|route.*Patricia/i,
   );
 });
 
@@ -89,6 +110,10 @@ test("email route keeps disclosure language out of buyer replies", async () => {
   expect(source).not.toContain("I’m Iris, the AI assistant");
   expect(source).not.toContain("AI email agent");
   expect(source).toContain("Do not mention AI, automation, a demo");
+  expect(source).toContain("first-person voice");
+  expect(source).toContain("Never speak as Iris");
+  expect(source).toContain("End exactly with");
+  expect(source).not.toContain("Route those to");
 });
 
 test("admin actions reject unauthenticated requests", async ({ request }) => {

@@ -22,7 +22,7 @@ export function DemoRoomExperience({ room, token }: { room: DemoRoom; token: str
     `Is ${room.listing.address} still available, and when could I see it?`,
     `Tell me more about the updates, acreage, location, and anything I should verify before touring ${room.listing.address}.`,
     `We need ${room.listing.beds} bedrooms and room for horses. Is this property worth touring?`,
-    "I need to sell my Beaumont home before buying. Can Patricia help me plan both?",
+    `I need to sell my current home before buying. Can ${room.prospect.firstName} help me plan both?`,
   ];
   const [message, setMessage] = useState(presets[0]);
   const [emailResult, setEmailResult] = useState<EmailResult | null>(null);
@@ -284,8 +284,8 @@ export function DemoRoomExperience({ room, token }: { room: DemoRoom; token: str
             </h2>
             <p className="mt-6 max-w-2xl text-[var(--text-body-lg)] leading-relaxed text-white/70">
               Try one property here. The same agent can identify any listing in your inventory,
-              answer from its current source data, capture buyer intent, and prepare the right
-              handoff.
+              answer from its current source data, capture buyer intent, and prepare the next
+              action.
             </p>
           </div>
           <article className="mt-12 overflow-hidden rounded-[var(--radius)] bg-[#ece9e1] text-[#151515] shadow-[0_28px_90px_rgba(0,0,0,0.35)]">
@@ -362,7 +362,7 @@ export function DemoRoomExperience({ room, token }: { room: DemoRoom; token: str
                   <>
                     <div className="border-b border-black/10 pb-5">
                       <p className="text-xs font-medium text-black/50">
-                        From: Iris &lt;iris@americanrealestate.com&gt;
+                        From: {room.prospect.fullName} · {room.prospect.businessName}
                       </p>
                       <p className="mt-1 break-words text-xs text-black/50">
                         To: buyer@example.com
@@ -421,13 +421,15 @@ export function DemoRoomExperience({ room, token }: { room: DemoRoom; token: str
                     </div>
                     <div className="mt-6 border-t border-black/10 pt-5 text-sm leading-6 text-[#555]">
                       <p className="font-semibold text-[#151515]">
-                        Iris · Buyer inquiry coordinator
+                        {room.prospect.fullName} · {room.prospect.role}
                       </p>
                       <p>{room.prospect.businessName}</p>
-                      <p>Working with {room.prospect.fullName}</p>
+                      <p className="text-xs text-[#777]">
+                        Drafted in the agent&apos;s voice by Iris
+                      </p>
                     </div>
                     <div className="mt-8 rounded-[10px] bg-[#f1eee7] p-5 text-sm">
-                      <strong className="text-[#151515]">Private agent handoff</strong>
+                      <strong className="text-[#151515]">Private notes for the agent</strong>
                       <p className="mt-2 leading-6 text-[#555]">
                         {emailResult.captured.length
                           ? emailResult.captured.join(" · ")
@@ -465,7 +467,7 @@ export function DemoRoomExperience({ room, token }: { room: DemoRoom; token: str
               <h2 className="mt-4 text-3xl font-semibold">Call Iris now.</h2>
               <p className="mt-3 text-sm leading-6 text-white/75">
                 Ask about this property as a real buyer. Iris answers from the same verified listing
-                details and hands the conversation back to Patricia.
+                details and responds in {room.prospect.firstName}&apos;s voice.
               </p>
               {!voiceConfig ? (
                 <button
@@ -511,9 +513,9 @@ export function DemoRoomExperience({ room, token }: { room: DemoRoom; token: str
                 </div>
               </div>
               <p className="mt-8 text-sm leading-6 text-white/50">
-                Iris can answer verified facts immediately. Questions about availability, financing,
-                insurance, restrictions, condition, or negotiations route to Patricia instead of
-                getting guessed.
+                Iris drafts verified facts in {room.prospect.firstName}&apos;s voice. For
+                availability, financing, insurance, restrictions, condition, or negotiations, the
+                draft says what still needs confirmation instead of guessing.
               </p>
             </article>
           </div>
@@ -578,7 +580,9 @@ export function DemoRoomExperience({ room, token }: { room: DemoRoom; token: str
           <div className="flex flex-col justify-center rounded-[var(--radius)] bg-[var(--color-dark-section)] p-6 text-white">
             <p className="text-sm text-white/60">Estimated monthly opportunity range</p>
             <p className="mt-2 flex flex-wrap items-baseline gap-x-2 text-[clamp(1.5rem,3vw,2.25rem)] font-semibold text-[var(--color-gold-italic)]">
-              <span>{money(recovered.low)}</span><span>–</span><span>{money(recovered.high)}</span>
+              <span>{money(recovered.low)}</span>
+              <span>–</span>
+              <span>{money(recovered.high)}</span>
             </p>
             <p className="mt-4 text-sm leading-6 text-white/60">
               Directional estimate from your assumptions. Closings depend on lead quality,
