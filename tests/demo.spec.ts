@@ -107,13 +107,14 @@ test("email preview reads like a team member", async ({ page }) => {
 
 test("email route keeps disclosure language out of buyer replies", async () => {
   const source = await readFile("app/api/demo/[token]/email/route.ts", "utf8");
+  const policy = await readFile("lib/iris-demo-policy.ts", "utf8");
   expect(source).not.toContain("I’m Iris, the AI assistant");
   expect(source).not.toContain("AI email agent");
-  expect(source).toContain("Do not mention AI, automation, a demo");
-  expect(source).toContain("first-person voice");
-  expect(source).toContain("Never speak as Iris");
-  expect(source).toContain("End exactly with");
-  expect(source).not.toContain("Route those to");
+  expect(policy).toContain("Do not mention AI, automation, a demo");
+  expect(policy).toContain("first-person voice");
+  expect(policy).toContain("Never speak as Iris");
+  expect(policy).toContain("End exactly with");
+  expect(policy).not.toContain("Route those to");
 });
 
 test("admin actions reject unauthenticated requests", async ({ request }) => {
