@@ -8,7 +8,11 @@ import type { DemoRoom } from "@/content/demo-rooms";
 import { emailBodyHtml } from "@/lib/email-html";
 
 type EmailResult = { subject: string; reply: string; captured: string[]; nextAction: string };
-type VoiceConfig = { publicKey: string; assistantId: string };
+type VoiceConfig = {
+  publicKey: string;
+  assistantId: string;
+  assistantOverrides: Parameters<Vapi["start"]>[1];
+};
 
 function money(value: number) {
   return new Intl.NumberFormat("en-US", {
@@ -157,7 +161,7 @@ export function DemoRoomExperience({ room, token }: { room: DemoRoom; token: str
         setVoiceStatus("idle");
         setVoiceError("Voice connection failed. Check microphone access and try again.");
       });
-      await client.start(voiceConfig.assistantId);
+      await client.start(voiceConfig.assistantId, voiceConfig.assistantOverrides);
     } catch {
       setVoiceStatus("idle");
       setVoiceError("Voice connection failed. Check microphone access and try again.");

@@ -21,6 +21,7 @@ export type DemoRoom = {
     images: { src: string; alt: string }[];
   };
   sources: { label: string; url: string; checkedAt: string }[];
+  safetyBoundaries?: string[];
   expiresAt: string;
   approved: boolean;
 };

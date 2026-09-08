@@ -2,6 +2,7 @@ import { type NextRequest, NextResponse } from "next/server";
 import { isAdmin } from "@/lib/admin-auth";
 import { allowRequest, clientAddress } from "@/lib/demo-rate-limit";
 import { demoRoomForToken } from "@/lib/demo-room";
+import { demoVoiceOverrides } from "@/lib/demo-voice";
 
 export const dynamic = "force-dynamic";
 
@@ -25,6 +26,7 @@ export async function GET(request: NextRequest, context: { params: Promise<{ tok
     {
       publicKey,
       assistantId,
+      assistantOverrides: demoVoiceOverrides(match.room),
     },
     { headers: { "Cache-Control": "no-store" } },
   );
