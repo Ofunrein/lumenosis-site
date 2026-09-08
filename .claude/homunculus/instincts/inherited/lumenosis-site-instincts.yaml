@@ -1,0 +1,147 @@
+# Instincts generated from https://github.com/Ofunrein/lumenosis-site
+# Generated: 2026-09-08T06:43:51.840Z
+# Version: 2.0
+# NOTE: This file supplements (does not replace) any existing curated instincts.
+# High-confidence manually curated instincts should be preserved alongside these.
+
+---
+id: lumenosis-site-commit-conventional
+trigger: "when writing a commit message"
+confidence: 0.85
+domain: git
+source: repo-analysis
+source_repo: https://github.com/Ofunrein/lumenosis-site
+---
+
+# Lumenosis Site Commit Conventional
+
+## Action
+
+Use conventional commit format with prefixes: feat
+
+## Evidence
+
+- 1 commits analyzed
+- Detected conventional commit pattern
+- Examples: feat: signed platform demo API for the admin app
+
+---
+id: lumenosis-site-commit-length
+trigger: "when writing a commit message"
+confidence: 0.6
+domain: git
+source: repo-analysis
+source_repo: https://github.com/Ofunrein/lumenosis-site
+---
+
+# Lumenosis Site Commit Length
+
+## Action
+
+Keep commit messages concise (~48 characters)
+
+## Evidence
+
+- Average commit message length: 48 chars
+- Based on 1 commits
+
+---
+id: lumenosis-site-naming-files
+trigger: "when creating a new file"
+confidence: 0.8
+domain: code-style
+source: repo-analysis
+source_repo: https://github.com/Ofunrein/lumenosis-site
+---
+
+# Lumenosis Site Naming Files
+
+## Action
+
+Use camelCase naming convention
+
+## Evidence
+
+- Analyzed file naming patterns in repository
+- Dominant pattern: camelCase
+
+---
+id: lumenosis-site-import-alias
+trigger: "when importing modules"
+confidence: 0.85
+domain: code-style
+source: repo-analysis
+source_repo: https://github.com/Ofunrein/lumenosis-site
+---
+
+# Lumenosis Site Import Alias
+
+## Action
+
+Use path aliases (@/, ~/) instead of relative imports
+
+## Evidence
+
+- Import analysis shows alias pattern
+- Example: import { x } from '@/lib/x'
+
+---
+id: lumenosis-site-export-style
+trigger: "when exporting from a module"
+confidence: 0.7
+domain: code-style
+source: repo-analysis
+source_repo: https://github.com/Ofunrein/lumenosis-site
+---
+
+# Lumenosis Site Export Style
+
+## Action
+
+Prefer named exports
+
+## Evidence
+
+- Export pattern analysis
+- Dominant style: named
+
+---
+id: lumenosis-site-test-separate
+trigger: "when writing tests"
+confidence: 0.8
+domain: testing
+source: repo-analysis
+source_repo: https://github.com/Ofunrein/lumenosis-site
+---
+
+# Lumenosis Site Test Separate
+
+## Action
+
+Place tests in the tests/ or __tests__/ directory, mirroring src structure
+
+## Evidence
+
+- Separate test directory pattern detected
+- Tests live in dedicated test folders
+
+---
+id: lumenosis-site-test-naming
+trigger: "when creating a test file"
+confidence: 0.85
+domain: testing
+source: repo-analysis
+source_repo: https://github.com/Ofunrein/lumenosis-site
+---
+
+# Lumenosis Site Test Naming
+
+## Action
+
+Name test files using the pattern: *.spec.ts
+
+## Evidence
+
+- File pattern: *.spec.ts
+- Consistent across test files
+
