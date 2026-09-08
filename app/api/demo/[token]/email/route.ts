@@ -22,7 +22,8 @@ const Output = z.object({
 
 export async function POST(request: NextRequest, context: { params: Promise<{ token: string }> }) {
   const { token } = await context.params;
-  const match = await demoRoomForToken(token, await isAdmin());
+  const allowDraft = await isAdmin();
+  const match = await demoRoomForToken(token, allowDraft);
   if (!match) return NextResponse.json({ error: "Demo not found" }, { status: 404 });
   if (match.expired) return NextResponse.json({ error: "Demo expired" }, { status: 410 });
 
@@ -36,7 +37,7 @@ export async function POST(request: NextRequest, context: { params: Promise<{ to
   const apiKey = process.env.OPENAI_API_KEY;
   if (!apiKey) return NextResponse.json({ error: "Email demo is not configured" }, { status: 503 });
 
-  if (!(await reserveDemoGeneration(match.id))) {
+  if (!(await reserveDemoGeneration(match.id, token, allowDraft))) {
     return NextResponse.json({ error: "Demo usage limit reached" }, { status: 429 });
   }
 
