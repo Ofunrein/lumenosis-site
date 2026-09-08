@@ -6,6 +6,14 @@ export type ImageQaAssessment = {
   reason: string;
 };
 
+export function demoImagesPassQa(
+  qa: { passed: boolean } | undefined,
+  images: { src: string }[],
+) {
+  if (!qa) return images.length > 0;
+  return qa.passed && images.length === 3;
+}
+
 export function listingImagesPassQa(
   imageUrls: string[],
   assessments: ImageQaAssessment[],

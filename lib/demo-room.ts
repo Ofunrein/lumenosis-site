@@ -3,10 +3,11 @@ import "server-only";
 import { createHash, createHmac, timingSafeEqual } from "node:crypto";
 import { type DemoRoom, demoRooms } from "@/content/demo-rooms";
 import { demoPostgresEnabled, postgresDemoRoomForToken } from "@/lib/demo-postgres";
+import { demoImagesPassQa } from "@/lib/listing-image-qa";
 import { sql, tursoConfigured } from "@/lib/turso";
 
 function passedQa(room: DemoRoom) {
-  return room.qa?.passed === true && room.listing.images.length === 3;
+  return demoImagesPassQa(room.qa, room.listing.images);
 }
 
 function secret() {

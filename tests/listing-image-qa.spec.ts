@@ -1,5 +1,5 @@
 import { expect, test } from "@playwright/test";
-import { listingImagesPassQa } from "../lib/listing-image-qa";
+import { demoImagesPassQa, listingImagesPassQa } from "../lib/listing-image-qa";
 
 const urls = [
   "https://photos.zillowstatic.com/a.jpg",
@@ -38,4 +38,12 @@ test("image QA rejects logos, unmatched photos, missing photos, and extra photos
   ).toBe(false);
   expect(listingImagesPassQa(urls.slice(0, 2), urls.slice(0, 2).map(assessment))).toBe(false);
   expect(listingImagesPassQa([...urls, "https://photos.zillowstatic.com/d.jpg"], urls.map(assessment))).toBe(false);
+});
+
+test("approved legacy demos remain readable without QA metadata", () => {
+  expect(demoImagesPassQa(undefined, [{ src: "https://example.com/legacy.jpg" }])).toBe(true);
+});
+
+test("explicit failed QA remains blocked", () => {
+  expect(demoImagesPassQa({ passed: false }, urls.map((src) => ({ src })))).toBe(false);
 });
