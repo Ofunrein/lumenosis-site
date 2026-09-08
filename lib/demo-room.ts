@@ -2,6 +2,7 @@ import "server-only";
 
 import { createHash, createHmac, timingSafeEqual } from "node:crypto";
 import { type DemoRoom, demoRooms } from "@/content/demo-rooms";
+import { demoPostgresEnabled, postgresDemoRoomForToken } from "@/lib/demo-postgres";
 import { sql, tursoConfigured } from "@/lib/turso";
 
 function secret() {
@@ -21,6 +22,19 @@ export function tokenHash(token: string) {
 
 export async function demoRoomForToken(token: string, allowDraft = false) {
   if (!/^[A-Za-z0-9_-]{43}$/.test(token)) return null;
+
+  if (demoPostgresEnabled()) {
+    // Exact-flag cutover, fail closed: a missing URL or query failure must never fall
+    // through to Turso/static data and create a split read path.
+    const row = await postgresDemoRoomForToken(token);
+    if (!row) return null;
+    const room = JSON.parse(String(row.config_json)) as DemoRoom;
+    return {
+      id: String(row.id),
+      room,
+      expired: Date.now() >= new Date(String(row.expires_at)).getTime(),
+    };
+  }
 
   if (tursoConfigured()) {
     const rows = await sql(
