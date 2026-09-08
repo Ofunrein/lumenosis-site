@@ -3,6 +3,7 @@
 import { ChevronLeft, ChevronRight, Expand, Mic, X } from "lucide-react";
 import Image from "next/image";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import type Vapi from "@vapi-ai/web";
 import type { DemoRoom } from "@/content/demo-rooms";
 import { emailBodyHtml } from "@/lib/email-html";
 
@@ -30,7 +31,9 @@ export function DemoRoomExperience({ room, token }: { room: DemoRoom; token: str
   const [sending, setSending] = useState(false);
   const [voiceConfig, setVoiceConfig] = useState<VoiceConfig | null>(null);
   const [voiceError, setVoiceError] = useState("");
-  const voiceHost = useRef<HTMLDivElement>(null);
+  const [voiceConsent, setVoiceConsent] = useState(false);
+  const [voiceStatus, setVoiceStatus] = useState<"idle" | "connecting" | "connected">("idle");
+  const vapi = useRef<Vapi | null>(null);
   const [leads, setLeads] = useState(120);
   const [lossRate, setLossRate] = useState(20);
   const [qualifiedRate, setQualifiedRate] = useState(45);
@@ -84,42 +87,10 @@ export function DemoRoomExperience({ room, token }: { room: DemoRoom; token: str
     sessionStorage.setItem(`demo-viewed:${token}`, "1");
   }, [event, token]);
 
-  useEffect(() => {
-    if (!voiceConfig || !voiceHost.current) return;
-    const host = voiceHost.current;
-    const scriptId = "vapi-demo-widget";
-
-    const widget = document.createElement("vapi-widget");
-    widget.setAttribute("public-key", voiceConfig.publicKey);
-    widget.setAttribute("assistant-id", voiceConfig.assistantId);
-    widget.setAttribute("mode", "voice");
-    widget.setAttribute("theme", "light");
-    widget.setAttribute("size", "full");
-    widget.setAttribute("radius", "medium");
-    widget.setAttribute("main-label", "Talk with Iris");
-    widget.setAttribute("start-button-text", "Start private voice demo");
-    widget.setAttribute("end-button-text", "End demo");
-    widget.setAttribute("require-consent", "true");
-    widget.setAttribute(
-      "terms-content",
-      "This is an isolated AI demonstration. Audio is processed to run the conversation. Recording is disabled.",
-    );
-    widget.addEventListener("call-start", () => void event("voice_started"));
-    widget.addEventListener("call-end", () => void event("voice_completed"));
-    widget.addEventListener("error", () =>
-      setVoiceError("Voice connection failed. Try the email demo instead."),
-    );
-    host.appendChild(widget);
-
-    document.getElementById(scriptId)?.remove();
-    const script = document.createElement("script");
-    script.id = scriptId;
-    script.src = "https://unpkg.com/@vapi-ai/client-sdk-react@0.1.1/dist/embed/widget.umd.js";
-    script.async = true;
-    script.onerror = () =>
-      setVoiceError("Voice interface failed to load. Try the email demo instead.");
-    document.head.appendChild(script);
-  }, [event, voiceConfig]);
+  useEffect(() => () => {
+    vapi.current?.stop();
+    vapi.current = null;
+  }, []);
 
   const recovered = useMemo(() => {
     const value =
@@ -162,6 +133,40 @@ export function DemoRoomExperience({ room, token }: { room: DemoRoom; token: str
       return;
     }
     setVoiceConfig(payload);
+    setVoiceConsent(true);
+  }
+
+  async function startVoiceDemo() {
+    if (!voiceConfig) return;
+    setVoiceConsent(false);
+    setVoiceError("");
+    setVoiceStatus("connecting");
+    try {
+      const { default: VapiClient } = await import("@vapi-ai/web");
+      const client = new VapiClient(voiceConfig.publicKey);
+      vapi.current = client;
+      client.on("call-start", () => {
+        setVoiceStatus("connected");
+        void event("voice_started");
+      });
+      client.on("call-end", () => {
+        setVoiceStatus("idle");
+        void event("voice_completed");
+      });
+      client.on("error", () => {
+        setVoiceStatus("idle");
+        setVoiceError("Voice connection failed. Check microphone access and try again.");
+      });
+      await client.start(voiceConfig.assistantId);
+    } catch {
+      setVoiceStatus("idle");
+      setVoiceError("Voice connection failed. Check microphone access and try again.");
+    }
+  }
+
+  function endVoiceDemo() {
+    vapi.current?.stop();
+    setVoiceStatus("idle");
   }
 
   const bookingUrl =
@@ -469,10 +474,10 @@ export function DemoRoomExperience({ room, token }: { room: DemoRoom; token: str
                 Ask about this property as a real buyer. Iris answers from the same verified listing
                 details and responds in {room.prospect.firstName}&apos;s voice.
               </p>
-              {!voiceConfig ? (
+              {voiceStatus === "idle" ? (
                 <button
                   type="button"
-                  onClick={loadVoiceDemo}
+                  onClick={voiceConfig ? () => setVoiceConsent(true) : loadVoiceDemo}
                   className="mt-6 flex w-full items-center gap-4 rounded-[12px] bg-[var(--color-brand-amber)] p-4 text-left text-black shadow-[0_10px_30px_rgba(196,154,82,0.24)] transition-[transform,background-color] duration-150 hover:bg-[#d3aa62] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-dark-section)]"
                 >
                   <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-black text-white">
@@ -485,8 +490,27 @@ export function DemoRoomExperience({ room, token }: { room: DemoRoom; token: str
                     </span>
                   </span>
                 </button>
+              ) : (
+                <button
+                  type="button"
+                  onClick={endVoiceDemo}
+                  disabled={voiceStatus === "connecting"}
+                  className="mt-6 w-full rounded-[12px] bg-black p-4 text-center font-semibold text-white disabled:opacity-60"
+                >
+                  {voiceStatus === "connecting" ? "Connecting..." : "End demo"}
+                </button>
+              )}
+              {voiceConsent ? (
+                <div className="mt-6 rounded-[12px] border border-white/20 bg-black/30 p-4">
+                  <p className="text-sm leading-6 text-white/80">
+                    This is an isolated AI demonstration. Audio is processed to run the conversation. Recording is disabled.
+                  </p>
+                  <div className="mt-4 flex gap-3">
+                    <button type="button" onClick={() => setVoiceConsent(false)} className="rounded-lg border border-white/30 px-4 py-2 text-sm text-white">Cancel</button>
+                    <button type="button" onClick={startVoiceDemo} className="rounded-lg bg-[var(--color-brand-amber)] px-4 py-2 text-sm font-semibold text-black">Accept and start</button>
+                  </div>
+                </div>
               ) : null}
-              <div ref={voiceHost} className="mt-6 min-h-40" />
               <p className="mt-4 text-xs leading-5 text-white/55">
                 No phone number. Recording disabled. No live calendar or CRM access.
               </p>
