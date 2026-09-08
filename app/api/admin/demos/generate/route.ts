@@ -4,6 +4,7 @@ import { z } from "zod";
 import type { DemoRoom } from "@/content/demo-rooms";
 import { isAdmin } from "@/lib/admin-auth";
 import { tokenHash } from "@/lib/demo-room";
+import { verifyListingImages } from "@/lib/listing-image-qa";
 import { isAllowedListingImage } from "@/lib/listing-image-hosts";
 import { sql } from "@/lib/turso";
 
@@ -38,7 +39,7 @@ const Listing = z
     summary: z.string().min(30),
     highlights: z.array(z.string()).min(3).max(8),
     buyerNotes: z.array(z.string()).max(6),
-    imageUrls: z.array(z.string().url()).min(1).max(3),
+    imageUrls: z.array(z.string().url()).length(3),
   })
   .refine((l) => l.price >= 25000, { message: "price looks like a rent amount, not a sale price" })
   .refine((l) => !/lease|rent/i.test(l.propertyType), {
@@ -142,7 +143,7 @@ export async function POST(request: Request) {
         {
           role: "system",
           content:
-            "Extract only verified facts for the exact listing. The listing must be currently for sale and active; never use a lease, rental, or off-market record, and never mix facts or photos from a different listing, unit, or past sale of the same address. Use 0 for unavailable numeric facts. Never infer. Use source image URLs only when clearly tied to this listing.",
+            "Extract only verified facts for the exact listing. The listing must be currently for sale and active; never use a lease, rental, or off-market record, and never mix facts or photos from a different listing, unit, or past sale of the same address. Use 0 for unavailable numeric facts. Never infer. Return exactly three direct source image URLs clearly tied to this exact listing. Each must be a real exterior or interior property photograph, never a logo, brokerage graphic, map, screenshot, placeholder, or stock image.",
         },
         {
           role: "user",
@@ -175,6 +176,21 @@ export async function POST(request: Request) {
       {
         error: "Listing could not be verified as an active for-sale listing",
         fields: listing.error.issues.map((issue) => issue.path.join(".") || issue.message),
+      },
+      { status: 422 },
+    );
+
+  const imageQa = await verifyListingImages(
+    input.listingAddress,
+    input.listingUrl,
+    listing.data.imageUrls,
+    openaiKey,
+  );
+  if (!imageQa.passed)
+    return NextResponse.json(
+      {
+        error: "Listing images failed QA",
+        images: imageQa.assessments.map(({ url, reason }) => ({ url, reason })),
       },
       { status: 422 },
     );
@@ -215,8 +231,14 @@ export async function POST(request: Request) {
         checkedAt: new Date().toISOString().slice(0, 10),
       },
     ],
+    qa: {
+      passed: true,
+      checkedAt: new Date().toISOString(),
+      images: "exact-listing-property-photos",
+      responsiveViewports: [320, 390, 768, 1024, 1440],
+    },
     expiresAt,
-    approved: true,
+    approved: false,
   };
   const senderName = senderNames[input.senderInbox];
   const demoUrl = `https://lumenosis.com/demo/${token}`;

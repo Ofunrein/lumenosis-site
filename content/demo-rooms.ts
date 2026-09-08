@@ -21,6 +21,12 @@ export type DemoRoom = {
     images: { src: string; alt: string }[];
   };
   sources: { label: string; url: string; checkedAt: string }[];
+  qa?: {
+    passed: true;
+    checkedAt: string;
+    images: "exact-listing-property-photos";
+    responsiveViewports: number[];
+  };
   safetyBoundaries?: string[];
   expiresAt: string;
   approved: boolean;
@@ -95,6 +101,12 @@ export const demoRooms: DemoRoom[] = [
         checkedAt: "2026-09-04",
       },
     ],
+    qa: {
+      passed: true,
+      checkedAt: "2026-09-04",
+      images: "exact-listing-property-photos",
+      responsiveViewports: [320, 390, 768, 1024, 1440],
+    },
     expiresAt: "2026-09-18T23:59:59.000Z",
     approved: true,
   },

@@ -5,6 +5,10 @@ import { type DemoRoom, demoRooms } from "@/content/demo-rooms";
 import { demoPostgresEnabled, postgresDemoRoomForToken } from "@/lib/demo-postgres";
 import { sql, tursoConfigured } from "@/lib/turso";
 
+function passedQa(room: DemoRoom) {
+  return room.qa?.passed === true && room.listing.images.length === 3;
+}
+
 function secret() {
   const value = process.env.DEMO_ROOM_SECRET;
   if (!value || value.length < 32)
@@ -29,6 +33,7 @@ export async function demoRoomForToken(token: string, allowDraft = false) {
     const row = await postgresDemoRoomForToken(token);
     if (!row) return null;
     const room = JSON.parse(String(row.config_json)) as DemoRoom;
+    if (!passedQa(room)) return null;
     return {
       id: String(row.id),
       room,
@@ -43,6 +48,7 @@ export async function demoRoomForToken(token: string, allowDraft = false) {
     );
     if (rows[0]) {
       const room = JSON.parse(String(rows[0].config_json)) as DemoRoom;
+      if (!passedQa(room)) return null;
       return {
         id: String(rows[0].id),
         room,
@@ -56,6 +62,6 @@ export async function demoRoomForToken(token: string, allowDraft = false) {
     const expected = Buffer.from(tokenForDemoRoom(candidate.slug));
     return expected.length === supplied.length && timingSafeEqual(expected, supplied);
   });
-  if (!room?.approved) return null;
+  if (!room?.approved || !passedQa(room)) return null;
   return { id: room.slug, room, expired: Date.now() >= new Date(room.expiresAt).getTime() };
 }

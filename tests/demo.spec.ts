@@ -38,6 +38,24 @@ for (const [width, height] of [
     ).toBe(true);
     const preview = page.locator('[aria-live="polite"]');
     expect(await preview.evaluate((e) => e.scrollWidth <= e.clientWidth)).toBe(true);
+    const images = page.locator("img");
+    await expect
+      .poll(() =>
+        images.evaluateAll((nodes) => nodes.every((node) => (node as HTMLImageElement).complete)),
+      )
+      .toBe(true);
+    expect(
+      await images.evaluateAll((nodes) =>
+        nodes.every((node) => {
+          const rect = node.getBoundingClientRect();
+          return (
+            (node as HTMLImageElement).naturalWidth > 0 &&
+            rect.left >= 0 &&
+            rect.right <= window.innerWidth
+          );
+        }),
+      ),
+    ).toBe(true);
     await page.getByRole("button", { name: "Open photo 1 of 3" }).first().click();
     const bounds = await page.getByRole("dialog").boundingBox();
     expect(bounds).not.toBeNull();
