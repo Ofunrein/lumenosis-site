@@ -81,7 +81,7 @@ test("voice speaks prices and street suffixes naturally without reading MLS IDs"
 
 test("voice demo uses the cost-efficient smart conversational stack", () => {
   const value = demoVoiceOverrides(room("Patricia", "ERA Team", "1 Private Rd", "MLS-A"));
-  expect(value.model.model).toBe("gpt-5-mini");
+  expect(value.model?.model).toBe("gpt-5-mini");
   expect(value.voice).toMatchObject({ provider: "deepgram", voiceId: "vesta", model: "aura-2" });
   expect(JSON.stringify(value.model)).toContain("casual");
   expect(JSON.stringify(value.model)).toContain("contractions");
@@ -104,9 +104,9 @@ test("voice override includes natural turn-taking and interruption controls", ()
   expect(value.transcriber).toEqual({ provider: "deepgram", model: "flux-general-en", language: "en" });
   expect(value.startSpeakingPlan).toMatchObject({ waitSeconds: 0.55 });
   expect(value.stopSpeakingPlan).toMatchObject({ numWords: 2, voiceSeconds: 0.2, backoffSeconds: 1 });
-  expect(value.backchannelingEnabled).toBe(true);
-  expect(value.backgroundDenoisingEnabled).toBe(true);
-  expect(value.voice).toMatchObject({ speed: 0.95 });
+  expect(value.firstMessageInterruptionsEnabled).toBe(true);
+  expect(value.backgroundSpeechDenoisingPlan).toEqual({ smartDenoisingPlan: { enabled: true } });
+  expect(value.voice).toMatchObject({ provider: "deepgram", voiceId: "vesta", model: "aura-2" });
 });
 
 test("voice policy handles corrections, uncertainty, emotion, repetition, and endings like a person", () => {
@@ -127,8 +127,8 @@ test("voice policy handles corrections, uncertainty, emotion, repetition, and en
 
 test("voice facts omit empty values instead of inviting the model to narrate nulls", () => {
   const fixture = room("Patricia", "ERA Team", "1 Private Road", "MLS-A");
-  fixture.listing.acreage = undefined;
-  fixture.listing.yearBuilt = undefined;
+  (fixture.listing as Partial<typeof fixture.listing>).acreage = undefined;
+  (fixture.listing as Partial<typeof fixture.listing>).yearBuilt = undefined;
   const prompt = JSON.stringify(demoVoiceOverrides(fixture));
   expect(prompt).not.toContain('"acreage"');
   expect(prompt).not.toContain('"yearBuilt"');

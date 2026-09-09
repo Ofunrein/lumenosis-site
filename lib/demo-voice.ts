@@ -1,4 +1,7 @@
 import type { DemoRoom } from "@/content/demo-rooms";
+import type Vapi from "@vapi-ai/web";
+
+type DemoAssistantOverrides = NonNullable<Parameters<Vapi["start"]>[1]>;
 
 const SMALL = [
   "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten",
@@ -63,7 +66,7 @@ function compact<T extends Record<string, unknown>>(value: T): Partial<T> {
   ) as Partial<T>;
 }
 
-export function demoVoiceOverrides(room: DemoRoom) {
+export function demoVoiceOverrides(room: DemoRoom): DemoAssistantOverrides {
   const addressForSpeech = spokenAddress(room.listing.address);
   const listingFacts = compact({
     address: addressForSpeech,
@@ -151,12 +154,11 @@ ${JSON.stringify(facts, null, 2)}`;
       provider: "deepgram" as const,
       voiceId: "vesta",
       model: "aura-2",
-      speed: 0.95,
     },
+    firstMessageInterruptionsEnabled: true,
     startSpeakingPlan: { waitSeconds: 0.55 },
     stopSpeakingPlan: { numWords: 2, voiceSeconds: 0.2, backoffSeconds: 1 },
-    backchannelingEnabled: true,
-    backgroundDenoisingEnabled: true,
+    backgroundSpeechDenoisingPlan: { smartDenoisingPlan: { enabled: true } },
     maxDurationSeconds: 300,
     backgroundSound: "off" as const,
   };
