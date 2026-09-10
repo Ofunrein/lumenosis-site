@@ -91,6 +91,19 @@ test("demo defaults to light mode and uses the landing-page theme toggle", async
   await expect(page.getByRole("button", { name: "Switch to light mode" })).toBeVisible();
 });
 
+test("voice demo and opportunity result follow the active light theme", async ({ page }) => {
+  await page.goto(demo);
+  await expect(page.locator("html")).toHaveClass(/light/);
+
+  const voiceCard = page.getByRole("heading", { name: "Call Iris now." }).locator("..");
+  const opportunityCard = page.getByText("Estimated monthly opportunity range").locator("..");
+
+  await expect(voiceCard).toHaveCSS("background-color", "rgb(248, 247, 243)");
+  await expect(voiceCard).toHaveCSS("color", "rgb(21, 21, 21)");
+  await expect(opportunityCard).toHaveCSS("background-color", "rgb(236, 233, 225)");
+  await expect(opportunityCard).toHaveCSS("color", "rgb(21, 21, 21)");
+});
+
 test("gallery supports mobile swipe", async ({ page }) => {
   await page.goto(demo);
   await page.getByRole("button", { name: "Open photo 1 of 3" }).click();
