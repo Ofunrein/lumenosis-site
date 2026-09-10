@@ -140,8 +140,8 @@
     "semantic_hash": ""
   },
   "components/demo-room-experience.tsx": {
-    "mtime": 1789022235.6357296,
-    "ast_hash": "fdfa610b711315b58d0ddd2dad104915",
+    "mtime": 1789022662.4708736,
+    "ast_hash": "fc4be3e53440007127578909bb64d56a",
     "semantic_hash": ""
   },
   "components/fillout-embed.tsx": {
@@ -560,8 +560,8 @@
     "semantic_hash": ""
   },
   "tests/demo.spec.ts": {
-    "mtime": 1789022235.6704597,
-    "ast_hash": "e576034658f17abf50786668063e6903",
+    "mtime": 1789022597.1223433,
+    "ast_hash": "651f661424fa5d68a7443986f1d9af1c",
     "semantic_hash": ""
   },
   "tests/email-html.spec.ts": {
