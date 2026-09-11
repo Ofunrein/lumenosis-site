@@ -25,6 +25,7 @@ const ServerEnv = z.object({
 const ClientEnv = z.object({
   NEXT_PUBLIC_FILLOUT_FORM_ID: z.string().min(1).optional(),
   NEXT_PUBLIC_GHL_CALENDAR_EMBED_URL: z.string().url().optional(),
+  NEXT_PUBLIC_WISTIA_DEMO_MEDIA_ID: z.string().min(1).optional(),
 });
 
 export const serverEnv = ServerEnv.parse({
@@ -52,4 +53,5 @@ export const serverEnv = ServerEnv.parse({
 export const clientEnv = ClientEnv.parse({
   NEXT_PUBLIC_FILLOUT_FORM_ID: process.env.NEXT_PUBLIC_FILLOUT_FORM_ID,
   NEXT_PUBLIC_GHL_CALENDAR_EMBED_URL: process.env.NEXT_PUBLIC_GHL_CALENDAR_EMBED_URL,
+  NEXT_PUBLIC_WISTIA_DEMO_MEDIA_ID: process.env.NEXT_PUBLIC_WISTIA_DEMO_MEDIA_ID,
 });
