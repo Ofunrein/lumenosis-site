@@ -6,6 +6,14 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type Vapi from "@vapi-ai/web";
 import type { DemoRoom } from "@/content/demo-rooms";
 import { emailBodyHtml } from "@/lib/email-html";
+import { WistiaVideo } from "@/components/wistia-video";
+
+/**
+ * Wistia media ID for the generic Iris demo. Hosted on Wistia so the video file
+ * never ships in the Vercel bundle. Set NEXT_PUBLIC_WISTIA_DEMO_MEDIA_ID to
+ * enable the block; when unset the section renders without a video.
+ */
+const WISTIA_DEMO_MEDIA_ID = process.env.NEXT_PUBLIC_WISTIA_DEMO_MEDIA_ID ?? "";
 
 type EmailResult = { subject: string; reply: string; captured: string[]; nextAction: string };
 type VoiceConfig = {
@@ -297,6 +305,18 @@ export function DemoRoomExperience({ room, token }: { room: DemoRoom; token: str
               action.
             </p>
           </div>
+
+          {WISTIA_DEMO_MEDIA_ID ? (
+            <div className="mt-12">
+              <WistiaVideo
+                mediaId={WISTIA_DEMO_MEDIA_ID}
+                title="Iris email agent demonstration"
+              />
+              <p className="mt-4 font-[var(--font-mono)] text-xs uppercase tracking-[0.14em] text-white/50">
+                60-second overview
+              </p>
+            </div>
+          ) : null}
           <article className="mt-12 overflow-hidden rounded-[var(--radius)] bg-[#ece9e1] text-[#151515] shadow-[0_28px_90px_rgba(0,0,0,0.35)]">
             <div className="flex flex-wrap items-center justify-between gap-3 border-b border-black/10 bg-[#f8f7f3] px-4 py-3 sm:px-6">
               <div className="flex items-center gap-3">
