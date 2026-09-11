@@ -1,6 +1,6 @@
-# Lumenosis marketing site
+# Lumenosis site archive
 
-Public website and Demo Room web runtime for Lumenosis. The separate outreach queue owns AgentMail polling, campaign state, and same-thread delivery; this repository owns Demo Room generation and rendering routes.
+This standalone repository no longer deploys. The active website and Demo Room code lives in the `lumenosis-site/` folder of [`Ofunrein/real-estate-email-agent`](https://github.com/Ofunrein/real-estate-email-agent).
 
 ## Architecture pointers
 

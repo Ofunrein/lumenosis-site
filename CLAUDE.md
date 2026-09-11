@@ -1,9 +1,8 @@
 # Project Instructions
 
 ## Overview
-- Active app inside the broader `atlas` workspace. Work in this repo, not the archive/research files at the parent root.
-- Lumenosis public site and Demo Room web runtime built on Next.js App Router. It includes marketing pages, demo/admin routes, and supporting API routes.
-- For positive-reply work, read [`docs/OUTREACH_ARCHITECTURE.md`](docs/OUTREACH_ARCHITECTURE.md). This repo owns Demo Room generation and rendering; `Ofunrein/iris-outreach-queue` owns AgentMail classification, delivery, campaign state, and follow-ups.
+- This standalone repository is an archive and does not deploy. Make production changes in `Ofunrein/real-estate-email-agent/lumenosis-site/`.
+- For positive-reply work, read [`docs/OUTREACH_ARCHITECTURE.md`](docs/OUTREACH_ARCHITECTURE.md) for the active repository and queue pointers.
 
 ## Tech Stack
 - TypeScript 5, `strict: true`
