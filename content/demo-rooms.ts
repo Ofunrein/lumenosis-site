@@ -107,7 +107,8 @@ export const demoRooms: DemoRoom[] = [
       images: "exact-listing-property-photos",
       responsiveViewports: [320, 390, 768, 1024, 1440],
     },
-    expiresAt: "2026-09-18T23:59:59.000Z",
+    // 14-day window from load, matching the admin generate route and the "expires in 14 days" copy.
+    expiresAt: new Date(Date.now() + 14 * 86400000).toISOString(),
     approved: true,
   },
 ];
